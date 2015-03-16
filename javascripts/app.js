@@ -26,7 +26,7 @@ particlesJS('particles-js', {
       enable_auto: true,
       distance: 100,
       color: '#aaa',
-      opacity: 0.1,
+      opacity: 1,
       width: 1,
       condensed_mode: {
         enable: false,
@@ -47,7 +47,7 @@ particlesJS('particles-js', {
     detect_on: 'canvas', // "canvas" or "window"
     mode: 'grab', // "grab" or false
     line_linked: {
-      opacity: .01
+      opacity: 1
     },
     events: {
       onclick: {
