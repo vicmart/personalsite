@@ -360,18 +360,18 @@ function launchParticlesJS(tag_id, params){
 
 
       /* Check distance between each particle and mouse position */
-      for(var j = i + 1; j < pJS.particles.array.length; j++){
+      /**for(var j = i + 1; j < pJS.particles.array.length; j++){
         var p2 = pJS.particles.array[j];
 
-        /* link particles if enable */
+        /* link particles if enable
         if(pJS.particles.line_linked.enable_auto){
           pJS.fn.vendors.distanceParticles(p,p2);
         }
 
-        /* set interactivity if enable */
+        /* set interactivity if enable
         if(pJS.interactivity.enable){
 
-          /* interactivity mode */
+          /* interactivity mode 
           switch(pJS.interactivity.mode){
             case 'grab':
               pJS.fn.vendors.interactivity.grabParticles(p,p2);
@@ -381,7 +381,7 @@ function launchParticlesJS(tag_id, params){
         }
 
 
-      }
+      }**/
     }
   };
 
@@ -417,14 +417,14 @@ function launchParticlesJS(tag_id, params){
     if(dist <= pJS.particles.line_linked.distance) {
 
       /* draw the line */
-      /**var color_line = pJS.particles.line_linked.color_rgb_line;
+      var color_line = pJS.particles.line_linked.color_rgb_line;
       pJS.canvas.ctx.beginPath();
       pJS.canvas.ctx.strokeStyle = 'rgba('+color_line.r+','+color_line.g+','+color_line.b+','+ (pJS.particles.line_linked.opacity-dist/pJS.particles.line_linked.distance) +')';
       pJS.canvas.ctx.moveTo(p1.x, p1.y);
       pJS.canvas.ctx.lineTo(p2.x, p2.y);
       pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
       pJS.canvas.ctx.stroke();
-      pJS.canvas.ctx.closePath();**/
+      pJS.canvas.ctx.closePath();
 
       /* condensed particles */
       if(pJS.particles.line_linked.condensed_mode.enable){
@@ -539,8 +539,8 @@ function launchParticlesJS(tag_id, params){
         dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse);
 
     /* Check distance between 2 particles + Check distance between 1 particle and mouse position */
-    /**if(dist <= pJS.particles.line_linked.distance && dist_mouse <= pJS.interactivity.mouse.distance && pJS.interactivity.status == 'mousemove'){
-      /* Draw the line 
+    if(dist <= pJS.particles.line_linked.distance && dist_mouse <= pJS.interactivity.mouse.distance && pJS.interactivity.status == 'mousemove'){
+      /* Draw the line */
       var color_line = pJS.particles.line_linked.color_rgb_line;
       pJS.canvas.ctx.beginPath();
       pJS.canvas.ctx.strokeStyle = 'rgba('+color_line.r+','+color_line.g+','+color_line.b+','+ (pJS.interactivity.line_linked.opacity-dist_mouse/pJS.interactivity.mouse.distance) +')';
@@ -549,7 +549,7 @@ function launchParticlesJS(tag_id, params){
       pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
       pJS.canvas.ctx.stroke();
       pJS.canvas.ctx.closePath();
-    }**/
+    }
   };
 
   pJS.fn.vendors.destroy = function(){
@@ -599,7 +599,7 @@ window.requestAnimFrame = (function(){
     window.oRequestAnimationFrame      ||
     window.msRequestAnimationFrame     ||
     function(callback){
-      window.setTimeout(callback, 1000 / 60);
+      window.setTimeout(callback, 1000 / 30);
     };
 })();
 

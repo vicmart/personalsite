@@ -21,9 +21,9 @@ particlesJS('particles-js', {
     },
     size: 4,
     size_random: true,
-    nb: 150,
+    nb: 50,
     line_linked: {
-      enable_auto: true,
+      enable_auto: false,
       distance: 100,
       color: '#aaa',
       opacity: 1,
@@ -40,7 +40,7 @@ particlesJS('particles-js', {
     }
   },
   interactivity: {
-    enable: true,
+    enable: false,
     mouse: {
       distance: 300
     },
@@ -51,7 +51,7 @@ particlesJS('particles-js', {
     },
     events: {
       onclick: {
-        enable: true,
+        enable: false,
         mode: 'push', // "push" or "remove"
         nb: 4
       },
@@ -64,5 +64,5 @@ particlesJS('particles-js', {
     }
   },
   /* Retina Display Support */
-  retina_detect: true
+  retina_detect: false
 });
