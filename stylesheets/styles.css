@@ -257,3 +257,14 @@ footer {
 strong, b {
     font-weight: bold;
 }
+
+.elevator-button {
+    text-align: center;
+    cursor: pointer;
+    width: 140px;
+    margin: auto;
+}
+
+.elevator-button:hover {
+    opacity: 0.7;
+}

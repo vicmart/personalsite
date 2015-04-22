@@ -13,6 +13,8 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src='javascripts/elevator.js'></script>
   </head>
   <body>
     <div id="particles-js"></div>
@@ -143,11 +145,25 @@ a void - javascript
 outrace - javascript
 <a href="projects/Outrace.htm" target="_blank">online game</a>
 </br></code></pre>
+
+<div class="elevator-button">back to top</div>
       </section>
       <footer>
         <p>this site is maintained by <a href="https://github.com/Vicmart1">Vicmart1</a></p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
+
+    <script>
+      // Elevator script included on the page, already.
+
+      window.onload = function() {
+      var elevator = new Elevator({
+      element: document.querySelector('.elevator-button'),
+      duration: 2000 // milliseconds
+      });
+      }
+    </script>
+
   </body>
 </html>
