@@ -132,6 +132,20 @@
   	background: linear-gradient(to right, rgba(255,255,255,0), green); /*Standard*/
 }
 
+.gray-red-fade {
+    background: -webkit-linear-gradient(gray, red); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(gray, red); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient( gray, red); /*Fx 3.6-15*/
+  	background: linear-gradient( gray, red); /*Standard*/
+}
+
+.red-blue-fade {
+    background: -webkit-linear-gradient( red, blue); /*Safari 5.1-6*/
+  	background: -o-linear-gradient( red, blue); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient( red, blue); /*Fx 3.6-15*/
+  	background: linear-gradient( red, blue); /*Standard*/
+}
+
 .white {
 	background: white;
 }
@@ -233,6 +247,14 @@ div{
     width: calc(50% + 40px);
 }
 
+.rotated-up {
+    -ms-transform: translateY(95px) translateX(15px) rotate(45deg);  
+    -webkit-transform: translateY(-75px) translateX(-190px) rotate(45deg); 
+    transform: translateY(95px) translateX(15px) rotate(45deg); 
+
+    width: calc(50% + 40px);
+}
+
 .rotated-junction {
     -ms-transform: translateY(85px) translateX(20px) rotate(45deg);  
     -webkit-transform: translateY(85px) translateX(20px) rotate(45deg); 
@@ -247,6 +269,18 @@ div{
     transform: translateY(85px) translateX(-40%) rotate(-45deg); 
     height: 12.5px;
     width: calc(1.414 * 50%);
+    
+    z-index: -2;
+}
+
+.rotated-left-up-solid {
+    -ms-transform: translateY(85px) translateX(-40%) rotate(-45deg);  
+    -webkit-transform: translateY(-100px) translateX(-40%) rotate(45deg); 
+    transform: translateY(85px) translateX(-40%) rotate(-45deg); 
+    height: 12.5px;
+    width: calc(1.414 * 50%);
+    
+    z-index: -2;
 }
 
 .rotated-right {
@@ -255,6 +289,8 @@ div{
     transform:  translateY(85px) translateX(40%) rotate(45deg); 
     height: 12.5px;
     width: calc(1.414 * 50%);
+
+    z-index: -2;
 }
 
 .rotated-left-up {
