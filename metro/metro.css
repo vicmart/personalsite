@@ -59,24 +59,77 @@
        background: red;
 }
 
+.red-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), red); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), red); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), red); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), red); /*Standard*/
+}
+
+.pink {
+       background: pink;
+}
+
+.pink-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), pink); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), pink); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), pink); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), pink); /*Standard*/
+}
+
 .orange {
        background: orange;
+}
+
+.orange-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), orange); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), orange); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), orange); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), orange); /*Standard*/
 }
 
 .black {
        background: black;
 }
 
+.black-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), black); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), black); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), black); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), black); /*Standard*/
+}
+
 .gray {
        background: gray;
+}
+
+.gray-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), gray); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), gray); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), gray); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), gray); /*Standard*/
 }
 
 .blue {
        background: blue;
 }
 
+.blue-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), blue); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), blue); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), blue); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), blue); /*Standard*/
+}
+
 .green {
        background: green;
+}
+
+.green-fade {
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), green); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), green); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), green); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), green); /*Standard*/
 }
 
 .white {
@@ -116,7 +169,7 @@ div{
 .ruler-rectangle {
 	   width: 100%;
 	   height: 2px;
-	   margin-bottom:50px;
+	   margin-bottom:100px;
 }
 
 .rectangle {
@@ -155,11 +208,11 @@ div{
 }
 
 .right-line {
-	left: 25;
+	left: 25px;
 }
 
 .left-line {
-	right: 25;
+	right: 25px;
 }
 
 .text {
@@ -167,9 +220,9 @@ div{
 }
 
 .ruler-rotated {
-    -ms-transform: translateY(95px) translateX(15px) rotate(45deg);  
+    -ms-transform: translateY(-5px) translateX(25px) rotate(45deg);  
     -webkit-transform: translateY(-5px) translateX(25px) rotate(45deg); 
-    transform: translateY(95px) translateX(15px) rotate(45deg); 
+    transform: translateY(-5px) translateX(25px) rotate(45deg); 
 }
 
 .rotated {
@@ -202,4 +255,44 @@ div{
     transform:  translateY(85px) translateX(40%) rotate(45deg); 
     height: 12.5px;
     width: calc(1.414 * 50%);
+}
+
+.rotated-left-up {
+	-ms-transform: translateY(-145px) translateX(-39%) rotate(45deg);  
+    -webkit-transform: translateY(-145px) translateX(-39%) rotate(45deg); 
+    transform:  translateY(-145px) translateX(-39%) rotate(45deg);
+    height: 12.5px;
+    width: calc(2 * 50%);
+    
+    z-index: -2;
+}
+
+.rotated-left-down {
+	-ms-transform:  translateY(130px) translateX(-39%) rotate(-45deg);   
+    -webkit-transform: translateY(130px) translateX(-39%) rotate(-45deg); 
+    transform:   translateY(130px) translateX(-39%) rotate(-45deg); 
+    height: 12.5px;
+    width: calc(2 * 50%);
+    
+	z-index: -2;
+}
+
+.rotated-right-up {
+	-ms-transform: translateY(-145px) translateX(39%) rotate(135deg);   
+    -webkit-transform: translateY(-145px) translateX(39%) rotate(135deg); 
+    transform:  translateY(-145px) translateX(39%) rotate(135deg);
+    height: 12.5px;
+    width: calc(2 * 50%);
+    
+    z-index: -2;
+}
+
+.rotated-right-down {
+	-ms-transform:  translateY(130px) translateX(39%) rotate(225deg);  
+    -webkit-transform: translateY(130px) translateX(39%) rotate(225deg); 
+    transform:  translateY(130px) translateX(39%) rotate(225deg);
+    height: 12.5px;
+    width: calc(2 * 50%);
+    
+    z-index: -2;
 }
