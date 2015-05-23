@@ -12,6 +12,28 @@ html {
 	overflow-x: hidden;
 }
 
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.page .content {
+    max-height: 0;
+    transition: max-height 10000s ease-out;
+    overflow: hidden;
+}
+
+html:hover .content {
+    max-height: 3000px;
+    transition: max-height 25s ease-out;
+}
+
+ruler:hover .content {
+    max-height: 3000px;
+    transition: max-height 25s ease-out;
+}
+
 .all-lines {
 	position:absolute;
     top:0px;
@@ -22,18 +44,17 @@ html {
 
 .ruler {
 	position: absolute;
-	left:-10px;
-	top:-8px;
+	left:0px;
+	top:0px;
 	
-	height:1000px;
-	width:100px;
+	height:2850px;
+	width:100%;
 	
 	z-index: 2;
 }
 
 .line {
-      width: 418px;
-      height: 100%;
+    	width: 418px;
 }
 
 .major-right-line {

@@ -2,8 +2,8 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="metro.css">
 	</head>
-	<body onload="redirect()">
-		<div class="center page">
+	<body>
+		<div class="center">
 			<div class="ruler">
 				<div class="gray ruler-rectangle" style="width:100px;">
 					<div class="right ruler-rotated">
@@ -146,7 +146,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="all-lines center content">
+			<div class="all-lines center">
 				<div class="left line major-left-line">
 					<div class="center" style="height:751px"></div>
 					<div class="center" style="height:249px">
@@ -493,12 +493,5 @@
 				</div>	
 			</div>
 		</div>
-	<script>
-		function redirect() {
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-    			document.location.href=document.location.href.splitOnLast('/')[0]+"/metro-mobile.html";
-			}
-		}
-	</script>
 	</body>
 </html>
