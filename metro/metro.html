@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="metro.css">
+		<script src="metro.js"></script>
 	</head>
 	<body onload="redirect()">
 		<div class="center page">
@@ -493,12 +494,5 @@
 				</div>	
 			</div>
 		</div>
-	<script>
-		function redirect() {
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-    			document.location.href=document.location.href.splitOnLast('/')[0]+"/metro-mobile.html";
-			}
-		}
-	</script>
 	</body>
 </html>
