@@ -8,6 +8,10 @@
     src: url(KeepCalm-Medium.ttf);
 }
 
+html {
+	overflow-x: hidden;
+}
+
 .all-lines {
 	position:absolute;
     top:0px;
