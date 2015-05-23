@@ -1,5 +1,7 @@
 function redirect() {
-	window.location.href = '/metro/metro-mobile.html'; //relative to domain	
+	if(isMobile()) {
+		window.location.href = '/metro/metro-mobile.html'; //relative to domain	
+	}
 }
 		
 function isMobile() {
