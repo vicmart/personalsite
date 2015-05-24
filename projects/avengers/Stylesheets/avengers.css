@@ -1,3 +1,18 @@
+@font-face {
+    font-family: avengers;
+    src: url(avengers.ttf);
+}
+
+@font-face {
+    font-family: comic;
+    src: url(comic.otf);
+}
+
+div {
+	font-family: comic;
+	font-size: 105%;
+}
+
 .panel {
 	position: relative;
 	height: 100%;
@@ -12,16 +27,11 @@
 
 .clock {
 	position: absolute;
-	padding: 0px;
-	height:100px;
+	top: 85%;
 	width: 100%;
-	margin: 0px;
-	zoom: 1.0; 
-	transform: scale(.54);
-	-ms-transform: scale(.54);
-	-webkit-transform: scale(.54); 
-	-o-transform: scale(.54); 
-	-moz-transform: scale(.54);
+	opacity: 0;
+	color: white;
+	text-align: center;
 }
 
 .ironman {
@@ -69,4 +79,11 @@ img {
     -o-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
 	transform: translateY(-50%);
+}
+
+#thor-img {
+	width: 75%;
+	 display: block;
+	margin-left: auto;
+	margin-right: auto;		
 }
