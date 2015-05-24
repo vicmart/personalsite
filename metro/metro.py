@@ -41,8 +41,11 @@ def new_station(f):
 	global right_line
 	
 	print "Building a new station..."
-	left_right = raw_input("Remove the left/right side line? ([l]eft, [r]ight, [n]either) ")
+	if center_line[1] == "none":
+		
+	left_right = raw_input("Alter the left/right side line? ([l]eft, [r]ight, [n]either) ")
 	if left_right == "l":
+		if
 		center_line[1] = "none"
 	elif left_right == "r":
 		center_line[2] = "none"

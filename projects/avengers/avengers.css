@@ -1,31 +1,38 @@
 .panel {
-	max-width: 20%;
-	min-width: 5%;
+	position: relative;
 	height: 100%;
 	float:left;
+	max-width: 20%;
+	min-width: 150px;
+	-webkit-transition: max-width 1s;
+	-moz-transition: max-width 1s;
+	-o-transition: max-width 1s;
+	-ms-transition: max-width 1s;
+	transition: max-width 1s;
+}
+
+.clock {
+	position: absolute;
+	padding: 0px;
+	height:100px;
+	width: 100%;
+	margin: 0px;
+	zoom: 1.0; 
+	transform: scale(.54);
+	-ms-transform: scale(.54);
+	-webkit-transform: scale(.54); 
+	-o-transform: scale(.54); 
+	-moz-transform: scale(.54);
 }
 
 .ironman {
 	background: rgb(204, 41, 21);
-	position: relative;
-	
-}
-
-.ironman:animate {
-	animation-name: iron-anim;
-	animation-duration: 10s;
-	animation-timing-function: linear;
-	animation-iteration-count: 1;	
-	animation-direction: normal;
-	animation-delay: 0;
-	animation-play-state: running;
-	animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes mymove {
-    0%   {top: -50px;}
-    50%  {top: 50px;}
-    100% {top: -50px;}
+    0%   {width: 50px;}
+    50%  {width: 500px;}
+    100% {width: 50px;}
 }
 
 .hulk {
@@ -44,9 +51,12 @@
 	background: rgb(200, 162, 42);
 }
 
+.all {
+	width: -webkit-intrinsic;
+}
+
 body {
 	margin: 0px;
-	width: 100%;
 	overflow: hidden;
 }
 
