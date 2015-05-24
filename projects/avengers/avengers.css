@@ -1,0 +1,63 @@
+.panel {
+	max-width: 20%;
+	min-width: 5%;
+	height: 100%;
+	float:left;
+}
+
+.ironman {
+	background: rgb(204, 41, 21);
+	position: relative;
+	
+}
+
+.ironman:animate {
+	animation-name: iron-anim;
+	animation-duration: 10s;
+	animation-timing-function: linear;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes mymove {
+    0%   {top: -50px;}
+    50%  {top: 50px;}
+    100% {top: -50px;}
+}
+
+.hulk {
+	background: rgb(53, 115, 18);
+}
+
+.avengers {
+	background: rgb(28, 33, 36);
+}
+
+.captain {
+	background: rgb(49, 84, 179);
+}
+
+.thor {
+	background: rgb(200, 162, 42);
+}
+
+body {
+	margin: 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+img {
+	width: 100%;
+
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
