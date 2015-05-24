@@ -8,6 +8,11 @@
     src: url(comic.otf);
 }
 
+audio {
+	position: absolute;
+	z-index: -1;
+}
+
 div {
 	font-family: comic;
 	font-size: 105%;
@@ -32,6 +37,40 @@ div {
 	opacity: 0;
 	color: white;
 	text-align: center;
+	z-index: 1;
+}
+
+.movies {
+	top: 0%;
+	text-align: left;
+	height: 65%;
+}
+
+.next {
+	top: 78%;
+	text-align: center;
+}
+
+p {
+	margin-left: 20px;	
+	margin-right: 20px;	
+	margin-top: 10px;
+}
+
+.title {
+	float: left;
+}
+
+.subtitle {
+	color: rgb(192, 192, 192);
+	font-size: 85%;
+	float: left;
+}
+
+.year {
+	color: rgb(192, 192, 192);
+	font-size: 85%;
+	float: right;
 }
 
 .ironman {
