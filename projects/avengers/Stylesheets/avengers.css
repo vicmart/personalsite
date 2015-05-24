@@ -8,6 +8,10 @@
     src: url(comic.otf);
 }
 
+body {
+	overflow: hidden;
+}
+
 audio {
 	position: absolute;
 	z-index: -1;
