@@ -56,4 +56,5 @@ $( document ).ready(function() {
 	var audio = document.getElementById("bg-music");
 	audio.controls = false;
 	audio.autoplay = true;
+	audio.loop = true;
 });
