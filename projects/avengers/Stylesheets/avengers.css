@@ -45,9 +45,15 @@ div {
 }
 
 .movies {
-	top: 0%;
 	text-align: left;
 	height: 65%;
+	
+	top: 25%;
+	-webkit-transform: translateY(-25%);
+	-moz-transform: translateY(-25%);
+    -o-transform: translateY(-25%);
+    -ms-transform: translateY(-25%);
+	transform: translateY(-25%);
 }
 
 .next {
