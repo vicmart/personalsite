@@ -8,6 +8,11 @@
     src: url(comic.otf);
 }
 
+@font-face {
+    font-family: guardians;
+    src: url(Guardians.ttf);
+}
+
 html, body {
 	overflow: hidden;
 }
@@ -17,7 +22,7 @@ body {
 }
 
 div {
-	font-family: comic;
+	font-family: guardians;
 	font-size: 110%;
 }
 
