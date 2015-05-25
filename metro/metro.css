@@ -29,27 +29,8 @@ body {
 	position: absolute;
 	left:0px;
 	top:0px;
-	
 	width:100%;
-	
 	z-index: 2;
-}
-
-.ruler-right {
-	position: absolute;
-	left:0px;
-	top:0px;
-	
-	width:120%;
-	
-	z-index: 2;
-	
-	-moz-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-        filter: FlipH;
-        -ms-filter: "FlipH";
 }
 
 .line {
