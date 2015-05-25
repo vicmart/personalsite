@@ -8,13 +8,12 @@
     src: url(comic.otf);
 }
 
-body {
+html, body {
 	overflow: hidden;
 }
 
-audio {
-	position: absolute;
-	z-index: -1;
+body {
+	position: relative;
 }
 
 div {
