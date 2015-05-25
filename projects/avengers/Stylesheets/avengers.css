@@ -51,7 +51,7 @@ div {
 }
 
 .next {
-	top: 78%;
+	top: calc(85% - 35px);
 	text-align: center;
 	height: 20%;
 }
@@ -102,6 +102,14 @@ p {
 
 .thor {
 	background: rgb(200, 162, 42);
+}
+
+.thor-subtitle {
+	color: rgb(212, 212, 212);
+}
+
+.thor-year {
+	color: rgb(212, 212, 212);
 }
 
 .all {
