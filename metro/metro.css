@@ -24,21 +24,21 @@ body {
     overflow: hidden;
 }
 
-html:hover .content {
+/*html:hover .content {
     max-height: 3000px;
-    transition: max-height 25s ease-out;
+    transition: max-height 10s ease-out;
 }
 
 ruler:hover .content {
     max-height: 3000px;
-    transition: max-height 25s ease-out;
-}
+    transition: max-height 10s ease-out;
+}*/
 
 .all-lines {
 	position:absolute;
     top:0px;
-	width:1280px;
-    left: calc(50% - 640px);
+	width:100%;
+    left: 0;
     margin-left:-50%; /* half of the width */
 }
 
@@ -76,15 +76,13 @@ ruler:hover .content {
 }
 
 .major-right-line {
-	-ms-transform: translateX(-50%); 
-    -webkit-transform: translateX(-50%); 
-    transform: translateX(-50%);
+	position: absolute;
+	left: calc(50% + 12px);
 }
 
 .major-left-line {
-	-ms-transform: translateX(50%); 
-    -webkit-transform: translateX(50%); 
-    transform: translateX(50%);
+	position: absolute;
+	left: calc(50% - 418px - 12px);
 }
 
 .center {
@@ -291,6 +289,7 @@ div{
     transform: translateY(95px) translateX(15px) rotate(45deg); 
 
     width: calc(50% + 40px);
+    padding: 5px;
 }
 
 .rotated-up {
