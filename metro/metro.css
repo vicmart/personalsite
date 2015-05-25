@@ -17,23 +17,6 @@ body {
 	margin: 0px;
 }
 
-
-.page .content {
-    max-height: 0;
-    transition: max-height 10000s ease-out;
-    overflow: hidden;
-}
-
-/*html:hover .content {
-    max-height: 3000px;
-    transition: max-height 10s ease-out;
-}
-
-ruler:hover .content {
-    max-height: 3000px;
-    transition: max-height 10s ease-out;
-}*/
-
 .all-lines {
 	position:absolute;
     top:0px;
@@ -47,7 +30,6 @@ ruler:hover .content {
 	left:0px;
 	top:0px;
 	
-	height:2850px;
 	width:100%;
 	
 	z-index: 2;
@@ -58,7 +40,6 @@ ruler:hover .content {
 	left:0px;
 	top:0px;
 	
-	height:2850px;
 	width:120%;
 	
 	z-index: 2;
