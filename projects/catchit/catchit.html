@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="catchit.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="all">
+      <div class="case animated">
+        <div class="item"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      $('.case').mouseover(function(e){
+        hovered(e, this);
+      });
+
+      function hovered(e, obj){
+        if(!$(obj).data("activated")) {
+          var x = e.pageX;
+          var y = e.pageY;
+
+          var pageWidth = $('body').width() - $(obj).width();
+          var pageHeight = $('body').height() - $(obj).height();      
+
+          var left = $(obj).offset().left;
+          var top = $(obj).offset().top;
+
+          var centX = left + ($(obj).width()/2);
+          var centY = top + ($(obj).height()/2);
+
+          var diffX = centX - x * 1.0;
+          var diffY = centY - y * 1.0;
+
+          var angle = Math.atan2(diffY,diffX);
+
+          //angle += getRandom(-90, 90) * (Math.PI/180);
+          var speed = getRandom((pageWidth + pageHeight)/2,(pageWidth + pageHeight)/2);
+
+          var finalX = left + (speed * Math.cos(angle));
+          var finalY = top + (speed * Math.sin(angle));
+
+          $(obj).css("left", finalX + "px");
+          $(obj).css("top", finalY + "px");
+          $(obj).data("activated", true);
+
+          if(finalX < 0 || finalY < 0 || finalX > pageWidth || finalY > pageHeight) {
+            var offsetX;
+            var offsetY;
+
+            if(finalX < -$(this).width()) {
+              offsetX = pageWidth;
+            }else if(finalX > pageWidth) {
+              offsetX = -pageWidth;
+            }
+
+            if(finalY < -$(this).height()) {
+              offsetY = pageHeight;
+            }else if(finalY > pageHeight) {
+              offsetY = -pageHeight;
+            }
+
+            var decoy = $("<div class='case'></div>").appendTo('.all');
+            $(decoy).append("<div class='item'></div>");
+
+            //$(decoy).css("-webkit-transition", "none");
+            //$(decoy).css("left", (left + offsetX) + "px");
+            //$(decoy).css("top", (top + offsetY) + "px");
+
+            
+            $(decoy).css("left", left + "px");
+            $(decoy).css("top", top + "px");
+            
+            //$(decoy).css("-webkit-transition", "none");
+            
+
+            //$(decoy).css("-webkit-transition", "left 1s ease, top 1s ease");
+            
+            $(document).on('mouseover', '.case', function(e) { hovered(e, this); });
+            $(document).on('mouseout', '.case', function(e) { hoveredOut(e, this); });
+
+            setTimeout(function(){
+              $(obj).remove();
+            }, 1000);
+          }
+        }
+      }
+
+      function hoveredOut(e, obj) {
+        $(obj).data("activated", false);
+      }
+
+      $('.case').mouseout(function(e){
+        hoveredOut(e, this);
+      });
+    </script>
+  </body>
+</html>
