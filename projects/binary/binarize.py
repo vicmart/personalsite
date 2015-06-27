@@ -24,11 +24,13 @@ prev = -1
 f.write('<span>')
 
 for y in range(0, img.shape[0] + 400,int(scale * (1.0 * img.shape[1]/img.shape[0]))):
-    for x in range(0, img.shape[1], scale):
-        if y > 200 and y < img.shape[0] + 200:
-            px = img[y - 200, x]
-        else:
+    for x in range(0, img.shape[1] + 400, scale):
+        if y < 200 or y > img.shape[0] + 200:
             px = 0
+        elif x < 200 or x > img.shape[1] + 200:
+            px = 0
+        else:
+            px = img[y - 200, x - 200]
         if px > colors[0] - 50 and px < colors[0] + 50:
             if prev != 0:
                 f.write("</span><span class='water' style='color:blue'>")
