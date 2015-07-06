@@ -1,0 +1,214 @@
+<html>
+<head>
+    <style type="text/css" media="screen">
+		html, body{
+			overflow: hidden;
+		}
+		img{
+			position: absolute;
+			width: 200%;
+			height: auto;
+			top: 0%;
+			left: -50%;
+			z-index:11;
+			
+			-webkit-transition: width 1s ease-out, height 1s ease-out, left 1s ease-out, top 1s ease-out;
+			-moz-transition:  width 1s ease-out, height 1s ease-out, left 1s ease-out, top 1s ease-out;
+			-o-transition:  width 1s ease-out, height 1s ease-out, left 1s ease-out, top 1s ease-out;
+			-ms-transition: width 1s ease-out, height 1s ease-out, left 1s ease-out, top 1s ease-out;
+			transition: width 1s ease-out, height 1s ease-out, left 1s ease-out, top 1s ease-out;
+		}
+		.title{
+			position: absolute;
+			top: 12%;
+			left: 15%;
+			width: 69%;
+			border-bottom: 1px solid white;
+			font-size: 24px;
+			color: white;
+		}
+		.subtitle{
+			position: absolute;
+			top: 18%;
+			left: 15%;
+			width: 70%;
+			font-size: 18px;
+			color: #FFFFFF;
+		}
+		.large{
+			width: 90%;
+			left: 5%;
+			top: 25%;
+			transform: translateY(-50%);
+		}
+		span{
+			overflow: hidden;
+			z-index: 10;
+		}
+		div{
+			width: 100%;
+			height: 100%;
+		}
+		.acknowledgements{
+			position: absolute;
+			left: 80%;
+			top: calc(100% - 40px);
+			transform: translateY(-50%);
+			color: gray;
+			z-index: 15;
+		}
+		a{
+			color: white;
+		}
+    </style>
+</head>
+<body>
+	<p class="acknowledgements"><i>Powered by the Coffee Physics Library</i></p>
+	<!-- Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="Javascript/particles.js"></script>
+
+    <!-- Core -->
+    <script src="CoffeePhysics/base.js"></script>
+    <script src="CoffeePhysics/math/Random.js"></script>
+    <script src="CoffeePhysics/math/Vector.js"></script>
+    <!-- Integrators -->
+    <script src="CoffeePhysics/engine/integrator/Integrator.js"></script>
+    <script src="CoffeePhysics/engine/integrator/Euler.js"></script>
+    <script src="CoffeePhysics/engine/integrator/ImprovedEuler.js"></script>
+    <script src="CoffeePhysics/engine/integrator/Verlet.js"></script>
+    <!-- Engine -->
+    <script src="CoffeePhysics/engine/Particle.js"></script>
+    <script src="CoffeePhysics/engine/Physics.js"></script>
+    <script src="CoffeePhysics/engine/Spring.js"></script>
+    <!-- Behaviours -->
+    <script src="CoffeePhysics/behaviour/Behaviour.js"></script>
+    <script src="CoffeePhysics/behaviour/Attraction.js"></script>
+    <script src="CoffeePhysics/behaviour/Collision.js"></script>
+    <script src="CoffeePhysics/behaviour/ConstantForce.js"></script>
+    <script src="CoffeePhysics/behaviour/EdgeBounce.js"></script>
+    <script src="CoffeePhysics/behaviour/EdgeWrap.js"></script>
+    <script src="CoffeePhysics/behaviour/Wander.js"></script>
+    <!-- Demo Renderers -->
+    <script src="CoffeePhysics/demos/renderer/Renderer.js"></script>
+    <script src="CoffeePhysics/demos/renderer/CanvasRenderer.js"></script>
+    <script src="CoffeePhysics/demos/renderer/WebGLRenderer.js"></script>
+    <script src="CoffeePhysics/demos/renderer/DOMRenderer.js"></script>
+    <!-- Demos -->
+    <script src="CoffeePhysics/demos/Demo.js"></script>
+    <script src="CoffeePhysics/demos/AttractionDemo.js"></script>
+    <script>
+
+        (function() {
+
+            
+
+            var list;
+            var demo;
+            var stats;
+            var items;
+            var playing;
+            var demoName;
+            var renderer;
+            var container;
+
+            var $renderer;
+
+            // Initialises the testbed and starts the default demo.
+            function init() {
+
+                items = {};
+                list = $('#demo-select');
+                playing = true;
+                renderer = 'DOMRenderer';
+                container = $('#container');
+                $renderer = $('#renderer-select a');
+
+                var item;
+
+
+                $renderer.click(onRendererSelected);
+
+                // Set default demo and start updating.
+                setDemo('Attraction');
+                update();
+
+                // Highlight current renderer.
+                $renderer.each(function(index, el) {
+                    var $el = $(el);
+                    var type = self[ $el.data('renderer') ];
+                    if ( demo.renderer instanceof type ) {
+                        $el.addClass('active');
+                    }
+                });
+            }
+
+            // Generates a click handler.
+            function generateClick(name) {
+                return function() {
+                    return false;
+                };
+            }
+
+            // Updates current demo.
+            function update() {
+
+                requestAnimationFrame(update);
+
+                if (playing && demo) {
+                    demo.step();
+                }
+            }
+
+            // Sets the current demo.
+            function setDemo(name) {
+
+                demoName = name
+                
+                // Kill any running demo.
+                if (demo) {
+                    demo.destroy();
+                    demo = null;
+                }
+
+                // Initialise new demo.
+                demo = new AttractionDemo();
+                demo.init(container.get(0), new self[ renderer ]());
+
+                // Activate / deactivate links.
+                for (var id in items) {
+                    if (id === name) {
+                        items[id].addClass('active');
+                    } else {
+                        items[id].removeClass('active');
+                    }
+                }
+
+                // Provide access from console for debugging.
+                self.__demo = demo;
+            }
+
+            function onRendererSelected(event) {
+                
+                var $selected = $(event.currentTarget);
+                
+                renderer = $selected.data('renderer');
+                setDemo(demoName);
+
+                $renderer.removeClass('active');
+                $selected.addClass('active');
+
+                return false;
+            }
+
+            function onKeyDown(event) {
+
+            }
+
+            init();
+
+        })();
+        
+    </script>
+</body>
+</html>
