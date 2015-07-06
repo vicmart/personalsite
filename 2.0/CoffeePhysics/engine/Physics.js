@@ -8,7 +8,7 @@ Physics = (function() {
   function Physics(integrator) {
     this.integrator = integrator != null ? integrator : new Euler();
     this.timestep = 1.0 / 60;
-    this.viscosity = 0.005;
+    this.viscosity = 0.01;
     this.behaviours = [];
     this._time = 0.0;
     this._step = 0.0;

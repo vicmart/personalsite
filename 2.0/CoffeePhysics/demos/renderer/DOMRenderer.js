@@ -19,7 +19,7 @@ DOMRenderer = (function(_super) {
 
   function DOMRenderer() {
     this.setSize = __bind(this.setSize, this);    DOMRenderer.__super__.constructor.apply(this, arguments);
-    this.useGPU = false;
+    this.useGPU = true;
     this.domElement = document.createElement('div');
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -78,7 +78,7 @@ DOMRenderer = (function(_super) {
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         p = _ref[_i];
         if (this.useGPU) {
-          p.domElement.style.WebkitTransform = "translate3d(" + (p.pos.x | 0) + "px," + (p.pos.y | 0) + "px,0px)";
+          p.domElement.style.WebkitTransform = "translate3d(" + (p.pos.x) + "px," + (p.pos.y) + "px,0px)";
         } else {
           p.domElement.style.left = p.pos.x;
           p.domElement.style.top = p.pos.y;

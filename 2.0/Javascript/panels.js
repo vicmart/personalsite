@@ -1,5 +1,32 @@
 var timeout = -1;
-var lastScroll = document.body.scrollTop;
+var lastScroll = -1;
+var diffScroll = -1;
+
+function iframeLoaded(iframe) {
+	/**$(".frame").each(function(){
+		$(this).css("height", parseInt($(this).css("height")) + "px");	
+	});	
+	$(".metro-page").css("height", iframe.contentWindow.document.body.scrollHeight + "px");
+	$(".all-frames").css("height", (((5.0*parseInt($(".all-frames").css("height")))/6) + iframe.contentWindow.document.body.scrollHeight) + "px");	**/
+}
+
+$(document).on( 'scroll', function(){
+	var seconds = new Date().getTime() / 1000;
+	
+	diffScroll = $(document).scrollTop() - lastScroll;
+	var offset = $(window).height();
+	if(seconds > timeout + 1.10) {
+		if($(document).scrollTop() < 0){
+			offset = offset * -1;
+		}
+		if(parseInt($(".all-frames").css('top')) - offset <= 0 && parseInt($(".all-frames").css('top')) - offset > -1 * parseInt($(".all-frames").css("height")) ) {
+				$(".all-frames").css('top', (parseInt($(".all-frames").css('top')) - offset) + 'px');
+		}
+		timeout = seconds;
+	}
+	//console.log($(document).scrollTop());
+});
+
 
 $( ".button" ).click(function() {
 	var seconds = new Date().getTime() / 1000;
@@ -28,4 +55,5 @@ $( ".button" ).click(function() {
 
 $( document ).ready(function() {
   // Handler for .ready() called.
+	
 });
