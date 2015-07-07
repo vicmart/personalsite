@@ -1,5 +1,5 @@
 var timeout = -1;
-var lastScroll = -1;
+var lastScroll = 1;
 var diffScroll = -1;
 
 function iframeLoaded(iframe) {
@@ -13,18 +13,23 @@ function iframeLoaded(iframe) {
 $(document).on( 'scroll', function(){
 	var seconds = new Date().getTime() / 1000;
 	
+	
 	diffScroll = $(document).scrollTop() - lastScroll;
+	//console.log(diffScroll);
+	$(document).scrollTop(1);
+	lastScroll = $(document).scrollTop();
+	
 	var offset = $(window).height();
-	if(seconds > timeout + 1.10) {
-		if($(document).scrollTop() < 0){
+	if(seconds > timeout + 1.0 && diffScroll != 0) {
+		if(diffScroll < 0){
 			offset = offset * -1;
 		}
+		console.log(diffScroll);
 		if(parseInt($(".all-frames").css('top')) - offset <= 0 && parseInt($(".all-frames").css('top')) - offset > -1 * parseInt($(".all-frames").css("height")) ) {
 				$(".all-frames").css('top', (parseInt($(".all-frames").css('top')) - offset) + 'px');
 		}
 		timeout = seconds;
 	}
-	//console.log($(document).scrollTop());
 });
 
 
