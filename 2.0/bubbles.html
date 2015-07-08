@@ -1,81 +1,14 @@
 <html>
 <head>
-    <style type="text/css" media="screen">
-		html, body{
-			overflow: hidden;
-			font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-		}
-		img{
-			position: absolute;
-			width: 200%;
-			height: auto;
-			top: 0%;
-			left: -50%;
-			z-index:11;
-		
-			-webkit-transition: width 0.2s ease-out, height 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out;	
-			-o-transition: width 0.2s ease-out, height 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out;	
-			-moz-transition: width 0.2s ease-out, height 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out;	
-			-ms-transition: width 0.2s ease-out, height 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out;	
-			transition: width 0.2s ease-out, height 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out;	
-		}
-		
-		.title{
-			position: absolute;
-			top: calc(24% - 70px);
-			left: 18%;
-			width: 64%;
-			min-width: 250px;
-			border-bottom: 1px solid white;
-			font-size: 22px;
-			color: white;
-		}
-		.subtitle{
-			position: absolute;
-			top: calc(23% - 30px);
-			left: 18%;
-			width: 64%;
-			font-size: 18px;
-			color: #CCCCCC;
-		}
-		.large{
-			width: 90%;
-			left: 5%;
-			top: 25%;
-			transform: translateY(-50%);
-			
-			-webkit-transition: width 0.2s ease-out 0.8s, height 0.2s ease-out 0.8s, left 0.2s ease-out 0.8s, top 0.2s ease-out 0.8s;
-			-moz-transition: width 0.2s ease-out 0.8s, height 0.2s ease-out 0.8s, left 0.2s ease-out 0.8s, top 0.2s ease-out 0.8s;
-			-ms-transition: width 0.2s ease-out 0.8s, height 0.2s ease-out 0.8s, left 0.2s ease-out 0.8s, top 0.2s ease-out 0.8s;
-			-o-transition: width 0.2s ease-out 0.8s, height 0.2s ease-out 0.8s, left 0.2s ease-out 0.8s, top 0.2s ease-out 0.8s;
-			transition: width 0.2s ease-out 0.8s, height 0.2s ease-out 0.8s, left 0.2s ease-out 0.8s, top 0.2s ease-out 0.8s;
-		}
-		span{
-			overflow: hidden;
-			z-index: 10;
-		}
-		div{
-			width: 100%;
-			height: 100%;
-		}
-		.acknowledgements{
-			position: absolute;
-			left: calc(100% - 280px);
-			top: calc(100% - 40px);
-			transform: translateY(-50%);
-			color: gray;
-			z-index: 15;
-		}
-		a {
-			color: #CCCCCC;
-		}
-    </style>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" type="text/css" href="Stylesheets/bubbles.css">
 </head>
 <body>
-	<p class="acknowledgements"><i>Powered by the Coffee Physics Library</i></p>
+	<!--p class="acknowledgements"><i>Powered by the Coffee Physics Library</i></p-->
 	<!-- Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="Javascript/particles.js"></script>
+	<script src="Javascript/bubbles.js"></script>
 
     <!-- Core -->
     <script src="CoffeePhysics/base.js"></script>

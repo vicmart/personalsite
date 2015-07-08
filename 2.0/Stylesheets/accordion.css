@@ -3,6 +3,11 @@
     src: url(NotCourierSans.otf);
 }
 
+@font-face {
+    font-family: Raleway-Med;
+    src: url(Raleway-Medium.ttf);
+}
+
 body {
 	overflow: hidden;
 }
@@ -13,7 +18,7 @@ audio {
 }
 
 div {
-	font-family: Arial,Helvetica Neue,Helvetica,sans-serif; 
+	font-family: Raleway-Med; 
 	font-size: 105%;
 	
 }

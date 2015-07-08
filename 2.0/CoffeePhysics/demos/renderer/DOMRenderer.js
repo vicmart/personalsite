@@ -19,7 +19,7 @@ DOMRenderer = (function(_super) {
 
   function DOMRenderer() {
     this.setSize = __bind(this.setSize, this);    DOMRenderer.__super__.constructor.apply(this, arguments);
-    this.useGPU = true;
+    this.useGPU = false;
     this.domElement = document.createElement('div');
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -80,17 +80,17 @@ DOMRenderer = (function(_super) {
         if (this.useGPU) {
           p.domElement.style.WebkitTransform = "translate3d(" + (p.pos.x) + "px," + (p.pos.y) + "px,0px)";
         } else {
-          p.domElement.style.left = p.pos.x;
-          p.domElement.style.top = p.pos.y;
+          p.domElement.style.left = p.pos.x + "px";
+          p.domElement.style.top = p.pos.y + "px";
         }
-		p.domElement.style.width = p.radius * 2;
-		p.domElement.style.height = p.radius * 2;
-		p.domElement.style["-moz-border-radius"] = p.radius;
-		p.domElement.style["-webkit-border-radius"] = p.radius;
-		p.domElement.style["border-radius"] = p.radius;
-		p.domElement.style["margin-left"] = -p.radius - 7;
-		p.domElement.style["margin-top"] = -p.radius - 7;
-		
+
+		p.domElement.style.width = (p.radius * 2) + "px";
+		p.domElement.style.height = (p.radius * 2) + "px";
+		p.domElement.style["-moz-border-radius"] = p.radius + "px";
+		p.domElement.style["-webkit-border-radius"] = p.radius + "px";
+		p.domElement.style["border-radius"] = p.radius + "px";
+		p.domElement.style["margin-left"] = -p.radius - 7 + "px";
+		p.domElement.style["margin-top"] = -p.radius - 7 + "px";	
       }
     }
     if (this.renderSprings) {
@@ -109,8 +109,8 @@ DOMRenderer = (function(_super) {
       if (this.useGPU) {
         this.mouse.domElement.style.WebkitTransform = "translate3d(" + (this.mouse.pos.x | 0) + "px," + (this.mouse.pos.y | 0) + "px,0px)";
       } else {
-        this.mouse.domElement.style.left = this.mouse.pos.x;
-        this.mouse.domElement.style.top = this.mouse.pos.y;
+        this.mouse.domElement.style.left = this.mouse.pos.x + "px";
+        this.mouse.domElement.style.top = this.mouse.pos.y + "px";
       }
     }
     return this.renderTime = new Date().getTime() - time;

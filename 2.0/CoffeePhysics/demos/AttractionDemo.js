@@ -27,8 +27,9 @@ AttractionDemo = (function(_super) {
     max = full ? 10 : 10;
     _results = [];
     for (i = _i = 0; 0 <= max ? _i <= max : _i >= max; i = 0 <= max ? ++_i : --_i) {
-	  var size_min = Math.min($(window).width() * 0.020,$(window).height() * 0.020);
-	  var size_max = Math.min($(window).width() * 0.035,$(window).height() * 0.035);
+	  var size_min = Math.min(window.innerWidth * 0.020,window.innerHeight * 0.020);
+	  var size_max = Math.min(window.innerWidth * 0.035,window.innerHeight * 0.035);
+	  
 	  p = new Particle(Random(size_min, size_max));
       p.setRadius(p.mass * 4);
       p.moveTo(new Vector(Random(this.width), Random(this.height)));

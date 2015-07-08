@@ -11,7 +11,8 @@ $('.panel').hover(
     	$(".thor").css("max-width", "15%");
     	$("#" + $(this).attr('id')).css("max-width","40%");
     	$("#" + $(this).attr('id') + "-img").css("top", "75%");
-		if($(window).width() < 1250 || $(window).height() < 700) {
+		
+		if($(window).width() < 1250 || $(window).height() < 750) {
 			$("#" + $(this).attr('id') + "-img").css("opacity", "0.2");
 		}
 		
