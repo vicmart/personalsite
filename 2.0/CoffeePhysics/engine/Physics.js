@@ -22,7 +22,6 @@ Physics = (function() {
   /* Performs a numerical integration step.
   */
 
-
   Physics.prototype.integrate = function(dt) {
     var behaviour, drag, index, particle, spring, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
 
@@ -30,20 +29,20 @@ Physics = (function() {
     _ref = this.particles;
     for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
       particle = _ref[index];
-	  
+  
 	  if(index >= current_size.length) {
 		  current_size.push(particle.radius);
 		  original_size.push(particle.radius);
 		  target_size.push(particle.radius);
 	  }
-	  
+  
 	  current_size[index] = particle.radius;
-	  
+  
 	  if(Math.abs(target_size[index] - particle.radius) > 0.01) {
 		  particle.radius += (target_size[index] - particle.radius)/32;
 		  particle.mass = particle.radius/4;
 	  }
-	  
+  
 	  _ref1 = this.behaviours;
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         behaviour = _ref1[_j];

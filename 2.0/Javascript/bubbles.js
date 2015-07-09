@@ -6,6 +6,7 @@ var tar_size = Math.min((window.innerHeight/2)  - 50, (window.innerWidth/2)  - 5
 var titles = ["2D Fluid Simulation", "Jeometry Wars", "Jeometry Wars", "Ray Trace Lighting", "Minecraft Clone", "Projection Matrix Render", "Projection Matrix Render", "Ray Trace Lighting", "Ray Trace Render", "Ray Trace Render"];
 
 var subtitles = ["Java <a href='projects/fluiddemo.zip'>demo</a>", "Java <a href='projects/jometrywars.zip'>demo</a>", "Java <a href='projects/jometrywars.zip'>demo</a>", "Java <a href='projects/Lighting.zip'>demo</a>", "C", "Java <a href='projects/Projection.zip'>demo</a>", "Java <a href='projects/Projection.zip'>demo</a>", "Java <a href='projects/Projection.zip'>demo</a>", "Java", "Java"];
+var paused;
 
 function expand(x){
 	var idx = parseInt(($(x).parent().attr("id")).slice(-1));
@@ -16,6 +17,7 @@ function expand(x){
 		target_size[idx] = tar_size;
 		$(x).addClass("large");
 	}
+		
 	$("span").each(function(index){
 		if(idx != index) {
 			target_size[index] = original_size[index];
