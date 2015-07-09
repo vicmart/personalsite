@@ -1,0 +1,71 @@
+body, html{
+	margin: 0px;
+	padding: 0px;
+}
+
+div{
+	position: relative;
+}
+
+.background{
+	width: 100%;
+	height: 50%;
+	overflow: hidden;
+}
+
+.helper{
+	display: inline-block;
+	height: 100%;
+}
+
+.bg-img{
+	position: relative;
+	width: 100%;
+	height: auto;
+	top: 50%;
+	-webkit-transform:translateY(-50%);
+	-moz-transform:translateY(-50%);
+	-o-transform:translateY(-50%); 
+	-ms-transform:translateY(-50%); 
+	transform:translateY(-50%); 
+}
+
+.foreground{
+	width: 100%;
+	height: 50%;
+	background: #DDDDEE;
+	border-top: 2.5px solid white;
+}
+
+.propic{
+	position: relative;
+	left: calc(50% - 100px);
+	top: 5px;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+}
+
+.pro-border{
+	width: 210px;
+	height: 210px;
+	top: -105px;
+	background: white;
+	-moz-border-radius: 105px;
+	-webkit-border-radius: 105px;
+	border-radius: 105px;
+}
+
+.shadow{
+	-webkit-box-shadow: 0px 0px 5px 0px gray;
+	-moz-box-shadow: 0px 0px 5px 0px gray;
+	box-shadow: 0px 0px 5px 0px gray; 
+}
+
+.pro-img{
+	width: 100%;
+	height: auto;
+}
