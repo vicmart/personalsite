@@ -23,8 +23,10 @@ div{
 
 .background{
 	width: 100%;
-	height: 50%;
+	height: 75%;
 	position: fixed;
+	background: black;
+	z-index: -1;
 }
 
 .helper{
@@ -43,6 +45,10 @@ div{
 	-o-transform:translateY(-50%); 
 	-ms-transform:translateY(-50%); 
 	transform:translateY(-50%); 
+}
+
+span{
+	opacity: 0;
 }
 
 .foreground{
@@ -132,6 +138,13 @@ div{
 	box-shadow: 5px 0px 5px -5px gray, -5px 0px 5px -5px gray;
 }
 
+.console{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	color: white;
+}
+
 .subtitle_container{
 	display: inline-block;
 }
@@ -163,8 +176,8 @@ p{
 
 .body{
 	margin: 15px;
-	margin-left: 40px;
-	margin-right: 40px;
+	margin-left: 20px;
+	margin-right: 20px;
 	font-family: Raleway-Light;
 }
 
@@ -188,4 +201,5 @@ a{
 	color: gray;
 	margin: 0px;
 	padding: 0px;
+	margin-bottom: 10px;
 }

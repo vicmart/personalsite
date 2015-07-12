@@ -1,6 +1,8 @@
 var statement = "";
 var intervalHandle = null;
-var chars = "<div class='background'><div class='helper'><img class='bg-img' src='Images/Beach.jpg'></div></div><div class='foreground shadow'><div class='propic pro-border shadow'><div class='propic'><img class='pro-img' src='Images/Profile.jpg'></div></div><div class='content'><h1 class='title'>Victor Dadfar</h1><div class='subtitle_container'><p class='subtitle_box'>Student</p></div><p class='body'>As an avid programmer, I enjoy spending my time working on personal and group projects. I have extensive experience with leadership and management positions, and I am an active member of my community, dedicating hundreds of hours of service to various organizations. My technological skills are versatile - I work in a multitude of languages including Python, Java, C, HTML/JavaScript, and use a variety of software from Matlab to Xcode.</p><div class='subtitle_container'><a class='footer' href='mailto:gotovicmart@gmail.com'>Email</a><div class='dot'></div><a class='footer' href='https://www.linkedin.com/pub/victor-dadfar/94/287/3a1'>LinkedIn</a><div class='dot'></div><a class='footer' href='https://github.com/Vicmart1'>GitHub</a></div></div></div>";
+var subtitle = "I am a student.____________________^_____^_____^_____^_____.______________________________^_____^_____^_____^_____^_____r_____e_____s_____e_____a_____r_____c_____h_____e_____r______________________________^_____^_____^_____^_____^_____^_____^_____^_____^_____p_____r_____o_____g_____r_____^_____^_____^_____^_____^_____^_____p_____r_____o_____g_____r_____a_____m_____m_____e_____r______________________________^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____a_____w_____e_____s_____o_____m_____e_____.______________________________";
+var body_text = "Hey, I'm Victor. I'm a freelance programmer with a healthcare background currently enrolled at Hopkins as an biomedical engineer who spends his free time in the service of others while also making video games and catching up on superhero movies in my free time. That's a lot to take in, which is why I threw together this site to help you better understand my story.</br>And yes, this webpage is being written in real time (web dev is tough).";
+var chars = "<div class='background'></div><div class='foreground shadow'><div class='propic pro-border shadow'><div class='propic'><img class='pro-img' src='Images/Profile.jpg'></div></div><div class='content'><h1 class='title'>Victor Dadfar</h1><div class='subtitle_container'><p class='subtitle_box'>" + subtitle + "</p></div><p class='body'>" + body_text + "</p><div class='subtitle_container'><a class='footer' href='mailto:gotovicmart@gmail.com'>Email</a><div class='dot'></div><a class='footer' href='https://www.linkedin.com/pub/victor-dadfar/94/287/3a1'>LinkedIn</a><div class='dot'></div><a class='footer' href='https://github.com/Vicmart1'>GitHub</a></div></div></div>";
 var char_index = 0;
 var center_x = -1;
 var center_y = -1;
@@ -12,6 +14,10 @@ var parent_element = "";
 var grabbing_text = false;
 var grabbed_text = false;
 var current_text = "";
+var break_tag = false;
+var indentation = "";
+var no_indent = false;
+var console_text = "vickyd:personalsite vickyd$ ";
 
 $(window).mousemove(function( event ) {
 	if(center_x == -1) {
@@ -28,19 +34,66 @@ $(window).mousemove(function( event ) {
 	$('.bg-img').css("top", "calc(50% + " + (diff_y/-10) + "px)");
 });
 
+$( window ).resize(function() {
+	if(parseInt(window.innerWidth) > 800) {
+		$("html").css("overflow", "hidden");
+	}
+});
+
 $(document).ready(function(){
-	var height = window.innerHeight;
-	//$(".foreground").css("opacity", 1);
-	//$(".foreground").css("top", (parseInt($(".foreground").css("top")) - (height/25.0)) + "px");
+	
+	if(parseInt(window.innerWidth) > 800) {
+		$("html").css("overflow", "hidden");
+	}
 	
   	intervalHandle = setInterval(function(){
-		statement = statement + chars.charAt(char_index);
-		
+		if(chars.charAt(char_index) == '^') {
+			$(".console").html($(".console").html().substring(0, $(".console").html().length - 1));
+		} else if(chars.charAt(char_index + 1) == "<") {
+			if(chars.charAt(char_index + 2) != "/") {
+				if(no_indent == false) {
+					indentation = indentation + "-----";
+				}
+				no_indent = false;
+			} else {
+				if(chars.substring(char_index - 4, char_index - 1) != "dot") {
+					indentation = indentation.substring(0, indentation.length - 5);
+				}
+				no_indent = true
+			}
+			$(".console").append(chars.charAt(char_index));
+			$(".console").append("</br>");
+			$(".console").append("<span>" + indentation + "<span>");
+		} else if(chars.charAt(char_index) == ">" && chars.charAt(char_index + 1) != "<") {
+			indentation = indentation + "-----";
+			$(".console").append(chars.charAt(char_index));
+			$(".console").append("</br>");
+			$(".console").append("<span>" + indentation + "<span>");
+		} else if(chars.charAt(char_index) != '_') {
+			$(".console").append(chars.charAt(char_index));
+		}		
+			
+		if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > window.innerHeight/2) {
+			$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
+			console.log("lol");
+		}
+				
 		if(grabbing_text == true) {
-			$(current_element).text($(current_element).text() + chars.charAt(char_index));
-			if(chars.charAt(char_index + 1) == "<") {
+			if(break_tag == true) {
+				if(chars.charAt(char_index) == ">") {
+					break_tag = false;
+				}
+			} else if(chars.charAt(char_index) == '^') {
+				$(current_element).html($(current_element).html().substring(0, $(current_element).html().length - 1));
+			} else if(chars.charAt(char_index) != '_') {
+				$(current_element).append(chars.charAt(char_index));
+			}
+			if(chars.charAt(char_index + 1) == "<" && chars.substring(char_index + 1, char_index + 6) != "</br>") {
 				grabbing_text = false;
 				grabbed_text = true;
+			} else if(chars.substring(char_index + 1, char_index + 6) == "</br>") {
+				$(current_element).append("</br>");
+				break_tag = true;
 			}
 		} else if (chars.charAt(char_index) == "<") {
 			switch(chars.charAt(char_index + 1)) {
@@ -111,14 +164,12 @@ $(document).ready(function(){
 			}	
 			grabbed_text = false;
 		}
-
-		$(".console").text(statement);
 		
 		char_index++;
 		if(char_index > chars.length - 2) {
-			statement = statement + ">";
-			$(".console").text(statement);
+			//statement = statement + ">";
+			$(".console").append(">");
 			clearInterval(intervalHandle);
 		}
-	},25);
+	},20);
 });
