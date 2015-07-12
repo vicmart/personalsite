@@ -1,7 +1,7 @@
 var statement = "";
 var intervalHandle = null;
 var subtitle = "I am a student.____________________^_____^_____^_____^_____.______________________________^_____^_____^_____^_____^_____r_____e_____s_____e_____a_____r_____c_____h_____e_____r______________________________^_____^_____^_____^_____^_____^_____^_____^_____^_____p_____r_____o_____g_____r_____^_____^_____^_____^_____^_____^_____p_____r_____o_____g_____r_____a_____m_____m_____e_____r______________________________^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____a_____w_____e_____s_____o_____m_____e_____.______________________________";
-var body_text = "Hey, I'm Victor. I'm a freelance programmer with a healthcare background currently enrolled at Hopkins as an biomedical engineer who spends his free time in the service of others while also making video games and catching up on superhero movies in my free time. That's a lot to take in, which is why I threw together this site to help you better understand my story.</br>And yes, this webpage is being written in real time (web dev is tough).";
+var body_text = "Hey, I'm Victor. I'm a freelance programmer with a healthcare background currently enrolled at Hopkins as an biomedical engineer who spends my free time helping others while also making video games and catching up on superhero movies when I can. That's a lot to take in, which is why I threw together this site to help you better understand my story.</br>And yes, this webpage is being written in real time (web dev is tough).";
 var chars = "<div class='background'></div><div class='foreground shadow'><div class='propic pro-border shadow'><div class='propic'><img class='pro-img' src='Images/Profile.jpg'></div></div><div class='content'><h1 class='title'>Victor Dadfar</h1><div class='subtitle_container'><p class='subtitle_box'>" + subtitle + "</p></div><p class='body'>" + body_text + "</p><div class='subtitle_container'><a class='footer' href='mailto:gotovicmart@gmail.com'>Email</a><div class='dot'></div><a class='footer' href='https://www.linkedin.com/pub/victor-dadfar/94/287/3a1'>LinkedIn</a><div class='dot'></div><a class='footer' href='https://github.com/Vicmart1'>GitHub</a></div></div></div>";
 var char_index = 0;
 var center_x = -1;
@@ -38,6 +38,10 @@ $( window ).resize(function() {
 	if(parseInt(window.innerWidth) > 800) {
 		$("html").css("overflow", "hidden");
 	}
+	/**$(".foreground").css("height", parseInt($(".content").css("height")) + "px");
+	console.log($(".content").css("height"));
+	console.log($(".foreground").css("height"));
+	**/
 });
 
 $(document).ready(function(){
@@ -76,7 +80,6 @@ $(document).ready(function(){
 			
 		if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > window.innerHeight/2) {
 			$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
-			console.log("lol");
 		}
 				
 		if(grabbing_text == true) {
