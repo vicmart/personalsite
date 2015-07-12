@@ -69,6 +69,7 @@ $(document).ready(function(){
 			$(".console").append(chars.charAt(char_index));
 			$(".console").append("</br>");
 			$(".console").append("<span>" + indentation + "<span>");
+			$(".background").css("height", "75%");
 		} else if(chars.charAt(char_index) != '_') {
 			$(".console").append(chars.charAt(char_index));
 		}		
