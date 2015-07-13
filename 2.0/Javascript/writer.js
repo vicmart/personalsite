@@ -34,22 +34,14 @@ $(window).mousemove(function( event ) {
 	$('.bg-img').css("top", "calc(50% + " + (diff_y/-10) + "px)");
 });
 
-$( window ).resize(function() {
-	if(parseInt(window.innerWidth) > 800) {
-		$("html").css("overflow", "hidden");
-	}
-	/**$(".foreground").css("height", parseInt($(".content").css("height")) + "px");
-	console.log($(".content").css("height"));
-	console.log($(".foreground").css("height"));
-	**/
+$(window).resize(function(){
+	$(".foreground").css("top", ((window.innerHeight/2) + 6) + "px");
+	$("body").css("height", window.innerHeight + "px");	
+	$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
 });
 
-$(document).ready(function(){
-	
-	if(parseInt(window.innerWidth) > 800) {
-		$("html").css("overflow", "hidden");
-	}
-	
+$(document).ready(function(){	
+	$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
   	intervalHandle = setInterval(function(){
 		if(chars.charAt(char_index) == '^') {
 			$(".console").html($(".console").html().substring(0, $(".console").html().length - 1));
@@ -168,6 +160,11 @@ $(document).ready(function(){
 			}	
 			grabbed_text = false;
 		}
+		
+		console.log($(".foreground").css("top"));
+		
+		$(".foreground").css("top", ((window.innerHeight/2) + 6) + "px");
+		$("body").css("height", window.innerHeight + "px");
 		
 		char_index++;
 		if(char_index > chars.length - 2) {

@@ -3,9 +3,9 @@ var target_size = [];
 var original_size = [];
 var tar_size = Math.min((window.innerHeight/2)  - 50, (window.innerWidth/2)  - 50);
 
-var titles = ["2D Fluid Simulation", "Jeometry Wars", "Jeometry Wars", "Ray Trace Lighting", "Minecraft Clone", "Projection Matrix Render", "Projection Matrix Render", "Ray Trace Lighting", "Ray Trace Render", "Ray Trace Render"];
+var titles = ["Liquid Physics", "Jeometry Wars", "Jeometry Wars", "Reflections", "Floating Islands", "Endless Space", "Paradox Shell", "Lost", "Mirrors", "Lonely Snowmen"];
 
-var subtitles = ["Java <a href='projects/fluiddemo.zip'>demo</a>", "Java <a href='projects/jometrywars.zip'>demo</a>", "Java <a href='projects/jometrywars.zip'>demo</a>", "Java <a href='projects/Lighting.zip'>demo</a>", "C", "Java <a href='projects/Projection.zip'>demo</a>", "Java <a href='projects/Projection.zip'>demo</a>", "Java <a href='projects/Projection.zip'>demo</a>", "Java", "Java"];
+var subtitles = ["2D Fluid Simulation - Java <a href='projects/fluiddemo.zip'>demo</a>", "Geometry Wars Clone - Java <a href='projects/jometrywars.zip'>demo</a>", "Geometry Wars Clone - Java <a href='projects/jometrywars.zip'>demo</a>", "Ray-Based Lighting - Java <a href='projects/Lighting.zip'>demo</a>", "Minecraft Clone - C", "Matrix-Based Render - Java <a href='projects/Projection.zip'>demo</a>", "Matrix-Based Render - Java <a href='projects/Projection.zip'>demo</a>", "Ray-Based Psuedo 3D Render - Java", "Ray Trace-Based Render - Java", "Ray Trace-Based Render - Java"];
 var paused;
 
 function expand(x){

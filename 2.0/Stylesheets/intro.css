@@ -66,7 +66,6 @@ span{
 	margin: 0px;
 	margin-top: -2.5px;
 
-	transition: opacity 1.5s ease-out, top 1.5s ease-out;
 	opacity: 1;
 	
 	background:
@@ -203,5 +202,5 @@ a{
 	color: gray;
 	margin: 0px;
 	padding: 0px;
-	margin-bottom: 25px;
+	margin-bottom: 30px;
 }
