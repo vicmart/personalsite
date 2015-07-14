@@ -1,6 +1,6 @@
 @font-face {
     font-family: Raleway;
-    src: url(Raleway.ttf);
+    src: url(Raleway-Light.ttf);
 }
 
 @font-face {
@@ -29,6 +29,7 @@ body{
 	top: calc(100% - 25px);
 	left: 0px;
 	z-index: 1;
+	opacity: 0.8;
 }
 
 .bot{
@@ -40,7 +41,6 @@ body{
 	color: white;
 	line-height: 25px;
 	font-family: Raleway-Med;
-	opacity: 0.8;
 	
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -66,15 +66,42 @@ body{
 	border-radius: 50% / 25px;
 	z-index: -1;
 	
-	-webkit-transition: left 0.5s ease, top 0.75s;
-    -moz-transition: left 0.5s ease, top 0.75s;
-    -ms-transition: left 0.5s ease, top 0.75s;
-    -o-transition: left 0.5s ease, top 0.75s;
-    transition: left 0.5s ease, top 0.75s;
+	-webkit-transition: top 0.75s;
+    -moz-transition: top 0.75s;
+    -ms-transition: top 0.75s;
+    -o-transition: top 0.75s;
+    transition: top 0.75s;
 }
 
 .bot:hover{
 	opacity: 1.0;
+}
+
+.info{
+	position: relative;
+	width: 100%;
+	background: black;
+	top: 0%;
+	height: 0%;
+	z-index: -1;
+	
+	-webkit-transition: top 0.75s, height 0.75s;
+    -moz-transition: top 0.75s, height 0.75s;
+    -ms-transition: top 0.75s, height 0.75s;
+    -o-transition: top 0.75s, height 0.75s;
+    transition: top 0.75s, height 0.75s;
+}
+
+.info_text{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	padding-left: 10px;
+	margin-top: 15px;
+	line-height: 100%;
+	color: white;
+	font-family: Raleway;
+	text-align: left;
 }
 
 .all-frames{
@@ -83,7 +110,7 @@ body{
 	left: 0px;
 	width: 100%;
 	height: 600%;
-
+	
 	-webkit-transition: left 0.5s ease, top 0.75s;
     -moz-transition: left 0.5s ease, top 0.75s;
     -ms-transition: left 0.5s ease, top 0.75s;
