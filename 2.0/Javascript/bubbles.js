@@ -9,6 +9,7 @@ var subtitles = ["2D Fluid Simulation - Java <a href='projects/fluiddemo.zip'>de
 var paused;
 
 function expand(x){
+	tar_size = Math.min((window.innerHeight/2)  - 50, (window.innerWidth/2)  - 50);
 	var idx = parseInt(($(x).parent().attr("id")).slice(-1));
 	if(Math.abs(current_size[idx] - original_size[idx]) > Math.abs(current_size[idx] - target_size[idx])) {
 		target_size[idx] = original_size[idx];
