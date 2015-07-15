@@ -78,7 +78,7 @@ DOMRenderer = (function(_super) {
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         p = _ref[_i];
         if (this.useGPU) {
-          p.domElement.style.WebkitTransform = "translate3d(" + (p.pos.x) + "px," + (p.pos.y) + "px,0px)";
+          p.domElement.style.WebkitTransform = "translate3d(" + (p.pos.x) + "px," + (p.pos.y) + "px, 0px)";
         } else {
           p.domElement.style.left = p.pos.x + "px";
           p.domElement.style.top = p.pos.y + "px";
@@ -91,26 +91,6 @@ DOMRenderer = (function(_super) {
 		p.domElement.style["border-radius"] = p.radius + "px";
 		p.domElement.style["margin-left"] = -p.radius - 7 + "px";
 		p.domElement.style["margin-top"] = -p.radius - 7 + "px";	
-      }
-    }
-    if (this.renderSprings) {
-      this.canvas.width = this.canvas.width;
-      this.ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-      this.ctx.beginPath();
-      _ref1 = physics.springs;
-      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-        s = _ref1[_j];
-        this.ctx.moveTo(s.p1.pos.x, s.p1.pos.y);
-        this.ctx.lineTo(s.p2.pos.x, s.p2.pos.y);
-      }
-      this.ctx.stroke();
-    }
-    if (this.renderMouse) {
-      if (this.useGPU) {
-        this.mouse.domElement.style.WebkitTransform = "translate3d(" + (this.mouse.pos.x | 0) + "px," + (this.mouse.pos.y | 0) + "px,0px)";
-      } else {
-        this.mouse.domElement.style.left = this.mouse.pos.x + "px";
-        this.mouse.domElement.style.top = this.mouse.pos.y + "px";
       }
     }
     return this.renderTime = new Date().getTime() - time;

@@ -6,6 +6,7 @@
 html, body{
 	overflow: hidden;
 	font-family: Raleway-Med;
+	text-align: center;
 }
 img{
 	position: absolute;

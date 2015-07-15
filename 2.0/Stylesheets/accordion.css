@@ -12,11 +12,6 @@ body {
 	overflow: hidden;
 }
 
-audio {
-	position: absolute;
-	z-index: -1;
-}
-
 div {
 	font-family: Raleway-Med; 
 	font-size: 105%;
@@ -129,7 +124,8 @@ hr{
 	margin-left: 20px;
 	margin-right: 20px;
 	padding: 0px;
-	margin-top:0px;
+	margin-top:10px;
+	margin-bottom:10px;
 	
 	z-index:0;
 }

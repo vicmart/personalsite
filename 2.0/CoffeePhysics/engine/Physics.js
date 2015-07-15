@@ -39,7 +39,7 @@ Physics = (function() {
 	  current_size[index] = particle.radius;
   
 	  if(Math.abs(target_size[index] - particle.radius) > 0.01) {
-		  particle.radius += (target_size[index] - particle.radius)/32;
+		  particle.radius += (target_size[index] - particle.radius)/64;
 		  particle.mass = particle.radius/4;
 	  }
   
@@ -51,12 +51,7 @@ Physics = (function() {
       particle.update(dt, index);
     }
     this.integrator.integrate(this.particles, dt, drag);
-    _ref2 = this.springs;
-    _results = [];
-    for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-      spring = _ref2[_k];
-      _results.push(spring.apply());
-    }
+   
     return _results;
   };
 
