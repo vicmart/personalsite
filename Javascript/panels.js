@@ -10,8 +10,11 @@ var panels = ["",
 	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece. -- powered by the Coffee Physics Library", 
 	"Going to a very medicine-oriented school has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
 	"So what's the future look like for Victor Dadfar? Programming, engineering and medicine will all certainly play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this :)"]
+
+var index;
 $(".bot").click(function() {
-	var offset = -1 * $(this).index() * $(".frame").height();
+	index = $(this).index();
+	var offset = -1 * index * $(".frame").height();
 	
 	$(".all-frames").css('top', offset + 'px');
 	$(".bot").each(function(){
@@ -83,4 +86,9 @@ $( document ).ready(function() {
 	active = $(".circle").get(0);
 	$(".info_text").text(panels[$(".circle").index(active)]);
   // Handler for .ready() called.
+});
+
+$( window ).resize(function() {
+	var offset = -1 * index * $(".frame").height();
+	$(".all-frames").css('top', offset + 'px');
 });
