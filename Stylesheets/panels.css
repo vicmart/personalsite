@@ -1,0 +1,268 @@
+@font-face {
+    font-family: Raleway;
+    src: url(Raleway-Light.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Med;
+    src: url(Raleway-Medium.ttf);
+}
+
+body{
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+.frame{
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 16.66666666666667%;
+	z-index: 0;
+}
+
+.bot-cont{
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	top: calc(100% - 25px);
+	left: 0px;
+	z-index: 1;
+	opacity: 0.9;
+}
+
+.bot{
+	position: relative;
+	float: left;
+	width: 16.66666666666667%;
+	height: 100%;
+	background: black;
+	color: white;
+	line-height: 25px;
+	font-family: Raleway-Med;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.circle{
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	
+	top: 0px;
+	left: 0px;
+	
+	background: black;
+	float: left;
+	
+	-moz-border-radius: 50% / 25px;
+	-webkit-border-radius: 50% / 25px;
+	border-radius: 50% / 25px;
+	z-index: -1;
+	
+	-webkit-transition: left 0.5s, top 0.25s;
+    -moz-transition: left 0.5s, top 0.25s;
+    -ms-transition: left 0.5s, top 0.25s;
+    -o-transition: left 0.5s, top 0.25s;
+    transition: left 0.5s, top 0.25s;
+}
+
+.info{
+	position: relative;
+	width: 100%;
+	background: black;
+	top: 0%;
+	overflow: hidden;
+	z-index: -1;
+	
+	-webkit-transition: top 0.25s, height 0.25s;
+    -moz-transition: top 0.25s, height 0.25s;
+    -ms-transition: top 0.25s, height 0.25s;
+    -o-transition: top 0.25s, height 0.25s;
+    transition: top 0.25s, height 0.25s;
+}
+
+.filling{
+	position: absolute;
+	width: 100%;
+	height: 800%;
+	top: 0px;
+	left: 0px;
+	background: black;
+	z-index: -2;
+}
+
+.info_text{
+	float: left;
+	width: 97%;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	margin-top: 15px;
+	color: white;
+	font-family: Raleway;
+	text-align: left;
+}
+
+.all-frames{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 600%;
+	
+	-webkit-transition: left 0.5s ease, top 0.75s;
+    -moz-transition: left 0.5s ease, top 0.75s;
+    -ms-transition: left 0.5s ease, top 0.75s;
+    -o-transition: left 0.5s ease, top 0.75s;
+    transition: left 0.5s ease, top 0.75s;
+}
+
+.window{
+	position: fixed;
+	width: 100%;
+	height: 0;
+	top: 50%;
+	z-index: 1;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+::-moz-scrollbar { 
+    display: none; 
+}
+
+::-ms-scrollbar { 
+    display: none; 
+}
+
+::-o-scrollbar { 
+    display: none; 
+}
+
+::scrollbar { 
+    display: none; 
+}
+
+.bg{
+	position: absolute;
+	width: 100%;
+	height: calc(100% + 2px);
+	left: 0px;
+	top: 0px;
+}
+
+iframe{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.navbar{
+	position: relative;
+	display:inline-block;
+
+}
+
+.dot{
+	position: relative;
+	background-color: #B8B8B8;
+	width: 10px;
+	height: 10px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+
+	opacity: 0.5;
+    filter: alpha(opacity=50);
+
+	margin-top: 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+
+.button{
+	position: relative;
+	background-color: #B8B8B8;
+	width: 100px;
+	height: 100px;
+
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+
+	opacity: 0.3;
+    filter: alpha(opacity=30);
+
+	margin: 25px;
+	padding: 0px;
+	color: white;
+	font-size: 100px;
+	font-family: "Courier New", Courier, monospace;
+	text-align: center;
+
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -ms-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+}
+
+.globe-page{
+	z-index:-1;
+}
+
+.metro-frame{
+	overflow: scroll;
+}
+
+.water{
+	z-index:-1;
+}
+
+.active{
+    opacity: 0.6;
+}
+
+.forward{
+	float: right;
+}
+
+.reverse{
+	float: left;
+}
+
+.button:hover{
+	opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.forward-text{
+	position: relative;
+	top: -5px;
+	left: 5px;
+}
+
+.reverse-text{
+	position: relative;
+	top: -5px;
+	left: -5px;
+}
