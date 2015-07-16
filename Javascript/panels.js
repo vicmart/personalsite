@@ -9,7 +9,7 @@ var panels = ["",
 	"I have two goals for the future: Visit everywhere, and create something that will be used globally. I'm still working on both.", 
 	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece. -- powered by the Coffee Physics Library", 
 	"Going to a very medicine-oriented school has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
-	"So what's the future look like for Victor Dadfar? Programming, engineering and medicine will all certainly play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this far :)"]
+	"So what's the future look like for Victor Dadfar? Programming, engineering and medicine will all certainly play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this :)"]
 $(".bot").click(function() {
 	var offset = -1 * $(this).index() * $(".frame").height();
 	
