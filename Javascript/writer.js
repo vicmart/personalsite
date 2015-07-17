@@ -132,6 +132,12 @@ $(document).ready(function(){
 				index++;
 			}
 			current_element.href = current_element.href + chars.substring(char_index + 6, index);
+		} else if (chars.substring(char_index, char_index + 6) == "target") {
+		   	var index = char_index + 8;
+		   	while(chars.charAt(index) != "'") {
+		   		index++;
+		   	}
+		   	current_element.target = current_element.target + chars.substring(char_index + 8, index);
 		} else if (chars.charAt(char_index) == '>' && chars.charAt(char_index + 1) != '<') {
 			grabbing_text = true;
 			/**var index = char_index + 1;
