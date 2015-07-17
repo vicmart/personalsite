@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<script src="Javascript/jquery-1.11.3.min.js"></script>
+		<style>
+			@font-face {
+			    font-family: Raleway-Med;
+			    src: url(Stylesheets/Raleway-Medium.ttf);
+			}
+		
+			@font-face {
+			    font-family: Raleway;
+			    src: url(Stylesheets/Raleway-Light.ttf);
+			}
+
+			html, body{
+				overflow: hidden;
+				padding: 0px;
+				margin: 0px;
+			}
+		
+			p {
+				font-family: Raleway;
+				font-size: 14px;
+			
+				position: relative;
+				width: 100%;
+				line-height: 100%;
+				top: calc(100% - 300px);
+				text-align: center;
+				color: white;
+			}
+		
+			div{
+				width: 100%;
+				height: 110%;
+				background: gray;
+			}
+			
+			span{
+				color: #CCCCCC;
+			}
+			
+			.footer{
+				color: #EEEEEE;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<p>Copyright &copy; 2015 Vicmart Inc, All Rights Reserved.</br><span>(Not Really)</span></br></br>
+				<a class="footer" href="mailto:gotovicmart@gmail.com">
+					Email</a> 
+				|
+				<a class="footer" href="https://www.linkedin.com/pub/victor-dadfar/94/287/3a1">
+					LinkedIn</a>
+			    |
+				<a class="footer" href="https://github.com/Vicmart1">GitHub</a></br></br>
+				All content is of my own creation, unless otherwise noted.</p>
+		</div>
+		
+		<script>
+			$(document).ready(function() {
+		  		//$("p").css("font-size", (window.innerHeight) + "px");
+			});
+			
+			$( window ).resize(function() {
+		  		//$("p").css("font-size", (window.innerHeight) + "px");
+			});
+		</script>
+	</body>
+</html>
