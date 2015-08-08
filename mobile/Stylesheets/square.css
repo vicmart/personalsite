@@ -1,0 +1,43 @@
+body{
+	background-color: purple;
+	margin: 5px;
+}
+
+.box{
+	position: relative;
+	float: left;
+	width: calc(50% - 15px);
+	padding-bottom: calc(50% - 15px);
+	background-color: orange;
+	margin: 7.5px;
+}
+
+.box:nth-child(2){
+	background-color: green;
+}
+
+.box:nth-child(4){
+	background-color: blue;
+}
+
+.box:nth-child(5){
+	background-color: white;
+}
+
+.box:nth-child(6){
+	background-color: yellow;
+}
+
+.box:nth-child(8){
+	background-color: gray;
+}
+
+.extra-wide{
+	width: calc(100% - 15px);
+	padding-bottom: calc(50% - 15px);
+}
+
+.extra-tall{
+	width: calc(50% - 15px);
+	padding-bottom: calc(100% - 15px);
+}
