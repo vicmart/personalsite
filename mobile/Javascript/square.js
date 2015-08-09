@@ -3,7 +3,7 @@ var window_height = window.innerHeight;
 var target;
 var scroll = 0;
 
-$(".container").hover(
+$(".container").mousedown(
 function() {
 	$(this).data("width", $(this).css("width"));
 	$(this).data("height", $(this).css("height"));
@@ -19,17 +19,24 @@ function() {
 	$(this).css("padding", "0px");
 	$(this).css("z-index", 1);
 	target = $(this);
-},
-function() {
-	$(this).css("width", $(this).data("width"));
-	$(this).css("height", $(this).data("height"));
-	$(this).css("left", $(this).data("left"));
-	$(this).css("top", $(this).data("top"));
-	$(this).css("margin", $(this).data("margin"));
-	$(this).css("padding", $(this).data("padding"));
+	
+	$(".exit").css("transition-delay", "0.5s");
+	$(".exit").css("opacity", 1);
+});
 
+$(".exit").mousedown(
+function() {
+	$(target).css("width", $(target).data("width"));
+	$(target).css("height", $(target).data("height"));
+	$(target).css("left", $(target).data("left"));
+	$(target).css("top", $(target).data("top"));
+	$(target).css("margin", $(target).data("margin"));
+	$(target).css("padding", $(target).data("padding"));
 	$(target).css("z-index", 0);
 	target = null;
+	
+	$(".exit").css("opacity", 0);
+	$(".exit").css("transition-delay", "0s");
 });
 
 $(window).scroll(function(){
