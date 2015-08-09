@@ -10,7 +10,7 @@ body{
 	padding-bottom: 44%;
 	margin: 2%;
 	
-	transition: all 0.5s;
+	transition: all 0.25s;
 }
 
 .box{
@@ -67,5 +67,5 @@ body{
 	z-index: 2;
 	opacity: 0;
 	
-	transition: opacity 0.1s linear 0.5s;
+	transition: opacity 0.1s linear 0.25s;
 }

@@ -11,16 +11,20 @@ function() {
 	$(this).data("top", $(this).css("top"));
 	$(this).data("margin", $(this).css("margin"));
 	$(this).data("padding", $(this).css("padding"));
+	$(this).css("top", (parseInt($(this).css("top")) - scroll) + "px");
+	$(this).css("transition-duration", "0.0s");
 	$(this).css("width", "calc(100%)");
 	$(this).css("height", "100vh");
 	$(this).css("left", "0px");
-	$(this).css("top", $(window).scrollTop() + "px");
+	$(this).css("top", "0px");
 	$(this).css("margin", "0px");
 	$(this).css("padding", "0px");
 	$(this).css("z-index", 1);
+	$(this).css("position", "fixed");
+	$(this).css("transition-duration", "0.25s");
 	target = $(this);
 	
-	$(".exit").css("transition-delay", "0.5s");
+	$(".exit").css("transition-delay", "0.25s");
 	$(".exit").css("opacity", 1);
 });
 
@@ -33,6 +37,7 @@ function() {
 	$(target).css("margin", $(target).data("margin"));
 	$(target).css("padding", $(target).data("padding"));
 	$(target).css("z-index", 0);
+	$(target).css("position", "absolute");
 	target = null;
 	
 	$(".exit").css("opacity", 0);
@@ -41,7 +46,7 @@ function() {
 
 $(window).scroll(function(){
     scroll = $(this).scrollTop();
-	$(target).css("top", scroll + "px");
+	//$(target).css("top", scroll + "px");
 });
 
 $( document ).ready(function() {
