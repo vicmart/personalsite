@@ -1,5 +1,7 @@
 body{
 	background-color: purple;
+	margin: 0px;
+	padding: 0px;
 }
 
 .container{
@@ -7,6 +9,8 @@ body{
 	width: 44%;
 	padding-bottom: 44%;
 	margin: 2%;
+	
+	transition: all 0.5s;
 }
 
 .box{
@@ -15,7 +19,6 @@ body{
 	height: 100%;
 	background-color: orange;
 	
-	transition: all 0.5s;
 }
 
 .green{
