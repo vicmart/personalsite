@@ -59,10 +59,10 @@ body{
 
 .exit{
 	position: fixed;
-	left: 85%;
+	left: 80%;
 	top: 0%;
-	width: 15%;
-	padding-bottom: 15%;
+	width: 20%;
+	padding-bottom: 20%;
 	background-color: red;
 	z-index: 2;
 	opacity: 0;
