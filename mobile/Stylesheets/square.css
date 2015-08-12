@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Raleway-Med;
+    src: url(Raleway-Medium.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Light;
+    src: url(Raleway-Light.ttf);
+}
+
 body{
 	background-color: purple;
 	margin: 0px;
@@ -11,6 +21,8 @@ body{
 	margin: 2%;
 	
 	transition: all 0.25s;
+
+	overflow: hidden;
 }
 
 .box{
@@ -68,4 +80,22 @@ body{
 	opacity: 0;
 	
 	transition: opacity 0.1s linear 0.25s;
+}
+
+.text-holder{
+	color: white;
+	padding: 5px;
+	font-size: 20px;
+	font-family: Raleway-Med;
+}
+
+h1{
+	padding: 0px;
+	margin: 20px;
+}
+
+hr{
+	height:2px;
+	border-width:0;
+	background-color:white;
 }
