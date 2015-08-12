@@ -48,7 +48,7 @@ function() {
 
 $(window).scroll(function(){
     scroll = $(this).scrollTop();
-	//$(target).css("top", scroll + "px");
+	$(target).css("top", scroll + "px");
 });
 
 $( document ).ready(function() {
