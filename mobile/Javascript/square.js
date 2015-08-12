@@ -19,6 +19,7 @@ function() {
 	$(this).css("padding", "0px");
 	$(this).css("z-index", 1);
 	$(this).css("transition-duration", "0.25s");
+	$($(this).find("p")[1]).css("opacity", 1);
 	target = $(this);
 	
 	$(".exit").css("transition-delay", "0.25s");
@@ -36,6 +37,7 @@ function() {
 	$(target).css("margin", $(target).data("margin"));
 	$(target).css("padding", $(target).data("padding"));
 	$(target).css("z-index", 0);
+	$($(target).find("p")[1]).css("opacity", 0);
 	target = null;
 	
 	$(".exit").css("opacity", 0);

@@ -84,8 +84,8 @@ body{
 
 .text-holder{
 	color: white;
-	padding: 5px;
-	font-size: 2em;
+	padding: 10px;
+	font-size: 1.5em;
 	font-family: Raleway-Med;
 }
 
@@ -98,4 +98,24 @@ hr{
 	height:2px;
 	border-width:0;
 	background-color:white;
+}
+
+.title{
+	position: absolute;
+	top: calc(100% - 2.2em);
+}
+
+.body{
+	opacity: 0;
+}
+
+.body{
+	transition: all 0.25s;
+}
+
+.fake-exit{
+	position: relative;
+	float: right;
+	width: 20%;
+	padding-bottom: 20%;
 }
