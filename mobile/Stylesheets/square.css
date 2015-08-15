@@ -90,6 +90,7 @@ body{
 }
 
 p{
+	position: relative;
 	font-size: 3em;
 	margin: 0;
 }
@@ -124,26 +125,13 @@ hr{
 
 .propic{
 	position: relative;
-	left: calc(25%);
-	top: 5px;
-	width: 50%;
-	padding-bottom: 50%;
+	
+	width: calc(100% + 20px);
+	left: -10px;
+	top: -100px;
+	margin: 0px;
+	padding: 0px;
 	overflow: hidden;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-}
-
-.pro-border{
-	width: calc(50% + 10px);
-	padding-bottom: calc(50% + 10px);
-	top: -20px;
-	left: calc(50% - 105px);
-	background: white;
-	-moz-border-radius: calc(50% + 5px);
-	-webkit-border-radius: calc(50% + 5px);
-	border-radius: calc(50% + 5px);
-	z-index: 1;
 }
 
 .pro-img{
@@ -156,4 +144,9 @@ body.lock-position {
 	overflow: hidden;
 	width: 100%;
 	position: fixed;
+}
+
+.subtitle{
+	font-size: 2em;
+	color: #DDD;
 }
