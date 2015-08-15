@@ -23,7 +23,9 @@ function() {
 		$(this).css("padding", "0px");
 		$(this).css("z-index", 1);
 		$(this).css("transition-duration", "0.25s");
-		$($(this).children().find("div")[2]).css("opacity", 1);
+		$($(this).children().find("div")[3]).css("opacity", 1);
+		$($(this).children().children().find("div")[0]).css("opacity", 0);
+		$($(this).children()[0]).css("overflow", "scroll");
 		target = $(this);
 	
 		$(".exit").css("transition-delay", "0.25s");
@@ -31,9 +33,9 @@ function() {
 		$(".exit").css("width", "20%");
 		$(".exit").css("padding-bottom", "20%");
 
-		//$("html").css("overflow", "hidden");
 		$("body").addClass("lock-position");
 		$("body").css("top", (-1 * scroll) + "px");
+		
 		active = true;
 	}
 });
@@ -47,7 +49,10 @@ function() {
 	$(target).css("margin", $(target).data("margin"));
 	$(target).css("padding", $(target).data("padding"));
 	$(target).css("z-index", 0);
-	$($(target).children().find("div")[2]).css("opacity", 0);
+	$($(target).children().find("div")[3]).css("opacity", 0);
+	$($(target).children().children().find("div")[0]).css("opacity", 1);
+	$($(target).children()[0]).scrollTop(0);
+	$($(target).children()[0]).css("overflow", "hidden");
 	target = null;
 	
 	$(".exit").css("opacity", 0);
@@ -55,7 +60,6 @@ function() {
 	$(".exit").css("padding-bottom", "0px");
 	$(".exit").css("transition-delay", "0s");
 	
-	//$("html").css("overflow", "scroll");
 	$("body").removeClass("lock-position");
 	$(window).scrollTop(scroll);
 	active = false;
