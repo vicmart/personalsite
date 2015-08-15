@@ -50,10 +50,10 @@ function() {
 	$("body").css("overflow", "scroll");
 });
 
-$(window).scroll(function(){
+/**$(window).scroll(function(){
     scroll = $(this).scrollTop();
 	$(target).css("top", scroll + "px");
-});
+});**/
 
 $( document ).ready(function() {
 	var i = 0;
