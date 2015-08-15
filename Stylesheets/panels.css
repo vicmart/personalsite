@@ -106,7 +106,8 @@ body{
 	padding-left: 10px;
 	padding-right: 10px;
 	
-	margin-top: 15px;
+	margin-top: 7px;
+	margin-bottom: 3px;
 	color: white;
 	font-family: Raleway;
 	text-align: left;
@@ -267,4 +268,19 @@ iframe{
 	position: relative;
 	top: -5px;
 	left: -5px;
+}
+
+.progress{
+	position: fixed;
+	width: 2.8%;
+	height: 2px;
+	left: 0px;
+	top: calc(100% - 2px);
+	background-color: white;
+	transition: all 0.25s;
+}
+
+p{
+	margin: 0px;
+	margin-top: 0px;
 }

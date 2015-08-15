@@ -23,17 +23,18 @@ $(".bot").click(function() {
 	
 	$(this).children().css("top", "-15px");	
 	active = $(this).children().get(0);
-	if($(".circle").index(active) != 0) {
+	if(index != 0) {
 		var old_height = parseInt($(".info").css("height"));
-		$(".info_text").text(panels[$(".circle").index(active)]);
-		$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
+		$(".info_text").text(panels[index]);
+		//$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
 		var new_top = old_height - parseInt($(".info").css("height"));
 		$(".filling").css("top", "calc(-0% - " + new_top + "px)");
 		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
 	} else {
-		$(active).css("top", "-15px");
+		//$(active).css("top", "-15px");
 		$(".info").css("top", "-100%");
 	}
+	$(".progress").css("width", ((16.7) * index + ((index + 1) * 2.8)) + "%");
 });
 
 $(".bot").hover(function() {

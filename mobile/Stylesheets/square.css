@@ -91,6 +91,7 @@ body{
 
 p{
 	font-size: 3em;
+	margin: 0;
 }
 
 h1{
@@ -106,7 +107,7 @@ hr{
 
 .title{
 	position: absolute;
-	top: calc(100% - 2.2em);
+	top: calc(100% - 1.2em);
 }
 
 .body{
@@ -123,25 +124,25 @@ hr{
 
 .propic{
 	position: relative;
-	left: calc(50% - 100px);
+	left: calc(25%);
 	top: 5px;
-	width: 200px;
-	height: 200px;
+	width: 50%;
+	padding-bottom: 50%;
 	overflow: hidden;
-	-moz-border-radius: 100px;
-	-webkit-border-radius: 100px;
-	border-radius: 100px;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
 }
 
 .pro-border{
-	width: 210px;
-	height: 210px;
+	width: calc(50% + 10px);
+	padding-bottom: calc(50% + 10px);
 	top: -20px;
 	left: calc(50% - 105px);
 	background: white;
-	-moz-border-radius: 105px;
-	-webkit-border-radius: 105px;
-	border-radius: 105px;
+	-moz-border-radius: calc(50% + 5px);
+	-webkit-border-radius: calc(50% + 5px);
+	border-radius: calc(50% + 5px);
 	z-index: 1;
 }
 
