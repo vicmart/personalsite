@@ -2,36 +2,40 @@ var window_width = window.innerWidth;
 var window_height = window.innerHeight;
 var target;
 var scroll = 0;
+var active = false;
 
 $(".container").mousedown(
 function() {
-	scroll = $(window).scrollTop();
+	if(!active) {
+		scroll = $(window).scrollTop();
 	
-	$(this).data("width", $(this).css("width"));
-	$(this).data("height", $(this).css("height"));
-	$(this).data("left", $(this).css("left"));
-	$(this).data("top", $(this).css("top"));
-	$(this).data("margin", $(this).css("margin"));
-	$(this).data("padding", $(this).css("padding"));
-	$(this).css("width", "calc(100%)");
-	$(this).css("height", "100vh");
-	$(this).css("left", "0px");
-	$(this).css("top", $(window).scrollTop() + "px");
-	$(this).css("margin", "0px");
-	$(this).css("padding", "0px");
-	$(this).css("z-index", 1);
-	$(this).css("transition-duration", "0.25s");
-	$($(this).children().find("div")[2]).css("opacity", 1);
-	target = $(this);
+		$(this).data("width", $(this).css("width"));
+		$(this).data("height", $(this).css("height"));
+		$(this).data("left", $(this).css("left"));
+		$(this).data("top", $(this).css("top"));
+		$(this).data("margin", $(this).css("margin"));
+		$(this).data("padding", $(this).css("padding"));
+		$(this).css("width", "calc(100%)");
+		$(this).css("height", "100vh");
+		$(this).css("left", "0px");
+		$(this).css("top", $(window).scrollTop() + "px");
+		$(this).css("margin", "0px");
+		$(this).css("padding", "0px");
+		$(this).css("z-index", 1);
+		$(this).css("transition-duration", "0.25s");
+		$($(this).children().find("div")[2]).css("opacity", 1);
+		target = $(this);
 	
-	$(".exit").css("transition-delay", "0.25s");
-	$(".exit").css("opacity", 1);
-	$(".exit").css("width", "20%");
-	$(".exit").css("padding-bottom", "20%");
+		$(".exit").css("transition-delay", "0.25s");
+		$(".exit").css("opacity", 1);
+		$(".exit").css("width", "20%");
+		$(".exit").css("padding-bottom", "20%");
 
-	//$("html").css("overflow", "hidden");
-	$("body").addClass("lock-position");
-	$("body").css("top", (-1 * scroll) + "px");
+		//$("html").css("overflow", "hidden");
+		$("body").addClass("lock-position");
+		$("body").css("top", (-1 * scroll) + "px");
+		active = true;
+	}
 });
 
 $(".exit").mousedown(
@@ -54,6 +58,7 @@ function() {
 	//$("html").css("overflow", "scroll");
 	$("body").removeClass("lock-position");
 	$(window).scrollTop(scroll);
+	active = false;
 });
 
 /**$(window).scroll(function(){
