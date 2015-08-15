@@ -14,9 +14,9 @@ var panels = ["",
 var index;
 $(".bot").click(function() {
 	index = $(this).index();
-	var offset = -1 * index * $(".frame").height();
+	var offset = -1 * index * $(".frame").width();
 	
-	$(".all-frames").css('top', offset + 'px');
+	$(".all-frames").css('left', offset + 'px');
 	$(".bot").each(function(){
 		$(this).children().css("top", "0px");
 	});
@@ -90,6 +90,6 @@ $( document ).ready(function() {
 });
 
 $( window ).resize(function() {
-	var offset = -1 * index * $(".frame").height();
-	$(".all-frames").css('top', offset + 'px');
+	var offset = -1 * index * $(".frame").width();
+	$(".all-frames").css('left', offset + 'px');
 });
