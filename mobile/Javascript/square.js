@@ -27,7 +27,7 @@ function() {
 	$(".exit").css("width", "20%");
 	$(".exit").css("padding-bottom", "20%");
 	
-	$("body").css("overflow", "hidden");
+	$("html").css("overflow", "hidden");
 });
 
 $(".exit").mousedown(
@@ -47,7 +47,7 @@ function() {
 	$(".exit").css("padding-bottom", "0px");
 	$(".exit").css("transition-delay", "0s");
 	
-	$("body").css("overflow", "scroll");
+	$("html").css("overflow", "scroll");
 });
 
 /**$(window).scroll(function(){
