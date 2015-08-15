@@ -5,6 +5,8 @@ var scroll = 0;
 
 $(".container").mousedown(
 function() {
+	scroll = $(window).scrollTop();
+	
 	$(this).data("width", $(this).css("width"));
 	$(this).data("height", $(this).css("height"));
 	$(this).data("left", $(this).css("left"));
@@ -26,8 +28,10 @@ function() {
 	$(".exit").css("opacity", 1);
 	$(".exit").css("width", "20%");
 	$(".exit").css("padding-bottom", "20%");
-	
-	$("html").css("overflow", "hidden");
+
+	//$("html").css("overflow", "hidden");
+	$("body").addClass("lock-position");
+	$("body").css("top", (-1 * scroll) + "px");
 });
 
 $(".exit").mousedown(
@@ -47,7 +51,9 @@ function() {
 	$(".exit").css("padding-bottom", "0px");
 	$(".exit").css("transition-delay", "0s");
 	
-	$("html").css("overflow", "scroll");
+	//$("html").css("overflow", "scroll");
+	$("body").removeClass("lock-position");
+	$(window).scrollTop(scroll);
 });
 
 /**$(window).scroll(function(){

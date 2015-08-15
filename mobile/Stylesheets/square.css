@@ -156,3 +156,10 @@ hr{
 	width: 100%;
 	height: auto;
 }
+
+body.lock-position {
+	height: 100%;
+	overflow: hidden;
+	width: 100%;
+	position: fixed;
+}
