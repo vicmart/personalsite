@@ -92,6 +92,6 @@ $( document ).ready(function() {
 	});
 	
 	i++;
-	
+
 	$(".footer-filler").css("top", ((window_width * 0.02) + (window_width * 0.48) * parseInt(i/2)) + "px");
 });

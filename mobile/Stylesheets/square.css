@@ -128,8 +128,7 @@ hr{
 	
 	width: calc(100% + 20px);
 	left: -10px;
-	top: -100px;
-	margin: 0px;
+	margin-top: -20px;
 	padding: 0px;
 	overflow: hidden;
 }
@@ -147,6 +146,6 @@ body.lock-position {
 }
 
 .subtitle{
-	font-size: 2em;
-	color: #DDD;
+	font-size: 2.5em;
+	color: #EEE;
 }
