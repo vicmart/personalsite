@@ -14,6 +14,7 @@ var panels = ["",
 var index;
 $(".bot").click(function() {
 	index = $(this).index();
+	active = index;
 	var offset = -1 * index * $(".frame").width();
 	
 	$(".all-frames").css('left', offset + 'px');
@@ -22,11 +23,9 @@ $(".bot").click(function() {
 	});
 	
 	$(this).children().css("top", "-15px");	
-	active = $(this).children().get(0);
-	if(index != 0) {
+	if(active != 0) {
 		var old_height = parseInt($(".info").css("height"));
 		$(".info_text").text(panels[index]);
-		//$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
 		var new_top = old_height - parseInt($(".info").css("height"));
 		$(".filling").css("top", "calc(-0% - " + new_top + "px)");
 		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
@@ -38,7 +37,7 @@ $(".bot").click(function() {
 });
 
 $(".bot").hover(function() {
-	if($(".circle").index(active) != 0) {
+	if(active != 0) {
 		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
 		$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
 	}
