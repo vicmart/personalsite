@@ -152,9 +152,10 @@ body.lock-position {
 
 iframe{
 	position: absolute;
-	top: -85px;
+	top: 0px;
 	left: 0px;
 	-webkit-transform: rotate(-90deg);
+	overflow: scroll;
 }
 
 .version{
