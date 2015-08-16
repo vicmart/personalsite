@@ -156,3 +156,10 @@ iframe{
 	left: 0px;
 	-webkit-transform: rotate(-90deg);
 }
+
+.version{
+	position: fixed;
+	left: calc(100% - 2em);
+	top: calc(100% - 2em);
+	color: white;
+}
