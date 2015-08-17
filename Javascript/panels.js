@@ -3,7 +3,7 @@ var lastScroll = 1;
 var diffScroll = -1;
 var intervalHandle = null;
 var paused;
-var active = 1;
+var active = 0;
 var panels = ["", 
 	"My ambition to do great things has driven me to be increasingly prolific through my high school and college years. Oh, and I really like metro maps.", 
 	"I have two goals for the future: Visit everywhere, and create something that will be used globally. I'm still working on both.", 
