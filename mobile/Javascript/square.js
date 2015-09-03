@@ -1,5 +1,5 @@
-var window_width = window.innerWidth;
-var window_height = window.innerHeight;
+var window_width = parseInt($(".ultron").css("width"));
+var window_height = parseInt($(".ultron").css("height"));
 var target;
 var scroll = 0;
 var active = false;
@@ -93,9 +93,5 @@ $( document ).ready(function() {
 	
 	i++;
 
-	$(".footer-filler").css("top", ((window_width * 0.02) + (window_width * 0.48) * parseInt(i/2)) + "px");
-	
-	$("iframe").css("height", window_width);
-	$("iframe").css("width", window_height);
-	
+	$(".footer-filler").css("top", ((window_width * 0.02) + (window_width * 0.48) * parseInt(i/2)) + "px");	
 });
