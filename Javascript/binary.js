@@ -36,9 +36,6 @@ setInterval(redraw, 100);
 
 var height = $(window).height();
 var width = $(window).width();
-console.log(height + "," + width);
-console.log(window.innerHeight + "," + window.innerWidth);
-console.log($(".world").height() + "," + $(".world").width());
 
 $('.world-container').css('font-size', parseInt(height)/48.0 + 'px');
 $('.world').css('margin-left', $('.world').width()/-2.0);
@@ -72,7 +69,7 @@ $( window ).resize(function() {
 	$('.left-sea').css('left', (($(window).width() - $('.world').width())/2.0) - $('.left-sea').width());
 	$('.right-sea').css('left', ($(window).width()/2.0) + ($('.world').width()/2.0));
 
-    if (width < height) {
+    if (width < $('.world').width()) {
         $('.world-container').css('font-size', parseInt(width)/110.0 + 'px');
         $('.world').css('margin-left', $('.world').width()/-2.0);
         $('.world').css('margin-top', $('.world').height()/-2.0);
