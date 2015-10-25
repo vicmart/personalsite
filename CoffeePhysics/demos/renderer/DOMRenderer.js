@@ -49,7 +49,8 @@ DOMRenderer = (function(_super) {
       st.height = p.radius * 2;
       st.width = p.radius * 2;
 	  el.id = "span" + _i;
-      document.body.appendChild(el);
+	  el.className = "bubble";
+      document.getElementById("bubbles").appendChild(el);
       p.domElement = el;
     }
     el = document.createElement('span');

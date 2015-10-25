@@ -20,6 +20,7 @@ body{
 	width: 16.66666666666667%;
 	height: 100%;
 	z-index: 0;
+	overflow: hidden;
 }
 
 .bot-cont{
@@ -283,4 +284,8 @@ iframe{
 p{
 	margin: 0px;
 	margin-top: 0px;
+}
+
+a:visited{
+	color: gray;
 }

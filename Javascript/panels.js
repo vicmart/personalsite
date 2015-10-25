@@ -5,7 +5,7 @@ var intervalHandle = null;
 var paused;
 var active = 0;
 var panels = ["", 
-	"My ambition to do great things has driven me to be increasingly prolific through my high school and college years. Oh, and I really like metro maps.", 
+	"My ambition to do great things has driven me to be increasingly prolific through my high school and college years. Oh, and I really like metro <a href='https://github.com/Vicmart1/metro.css'>maps</a>.", 
 	"I have two goals for the future: Visit everywhere, and create something that will be used globally. I'm still working on both.", 
 	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece. -- powered by the Coffee Physics Library", 
 	"Going to a very medicine-oriented school has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
@@ -25,7 +25,7 @@ $(".bot").click(function() {
 	$(this).children().css("top", "-15px");	
 	if(active != 0) {
 		var old_height = parseInt($(".info").css("height"));
-		$(".info_text").text(panels[index]);
+		$(".info_text").html(panels[index]);
 		var new_top = old_height - parseInt($(".info").css("height"));
 		$(".filling").css("top", "calc(-0% - " + new_top + "px)");
 		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
