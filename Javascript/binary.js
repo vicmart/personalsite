@@ -1,3 +1,5 @@
+var intervalHandle = null;
+
 String.prototype.replaceAt=function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
 }
@@ -16,27 +18,8 @@ function randomChar(mix) {
     return String.fromCharCode(num + 48);
 }
 
-var redraw = function() {
-    $("span").each(function( index ) {
-        if($(this).hasClass("water") || $(this).hasClass("land")) {
-    	   var text = $(this).text();
-    	
-    	   for(i = 0; i < text.length; i++) {
-    		  if(parseInt(Math.random() * 3) < 1) {
-    		      text = text.replaceAt(i, randomChar(7));
-    		  }
-    	   }
-
-    	   $(this).html(text);
-        }
-	});
-};
-
-setInterval(redraw, 100);
-
 var height = $(window).height();
 var width = $(window).width();
-
 $('.world-container').css('font-size', parseInt(height)/48.0 + 'px');
 $('.world').css('margin-left', $('.world').width()/-2.0);
 $('.world').css('margin-top', $('.world').height()/-2.0);
@@ -58,6 +41,33 @@ if (width < $('.world').width()) {
 $('.left-sea').css('left', (($(window).width() - $('.world').width())/2.0) - $('.left-sea').width());
 $('.right-sea').css('left', ($(window).width()/2.0) + ($('.world').width()/2.0));
 
+
+intervalHandle = setInterval(function(){
+	$(".water").each(function( index ) {
+        var text = $(this).text();
+	
+    	for(i = 0; i < text.length; i++) {
+		  if(parseInt(Math.random() * 1) < 1) {
+		      text = text.replaceAt(i, randomChar(7));
+		  }
+	   }
+
+	   $(this).html(text);
+	});
+
+    $(".land").each(function( index ) {
+        var text = $(this).text();
+	
+    	for(i = 0; i < text.length; i++) {
+		  if(parseInt(Math.random() * 10) < 1) {
+		      text = text.replaceAt(i, randomChar(7));
+		  }
+	   }
+
+	   $(this).html(text);
+	});
+	console.log("lolo");
+}, 1);
 
 $( window ).resize(function() {
 	var height = $(window).height();

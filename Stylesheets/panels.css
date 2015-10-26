@@ -237,10 +237,6 @@ iframe{
 	overflow: scroll;
 }
 
-.water{
-	z-index:-1;
-}
-
 .active{
     opacity: 0.6;
 }
