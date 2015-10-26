@@ -47,7 +47,7 @@ intervalHandle = setInterval(function(){
         var text = $(this).text();
 	
     	for(i = 0; i < text.length; i++) {
-		  if(parseInt(Math.random() * 1) < 1) {
+		  if(parseInt(Math.random() * 3) < 1) {
 		      text = text.replaceAt(i, randomChar(7));
 		  }
 	   }
@@ -67,7 +67,7 @@ intervalHandle = setInterval(function(){
 	   $(this).html(text);
 	});
 	console.log("lolo");
-}, 1);
+}, 100);
 
 $( window ).resize(function() {
 	var height = $(window).height();
