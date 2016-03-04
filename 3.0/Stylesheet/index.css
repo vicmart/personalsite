@@ -1,0 +1,106 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    -webkit-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+div {
+}
+
+.body {
+    display:inline-block;
+    margin-bottom: 0px;
+}
+
+.side_bar {
+    height: auto;
+    float: left;
+    font-family: "Courier New", Courier, monospace;
+    border-right: solid 1px gray;
+    -webkit-transition: color 0.5s ease;
+    transition: color 0.5s ease;
+}
+
+.outer_content {
+    height: auto;
+}
+
+.main_content {
+    height: auto;
+    float: right;
+    border-color: blue;
+}
+
+.col {
+    float: left;
+    width: calc(33.3% - 2px);
+    position: relative; /* Remove if you dont want col to change position. */
+    height: auto;
+}
+
+p {
+    margin: 4px;
+}
+
+.content {
+    margin-top: 12px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.c_title {
+    text-align: center;
+    font-weight: bold;
+    -webkit-transition: color 0.5s ease;
+    transition: color 0.5s ease;
+} 
+
+.c_date {
+    text-align: right;
+    font-style: italic;
+    font-size: 12px;
+    -webkit-transition: color 0.5s ease;
+    transition: color 0.5s ease;
+}
+
+.c_text {
+    text-align: justify;
+    color: gray;
+    font-size: 13px;
+}
+
+p, footer {
+    font-family: "Courier New", Courier, monospace;
+}
+
+hr {
+    width: 80%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    -webkit-transition: border-color 0.5s ease;
+    transition: border-color 0.5s ease;
+}
+
+.title {
+    font-size: 55px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.bio {
+    color: gray;
+    text-align: justify;
+    font-size: 18px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.footer {
+    text-align: center;
+    color: gray;
+    position: static;
+    padding: 20px;
+    float: right;
+}
