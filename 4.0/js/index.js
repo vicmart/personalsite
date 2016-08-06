@@ -20,8 +20,8 @@ $(document).ready(function() {
         
         var short = Math.min($(window).width(), $(window).height());
         
-        $(this).css('top', (height * random(0, 70))/100.0 ) ;
-        $(this).css('left', random(0,70) + "%");
+        $(this).css('top', random(0, 70) + "%") ;
+        $(this).css('left', random(0, 70) + "%");
         $(this).css('width', random(short * 0.15, short * 0.3));
         $(this).css('height', $(this).css('width'));
     });
@@ -55,11 +55,11 @@ function animateCircles() {
         var xvel = $(this).data('xvel');
         var yvel = $(this).data('yvel');
         
-        if (left + xvel + $(this).width() > $(window).width() || left + xvel < 0) {
+        if (left + xvel + $(this).width() > window.innerWidth || left + xvel < 0) {
             xvel *= -1;
             $(this).data('xvel', xvel);
         }
-        if (top + yvel + $(this).height() > $(window).height() || top + yvel < 0) {
+        if (top + yvel + $(this).height() > window.innerHeight || top + yvel < 0) {
             yvel *= -1;
             $(this).data('yvel', yvel);
         }
@@ -72,25 +72,40 @@ function animateCircles() {
 }
 
 $(window).resize(function() {
+    if (!isMobile() || window.innerWidth > window.innerHeight) {
+        $(".label").css("font-size", "1.5em"); 
+    }
+    
     if ($(window).width() < 780 || isMobile()) {
         $(".pane").css("width", "calc(50% - 40px)");
         $(".pane").css("height", $(".pane").css("width"));
+        $(".pane").css("margin-bottom", "20px");
         $(".icon").removeClass("icon-centered");
         $(".label").css("padding-top", "6%");
+        $(".flag").removeClass("flag-center-h");
+        $(".flag").removeClass("flag-center-v");
         
         if (isMobile() && window.innerWidth < window.innerHeight) {
             $(".icon").addClass("icon-centered-70");
+            $(".no-center").removeClass("icon-centered-70");
+            $(".flag").addClass("flag-center-v");
             $(".pane").css("width", "calc(100% - 40px)");
             $(".pane").css("height", $(".pane").css("width")/2);
             $(".label").css("padding-top", "2%");
-            $(".label").css("font-size", "60px");     
+            $(".label").css("font-size", "60px"); 
+            $(".pane").css("margin-bottom", "50px");
+            $("h1").css("font-size", "80px");
         } else if (isMobile() && window.innerWidth > window.innerHeight){
-            $(".label").css("font-size", "32px");
+            $(".icon").removeClass("icon-centered-70");
+            $(".flag").addClass("flag-center-h");
+            
+            $(".label").css("padding-top", "5%");
         }
     } else {
         $(".pane").css("width", "350px");
         $(".pane").css("height", "250px");
         $(".icon").addClass("icon-centered");
+        $(".no-center").removeClass("icon-centered");
         $(".label").css("padding-top", "4%");
     }
 });
