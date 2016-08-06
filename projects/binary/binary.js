@@ -17,7 +17,7 @@ function randomChar(mix) {
 }
 
 var redraw = function() {
-    $("span").each(function( index ) {
+    $(".land").each(function( index ) {
         if(!$(this).hasClass("location")) {
     	   var text = $(this).text();
     	
@@ -32,7 +32,7 @@ var redraw = function() {
 	});
 };
 
-setInterval(redraw, 100);
+setInterval(redraw, 75);
 
 var height = $(window).height();
 var width = $(window).width();
