@@ -9,8 +9,9 @@
 }
 
 body, html {
-    background-color: #444;
+    background-color: #FFF;
     margin: 0px;
+    padding: 0px;   
     color: white;
     font-family: Raleway;
 }
@@ -20,6 +21,8 @@ body, html {
     width: 100%;
     height: 100%;
     z-index: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
 .circle {
@@ -28,66 +31,90 @@ body, html {
 	height: 200px; 
     top: 0px;
     left: 0px;
-	background-color: red;
     position: absolute;
-    opacity: 0.5;
-    border: 1px solid black;
+    opacity: 0;
     z-index: 0;
+    background-color: gray;
+    
+    -webkit-transition: opacity 2s;
+    -m-transition: opacity 2s;
+    -moz-transition: opacity 2s;
+    -o-transition: opacity 2s;
+    transition: opacity 2s;
     
     -o-box-shadow: 0px 0px 10px #000;
     -moz-box-shadow: 0px 0px 10px #000;
     -webkit-box-shadow: 0px 0px 10px #000;
     -m-box-shadow: 0px 0px 10px #000;
-    box-shadow: 0px 0px 20px #000;
+    box-shadow: 0px 0px 10px #000;
 }
 
-.circle:nth-child(1n) {
-    background-color: red;
+span {
+    margin: 5px;
+    padding: 0px;
 }
 
-.circle:nth-child(2n) {
-    background-color: blue;
+.big-title {
+    position: relative;
+    opacity: 1;
+    
+    text-align: center;
+    top: calc(50% - 50px);
 }
 
-.circle:nth-child(3n) {
-    background-color: orange;
+.subtitle {
+    opacity: 0;
+    top: calc(50% - 100px);
+    font-size: 30px;
+    overflow: hidden;
+    
+    -webkit-transition: opacity 1s, top 1s, height 1s;
+    -m-transition: opacity 1s, top 1s, height 1s;
+    -moz-transition: opacity 1s, top 1s, height 1s;
+    -o-transition: opacity 1s, top 1s, height 1s;
+    transition: opacity 1s, top 1s, height 1s;
 }
 
-.circle:nth-child(4n) {
-    background-color: green;
+.underline {
+    position: relative;
+    top: calc(50% - 50px);
+    width: 0px;
+    
+    -webkit-transition: width 3s ease-out, top 1s;
+    -m-transition: width 3s ease-out, top 1s;
+    -moz-transition: width 3s ease-out, top 1s;
+    -o-transition: width 3s ease-out, top 1s;
+    transition: width 3s ease-out, top 1s;
 }
 
-.circle:nth-child(5n) {
-    background-color: pink;
-}
-
-.circle:nth-child(6n) {
-    background-color: purple;
-}
-
-.circle:nth-child(7n) {
-    background-color: aqua;
-}
-
-.circle:nth-child(8n) {
-    background-color: aquamarine;
-}
-
-.circle:nth-child(9n) {
-    background-color: gainsboro;
+.letter {
+    opacity: 0;
+    
+    -webkit-transition: opacity 1s, top 1s;
+    -m-transition: opacity 1s, top 1s;
+    -moz-transition: opacity 1s, top 1s;
+    -o-transition: opacity 1s, top 1s;
+    transition: opacity 1s, top 1s;
 }
 
 h1 {
     position: relative;
     margin:20px;
-    color: #DDD;
-    font-size: 50;
+    color: #888;
+    font-size: 40;
     margin-bottom: 10px;
-    text-shadow: 0px 0px 10px #000000, 0px 0px 5px #000000;
     
     font-weight: normal;
     font-family: Raleway;
-    z-index: 1px;    
+    z-index: 1px;  
+    
+    text-shadow: 0px 0px 10px #777;
+    
+    -webkit-transition: opacity 1s, top 1s, font-size 1s;
+    -m-transition: opacity 1s, top 1s, font-size 1s;
+    -moz-transition: opacity 1s, top 1s, font-size 1s;
+    -o-transition: opacity 1s, top 1s, font-size 1s;
+    transition: opacity 1s, top 1s, font-size 1s;
 }
 
 .h1-portrait {
@@ -99,15 +126,21 @@ hr {
     width: calc(100% - 40px);
     z-index: 1;
     margin-top: 0px;
-    border-color: #000;
-    border-radius: 10px;
-    height: 2px;
+    border-radius: 20px;
+    border-color: #999;
+    height: 0px;
     
-    -o-box-shadow: 0px 0px 10px #000;
-    -moz-box-shadow: 0px 0px 10px #000;
-    -webkit-box-shadow: 0px 0px 10px #000;
-    -m-box-shadow: 0px 0px 10px #000;
-    box-shadow: 0px 0px 10px #000;
+    -o-box-shadow: 0px 0px 5px #888;
+    -moz-box-shadow: 0px 0px 5px #888;
+    -webkit-box-shadow: 0px 0px 5px #888;
+    -m-box-shadow: 0px 0px 5px #888;
+    box-shadow: 0px 0px 5px #888;
+    
+    -webkit-transition: opacity 1s, top 1s;
+    -m-transition: opacity 1s, top 1s;
+    -moz-transition: opacity 1s, top 1s;
+    -o-transition: opacity 1s, top 1s;
+    transition: opacity 1s, top 1s;
 }
  
 .container {
@@ -115,27 +148,30 @@ hr {
     display: inline-block;
 }
 
+.base {
+    top: 100px;
+    opacity: 0;
+}
+
 .pane {
     background-color: #444;
     border-radius: 10px;
-    -o-box-shadow: 0px 0px 20px #000;
-    -moz-box-shadow: 0px 0px 20px #000;
-    -webkit-box-shadow: 0px 0px 20px #000;
-    -m-box-shadow: 0px 0px 20px #000;
-    box-shadow: 0px 0px 20px #000;
+    -o-box-shadow: 0px 0px 5px #888;
+    -moz-box-shadow: 0px 0px 5px #888;
+    -webkit-box-shadow: 0px 0px 5px #888;
+    -m-box-shadow: 0px 0px 5px #888;
+    box-shadow: 0px 0px 5px #888;
     margin: 20px;
     overflow: hidden;
     float: left;
     position: relative;
     z-index: 10;
     
-    top: 100px;
-    opacity: 0;
-    -webkit-transition: opacity 1s, top 1s;
-    -m-transition: opacity 1s, top 1s;
-    -moz-transition: opacity 1s, top 1s;
-    -o-transition: opacity 1s, top 1s;
-    transition: opacity 1s, top 1s;
+    -webkit-transition: opacity 1s, top 1s, -webkit-box-shadow 0.25s;
+    -m-transition: opacity 1s, top 1s, -m-box-shadow 0.25s;
+    -moz-transition: opacity 1s, top 1s, -moz-box-shadow 0.25s;
+    -o-transition: opacity 1s, top 1s, -o-box-shadow 0.25s;
+    transition: opacity 1s, top 1s, box-shadow 0.25s;
 }
 
 .pane-n-fit {
@@ -157,13 +193,15 @@ hr {
 }
 
 .pane-2-fit:hover, .pane-n-fit:hover {
-    border: 2px solid yellow;
-    margin: 18px;
+    border: 1px solid rgb(40, 165, 250);
+    box-shadow: 0px 0px 20px rgb(40, 165, 250);
+    margin: 19px;
 }
 
 .pane-1-fit:hover {
-    border: 2px solid yellow;
-    margin: 48px;
+    border: 1px solid yellow;
+    box-shadow: 0px 0px 20px b;
+    margin: 49px;
 }
 
 .image {
@@ -210,7 +248,13 @@ hr {
     background-color: white;
     padding-left: 10px;
     font-family: Raleway-Med;
-    color: #333;
+    color: #888;
+
+    -o-box-shadow: 0px -0px 5px #888;
+    -moz-box-shadow: 0px -0px 5px #888;
+    -webkit-box-shadow: 0px -0px 5px #888;
+    -m-box-shadow: 0px -0px 5px #888;
+    box-shadow: 0px -0px 5px #888;
     
     -webkit-transition: top 0.5s;
     -m-transition: top 0.5s;

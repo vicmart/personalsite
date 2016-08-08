@@ -3,13 +3,20 @@
 $(document).ready(function() {
     $(window).resize();
     
-    bringUpPane(0);
+    //bringUpBase(0, 250);
+    
+    bringUpTitle(0, 250);
     
     var height = $(document).height();
     
     $(".circle").each(function() {
-        $(this).data('xvel', random(-5, 5));
-        $(this).data('yvel', random(-5, 5));
+        $(this).data('xvel', random(-3, 3));
+        $(this).data('yvel', random(-3, 3));
+        $(this).data('fadeCounter', random(0, 250));
+        
+        if ($(this).data('fadeCounter') < 0) {
+            $(this).css("opacity",  0);
+        }
         
         if ($(this).data('xvel') == 0) {
             $(this).data('xvel', 1);
@@ -20,28 +27,73 @@ $(document).ready(function() {
         
         var short = Math.min($(window).width(), $(window).height());
         
-        $(this).css('top', random(0, 70) + "%") ;
+        $(this).css('top', random(0, 70) + "%");
         $(this).css('left', random(0, 70) + "%");
         $(this).css('width', random(short * 0.15, short * 0.3));
         $(this).css('height', $(this).css('width'));
     });
     
     if (!isMobile()) {
-        //animateCircles();
+        animateCircles();
     } else {
         $(".background").remove();
     }
 });
 
-function bringUpPane(index) {
-    $(".pane").eq(index).css("opacity", 1);
-    $(".pane").eq(index).css("top", 0);
+function bringUpTitle(index, time) {
+    $(".letter").eq(index).css("opacity", 1);
     
-    if (index + 1 < $(".pane").length) {
-        setTimeout(function() {
-            bringUpPane(index + 1)
-        }, 250);
+    if (index == 3) {
+        $(".underline").css("width", "40%");
+    } else if (index == 11) {
+        $(".subtitle").css("opacity", 1);
+        $(".subtitle").css("top","calc(50% - 65px)");
     }
+    
+    if (index + 1 < $(".letter").length) {
+        setTimeout(function() {
+            if (index < 1 && $(window).scrollTop() != 0) {
+                bringUpBaseInstantly();
+            } else {
+                bringUpTitle(index + 1, time);
+            }
+        }, time);
+    } else {
+        setTimeout(function() {
+            $(".big-title").css("top", 0);
+            $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
+            $(".underline").css("top", 0);
+            $(".underline").css("width", "10%");
+            $(".subtitle").css("opacity", 0);
+            $(".subtitle").css("top", 0);
+            setTimeout(function() {
+                $(".subtitle").remove();
+                bringUpBase(0, time);
+            }, time * 2);
+        }, time * 5);
+    }
+}
+
+function bringUpBase(index, time) {
+    $(".base").eq(index).css("opacity", 1);
+    $(".base").eq(index).css("top", 0);
+    
+    if (index + 1 < $(".base").length) {
+        setTimeout(function() {
+            if (index < 1 && $(window).scrollTop() != 0) {
+                bringUpBaseInstantly();
+            } else {
+                bringUpBase(index + 1, time);
+            }
+        }, time);
+    }
+}
+
+function bringUpBaseInstantly() {
+    $(".base").each(function() {
+        $(this).css("opacity", 1); 
+        $(this).css("top", 0); 
+    });
 }
 
 function random(low, high) {
@@ -54,18 +106,46 @@ function animateCircles() {
         var left = parseInt($(this).css('left'));
         var xvel = $(this).data('xvel');
         var yvel = $(this).data('yvel');
+        var fade = $(this).data('fadeCounter');
         
-        if (left + xvel + $(this).width() > window.innerWidth || left + xvel < 0) {
+        if (left + $(this).width() > window.innerWidth && xvel > 0) {
             xvel *= -1;
-            $(this).data('xvel', xvel);
+        } else if (left < 0 && xvel < 0) {
+            xvel *= -1;
         }
-        if (top + yvel + $(this).height() > window.innerHeight || top + yvel < 0) {
+            
+        if (top + $(this).height() > window.innerHeight && yvel > 0) {
             yvel *= -1;
+        } else if (top < 0 && yvel < 0) {
+            yvel *= -1;
+        }
+        
+        fade--;
+        
+        if (fade < 0) {
+            if ($(this).css("opacity") < 0.05) {
+                $(this).css("opacity", 0.3);
+                
+                $(this).css('top', random(0, 70) + "%");
+                $(this).css('left', random(0, 70) + "%");
+                $(this).data('xvel', random(-3, 3));
+                $(this).data('yvel', random(-3, 3));
+                
+                fade =  random(100, 400);
+            } else {
+                $(this).css("opacity", 0);  
+                fade =  random(100, 400);
+            }
+            
+        } else {           
+            $(this).css('left', left + xvel);
+            $(this).css('top', top + yvel);
+        
+            $(this).data('xvel', xvel);
             $(this).data('yvel', yvel);
         }
         
-        $(this).css('top', top + yvel);
-        $(this).css('left', left + xvel);
+        $(this).data('fadeCounter', fade);
     });
     
     setTimeout(animateCircles, 33);
