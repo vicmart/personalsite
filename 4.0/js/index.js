@@ -3,8 +3,7 @@
 $(document).ready(function() {
     $(window).resize();
     
-    //bringUpBase(0, 250);
-    
+    $(".underline").addClass("underline-slower");
     bringUpTitle(0, 250);
     
     var height = $(document).height();
@@ -43,35 +42,49 @@ $(document).ready(function() {
 function bringUpTitle(index, time) {
     $(".letter").eq(index).css("opacity", 1);
     
-    if (index == 3) {
+    if (index == 6) {
         $(".underline").css("width", "40%");
     } else if (index == 11) {
         $(".subtitle").css("opacity", 1);
-        $(".subtitle").css("top","calc(50% - 65px)");
+        $(".subtitle").css("top","calc(50vh - 50px)");
     }
     
     if (index + 1 < $(".letter").length) {
         setTimeout(function() {
             if (index < 1 && $(window).scrollTop() != 0) {
-                bringUpBaseInstantly();
+                $(".letter").each(function() {
+                    $(this).css("opacity", 1);
+                });
+                finishTitle(time);
             } else {
                 bringUpTitle(index + 1, time);
             }
         }, time);
     } else {
+        $(".underline").removeClass("underline-slower");
+        $(".underline").addClass("underline-faster");
+
         setTimeout(function() {
-            $(".big-title").css("top", 0);
-            $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
-            $(".underline").css("top", 0);
-            $(".underline").css("width", "10%");
-            $(".subtitle").css("opacity", 0);
-            $(".subtitle").css("top", 0);
-            setTimeout(function() {
-                $(".subtitle").remove();
-                bringUpBase(0, time);
-            }, time * 2);
-        }, time * 5);
+            finishTitle(time);
+        }, time * 7);
     }
+}
+
+function finishTitle(time) {
+    $(".big-title").css("top", 0);
+    $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
+    $(".underline").css("top", 0);
+    $(".underline").css("width", "10%");
+    $(".subtitle").css("opacity", 0);
+    $(".subtitle").css("top", 0);
+
+    setTimeout(function() {
+        $(".subtitle").remove();
+        bringUpBase(0, time);
+
+        $(".fake-header").css("height", parseInt($(".header").css("height")) + 10);
+        $(".header").addClass("header-shadow");
+    }, time * 2);
 }
 
 function bringUpBase(index, time) {
