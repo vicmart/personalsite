@@ -3,6 +3,11 @@
 $(document).ready(function() {
     $(window).resize();
     
+    if (isMobile() && !isLandscape()) {
+        $(".big-title").css("top", "calc(40vh - 50px)");
+        $(".underline").css("top", "calc(40vh - 50px)");
+    }
+    
     $(".underline").addClass("underline-slower");
     bringUpTitle(0, 250);
     
@@ -32,7 +37,7 @@ $(document).ready(function() {
         $(this).css('height', $(this).css('width'));
     });
     
-    if (!isMobile()) {
+    if (true) {
         animateCircles();
     } else {
         $(".background").remove();
@@ -48,8 +53,8 @@ function bringUpTitle(index, time) {
         $(".subtitle").css("opacity", 1);
         $(".subtitle").css("top","calc(50vh - 50px)");
         
-        if (isMobile() && isLandscape()) {
-            $(".subtitle").css("font-size", 20);
+        if (isMobile() && !isLandscape()) {
+            $(".subtitle").css("font-size", 30);
             $(".subtitle").css("top","calc(40vh - 50px)");
         }
     }
