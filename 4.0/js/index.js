@@ -47,6 +47,11 @@ function bringUpTitle(index, time) {
     } else if (index == 11) {
         $(".subtitle").css("opacity", 1);
         $(".subtitle").css("top","calc(50vh - 50px)");
+        
+        if (isMobile() && isLandscape()) {
+            $(".subtitle").css("font-size", 20);
+            $(".subtitle").css("top","calc(40vh - 50px)");
+        }
     }
     
     if (index + 1 < $(".letter").length) {
