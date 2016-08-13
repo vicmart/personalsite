@@ -7,7 +7,7 @@ $(document).ready(function() {
     
     if (isMobile() && !isLandscape()) {
         $(".big-title").css("top", "calc(40vh - 50px)");
-        $(".underline").css("top", "calc(40vh - 50px)");        
+        $(".underline").css("top", "calc(40vh - 50px)");  
     }
     
     $(".underline").addClass("underline-slower");
@@ -63,9 +63,10 @@ function bringUpTitle(index, time) {
     } else if (index == 11) {
         $(".subtitle").css("opacity", 1);
         $(".subtitle").css("top","calc(50vh - 50px)");
+        $(".subtitle").css("font-size", 30);
         
         if (isMobile() && !isLandscape()) {
-            $(".subtitle").css("font-size", 40);
+            $(".subtitle").css("font-size", 50);
             $(".subtitle").css("top","calc(40vh - 50px)");
         }
     }
@@ -93,7 +94,11 @@ function bringUpTitle(index, time) {
 
 function finishTitle(time) {
     $(".big-title").css("top", 0);
-    $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
+    if (!(isMobile() && !isLandscape())) {
+        $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
+    } else {
+        $(".big-title").css("font-size", 3 * parseInt($(".big-title").css("font-size"))/4 + "px");        
+    }
     $(".underline").css("top", 0);
     $(".underline").css("width", "10%");
     $(".subtitle").css("opacity", 0);
@@ -106,6 +111,7 @@ function finishTitle(time) {
         $(".fake-header").css("height", parseInt($(".header").css("height")) + 10);
         $(".header").addClass("header-shadow");
         $(".tabs").css("opacity", 1);
+        $(".description").css("opacity", 1);
         
         $(".hamburger").css("width", $(".hamburger").css("height"));
     }, time * 2);
@@ -208,7 +214,7 @@ $(window).resize(function() {
     $(".label").removeClass("label-dyn");
     $(".label").removeClass("label-sta");
     
-    $("h1").removeClass("h1-portrait");
+    $("h1").removeClass("h1-normal");
     
     $(".tab-content").removeClass("tab-content-center");
     $(".tabs").removeClass("tabs-center");
@@ -216,7 +222,8 @@ $(window).resize(function() {
 
     $(".hamburger").removeClass("no-div");
     $(".tabs").removeClass("no-div");
-    
+    $(".droptab").removeClass("droptab-large");
+    $(".description").removeClass("no-div");
     if (isMobile() && !isLandscape()) {
         $(".pane").addClass("pane-1-fit"); 
         
@@ -228,9 +235,8 @@ $(window).resize(function() {
         
         $(".image").addClass("image-dyn-m");
         
-        $("h1").addClass("h1-portrait");
-        
         $(".tabs").addClass("no-tabs");
+        $(".droptab").addClass("droptab-large");
     } else if ((isMobile() && isLandscape()) || $(window).width() < 780) {
         $(".pane").addClass("pane-2-fit");
         $(".icon").addClass("icon-centered");
@@ -244,7 +250,10 @@ $(window).resize(function() {
         
         $(".image").addClass("image-dyn");
         
+        $("h1").addClass("h1-normal");
+
         $(".hamburger").addClass("no-div");
+        $(".description").addClass("no-div");
     } else {
         $(".pane").addClass("pane-n-fit");
         $(".icon").addClass("icon-centered");
@@ -254,8 +263,10 @@ $(window).resize(function() {
         $(".tabs").addClass("tabs-center");
         $(".label").addClass("label-sta");
 
+        $("h1").addClass("h1-normal");
         $(".image").addClass("image-sta");
         $(".hamburger").addClass("no-div");
+        $(".description").addClass("no-div");
     }
 });
 
@@ -335,10 +346,12 @@ $(".tab").hover(function() {
 });
 
 $(".hamburger").click(function() {
-    if ($(".dropdown").hasClass("no-dropdown")) {
-        $(".dropdown").removeClass("no-dropdown");
+    if (parseInt($(".dropdown").css("height")) == 0) {
+        var tabheight = parseInt($(".droptab").outerHeight());
+        var length = $(".droptab").length;
+        $(".dropdown").css("height", tabheight * length);
     } else {
-        $(".dropdown").addClass("no-dropdown");
+        $(".dropdown").css("height", 0);
     }
 });
 
@@ -351,7 +364,9 @@ $(".tab").click(function() {
 $(".droptab").click(function() {
     var index = $(".droptab").index($(this));
     switchTab(index);
-    $(".dropdown").addClass("no-dropdown");
+    $(".dropdown").css("height", 0);
+    
+    $(".description").text($(this).text());
 });
 
 function switchTab(newIndex) {

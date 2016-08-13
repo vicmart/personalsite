@@ -119,7 +119,7 @@ span {
     background-color: #888;
     width: 60%;
     height: 0px;
-    margin: 20% 20%;
+    margin: 22.5% 20%;
 }
 
 .dropdown {
@@ -127,19 +127,16 @@ span {
     right: 0px;
     top: 100%;
     width: 100%;
+    height: 0px;
     background-color: white;
     z-index: 20;
+    overflow: hidden;
     
     -webkit-transition: height 0.25s;
     -m-transition: height 0.25s;
     -moz-transition: height 0.25s;
     -o-transition: height 0.25s;
     transition: height 0.25s;
-}
-
-.no-dropdown {
-    height: 0px;
-    overflow: hidden;
 }
 
 .droptab {
@@ -156,6 +153,12 @@ span {
 
 .droptab:nth-child(5) {
     border-bottom: none;
+}
+
+.droptab-large {
+    font-size: 40px;
+    padding-bottom: 40px;
+    padding-top: 40px;
 }
 
 .tab {
@@ -175,6 +178,20 @@ span {
     -moz-transition: background-color 0.5s, color 0.5s;
     -o-transition: background-color 0.5s, color 0.5s;
     transition: background-color 0.5s, color 0.5s;
+}
+
+.description {
+    width: 100%;
+    color: #888;
+    text-align: center;
+    font-size: 40px;
+    
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -m-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
 
 .tabs {
@@ -314,7 +331,7 @@ h1 {
     position: relative;
     margin:20px;
     color: #888;
-    font-size: 40;
+    font-size: 80px;
     margin-bottom: 10px;
     margin-top: 0px;
     font-weight: normal;
@@ -330,8 +347,8 @@ h1 {
     transition: opacity 1s, top 1s, font-size 1s;
 }
 
-.h1-portrait {
-    font-size: 75px;
+.h1-normal {
+    font-size: 40px;
 }
 
 hr {
