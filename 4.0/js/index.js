@@ -94,11 +94,6 @@ function bringUpTitle(index, time) {
 
 function finishTitle(time) {
     $(".big-title").css("top", 0);
-    if (!(isMobile() && !isLandscape())) {
-        $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
-    } else {
-        $(".big-title").css("font-size", 3 * parseInt($(".big-title").css("font-size"))/4 + "px");        
-    }
     $(".underline").css("top", 0);
     $(".underline").css("width", "10%");
     $(".subtitle").css("opacity", 0);
@@ -108,12 +103,18 @@ function finishTitle(time) {
         $(".subtitle").remove();
         bringUpBase(0, 0, time);
 
-        $(".fake-header").css("height", parseInt($(".header").css("height")) + 10);
+        $(".fake-header").css("height", parseInt($(".header").css("height")) - 10);
         $(".header").addClass("header-shadow");
         $(".tabs").css("opacity", 1);
         $(".description").css("opacity", 1);
         
         $(".hamburger").css("width", $(".hamburger").css("height"));
+        
+        if (!(isMobile() && !isLandscape())) {
+            $(".big-title").css("font-size", parseInt($(".big-title").css("font-size"))/2 + "px");
+        } else {
+            $(".big-title").css("font-size", 3 * parseInt($(".big-title").css("font-size"))/4 + "px");        
+        }
     }, time * 2);
 }
 
@@ -223,6 +224,7 @@ $(window).resize(function() {
     $(".hamburger").removeClass("no-div");
     $(".tabs").removeClass("no-div");
     $(".droptab").removeClass("droptab-large");
+    $(".droptab").removeClass("droptab-medium");
     $(".description").removeClass("no-div");
     if (isMobile() && !isLandscape()) {
         $(".pane").addClass("pane-1-fit"); 
@@ -244,16 +246,20 @@ $(window).resize(function() {
 
         if (isMobile() && isLandscape()) {
             $(".label").addClass("label-landscape");
+            
+            $(".tabs").addClass("no-tabs");
+            $(".droptab").addClass("droptab-medium");
         } else {
             $(".label").addClass("label-dyn");
+            
+            $(".hamburger").addClass("no-div");
+            $(".description").addClass("no-div");
         }
         
         $(".image").addClass("image-dyn");
         
         $("h1").addClass("h1-normal");
 
-        $(".hamburger").addClass("no-div");
-        $(".description").addClass("no-div");
     } else {
         $(".pane").addClass("pane-n-fit");
         $(".icon").addClass("icon-centered");
@@ -341,8 +347,10 @@ $(".tab").hover(function() {
     var index = $(".tab").index($(this));
 
     if ($(".tab-underline").eq(index).data("click") == 0) {
-        $(".tab-underline").eq(index).css("width", "0%");
-        $(".tab-underline").eq(index).css("margin", "0px 10%");  
+        for (var i = 0; i < 5; i++) {
+            $(".tab-underline").eq(i).css("width", "0%");
+            $(".tab-underline").eq(i).css("margin", "0px 10%");  
+        }
         
         $(".tab-underline").eq(currentTab).css("width", "20%");
         $(".tab-underline").eq(currentTab).css("margin", "0px 0%"); 
