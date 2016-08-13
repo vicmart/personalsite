@@ -321,6 +321,10 @@ $(".pane").click(function() {
     var new_top = (total_height) - old_height;
     
     $(this).find(".label").css("top", -1 * new_top);
+    
+    $(".dropdown").css("height", 0);
+    $(".hamburger").css('background-color', '#FFF');
+    $(".patty").css('background-color', '#888');
 });
 
 $(".tab").hover(function() {
@@ -350,8 +354,12 @@ $(".hamburger").click(function() {
         var tabheight = parseInt($(".droptab").outerHeight());
         var length = $(".droptab").length;
         $(".dropdown").css("height", tabheight * length);
+        $(this).css('background-color', '#BBB');
+        $(".patty").css('background-color', '#FFF');
     } else {
         $(".dropdown").css("height", 0);
+        $(this).css('background-color', '#FFF');
+        $(".patty").css('background-color', '#888');
     }
 });
 
@@ -364,7 +372,10 @@ $(".tab").click(function() {
 $(".droptab").click(function() {
     var index = $(".droptab").index($(this));
     switchTab(index);
+    
     $(".dropdown").css("height", 0);
+    $(".hamburger").css('background-color', '#FFF');
+    $(".patty").css('background-color', '#888');
     
     $(".description").text($(this).text());
 });
@@ -399,21 +410,21 @@ function switchTab(newIndex) {
 
 $(document).keydown(function(e) {
     switch(e.which) {
-        case 37: // left
+        case 37: 
             if (currentTab != 0) {
                 switchTab(currentTab - 1);
             }
         break;
 
-        case 39: // right
+        case 39: 
             if (currentTab != $(".tab").length - 1) {
                 switchTab(currentTab + 1);
             }
         break;
 
-        default: return; // exit this handler for other keys
+        default: return;
     }
-    e.preventDefault(); // prevent the default action (scroll / move caret)
+    e.preventDefault();
 });
 
 function isMobile() {
