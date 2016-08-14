@@ -16,7 +16,8 @@ $(document).ready(function() {
     $(".tab-underline").eq(0).css("margin", "0px 0%"); 
     $(".tab-underline").eq(0).data("click", 1);
     $(".dropdown").addClass("no-dropdown");
-
+    $(".description").text($(".small-title").eq(0).text());
+    
     bringUpTitle(currentTab, regTime);
     
     $(".circle").each(function() {
@@ -235,7 +236,11 @@ $(window).resize(function() {
     $(".droptab").removeClass("droptab-large");
     $(".droptab").removeClass("droptab-medium");
     $(".description").removeClass("no-div");
+    $(".description").removeClass("description-small");               
+
     $(".small-title").removeClass("no-div");
+
+    $(".ribbon").removeClass("ribbon-mobile");
     if (isMobile() && !isLandscape()) {
         $(".pane").addClass("pane-1-fit"); 
         
@@ -251,6 +256,8 @@ $(window).resize(function() {
         $(".droptab").addClass("droptab-large");
             
         $(".small-title").addClass("no-div");
+            
+        $(".ribbon").addClass("ribbon-mobile");
     } else if ((isMobile() && isLandscape()) || $(window).width() < 780) {
         $(".pane").addClass("pane-2-fit");
         $(".icon").addClass("icon-centered");
@@ -262,6 +269,9 @@ $(window).resize(function() {
             $(".tabs").addClass("no-tabs");
             $(".droptab").addClass("droptab-medium");
             $(".small-title").addClass("no-div");
+            $(".small-title").addClass("small-title-small");
+                    
+            $(".description").addClass("description-small");               
         } else {
             $(".label").addClass("label-dyn");
             
@@ -375,11 +385,9 @@ $(".hamburger").click(function() {
         var tabheight = parseInt($(".droptab").outerHeight());
         var length = $(".droptab").length;
         $(".dropdown").css("height", tabheight * length);
-        $(this).css('background-color', '#BBB');
         $(".patty").css('background-color', '#FFF');
     } else {
         $(".dropdown").css("height", 0);
-        $(this).css('background-color', '#FFF');
         $(".patty").css('background-color', '#888');
     }
 });
