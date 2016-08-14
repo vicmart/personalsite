@@ -292,6 +292,12 @@ span {
     top: calc(50vh - 50px);
 }
 
+.small-title {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
 .subtitle {
     opacity: 0;
     top: calc(50vh - 100px);
