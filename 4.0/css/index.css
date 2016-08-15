@@ -241,6 +241,7 @@ span {
     overflow: hidden;
     opacity: 1;
     display: inline-block;
+    width: 100%;
     
     -webkit-transition: opacity 0.25s;
     -m-transition: opacity 0.25s;
@@ -251,13 +252,6 @@ span {
 
 .tab-content-gone {
     height: 0;
-}
-
-.tab-content-center {
-    position: relative;
-    max-width: 1170px;
-    width: 100%;
-    margin: auto;
 }
 
 .tab-underline {
@@ -370,6 +364,20 @@ h1 {
 
 .h1-normal {
     font-size: 40px;
+}
+
+@media screen and (min-width: 780px) {
+    .container {
+        width: 780px;
+        left: calc(50% - 390px);
+    }
+}
+
+@media screen and (min-width: 1170px) {
+    .container {
+        width: 1170px;
+        left: calc(50% - 585px);
+    }
 }
 
 hr {

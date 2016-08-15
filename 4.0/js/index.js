@@ -227,7 +227,6 @@ $(window).resize(function() {
     
     $("h1").removeClass("h1-normal");
     
-    $(".tab-content").removeClass("tab-content-center");
     $(".tabs").removeClass("tabs-center");
     $(".tabs").removeClass("no-tabs");
 
@@ -288,14 +287,13 @@ $(window).resize(function() {
         $(".icon").addClass("icon-centered");
         $(".no-center").removeClass("icon-centered");
         
-        $(".tab-content").addClass("tab-content-center");
         $(".tabs").addClass("tabs-center");
         $(".label").addClass("label-sta");
 
         $("h1").addClass("h1-normal");
         $(".image").addClass("image-sta");
         $(".hamburger").addClass("no-div");
-        $(".description").addClass("no-div");
+        $(".description").addClass("no-div");    
     }
 });
 
