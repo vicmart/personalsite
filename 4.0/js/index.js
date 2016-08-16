@@ -356,6 +356,7 @@ $(".pane").hover(function() {
         var image_height = $(this).find(".image").height();
         var old_height = total_height - image_height;
         var new_top = (total_height/2) - old_height;
+        //var new_top = (total_height) - old_height;
     
         $(this).find(".label").css("top", -1 * new_top);
     }, function () {
@@ -444,13 +445,13 @@ function switchTab(newIndex) {
             newColor("#e6ffe6", "#66ff66");
             break;
         case 2:
-            newColor("#e6eeff", "#6699ff");
+            newColor("#fff2e6", "#ffb366");
             break;
         case 3:
-            newColor("#ffe6ff", "#ff66ff");
+            newColor("#e6eeff", "#6699ff");
             break;
         case 4:
-            newColor("#ffe6e6", "#ff9999");
+            newColor("#f9ecec", "#d98c8c");
             break;
     }
     
