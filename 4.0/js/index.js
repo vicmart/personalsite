@@ -43,7 +43,7 @@ $(document).ready(function() {
         $(this).css('width', random(short * 0.15, short * 0.3));
         $(this).css('height', $(this).css('width'));
     });
-    
+
     if (true) {
         animateCircles();
     } else {
@@ -55,6 +55,17 @@ $(document).ready(function() {
         $(".tab-content").eq(t).addClass("tab-content-gone");
     }
 });
+
+function newColor(color1, color2) {
+    $("body").css("background-color", color1);
+    $(".header").css("background-color", color1);
+    $(".label").css("background-color", color1);
+    $(".dropdown").css("background-color", color1);
+    $(".ribbon").css("background-color", color1);
+    
+    $(".circle").css("background-color", color2);
+    $(".circle").css("box-shadow", "0px 0px 10px " + color2);
+}
 
 function bringUpTitle(index, time) {
     $(".letter").eq(index).css("opacity", 1);
@@ -240,6 +251,10 @@ $(window).resize(function() {
     $(".small-title").removeClass("no-div");
 
     $(".ribbon").removeClass("ribbon-mobile");
+    
+    $(".container").removeClass("container-780");
+    $(".container").removeClass("container-1170");
+
     if (isMobile() && !isLandscape()) {
         $(".pane").addClass("pane-1-fit"); 
         
@@ -248,7 +263,8 @@ $(window).resize(function() {
         $(".no-center").addClass("flag-center-v");
         
         $(".label").addClass("label-portrait");
-        
+        $(".pane-description").css("font-size", parseInt($(".label").css("font-size")) * 0.9);
+
         $(".image").addClass("image-dyn-m");
         
         $(".tabs").addClass("no-tabs");
@@ -264,7 +280,8 @@ $(window).resize(function() {
 
         if (isMobile() && isLandscape()) {
             $(".label").addClass("label-landscape");
-            
+            $(".pane-description").css("font-size", parseInt($(".label").css("font-size")) * 0.9);
+
             $(".tabs").addClass("no-tabs");
             $(".droptab").addClass("droptab-medium");
             $(".small-title").addClass("no-div");
@@ -273,7 +290,8 @@ $(window).resize(function() {
             $(".description").addClass("description-small");               
         } else {
             $(".label").addClass("label-dyn");
-            
+            $(".pane-description").css("font-size", parseInt($(".label").css("font-size")) * 0.85);
+
             $(".hamburger").addClass("no-div");
             $(".description").addClass("no-div");
         }
@@ -289,11 +307,18 @@ $(window).resize(function() {
         
         $(".tabs").addClass("tabs-center");
         $(".label").addClass("label-sta");
+        $(".pane-description").css("font-size", parseInt($(".label").css("font-size")) * 0.9);
 
         $("h1").addClass("h1-normal");
         $(".image").addClass("image-sta");
         $(".hamburger").addClass("no-div");
-        $(".description").addClass("no-div");    
+        $(".description").addClass("no-div");   
+                
+        if ($(window).width() < 1170) {
+            $(".container").addClass("container-780");
+        } else {
+            $(".container").addClass("container-1170");
+        }
     }
 });
 
@@ -350,7 +375,6 @@ $(".pane").click(function() {
     $(this).find(".label").css("top", -1 * new_top);
     
     $(".dropdown").css("height", 0);
-    $(".hamburger").css('background-color', '#FFF');
     $(".patty").css('background-color', '#888');
 });
 
@@ -402,7 +426,6 @@ $(".droptab").click(function() {
     switchTab(index);
     
     $(".dropdown").css("height", 0);
-    $(".hamburger").css('background-color', '#FFF');
     $(".patty").css('background-color', '#888');
     
     $(".description").text($(".small-title").eq(index).text());
@@ -411,6 +434,24 @@ $(".droptab").click(function() {
 function switchTab(newIndex) {
     if (newIndex == currentTab) {
         return;
+    }
+    
+    switch (newIndex) {
+        case 0: 
+            newColor("#FFF", "gray");
+            break;
+        case 1: 
+            newColor("#e6ffe6", "#66ff66");
+            break;
+        case 2:
+            newColor("#e6eeff", "#6699ff");
+            break;
+        case 3:
+            newColor("#ffe6ff", "#ff66ff");
+            break;
+        case 4:
+            newColor("#ffe6e6", "#ff9999");
+            break;
     }
     
     $(".tab-content").eq(currentTab).css("opacity", 0);
@@ -431,7 +472,7 @@ function switchTab(newIndex) {
         $(".tab-content").eq(newIndex).css("opacity", 1);
         $(".tab-content").eq(newIndex).removeClass("tab-content-gone");
         $(".tab-content").eq(newIndex).find(".fake-footer").css("height", 100);
-        bringUpBase(newIndex, 0, regTime/2);
+        bringUpBase(newIndex, 0, regTime);
         currentTab = newIndex;
     }, 250);
 }
