@@ -358,8 +358,6 @@ h1 {
     font-family: Raleway;
     z-index: 1px;  
     
-    text-shadow: 0px 0px 10px #777;
-    
     -webkit-transition: opacity 1s, top 1s, font-size 1s;
     -m-transition: opacity 1s, top 1s, font-size 1s;
     -moz-transition: opacity 1s, top 1s, font-size 1s;
@@ -379,12 +377,6 @@ hr {
     border-radius: 20px;
     border-color: #999;
     height: 0px;
-    
-    -o-box-shadow: 0px 0px 5px #888;
-    -moz-box-shadow: 0px 0px 5px #888;
-    -webkit-box-shadow: 0px 0px 5px #888;
-    -m-box-shadow: 0px 0px 5px #888;
-    box-shadow: 0px 0px 5px #888;
     
     -webkit-transition: opacity 1s, top 1s;
     -m-transition: opacity 1s, top 1s;
@@ -463,6 +455,14 @@ ul {
 
 i {
     margin-left: -20px;
+}
+
+b {
+    font-family: Raleway-Med;
+}
+
+.favorites {
+    line-height: 150%;
 }
 
 .image {
