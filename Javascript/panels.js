@@ -6,16 +6,15 @@ var paused;
 var active = 0;
 var panels = ["", 
 	"My ambition to do great things has driven me to be increasingly prolific through my high school and college years. Oh, and I really like metro <a href='https://github.com/Vicmart1/metro.css'>maps</a>.", 
-	"I have two goals for the future: Visit everywhere, and create something that will be used globally. I'm still working on both.", 
 	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece. -- powered by the Coffee Physics Library", 
-	"Going to a very medicine-oriented school has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
+	"Working right next to a globally-renown hospital has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
 	"So what's the future look like for Victor Dadfar? Programming, engineering and medicine will all certainly play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this :)"]
 
 var index;
-$(".bot").click(function() {
-	index = $(this).index();
-	active = index;
-	var offset = -1 * index * $(".frame").width();
+
+function switchPanel(newIndex) {
+    active = newIndex;
+	var offset = -1 * newIndex * $(".frame").width();
 	
 	$(".all-frames").css('left', offset + 'px');
 	$(".bot").each(function(){
@@ -25,7 +24,7 @@ $(".bot").click(function() {
 	$(this).children().css("top", "-15px");	
 	if(active != 0) {
 		var old_height = parseInt($(".info").css("height"));
-		$(".info_text").html(panels[index]);
+		$(".info_text").html(panels[newIndex]);
 		var new_top = old_height - parseInt($(".info").css("height"));
 		$(".filling").css("top", "calc(-0% - " + new_top + "px)");
 		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
@@ -33,7 +32,31 @@ $(".bot").click(function() {
 		//$(active).css("top", "-15px");
 		$(".info").css("top", "-100%");
 	}
-	$(".progress").css("width", ((16.7) * index + ((index + 1) * 2.8)) + "%");
+	$(".progress").css("width", ((20) * newIndex + ((newIndex + 1) * 4)) + "%");
+}
+
+$(".bot").click(function() {
+	index = $(this).index();
+	
+    switchPanel(index);
+});
+
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: 
+            if (active != 0) {
+                switchPanel(active - 1);
+            }
+            break;
+        case 39: 
+            if (active != $(".bot").length - 1) {
+                switchPanel(active + 1);
+            }
+            break;
+        default: 
+            return;
+    }
+    e.preventDefault();
 });
 
 $(".bot").hover(function() {
@@ -79,12 +102,17 @@ var isMobile = {
     }
 };
 
+function isMobile2() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 $( document ).ready(function() {
-	if(isMobile.any()){
+	if(isMobile.any() || isMobile2()){
 		window.location.replace("m/index.html");	
 	}
-	active = $(".circle").get(0);
-	$(".info_text").text(panels[$(".circle").index(active)]);
+
+    $(".info_text").text(panels[$(".circle").index(active)]);
+    active = 0;
   // Handler for .ready() called.
 });
 

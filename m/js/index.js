@@ -21,8 +21,8 @@ $(document).ready(function() {
     bringUpTitle(currentTab, regTime);
     
     $(".circle").each(function() {
-        $(this).data('xvel', random(-3, 3));
-        $(this).data('yvel', random(-3, 3));
+        $(this).data('xvel', random(-1.5, 1.5));
+        $(this).data('yvel', random(-1.5, 1.5));
         $(this).data('fadeCounter', random(0, 250));
         
         if ($(this).data('fadeCounter') < 0) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
         $(this).css('height', $(this).css('width'));
     });
 
-    if (true) {
+    if (!isMobile()) {
         animateCircles();
     } else {
         $(".background").remove();
@@ -193,8 +193,8 @@ function animateCircles() {
                 
                 $(this).css('top', random(0, 70) + "%");
                 $(this).css('left', random(0, 70) + "%");
-                $(this).data('xvel', random(-3, 3));
-                $(this).data('yvel', random(-3, 3));
+                $(this).data('xvel', random(-1.5, 1.5));
+                $(this).data('yvel', random(-1.5, 1.5));
                 
                 fade =  random(100, 400);
             } else {
@@ -213,7 +213,7 @@ function animateCircles() {
         $(this).data('fadeCounter', fade);
     });
     
-    setTimeout(animateCircles, 33);
+    setTimeout(animateCircles, 66);
 }
 
 $(window).resize(function() {
@@ -257,13 +257,13 @@ $(window).resize(function() {
 
     if (isMobile() && !isLandscape()) {
         $(".pane").addClass("pane-1-fit"); 
-        
+
         $(".icon").addClass("icon-centered-70");
         $(".no-center").removeClass("icon-centered-70");
         $(".no-center").addClass("flag-center-v");
         
         $(".label").addClass("label-portrait");
-        $(".pane-description").css("font-size", parseInt($(".label").css("font-size")) * 0.9);
+        $(".pane-description").css("font-size", parseInt($(".label").css("font-size")) * 0.95);
 
         $(".image").addClass("image-dyn-m");
         
@@ -349,18 +349,18 @@ function filterLess(element, intensity, interval) {
 }
 
 $(".pane").hover(function() {
-        if (!isMobile()) {
+        if (false) {
             filterMore($(this).find(".image"), 1, 4, 50);
         }
         var total_height = $(this).height();
         var image_height = $(this).find(".image").height();
         var old_height = total_height - image_height;
-        var new_top = (total_height/2) - old_height;
-        //var new_top = (total_height) - old_height;
+        //var new_top = (total_height/2) - old_height;
+        var new_top = (total_height) - old_height;
     
         $(this).find(".label").css("top", -1 * new_top);
     }, function () {
-        if (!isMobile()) {
+        if (false) {
             filterLess($(this).find(".image"), 4, 50);
         }
         $(this).find(".label").css("top", 0);
@@ -368,15 +368,20 @@ $(".pane").hover(function() {
 );
 
 $(".pane").click(function() {
-    var total_height = $(this).height();
-    var image_height = $(this).find(".image").height();
-    var old_height = total_height - image_height;
-    var new_top = (total_height) - old_height;
-    
-    $(this).find(".label").css("top", -1 * new_top);
-    
-    $(".dropdown").css("height", 0);
-    $(".patty").css('background-color', '#888');
+    if (!$(this).hasClass("no-click")) {        
+        if (isMobile() && isLandscape()) {
+            //$(".text").css("font-size", "4em");
+        }
+        var total_height = $(this).height();
+        var image_height = $(this).find(".image").height();
+        var old_height = total_height - image_height;
+        var new_top = (total_height) - old_height;
+
+        $(this).find(".label").css("top", -1 * new_top);
+
+        $(".dropdown").css("height", 0);
+        $(".patty").css('background-color', '#888');
+    }
 });
 
 $(".tab").hover(function() {
@@ -435,24 +440,6 @@ $(".droptab").click(function() {
 function switchTab(newIndex) {
     if (newIndex == currentTab) {
         return;
-    }
-    
-    switch (newIndex) {
-        case 0: 
-            newColor("#FFF", "gray");
-            break;
-        case 1: 
-            newColor("#e6ffe6", "#66ff66");
-            break;
-        case 2:
-            newColor("#fff2e6", "#ffb366");
-            break;
-        case 3:
-            newColor("#e6eeff", "#6699ff");
-            break;
-        case 4:
-            newColor("#f9ecec", "#d98c8c");
-            break;
     }
     
     $(".tab-content").eq(currentTab).css("opacity", 0);

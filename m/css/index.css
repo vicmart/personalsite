@@ -15,7 +15,12 @@ body, html {
     color: white;
     font-family: Raleway;
     overflow: scroll;
-    
+    -webkit-text-size-adjust: 100%
+    -m-text-size-adjust: 100%
+    -moz-text-size-adjust: 100%
+    -o-text-size-adjust: 100%
+    text-size-adjust: 100%
+         
     -webkit-transition: background-color 0.5s;
     -m-transition: background-color 0.5s;
     -moz-transition: background-color 0.5s;

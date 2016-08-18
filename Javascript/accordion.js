@@ -13,7 +13,11 @@ $('.panel').hover(
     	$("#" + $(this).attr('id') + "-img").css("top", "75%");
 		
 		if($(window).width() < 1250 || $(window).height() < 750) {
-			$("#" + $(this).attr('id') + "-img").css("opacity", "0.2");
+            if ($(this).attr('id') == "avengers") {
+                $("#" + $(this).attr('id') + "-img").css("opacity", "0.4");
+            } else {
+                $("#" + $(this).attr('id') + "-img").css("opacity", "0.2");                
+            }
 		}
 		
 		$("#" + $(this).attr('id') + "-movies").css("-webkit-animation-duration", "0.25s");

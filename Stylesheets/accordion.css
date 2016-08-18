@@ -126,7 +126,11 @@ hr{
 	padding: 0px;
 	margin-top:10px;
 	margin-bottom:10px;
-	
+	background-color: white;
+    border-color: white;
+    color: white;
+    height: 0px;
+    
 	z-index:0;
 }
 
