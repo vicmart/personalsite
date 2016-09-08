@@ -1,0 +1,3 @@
+[submodule "vicmart-server/parse-server"]
+	path = vicmart-server/parse-server
+	url = git@github.com:ParsePlatform/parse-server.git

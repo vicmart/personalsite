@@ -1,2 +1,185 @@
 <html>
+	<head>
+		<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon-76x76.png">
+		<link rel="icon" type="image/png" href="favicons/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="favicons/manifest.json">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+		
+		<title>Engineering World Health</title>
+    	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	    <style>
+			@font-face {
+		    	font-family: Raleway-Med;
+		    	src: url(Stylesheets/Raleway-Medium.ttf);
+			}
+			
+			@font-face {
+		    	font-family: Raleway;
+		    	src: url(Stylesheets/Raleway-Light.ttf);
+			}
+			
+		    html, body{
+				margin: 0px;
+				padding: 0px;
+				overflow-y: hidden;
+			}
+
+			.box-cont{
+				position: absolute;
+				margin: 10px;
+				margin-top: 0px;
+				margin-left: 0px;
+				left: 0px;
+				top: 0px;
+				background-color: green;
+				transition: all 0.5s ease;
+				color: white;
+				-webkit-transform: translate3d(0, 0, 0);
+			}
+			
+			.inactive{
+				background-color: #EEE;	
+				z-index: -1;
+			}
+			
+			.active{
+				background-color: #33CCFF;
+				z-index: 2;
+			}
+			
+			.deactive{
+				background-color: gray;
+				z-index: 2;
+			}
+			
+			.letter{
+				background-color: #09F;
+			}
+			
+			.letter-black{
+				background-color: #000;
+			}
+			
+			p{
+				font-family: Raleway;
+				-webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+				cursor:default;
+			}
+			
+			.title{
+				position: absolute;
+				width: 95%;
+				height: 100%;
+				margin: 5px;
+				transition: all 0.1s ease 0.4s;
+				opacity: 0;
+			}
+			
+			.description{
+				position: absolute;
+				width: 0px;
+				height: 0px;
+				left: 0px;
+				top: 0px;
+				background-color: gray;
+				z-index: 3;
+				opacity: 0;
+				transition: all 0.25s ease 0.25s;
+				-webkit-transform: translate3d(0, 0, 0);
+				color: white;
+				font-family: Raleway;
+				overflow: scroll;
+			}
+			
+			.paragraph{
+				position: absolute;
+				margin: 5px;
+				opacity: 0;
+				transition: all 0.05s ease 0.5s;
+			}
+			
+			.notifbar{
+				position: fixed;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 1em;
+				background-color: white;
+				border-bottom: 1px solid black;
+				z-index: 5;
+				font-family: Raleway;
+				font-size: 1.5em;
+				padding: 5px;
+				padding-top: 0px;
+			}
+			
+			.header{
+				position: absolute;
+				top: 0px;
+				width: calc(100% - 20px);
+				margin-top: 0px;
+			}
+			
+			.right-para{
+				text-align: right;
+			}
+			
+			.footer{
+				position: fixed;
+				width: 100%;
+				font-family: Raleway;
+				left: 0px;
+				top: calc(100% - 2em - 10px);
+				font-size: 1.0em;
+				margin: 5px;
+			}
+			
+			.head-links{
+				color: black;
+				font-family: Raleway;
+				text-decoration: none;
+				padding-left: 5px;
+				padding-right: 5px;
+				transition: all 0.35s ease;
+			}
+			
+			.head-links:hover{
+				background-color: rgba(51, 204, 255, 1.0);
+				color: white;
+			}
+			
+			.head-links:active{
+				background-color: #3CF;
+				color: white;
+			}
+			
+			.active-link{
+				background-color: #3CF;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+  		<script src="Javascripts/squares.js"></script>
+		<div class="notifbar">
+			<p class="header left-para">
+				<span class="ewh" style='color: #33CCFF'>EngineeringWorldHealth</span>|JohnsHopkinsUniversity
+			</p>
+			<p class="header right-para">
+			</p>
+		</div>
+		<div class="footer" style="z-index: 10;">
+			<i>Email us at <a href="mailto:jhuewh@gmail.com">jhuewh@gmail.com</a></br>Created by <a href="https://github.com/Vicmart1">Victor Dadfar</a>, Webmaster</i>
+		</div>
+	</body>
 </html>
