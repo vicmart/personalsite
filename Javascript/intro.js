@@ -1,6 +1,6 @@
 var subtitle = "I am a student";
 var intervalHandle = null;
-var chars = "                         ^^^.          ^^^^^p r o g r a m m e r          ^^^^^^^^^r e s e ^^^^^r e s e a r c h e r          ^^^^^^^^^^^^a w e s o m e .";
+var chars = "                         ^^^^^^^p r o g r a m m e r          ^^^^^^^^^r e s e ^^^^^r e s e a r c h e r          ^^^^^^^^^^^^a w e s o m e .";
 var char_index = 0;
 var center_x = -1;
 var center_y = -1;
