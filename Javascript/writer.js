@@ -70,8 +70,8 @@ $(document).ready(function(){
 			$(".console").append(chars.charAt(char_index));
 		}		
 			
-		if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > window.innerHeight/2) {
-			$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
+		if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > (window.innerHeight/2) - 36) {
+			$(".console").css("top", ((window.innerHeight/2) - 36 - parseInt($(".console").css("height"))) + "px")
 		}
 				
 		if(grabbing_text == true) {
@@ -140,11 +140,6 @@ $(document).ready(function(){
 		   	current_element.target = current_element.target + chars.substring(char_index + 8, index);
 		} else if (chars.charAt(char_index) == '>' && chars.charAt(char_index + 1) != '<') {
 			grabbing_text = true;
-			/**var index = char_index + 1;
-			while(chars.charAt(index) != "<") {
-				index++;
-			}
-			$(current_element).text($(current_element).text() + chars.substring(char_index + 1, index));**/
 			if(parent_element == "") {
 				$("body").append(current_element);
 			} else {
@@ -167,7 +162,7 @@ $(document).ready(function(){
 			grabbed_text = false;
 		}
 		
-		$(".foreground").css("top", ((window.innerHeight/2) + 6) + "px");
+		$(".foreground").css("top", ((window.innerHeight/2) - 30) + "px");
 		$("body").css("height", window.innerHeight + "px");
 		
 		char_index++;

@@ -6,9 +6,9 @@ var paused;
 var active = 0;
 var panels = ["", 
 	"My ambition to do great things has driven me to be increasingly prolific through my high school and college years. Oh, and I really like metro <a href='https://github.com/Vicmart1/metro.css'>maps</a>.", 
-	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece. -- powered by the Coffee Physics Library", 
+	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece.", 
 	"Working right next to a globally-renown hospital has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
-	"So what's the future look like for Victor Dadfar? Programming, engineering and medicine will all certainly play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this :)"]
+	"So what's the future look like for me? Programming, engineering and medicine will all play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this :)"]
 
 var index;
 
@@ -19,18 +19,19 @@ function switchPanel(newIndex) {
 	$(".all-frames").css('left', offset + 'px');
 	$(".bot").each(function(){
 		$(this).children().css("top", "0px");
+        $(this).removeClass("bot-click");
 	});
 	
-	$(this).children().css("top", "-15px");	
+    $(".bot").eq(newIndex).addClass("bot-click");
+	//$(this).children().css("top", "-15px");	
 	if(active != 0) {
 		var old_height = parseInt($(".info").css("height"));
 		$(".info_text").html(panels[newIndex]);
 		var new_top = old_height - parseInt($(".info").css("height"));
-		$(".filling").css("top", "calc(-0% - " + new_top + "px)");
-		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
+		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
 	} else {
 		//$(active).css("top", "-15px");
-		$(".info").css("top", "-100%");
+		$(".info").css("top", "0%");
 	}
 	$(".progress").css("width", ((20) * newIndex + ((newIndex + 1) * 4)) + "%");
 }
@@ -61,22 +62,22 @@ $(document).keydown(function(e) {
 
 $(".bot").hover(function() {
 	if(active != 0) {
-		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
+		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
 		$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
 	}
 }, function() {
-	$(".info").css("top", "-100%");
+	$(".info").css("top", "0%");
 	$(active).css("top", "-15px");
 	$(".filling").css("top", "0px");
 });
 
 $(".info").hover(function() {
 	if($(".circle").index(active) != 0) {
-		$(".info").css("top", "calc(-100% - " + (parseInt($(".info").css("height")) - 2) + "px)");
+		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
 		$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
 	}
 }, function() {
-	$(".info").css("top", "-100%");
+	$(".info").css("top", "0%");
 	$(active).css("top", "-15px");
 	$(".filling").css("top", "0px");
 });
