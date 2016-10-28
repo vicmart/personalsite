@@ -22,6 +22,67 @@ body{
 	z-index: 0;
 }
 
+.side-right {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: black;
+    width: 40px;
+    height: calc(100% - 40px);
+    z-index: 1000;
+    opacity: 0;
+    
+    cursor:pointer;
+    
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    -ms-transition: opacity 0.25s;
+    -o-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+}
+
+.side-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    width: 40px;
+    height: calc(100% - 40px);
+    z-index: 1000;
+    opacity: 0;
+    
+    cursor:pointer;
+    
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    -ms-transition: opacity 0.25s;
+    -o-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+}
+
+.arrow {
+    position: absolute;
+    top: calc(50% - 15px);
+    left: -7.5px;
+    width: 30px;
+    height: 30px;
+    
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    
+    -ms-transform: rotate(45deg); 
+    -webkit-transform: rotate(45deg); 
+    transform: rotate(45deg);   
+}
+
+.arrow-left {
+    -ms-transform: rotate(-135deg); 
+    -webkit-transform: rotate(-135deg); 
+    transform: rotate(-135deg);   
+    
+    left: 15px;
+}
+
 .bot-cont{
 	position: fixed;
 	width: 100%;
@@ -36,6 +97,8 @@ body{
 	position: relative;
 	float: left;
 	width: 20%;
+    margin: 0px;
+    padding: 0px;
 	height: 100%;
 	background: black;
 	color: white;

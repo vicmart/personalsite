@@ -42,6 +42,42 @@ $(".bot").click(function() {
     switchPanel(index);
 });
 
+$(".side-right").click(function() {
+    if (active < $(".bot").length - 1) {
+        switchPanel(active + 1); 
+        if (active == $(".bot").length - 1) {
+            $(this).css("opacity", "0");
+        }
+    }
+});
+
+
+$(".side-right").hover(function() {
+    if (active < $(".bot").length - 1) {
+        $(this).css("opacity", "0.9");
+    }
+}, function() {
+    $(this).css("opacity", "0");
+});
+
+
+$(".side-left").click(function() {
+    if (active > 0) {
+        switchPanel(active - 1); 
+        if (active == 0) {
+            $(this).css("opacity", "0");
+        }
+    }
+});
+
+$(".side-left").hover(function() {
+    if (active > 0) {
+        $(this).css("opacity", "0.9");
+    }
+}, function() {
+    $(this).css("opacity", "0");
+});
+
 $(document).keydown(function(e) {
     switch(e.which) {
         case 37: 
