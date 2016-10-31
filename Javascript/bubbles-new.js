@@ -3,15 +3,15 @@ var target_size = [];
 var original_size = [];
 var tar_size = Math.min((window.innerHeight/2)  - 50, (window.innerWidth/2)  - 50);
 
-var titles = ["Liquid Physics", "Jeometry Wars", "Jeometry Wars", "Reflections", "Floating Islands", "Endless Space", "Paradox Shell", "Lost", "Mirrors", "Lonely Snowmen"];
+var titles = ["Title: Liquid Physics", "Title: Jeometry Wars", "Title: Reflections", "Title: Floating Islands", "Title: Endless Space", "Title: Paradox Shell", "Title: Lost", "Title: Mirrors", "Title: Lonely Snowmen"];
 
-var subtitles = ["2D Fluid Simulation - Java <a href='projects/fluiddemo.zip'>demo</a>", "Geometry Wars Clone - Java <a href='projects/jometrywars.zip'>demo</a>", "Geometry Wars Clone - Java <a href='projects/jometrywars.zip'>demo</a>", "Ray-Based Lighting - Java <a href='projects/Lighting.zip'>demo</a>", "Minecraft Clone - C", "Matrix-Based Render - Java <a href='projects/Projection.zip'>demo</a>", "Matrix-Based Render - Java <a href='projects/Projection.zip'>demo</a>", "Ray-Based Psuedo 3D Render - Java", "Ray Trace-Based Render - Java", "Ray Trace-Based Render - Java"];
+var subtitles = ["2D Fluid Simulation - Java <a href='projects/fluiddemo.zip'>demo</a>", "Geometry Wars Clone - Java <a href='projects/jometrywars.zip'>demo</a>", "Ray Casting - Java <a href='projects/Lighting.zip'>demo</a>", "Minecraft Clone - C", "Perspective Projection - Java <a href='projects/Projection.zip'>demo</a>", "Perspective Projection - Java <a href='projects/Projection.zip'>demo</a>", "Ray Tracing - Java", "Ray Tracing - Java", "Ray Tracing - Java"];
 var paused;
 
-function expand(x){
+function expand(x) {
 	tar_size = Math.min((window.innerHeight/2)  - 50, (window.innerWidth/2)  - 50);
 	var idx = parseInt(($(x).parent().attr("id")).slice(-1));
-	if(Math.abs(current_size[idx] - original_size[idx]) > Math.abs(current_size[idx] - target_size[idx])) {
+	if(Math.abs(current_size[idx]*4 - original_size[idx]) > Math.abs(current_size[idx]*4 - target_size[idx])) {
 		target_size[idx] = original_size[idx];
 		$(x).removeClass("large");
 	}else{
@@ -29,17 +29,14 @@ function expand(x){
 
 $( document ).ready(function() {
 	$(".bubble").last().remove();
+	$(".bubble").last().remove();
 	$("canvas").first().remove();
 	
 	$(".bubble").each(function(index){
 		//$(this).css("-moz-border-radius", "50%");
 		//$(this).css("-webkit-border-radius",  "50%");
 		//$(this).css("border-radius", "50%");
-		if(window.innerWidth < 550 || window.innerHeight < 550) {
-			$(this).append("<p class='title' style='top: calc(24% - 55px);'>" + titles[index] + "</p><img id='img" + index + "' src='Images/" + (index+1) + ".png' onmousedown='expand(this)'>");
-		} else {
-			$(this).append("<p class='title'>" + titles[index] + "</p><img id='img" + index + "' src='Images/" + (index+1) + ".png' onmousedown='expand(this)'><p class='subtitle'>" + subtitles[index] + "</p>");
-		}
+		$(this).append("<p class='title'>" + titles[index] + "</p><img id='img" + index + "' src='Images/" + (index+1) + ".jpg' onmousedown='expand(this)'><p class='subtitle'>" + subtitles[index] + "</p>");
 	});
 	
 });

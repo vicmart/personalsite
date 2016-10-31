@@ -1,8 +1,8 @@
 var statement = "";
 var intervalHandle = null;
 var subtitle = "I am a student.____________________^_____^_____^_____^_____^_____^_____^_____^_____r_____e_____s_____e_____a_____r_____c_____h_____e_____r______________________________^_____^_____^_____^_____^_____^_____^_____^_____^_____p_____r_____o_____g_____r_____^_____^_____^_____^_____^_____^_____p_____r_____o_____g_____r_____a_____m_____m_____e_____r______________________________^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____^_____a_____w_____e_____s_____o_____m_____e_____.______________________________";
-var body_text = "Hey, I'm Victor. I'm a full stack developer with a healthcare background currently enrolled at Hopkins as a biomedical engineer who spends his free time helping others while also making cool webpages and catching up on Marvel movies. That's a lot to take in, which is why I threw together this site to help you better understand my story.</br>And yes, this webpage is being written in real time (web dev is tough).";
-var chars = "<div class='background'></div><div class='foreground shadow'><div class='propic pro-border shadow'><div class='propic'><img class='pro-img' src='Images/Profile.jpg'></div></div><div class='content'><h1 class='title'>Victor Dadfar</h1><div class='subtitle_container'><p class='subtitle_box'>" + subtitle + "</p></div><p class='body'>" + body_text + "</p><div class='subtitle_container'><a class='footer' href='mailto:gotovicmart@gmail.com'>Email</a><div class='dot'></div><a class='footer' href='http://www.linkedin.com/pub/victor-dadfar/94/287/3a1' target='_blank'>LinkedIn</a><div class='dot'></div><a class='footer' href='http://github.com/Vicmart1' target='_blank'>GitHub</a></div></div></div>";
+var body_text = "Hey, I'm Victor. I'm a full stack developer with a healthcare background currently enrolled at Hopkins as a biomedical engineer who spends his free time helping others while also making cool webpages and catching up on Marvel movies. That's a lot to take in, which is why I threw together this site to help you better understand my story.</br></br>And yes, this webpage is being written in real time (web dev is tough).";
+var chars = "<div class='background'></div><div class='foreground shadow'><div class='propic pro-border shadow'><div class='propic'><img class='pro-img' src='Images/Profile.png'></div></div><div class='content'><h1 class='title'>Victor Dadfar</h1><div class='subtitle_container'><p class='subtitle_box'>" + subtitle + "</p></div><p class='body'>" + body_text + "</p><div class='subtitle_container'><a class='footer' href='mailto:gotovicmart@gmail.com'>Email</a><div class='dot'></div><a class='footer' href='http://www.linkedin.com/pub/victor-dadfar/94/287/3a1' target='_blank'>LinkedIn</a><div class='dot'></div><a class='footer' href='http://github.com/Vicmart1' target='_blank'>GitHub</a></div></div></div>";
 var char_index = 0;
 var center_x = -1;
 var center_y = -1;
@@ -17,7 +17,7 @@ var current_text = "";
 var break_tag = false;
 var indentation = "";
 var no_indent = false;
-var console_text = "vickyd:personalsite vickyd$ ";
+var console_text = "vickyd:personalsite vickyd$ make webpage";
 
 $(window).mousemove(function( event ) {
 	if(center_x == -1) {
@@ -35,13 +35,17 @@ $(window).mousemove(function( event ) {
 });
 
 $(window).resize(function(){
-	$(".foreground").css("top", ((window.innerHeight/2) + 6) + "px");
+	$(".foreground").css("top", ((window.innerHeight/3) + 6) + "px");
 	$("body").css("height", window.innerHeight + "px");	
-	$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
+	$(".console").css("top", "0px");
+    if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > (window.innerHeight/3) - 36) {
+        $(".console").css("top", ((window.innerHeight/3) - 36 - parseInt($(".console").css("height"))) + "px")
+    }
 });
 
 $(document).ready(function(){	
-	$(".console").css("top", ((window.innerHeight/2) - parseInt($(".console").css("height"))) + "px")
+	$(".console").css("top", "0px");
+    
   	intervalHandle = setInterval(function(){
 		if(chars.charAt(char_index) == '^') {
 			$(".console").html($(".console").html().substring(0, $(".console").html().length - 1));
@@ -70,8 +74,8 @@ $(document).ready(function(){
 			$(".console").append(chars.charAt(char_index));
 		}		
 			
-		if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > (window.innerHeight/2) - 36) {
-			$(".console").css("top", ((window.innerHeight/2) - 36 - parseInt($(".console").css("height"))) + "px")
+		if(parseInt($(".console").css("height")) + parseInt($(".console").css("top")) > (window.innerHeight/3) - 36) {
+			$(".console").css("top", ((window.innerHeight/3) - 36 - parseInt($(".console").css("height"))) + "px")
 		}
 				
 		if(grabbing_text == true) {
@@ -162,7 +166,7 @@ $(document).ready(function(){
 			grabbed_text = false;
 		}
 		
-		$(".foreground").css("top", ((window.innerHeight/2) - 30) + "px");
+		$(".foreground").css("top", ((window.innerHeight/3) - 30) + "px");
 		$("body").css("height", window.innerHeight + "px");
 		
 		char_index++;
@@ -171,5 +175,5 @@ $(document).ready(function(){
 			$(".console").append(">");
 			clearInterval(intervalHandle);
 		}
-	},20);
+	},15);
 });

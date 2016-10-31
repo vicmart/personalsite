@@ -4,36 +4,57 @@ var diffScroll = -1;
 var intervalHandle = null;
 var paused;
 var active = 0;
-var panels = ["", 
-	"My ambition to do great things has driven me to be increasingly prolific through my high school and college years. Oh, and I really like metro <a href='https://github.com/Vicmart1/metro.css'>maps</a>.", 
-	"I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece.", 
-	"Working right next to a globally-renown hospital has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
-	"So what's the future look like for me? Programming, engineering and medicine will all play a large role, but what I do with that knowledge will be most important. In the meantime, thank you for reading this :)"]
+var max_active = 0;
+var panels = ["<h1></h1>", 
+	"<h1>My Background</h1> My ambition to do great things has driven me to be increasingly efficient through my high school and college years. Oh, and I really like metro <a href='https://github.com/Vicmart1/metro.css'>maps</a>.", 
+	"<h1>My Projects</h1> I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece.", 
+	"<h1>My Research</h1> Working near a globally-renown hospital has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
+	"<h1>My Interests</h1> Of course, I have some downtime too."]
 
 var index;
+var wait 
+$(".info").css("top", "-45px");
+$(".info_text").html(panels[active]);
+$("h1").css("margin-top", "-5px");
 
 function switchPanel(newIndex) {
     active = newIndex;
+    if (active > max_active) {
+        max_active = active;
+    }
 	var offset = -1 * newIndex * $(".frame").width();
-	
+	   
+    if (active == 4) {
+        document.getElementById('interests').contentWindow.location.reload();
+    }
 	$(".all-frames").css('left', offset + 'px');
 	$(".bot").each(function(){
 		$(this).children().css("top", "0px");
         $(this).removeClass("bot-click");
 	});
-	
+	$(".arrows").removeClass("arrows-move");
     $(".bot").eq(newIndex).addClass("bot-click");
 	//$(this).children().css("top", "-15px");	
+    $(".info_text").html(panels[newIndex]);
 	if(active != 0) {
-		var old_height = parseInt($(".info").css("height"));
-		$(".info_text").html(panels[newIndex]);
+		var old_height = parseInt($(".info").css("height"));		
 		var new_top = old_height - parseInt($(".info").css("height"));
-		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
+		$(".info").css("top",  "-90px");
+        $("h1").css("margin-top", "0px");
+        clearTimeout(wait);
+        wait = setTimeout(function() {
+            if (active == max_active && active < 4) {
+                $(".arrows").addClass("arrows-move");
+            }
+            $(".info").css("top", "-45px");
+            $("h1").css("margin-top", "-5px");
+        }, 2500);
 	} else {
 		//$(active).css("top", "-15px");
-		$(".info").css("top", "0%");
+		$(".info").css("top", "-45px");
+        $("h1").css("margin-top", "-5px");
 	}
-	$(".progress").css("width", ((20) * newIndex + ((newIndex + 1) * 4)) + "%");
+	$(".progress").css("width", ((25) * newIndex) + "%");
 }
 
 $(".bot").click(function() {
@@ -96,27 +117,37 @@ $(document).keydown(function(e) {
     e.preventDefault();
 });
 
-$(".bot").hover(function() {
+/**$(".bot").hover(function() {
 	if(active != 0) {
 		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
-		$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
+		$(active).css("top", "-100px");
 	}
 }, function() {
-	$(".info").css("top", "0%");
+	$(".info").css("top", "-50px");
 	$(active).css("top", "-15px");
 	$(".filling").css("top", "0px");
-});
+});**/
 
 $(".info").hover(function() {
-	if($(".circle").index(active) != 0) {
-		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
-		$(active).css("top", "calc(-0% - " + (parseInt($(".info").css("height")) + 13) + "px)");
+	if($(".circle").index(active) != 0 && active != 0) {
+		$(".info").css("top",  "-90px");
+        $("h1").css("margin-top", "0px");
+        //$(".arrows").removeClass("arrows-move");
 	}
 }, function() {
-	$(".info").css("top", "0%");
-	$(active).css("top", "-15px");
-	$(".filling").css("top", "0px");
+	$(".info").css("top", "-45px");
+    $("h1").css("margin-top", "-5px");
+    /**if (active == max_active && active < 4) {
+        $(".arrows").addClass("arrows-move");
+    }**/
 });
+
+$(".info").click(function() {
+    if($(".arrows").hasClass("arrows-move")) {
+        switchPanel(active + 1); 
+        $(".side-right").css("opacity", "0");
+    }
+})
 
 var isMobile = {
     Android: function() {
@@ -150,6 +181,13 @@ $( document ).ready(function() {
 
     $(".info_text").text(panels[$(".circle").index(active)]);
     active = 0;
+    
+    setTimeout(function() {
+        if (active == 0) {
+            $(".arrows").addClass("arrows-move");
+            $(".side-right").css("opacity", "0.9");
+        }
+    }, 25000);
   // Handler for .ready() called.
 });
 

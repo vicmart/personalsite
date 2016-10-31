@@ -6,7 +6,7 @@ var Demo,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 Demo = (function() {
-  Demo.COLOURS = ['DC0048', '34A176', '1A503B', '4A9926', '378D98', '6600CC'];
+  Demo.COLOURS = ['#16a085', '#27ae60', '#8e44ad', '#2980b9', 'gray', '#2c3e50'];
 
   function Demo() {
     this.mousemove = __bind(this.mousemove, this);

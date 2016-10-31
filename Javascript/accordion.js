@@ -36,12 +36,31 @@ $('.panel').hover(
 	
 		
 	
-		var color = [getRandom(60, 125), getRandom(60, 125), getRandom(60, 125)];
-		$('.ironman').css("background", "rgb(" + (color[0] - 60) + "," + (color[1] - 60) + "," + (color[2] - 60) + ")");
+		//var color = [getRandom(60, 125), getRandom(60, 125), getRandom(60, 125)];
+		/**var index = $(".panel").index($(this));
+        console.log(index);
+        switch (index) {
+            case 0:
+                color = [0, 0, 195];                
+                break;
+            case 1:
+                color = [195, 0, 0];
+                break;
+            case 2:
+                color = [255, 165, 0];
+                break;
+            case 3:
+                color = [225, 162, 173];                
+                break;
+            case 4:
+                color = [0, 195, 0];                
+                break;
+        }
+        $('.ironman').css("background", "rgb(" + (color[0] - 60) + "," + (color[1] - 60) + "," + (color[2] - 60) + ")");
 		$('.hulk').css("background", "rgb(" + (color[0] - 30) + "," + (color[1] - 30) + "," + (color[2] - 30) + ")");
 		$('.avengers').css("background", "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")");
 		$('.captain').css("background", "rgb(" + (color[0] + 30) + "," + (color[1] + 30) + "," + (color[2] + 30) + ")");
-		$('.thor').css("background", "rgb(" + (color[0] + 60) + "," + (color[1] + 60) + "," + (color[2] + 60) + ")");
+		$('.thor').css("background", "rgb(" + (color[0] + 60) + "," + (color[1] + 60) + "," + (color[2] + 60) + ")");**/
 		
 	} , 
 	function(){
@@ -75,11 +94,11 @@ $('.panel').hover(
 );
 
 $( document ).ready(function() {
-	var color = [getRandom(60, 125), getRandom(60, 125), getRandom(60, 125)];
+	/**var color = [getRandom(60, 125), getRandom(60, 125), getRandom(60, 125)];
 	$('.ironman').css("background", "rgb(" + (color[0] - 60) + "," + (color[1] - 60) + "," + (color[2] - 60) + ")");
 	$('.hulk').css("background", "rgb(" + (color[0] - 30) + "," + (color[1] - 30) + "," + (color[2] - 30) + ")");
 	$('.avengers').css("background", "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")");
 	$('.captain').css("background", "rgb(" + (color[0] + 30) + "," + (color[1] + 30) + "," + (color[2] + 30) + ")");
-	$('.thor').css("background", "rgb(" + (color[0] + 60) + "," + (color[1] + 60) + "," + (color[2] + 60) + ")");
+	$('.thor').css("background", "rgb(" + (color[0] + 60) + "," + (color[1] + 60) + "," + (color[2] + 60) + ")");**/
 	
 });

@@ -10,6 +10,7 @@ html {
 body {
 	padding: 0px;
 	margin: 0px;
+    background-color: white;
 }
 
 .all-lines {
@@ -56,36 +57,36 @@ body {
 }
 
 .red {
-       background: red;
+       background: #16a085;
 }
 
 .red-fade {
-    background: -webkit-linear-gradient(left,rgba(255,255,255,0), red); /*Safari 5.1-6*/
-  	background: -o-linear-gradient(right,rgba(255,255,255,0), red); /*Opera 11.1-12*/
-  	background: -moz-linear-gradient(right,rgba(255,255,255,0), red); /*Fx 3.6-15*/
-  	background: linear-gradient(to right, rgba(255,255,255,0), red); /*Standard*/
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), #16a085); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), #16a085); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), #16a085); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), #16a085); /*Standard*/
 }
 
 .pink {
-       background: pink;
+       background: #27ae60;
 }
 
 .pink-fade {
-    background: -webkit-linear-gradient(left,rgba(255,255,255,0), pink); /*Safari 5.1-6*/
-  	background: -o-linear-gradient(right,rgba(255,255,255,0), pink); /*Opera 11.1-12*/
-  	background: -moz-linear-gradient(right,rgba(255,255,255,0), pink); /*Fx 3.6-15*/
-  	background: linear-gradient(to right, rgba(255,255,255,0), pink); /*Standard*/
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), #27ae60); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), #27ae60); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), #27ae60); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), #27ae60); /*Standard*/
 }
 
 .orange {
-       background: orange;
+       background: #8e44ad;
 }
 
 .orange-fade {
-    background: -webkit-linear-gradient(left,rgba(255,255,255,0), orange); /*Safari 5.1-6*/
-  	background: -o-linear-gradient(right,rgba(255,255,255,0), orange); /*Opera 11.1-12*/
-  	background: -moz-linear-gradient(right,rgba(255,255,255,0), orange); /*Fx 3.6-15*/
-  	background: linear-gradient(to right, rgba(255,255,255,0), orange); /*Standard*/
+    background: -webkit-linear-gradient(left,rgba(255,255,255,0), #8e44ad); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,rgba(255,255,255,0), #8e44ad); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,rgba(255,255,255,0), #8e44ad); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, rgba(255,255,255,0), #8e44ad); /*Standard*/
 }
 
 .black {
@@ -111,7 +112,8 @@ body {
 }
 
 .blue {
-       background: blue;
+       background: #2980b9;
+    
 }
 
 .blue-fade {
@@ -122,7 +124,7 @@ body {
 }
 
 .green {
-       background: green;
+       background: #2c3e50;
 }
 
 .green-fade {
@@ -133,17 +135,17 @@ body {
 }
 
 .gray-red-fade {
-    background: -webkit-linear-gradient(gray, red); /*Safari 5.1-6*/
-  	background: -o-linear-gradient(gray, red); /*Opera 11.1-12*/
-  	background: -moz-linear-gradient( gray, red); /*Fx 3.6-15*/
-  	background: linear-gradient( gray, red); /*Standard*/
+    background: -webkit-linear-gradient(gray, #16a085); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(gray, #16a085); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient( gray, #16a085); /*Fx 3.6-15*/
+  	background: linear-gradient( gray, #16a085); /*Standard*/
 }
 
 .red-blue-fade {
-    background: -webkit-linear-gradient( red, blue); /*Safari 5.1-6*/
-  	background: -o-linear-gradient( red, blue); /*Opera 11.1-12*/
-  	background: -moz-linear-gradient( red, blue); /*Fx 3.6-15*/
-  	background: linear-gradient( red, blue); /*Standard*/
+    background: -webkit-linear-gradient( #16a085, #2980b9); /*Safari 5.1-6*/
+  	background: -o-linear-gradient( #16a085, #2980b9); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient( #16a085, #2980b9); /*Fx 3.6-15*/
+  	background: linear-gradient( #16a085, #2980b9); /*Standard*/
 }
 
 .white {
