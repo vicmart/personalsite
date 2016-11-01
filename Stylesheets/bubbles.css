@@ -28,17 +28,14 @@ img{
 
 .title{
 	position: absolute;
-	top: calc(24% - 70px);
-	left: 0%;
+	top: calc(21.5%);
+	left: 10%;
+    text-align: left;
 	width: 100%;
-	font-size: 22px;
+	font-size: 30px;
 	color: white;
 }
 .subtitle{
-	position: absolute;
-	top: calc(24% - 45px);
-	left: 18%;
-	width: 64%;
 	font-size: 18px;
 	color: #EEE;
 }

@@ -3,9 +3,9 @@ var target_size = [];
 var original_size = [];
 var tar_size = Math.min((window.innerHeight/2)  - 50, (window.innerWidth/2)  - 50);
 
-var titles = ["Title: Liquid Physics", "Title: Jeometry Wars", "Title: Reflections", "Title: Floating Islands", "Title: Endless Space", "Title: Paradox Shell", "Title: Lost", "Title: Mirrors", "Title: Lonely Snowmen"];
+var titles = ["Liquid Physics", "Jeometry Wars", "Reflections", "Floating Islands", "Endless Space", "Paradox Shell", "Lost", "Mirrors", "Lonely Snowmen"];
 
-var subtitles = ["2D Fluid Simulation - Java <a href='projects/fluiddemo.zip'>demo</a>", "Geometry Wars Clone - Java <a href='projects/jometrywars.zip'>demo</a>", "Ray Casting - Java <a href='projects/Lighting.zip'>demo</a>", "Minecraft Clone - C", "Perspective Projection - Java <a href='projects/Projection.zip'>demo</a>", "Perspective Projection - Java <a href='projects/Projection.zip'>demo</a>", "Ray Tracing - Java", "Ray Tracing - Java", "Ray Tracing - Java"];
+var subtitles = ["2D Fluid Simulation", "Geometry Wars Clone", "Ray Casting", "Minecraft Clone", "Perspective Projection", "Perspective Projection", "Ray Tracing", "Ray Tracing", "Ray Tracing"];
 var paused;
 
 function expand(x) {
@@ -36,7 +36,7 @@ $( document ).ready(function() {
 		//$(this).css("-moz-border-radius", "50%");
 		//$(this).css("-webkit-border-radius",  "50%");
 		//$(this).css("border-radius", "50%");
-		$(this).append("<p class='title'>" + titles[index] + "</p><img id='img" + index + "' src='Images/" + (index+1) + ".jpg' onmousedown='expand(this)'><p class='subtitle'>" + subtitles[index] + "</p>");
+		$(this).append("<p class='title'>" + titles[index] + "<span class='subtitle'>  " + subtitles[index] + "</span></p><img id='img" + index + "' src='Images/" + (index+1) + ".jpg' onmousedown='expand(this)'>");
 	});
 	
 });

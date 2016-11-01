@@ -14,7 +14,7 @@ Physics = (function() {
     this._step = 0.0;
     this._clock = null;
     this._buffer = 0.0;
-    this._maxSteps = 4;
+    this._maxSteps = 2;
     this.particles = [];
     this.springs = [];
   }
