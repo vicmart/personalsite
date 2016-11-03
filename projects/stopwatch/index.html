@@ -1,317 +1,25 @@
+<!--ClickTime Software Development Intern Quiz
+    Question 3
+    Victor Dadfar
+    11/2/16-->
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script>
-            var countTarget = 0;
-            var timer1;
-            var pause1;
-            var start1;
-            var paused1 = false;
-            var timer2;
-            var pause2;
-            var start2;
-            var paused2 = false;
-            
-            var bgcolor = "#34495e";
-            var color1 = "#4f6f8f";
-            var color2 = "#4f6f8f";
-            
-            $(document).ready(function() {
-                timer1 = setInterval(loop1, 15);
-                timer2 = setInterval(loop2, 15);
-                
-                countTarget = 5;
-                
-                start1 = Date.now();
-                start2 = Date.now();
-                
-                $(".reset").on("click", function() {
-                    var num = parseInt($(this).attr("id"));
-                    reset(num);
-                });
-                
-                $(".start").on("click", function() {
-                    var num = parseInt($(this).attr("id"));
-                    startstop(num);
-                });
-                
-                $(".inputfield").submit(function(e) {
-                    e.preventDefault();
-                    changeTarget();
-                })
-            });
-            
-            function loop1() {
-                var current = Date.now();
-                var actual = (current - start1)/1000.0;
-
-                actual *= (360/countTarget);
-                
-                display = (actual/360) * countTarget;
-                
-                if (actual <= 360) {
-                    $("#time1").html(convertTo(display));
-                }
-
-                if (actual < 180) {
-                    $($("#timer1").children(".outer-circle")[0]).css("background-image", "linear-gradient(" + (90 + actual) + "deg, transparent 50%, " + bgcolor + " 50%), linear-gradient(90deg, " + bgcolor + " 50%, transparent 50%)");
-                } else if (actual <= 360) {
-                    $($("#timer1").children(".outer-circle")[0]).css("background-image", "linear-gradient(" + (actual - 90) + "deg, transparent 50%, " + color1 + " 50%), linear-gradient(90deg, " + bgcolor + " 50%, transparent 50%)");
-                } else {
-                    clearInterval(timer1);
-                    
-                    display = (360/360) * countTarget;
-                    $("#time1").html(convertTo(display));
-                    $($("#timer1").children(".outer-circle")[0]).css("background-image", "linear-gradient(270deg, transparent 50%, " + color1 + " 50%), linear-gradient(90deg, " + bgcolor + " 50%, transparent 50%)");
-                    
-                    $(".start1").addClass("inactive");
-                }
-            }
-            
-            function loop2() {
-                var current = Date.now();
-                var actual = (current - start2)/1000.0;
-
-                actual *= (360/countTarget);
-                actual = 360 - actual;
-                
-                display = (actual/360) * countTarget;
-                
-                if (actual >= 0) {
-                    $("#time2").html(convertTo(display));
-                }
-                
-                if (actual > 180) {
-                    $($("#timer2").children(".outer-circle")[0]).css("background-image", "linear-gradient(" + (actual - 90) + "deg, transparent 50%, " + color2 + " 50%), linear-gradient(90deg, " + bgcolor + " 50%, transparent 50%)");
-                } else if (actual >= 0) {
-                    $($("#timer2").children(".outer-circle")[0]).css("background-image", "linear-gradient(" + (90 + actual) + "deg, transparent 50%, " + bgcolor + " 50%), linear-gradient(90deg, " + bgcolor + " 50%, transparent 50%)");
-                } else {
-                    clearInterval(timer2);
-                    
-                    display = (0/360) * countTarget;
-                    $("#time2").html(convertTo(display));
-                    $($("#timer2").children(".outer-circle")[0]).css("background-image", "linear-gradient(90deg, transparent 50%, " + bgcolor + " 50%), linear-gradient(90deg, " + bgcolor + " 50%, transparent 50%)");
-                    
-                    $(".start2").addClass("inactive");
-                }
-            }
-            
-            function reset(num) {
-                if (num == 1) {
-                    start1 = Date.now();
-                    clearInterval(timer1);
-                    timer1 = setInterval(loop1, 15);
-                    paused1 = false;
-                    $(".start1").removeClass("inactive");
-                } else {
-                    start2 = Date.now();                    
-                    clearInterval(timer2);
-                    timer2 = setInterval(loop2, 15);
-                    paused2 = false;
-                    $(".start2").removeClass("inactive");
-                }
-                $("#sp" + num).text("Pause");
-            }
-            
-            function startstop(num) {
-                if (!$(".start" + num).hasClass("inactive")) {
-                    if (num == 1) {
-                        if (!paused1) {
-                            pause1 = Date.now() - start1;
-                            clearInterval(timer1);
-                            paused1 = true;
-                            $("#sp" + num).text("Start");
-                        } else {
-                            start1 = Date.now() - pause1;
-                            timer1 = setInterval(loop1, 15);
-                            paused1 = false;
-                            $("#sp" + num).text("Pause");
-                        }
-                    } else {
-                        if (!paused2) {
-                            pause2 = Date.now() - start2;
-                            clearInterval(timer2);
-                            paused2 = true;
-                            $("#sp" + num).text("Start");
-                        } else {
-                            start2 = Date.now() - pause2;
-                            timer2 = setInterval(loop2, 15);
-                            paused2 = false;
-                            $("#sp" + num).text("Pause");
-                        }
-                    }
-                }
-            }
-            
-            function changeTarget() {
-                var newTarget = parseInt($('.max').val());
-                if (!isNaN(newTarget)) {
-                    countTarget = newTarget;
-                    reset(1);
-                    reset(2);
-                }
-            }
-            
-            function convertTo(time) {
-                var days = Math.floor(time / (60 * 60 * 24));
-                var hours = Math.floor((time % (60 * 60 * 24)) / (60 * 60));
-                var minutes = Math.floor((time % (60 * 60)) / 60);
-                var seconds = (time % 60);
-                
-                return days.toFixed(0) + "</br>" + hours.toFixed(0) + "</br>" + minutes.toFixed(0) + "</br>" + seconds.toFixed(1); 
-            }
-        </script>
-        <style>
-            @font-face {
-                font-family: roboto;
-                src: url(Roboto-Light.ttf); 
-            }
-            
-            @font-face {
-                font-family: roboto-thin;
-                src: url(Roboto-Thin.ttf); 
-            }
-            
-            body, html {
-                background-color: #34495e;
-                color: white;
-                font-family: roboto;
-            }
-            
-            .timer {
-                position: relative;
-                width: 400px;
-                height: 400px;
-                float: left;
-                margin: 5px;
-            }
-            
-            .outer-circle {
-                width: 100%;
-                height: 100%;
-                border-radius: 100%;
-            }
-            
-            #outer1 {
-                background-color: #4f6f8f;   
-            }
-            
-            #outer2 {
-                background-color: #4f6f8f;   
-            }
-            
-            .inner-circle {
-                position: absolute;
-                top: 12.5%;
-                left: 12.5%;
-                background-color: #34495e;
-                border-radius: 100%;
-                width: 75%;
-                height: 75%;
-            }
-            
-            .time {
-                position: absolute;
-                font-size: 30px;
-                top: calc(10% - 20px);
-                left: 56%;
-                text-align: left;
-            }
-            
-            .labels {
-                position: absolute;
-                font-size: 30px;
-                top: calc(10% - 20px);
-                right: 46%;
-                text-align: right;                
-                font-family: roboto-thin;
-                color: #BBB;
-            }
-            
-            .label-up {
-                left: 46%;
-                text-align: left;   
-            }
-            
-            .time-up {
-                left: auto;
-                right: 56%;
-                text-align: right;
-            }
-            
-            .start {
-                position: absolute;
-                top: calc(46% + 20px);
-                left: 12.5%;
-                background-color: white;
-                width: 35%;
-                height: 35%;
-                border-radius: 100%;
-                
-                color: #34495e;
-                
-                -webkit-transition: all 0.25s;
-                -m-transition: all 0.25s;
-                -o-transition: all 0.25s;
-                transition: all 0.25s;
-            }
-            
-            .start:hover {
-                color: white;
-                background-color: #4f6f8f; 
-            }
-            
-            .reset {
-                position: absolute;
-                top: calc(46% + 20px);
-                right: 12.5%;
-                background-color: white;
-                width: 35%;
-                height: 35%;
-                border-radius: 100%;
-
-                color: #34495e;
-                
-                -webkit-transition: all 0.25s;
-                -m-transition: all 0.25s;
-                -o-transition: all 0.25s;
-                transition: all 0.25s;
-            }
-            
-            .reset:hover {
-                color: white;
-                background-color: #4f6f8f; 
-            }
-            
-            .center-text{
-                position: relative;
-                font-size: 30px;
-                top: calc(50% - 20px);
-                text-align: center;
-            }
-            
-            .inactive {
-                background-color: #999;
-            }
-            
-            .inactive:hover {
-                color: #34495e;
-                background-color: #999;
-            }
-        </style>
+        <script src="index.js"></script>
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
         <form class='inputfield'>
             <input type="text" class='max' placeholder="Enter time">
-            <input type="submit" value="Go!">
+            <input type="submit" class='btn' value="Go!">
         </form>
         <div class="timer" id="timer1">
             <div class="outer-circle" id="outer1"></div>   
             <div class="inner-circle">
                 <div class='labels label-up'>day</br>hour</br>minute</br>second</div>
-                <div class='time time-up' id='time1'>05:04:56</div>
+                <div class='time time-up' id='time1'>0</br>0</br>0</br>0.0</div>
                 <div class='start start1' id='1'>
-                    <div class='center-text' id='sp1'>Pause</div>
+                    <div class='center-text' id='sp1'>Start</div>
                 </div>
                 <div class='reset' id='1'>   
                     <div class='center-text' id='r1'>Reset</div>
@@ -322,9 +30,9 @@
             <div class="outer-circle" id="outer2"></div>   
             <div class="inner-circle">
                 <div class='labels'>day</br>hour</br>minute</br>second</div>
-                <div class='time' id='time2'>05:04:56</div>
+                <div class='time' id='time2'>0</br>0</br>0</br>30.0</div>
                 <div class='start start2' id='2'>
-                    <div class='center-text' id='sp2'>Pause</div>
+                    <div class='center-text' id='sp2'>Start</div>
                 </div>
                 <div class='reset' id='2'>   
                     <div class='center-text' id='r2'>Reset</div>
