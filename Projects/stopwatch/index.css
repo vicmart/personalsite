@@ -1,0 +1,204 @@
+/*
+   ClickTime Software Development Intern Quiz
+   Question 3
+   Victor Dadfar
+   11/2/16
+*/
+@font-face {
+    font-family: roboto;
+    src: url(Roboto-Light.ttf); 
+}
+
+@font-face {
+    font-family: roboto-thin;
+    src: url(Roboto-Thin.ttf); 
+}
+
+body, html {
+    background-color: #34495e;
+    color: white;
+    font-family: roboto;
+}
+
+.timer {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    float: left;
+    margin: 5px;
+    top: calc(50% - 200px);
+}
+
+#timer1 {
+    left: calc(50% - 420px);
+}
+
+#timer2 {
+    left: calc(50% + 20px);
+}
+
+.outer-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+#outer1 {
+    background-color: #4f6f8f;   
+    background-image: linear-gradient( 90deg, transparent 50%, #34495e 50%), linear-gradient(90deg, #34495e 50%, transparent 50%);   
+}
+
+#outer2 {
+    background-color: #4f6f8f;   
+}
+
+.inner-circle {
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+    background-color: #34495e;
+    border-radius: 100%;
+    width: 75%;
+    height: 75%;
+}
+
+.time {
+    position: absolute;
+    font-size: 30px;
+    top: calc(10% - 20px);
+    left: 56%;
+    text-align: left;
+}
+
+.labels {
+    position: absolute;
+    font-size: 30px;
+    top: calc(10% - 20px);
+    right: 46%;
+    text-align: right;                
+    font-family: roboto-thin;
+    color: #BBB;
+}
+
+.label-up {
+    left: 46%;
+    text-align: left;   
+}
+
+.time-up {
+    left: auto;
+    right: 56%;
+    text-align: right;
+}
+
+.start {
+    position: absolute;
+    top: calc(46% + 20px);
+    left: 12.5%;
+    background-color: white;
+    width: 35%;
+    height: 35%;
+    border-radius: 100%;
+
+    color: #34495e;
+
+    -webkit-transition: all 0.25s;
+    -m-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    transition: all 0.25s;
+
+    cursor: pointer; 
+    cursor: hand;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+.start:hover {
+    color: white;
+    background-color: #4f6f8f; 
+}
+
+.reset {
+    position: absolute;
+    top: calc(46% + 20px);
+    right: 12.5%;
+    background-color: white;
+    width: 35%;
+    height: 35%;
+    border-radius: 100%;
+
+    color: #34495e;
+
+    -webkit-transition: all 0.25s;
+    -m-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    transition: all 0.25s;
+
+    cursor: pointer; 
+    cursor: hand;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+.reset:hover {
+    color: white;
+    background-color: #4f6f8f; 
+}
+
+.center-text{
+    position: relative;
+    font-size: 30px;
+    top: calc(50% - 20px);
+    text-align: center;
+}
+
+.inactive {
+    background-color: #999;
+}
+
+.inactive:hover {
+    color: #34495e;
+    background-color: #999;
+}
+
+.max {
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 60px;
+    font-size: 25px;
+    font-family: roboto;
+    border: none;
+    background-color: #4f6f8f;
+    color: white;
+}
+
+.max:focus {
+    outline: none;
+}
+
+.btn {
+    position: relative;
+    font-size: 20px;
+    font-family: roboto-thin;
+    top: -3px;
+    left: -56px;
+    width: 50px;
+    height: 40px;
+    border: none;
+    background-color: #4f6f8f;
+    color: white;
+    cursor: pointer; 
+    cursor: hand;
+}
+
+.inputfield {
+    width: 100%;
+}
