@@ -1,0 +1,128 @@
+@font-face {
+    font-family: courier;
+    src: url(NotCourierSans.otf);
+}
+
+@font-face {
+    font-family: Raleway-Med;
+    src: url(Raleway-Medium.ttf);
+}
+
+body {
+	overflow: hidden;
+}
+
+div {
+	font-family: Raleway-Med; 
+	font-size: 105%;	
+}
+
+.panel {
+	position: relative;
+	height: 100%;
+	float:left;
+	max-width: 20%;
+	-webkit-transition: max-width 0.5s, background 0.5s;
+	-moz-transition: max-width 0.5s, background 0.5s;
+	-o-transition: max-width 0.5s, background 0.5s;
+	-ms-transition: max-width 0.5s, background 0.5s;
+	transition: max-width 0.5s, background 0.5s; 
+}
+
+.clock {
+	position: absolute;
+	top: 85%;
+	width: 100%;
+	opacity: 0;
+	color: white;
+	text-align: center;
+	z-index: 1;
+}
+
+.movies {
+	text-align: left;
+	height: 65%;
+	
+	top: 25%;
+	-webkit-transform: translateY(-25%);
+	-moz-transform: translateY(-25%);
+    -o-transform: translateY(-25%);
+    -ms-transform: translateY(-25%);
+	transform: translateY(-25%);
+}
+
+.next {
+	top: calc(95% - 35px);
+	text-align: center;
+	height: 20%;
+}
+
+p {
+	margin-left: 20px;	
+	margin-right: 20px;	
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	
+	z-index: 0;
+}
+
+.title {
+	float: left;
+}
+
+.subtitle {
+	color: rgb(242, 242, 242);
+	font-size: 85%;
+	float: left;
+}
+
+.all {
+	width: -webkit-intrinsic;
+}
+
+body {
+	margin: 0px;
+}
+
+img {
+	width: 50%;
+	display:block;
+	margin: auto;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	
+	z-index: 1;
+	
+	-webkit-transition: top 0.5s, opacity 0.5s;
+	-moz-transition: top 0.5s, opacity 0.5s;
+	-o-transition: top 0.5s, opacity 0.5s;
+	-ms-transition: top 0.5s, opacity 0.5s;
+	transition: top 0.5s, opacity 0.5s;
+	
+	opacity: 1.0;
+}
+
+hr{
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 0px;
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color: white;
+    border-color: white;
+    color: white;
+    height: 0px;
+    
+	z-index:0;
+}
+
+a{
+	color: white;
+}
+
