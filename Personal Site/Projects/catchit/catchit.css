@@ -1,0 +1,39 @@
+.item {
+    background: red;
+    width: 50px;
+    height: 50px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+
+	position: absolute;
+	left: calc(50% - 25px);
+	top: calc(50% - 25px);
+}
+
+.case {
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+
+    position: absolute;
+	left: calc(50% - 50px);
+	top: calc(50% - 50px);
+}
+
+.animated {
+	-webkit-transition: left 1s ease, top 1s ease;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.all {
+	width:100%;
+	height:100%;
+}

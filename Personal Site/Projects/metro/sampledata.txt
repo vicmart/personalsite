@@ -1,0 +1,64 @@
+2009:2013.1
+###################################
+:491
+pink
+"Station Title: Description of Life Event"
+:240
+"Station Title: Description of Life Event"
+>pink:
+:45
+"Station Title: Description of Life Event"
+<pink:fade:down
+-:580
+orange
+"Station Title: Description of Life Event"
+::204
+###################################
+:352
+green:58
+"Station Title: Description of Life Event"
+:300
+"Station Title: Description of Life Event"
+<gray:solid:up
+>gray:fade:down
+:180
+"Station Title: Description of Life Event"
+>orange:fade:up
+<orange:
+:165
+"Station Title: Description of Life Event"
+:230
+"Station Title: Description of Life Event"
+::224
+###################################
+pink:gray:green:100
+"Station Title: Description of Life Event"
+>
+:120
+"Station Title: Description of Life Event"
+<
+:155
+"Station Title: Description of Life Event"
+:100
+"Station Title: Description of Life Event"
+red:80
+"Station Title: Description of Life Event"
+:80
+black
+"Station Title: Description of Life Event"
+<black:fade:up
+>black:fade:down
+red
+:60
+"Station Title: Description of Life Event"
+pink:::160
+"Station Title: Description of Life Event"
+::orange:30
+"Station Title: Description of Life Event"
+<orange:
+blue:30
+"Station Title: Description of Life Event"
+:70
+"Station Title: Description of Life Event"
+::224
+#################################
