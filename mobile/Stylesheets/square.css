@@ -1,0 +1,166 @@
+@font-face {
+    font-family: Raleway-Med;
+    src: url(Raleway-Medium.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Light;
+    src: url(Raleway-Light.ttf);
+}
+
+body{
+	background-color: purple;
+	margin: 0px;
+	padding: 0px;
+	-webkit-text-size-adjust: 100%;
+}
+
+.container{
+	position: absolute;
+	width: 44%;
+	padding-bottom: 44%;
+	margin: 2%;
+	
+	transition: all 0.25s;
+
+	overflow: hidden;
+}
+
+.box{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: orange;
+	overflow: hidden;
+}
+
+.green{
+	background-color: green;
+}
+
+.blue{
+	background-color: blue;
+}
+
+.white{
+	background-color: white;
+}
+
+.yellow{
+	background-color: yellow;
+}
+
+.gray{
+	background-color: gray;
+}
+
+.extra-wide{
+	width: 92%;
+	padding-bottom: 44%;
+}
+
+.extra-tall{
+	width: 44%;
+	padding-bottom:92%;
+}
+
+.footer-filler{
+	position: absolute;
+	width: 100%;
+	padding-bottom: 2%;
+}
+
+.exit{
+	position: fixed;
+	left: 80%;
+	top: 0%;
+	width: 20%;
+	padding-bottom: 20%;
+	background-color: red;
+	z-index: 2;
+	opacity: 0;
+	
+	transition: opacity 0.1s linear 0.25s;
+}
+
+.text-holder{
+	color: white;
+	padding: 10px;
+	font-family: Raleway-Med;
+}
+
+p{
+	position: relative;
+	font-size: 3em;
+	margin: 0;
+}
+
+h1{
+	padding: 0px;
+	margin: 20px;
+}
+
+hr{
+	height:2px;
+	border-width:0;
+	background-color:white;
+}
+
+.title{
+	position: absolute;
+	top: calc(100% - 1.2em);
+}
+
+.body{
+	opacity: 0;
+	transition: all 0.25s;
+}
+
+.fake-exit{
+	position: relative;
+	float: right;
+	width: 20%;
+	padding-bottom: 20%;
+}
+
+.propic{
+	position: relative;
+	
+	width: calc(100% + 20px);
+	left: -10px;
+	margin-top: -20px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.pro-img{
+	width: 100%;
+	height: auto;
+}
+
+body.lock-position {
+	height: 100%;
+	overflow: hidden;
+	width: 100%;
+	position: fixed;
+}
+
+.subtitle{
+	font-size: 2.5em;
+	color: #EEE;
+}
+
+iframe{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	-webkit-transform: rotate(-90deg);
+	overflow: scroll;
+}
+
+.version{
+	position: fixed;
+	left: calc(100% - 2em);
+	top: calc(100% - 2em);
+	color: white;
+}
