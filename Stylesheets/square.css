@@ -409,11 +409,11 @@ hr {
     cursor: pointer; 
     cursor: hand;
     
-    -webkit-transition: opacity 1s, top 1s, -webkit-box-shadow 0.25s;
-    -m-transition: opacity 1s, top 1s, -m-box-shadow 0.25s;
-    -moz-transition: opacity 1s, top 1s, -moz-box-shadow 0.25s;
-    -o-transition: opacity 1s, top 1s, -o-box-shadow 0.25s;
-    transition: opacity 1s, top 1s, box-shadow 0.25s;
+    -webkit-transition: opacity 1s, top 1s, -webkit-box-shadow 0.25s, top 0.25s, left 0.25s;
+    -m-transition: opacity 1s, top 1s, -m-box-shadow 0.25s, top 0.25s, left 0.25s;
+    -moz-transition: opacity 1s, top 1s, -moz-box-shadow 0.25s, top 0.25s, left 0.25s;
+    -o-transition: opacity 1s, top 1s, -o-box-shadow 0.25s, top 0.25s, left 0.25s;
+    transition: opacity 1s, top 1s, box-shadow 0.25s, top 0.25s, left 0.25s;
 }
 
 .pane-n-fit {

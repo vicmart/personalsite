@@ -4,150 +4,191 @@ var diffScroll = -1;
 var intervalHandle = null;
 var paused;
 var active = 0;
+var hoverIndex = 0;
+var hoverActive = 0;
 var max_active = 0;
-var panels = ["<h1></h1>", 
-	"<h1>My Background</h1> My ambition to do great things has driven me to be increasingly efficient through my high school and college years. Oh, and I really like metro <a href='https://github.com/Vicmart1/metro.css'>maps</a>.", 
-	"<h1>My Projects</h1> I spend my free time creating whatever idea pops up in my head. Some ideas I consider personal accomplishments, such as this interactive piece.", 
-	"<h1>My Research</h1> Working near a globally-renown hospital has allowed me to undertake a wide variety of biotech projects that I could not have found elsewhere.", 
-	"<h1>My Interests</h1> Of course, I have some downtime too."]
+var overview = 0;
+var isDragging = false;
+var dragOrigin = 0;
+var newDrag = 0;
+var currentDrag = 0;
+var smallDrag = 0;
+var shadow_timer = 0;
+var shadow_interval = 30;
+var momentum = 0;
+var momentumTimer = null;
+var shadowTimer = null;
+var target = -1;
 
 var index;
-var wait 
-$(".info").css("top", "-45px");
-$(".info_text").html(panels[active]);
-$("h1").css("margin-top", "-5px");
+var wait;
 
-function switchPanel(newIndex) {
-    active = newIndex;
-    if (active > max_active) {
-        max_active = active;
+$(document).mousedown(function(event) {
+    if (overview == 1) {
+        isDragging = true;
+        dragOrigin = event.pageX;
+        newDrag = currentDrag;
+        smallDrag = false;
+        momentum = 0;
+        target = -1;
+        clearInterval(momentumTimer);
     }
-	var offset = -1 * newIndex * $(".frame").width();
-	   
-    if (active == 4) {
-        document.getElementById('interests').contentWindow.location.reload();
+});
+
+$(document).mousemove(function(event) {
+    if (isDragging == true && overview == 1) {
+        var oldDrag = newDrag;
+        
+        newDrag = event.pageX - dragOrigin + currentDrag;        
+        
+        momentum = newDrag - oldDrag;
+        
+        var window_width = window.innerWidth;
+        var offset = -1 * active * (window_width * 0.75);
+        $(".all-frames").css('left', ((offset - (50 * active)) + (window_width/8) + newDrag) + "px");
     }
-	$(".all-frames").css('left', offset + 'px');
-	$(".bot").each(function(){
-		$(this).children().css("top", "0px");
-        $(this).removeClass("bot-click");
-	});
-	$(".arrows").removeClass("arrows-move");
-    $(".bot").eq(newIndex).addClass("bot-click");
-	//$(this).children().css("top", "-15px");	
-    $(".info_text").html(panels[newIndex]);
-	if(active != 0) {
-		var old_height = parseInt($(".info").css("height"));		
-		var new_top = old_height - parseInt($(".info").css("height"));
-		$(".info").css("top",  "-90px");
-        $("h1").css("margin-top", "0px");
-        clearTimeout(wait);
-        wait = setTimeout(function() {
-            if (active == max_active && active < 4) {
-                $(".arrows").addClass("arrows-move");
-            }
-            $(".info").css("top", "-45px");
-            $("h1").css("margin-top", "-5px");
-        }, 2500);
-	} else {
-		//$(active).css("top", "-15px");
-		$(".info").css("top", "-45px");
-        $("h1").css("margin-top", "-5px");
-	}
-	$(".progress").css("width", ((25) * newIndex) + "%");
+});
+
+$(document).mouseup(function() {
+    if (overview == 1) {
+        if (Math.abs(currentDrag - newDrag) < 1) {
+            smallDrag = true;
+        }
+        isDragging = false;    
+        currentDrag = newDrag;
+        momentumTimer = setInterval(slide, 20);
+    }
+});
+
+function slide() {
+    currentDrag += momentum;  
+
+    var window_width = window.innerWidth;
+    var offset = -1 * active * (window_width * 0.75);
+    
+    var diff_max = ((offset - (50 * active)) + (window_width/8) + currentDrag) - (-0.67 * parseInt($(".all-frames").css("width")));
+    var diff_min = ((offset - (50 * active)) + (window_width/8) + currentDrag) - 100;
+    if ((offset - (50 * active)) + (window_width/8) + currentDrag < -0.67 * parseInt($(".all-frames").css("width"))) {
+        momentum = (momentum/1.15) - (diff_max/64);
+    } else if ((offset - (50 * active)) + (window_width/8) + currentDrag > 100) {
+        momentum = (momentum/1.15) - (diff_min/64);
+    } else if (target == -1) {
+        momentum = momentum/1.02;
+    }
+        
+    hoverActive = parseInt((offset - (50 * active)+ (window_width/8) + currentDrag - (window_width/2))/ (-0.17 * parseInt($(".all-frames").css("width"))));
+    
+    $(".frame-zoom").removeClass("frame-zoom-active");
+    $(".frame-zoom").eq(hoverActive).addClass("frame-zoom-active");
+    $(".frame-title").removeClass("frame-title-active");
+    $(".frame-title").eq(hoverActive).addClass("frame-title-active");
+    
+    if (target != -1) {
+        var curr = offset - (50 * active) + (window_width/8) + currentDrag;
+        var diff = curr - (target * -0.185 * (parseInt($(".all-frames").css("width")) - 600));
+
+        momentum = (momentum/1.45) - (diff/32);
+        
+        console.log(diff);
+        
+        if (Math.abs(diff) < 5) {
+            target = -1;
+        }
+    }
+    
+    $(".all-frames").css('left', (offset - (50 * active) + (window_width/8) + currentDrag) + "px");
 }
 
-$(".bot").click(function() {
-	index = $(this).index();
-	
-    switchPanel(index);
+function shadow() {
+    if (parseInt($(".all-frames").css("left")) > 100) {
+        var diff_min = parseInt($(".all-frames").css("left")) - 100;
+        var size = parseInt(diff_min/5);
+        $("body").css("box-shadow", "inset " + size + "px 0px " + size + "px -" + size + "px #000000");
+    } else if (parseInt($(".all-frames").css("left")) < -0.67 * parseInt($(".all-frames").css("width"))) {
+        var diff_max = parseInt($(".all-frames").css("left")) - (-0.67 * parseInt($(".all-frames").css("width")));
+        var size = Math.abs(parseInt(diff_max/5));
+        $("body").css("box-shadow", "inset -" + size + "px 0px " + size + "px -" + size + "px #000000");
+    } else {
+        $("body").css("box-shadow", "none");
+    }
+}
+
+$(".menu").hover(function() {
+    $(".menu-box").addClass("menu-box-small");
+    $(".hr").addClass("hrhover");
+}, function() {
+    $(".menu-box").removeClass("menu-box-small");
+    $(".hr").removeClass("hrhover");
 });
 
-$(".side-right").click(function() {
-    if (active < $(".bot").length - 1) {
-        switchPanel(active + 1); 
-        if (active == $(".bot").length - 1) {
-            $(this).css("opacity", "0");
+$(".menu").click(function() {
+    if (overview == 0) {
+        zoomOut();
+    } else {
+        //zoomIn();
+    }
+});
+
+function zoomOut() {
+    $(".all-frames").addClass("all-frames-zoom");
+    setTimeout(function() {
+        $(".all-frames").addClass("all-frames-no-animation");
+    }, 250);
+    $(".fake-all-frames").addClass("fake-all-frames-zoom");
+    $(".frame").addClass("frame-zoom");
+    $(".fake-frame").addClass("fake-frame-zoom");
+    $(".menu").addClass("menu-gone");
+    overview = 1;
+    currentDrag = 0;
+    shadowTimer = setInterval(shadow, 60);
+    $(".frame-zoom").eq(hoverActive).addClass("frame-zoom-active");
+    $(".frame-title").eq(hoverActive).addClass("frame-title-active");
+
+
+    //clearInterval(document.getElementById("opening-frame").contentWindow.intervalHandler);
+    
+    var window_width = window.innerWidth;
+    var offset = -1 * active * (window_width * 0.75);
+    $(".all-frames").css('left', ((offset - (50 * active)) + ((window_width/8))) + "px");
+}
+
+function zoomIn() {
+    $(".all-frames").removeClass("all-frames-zoom");
+    $(".all-frames").removeClass("all-frames-no-animation");
+    $(".fake-all-frames").removeClass("fake-all-frames-zoom");
+    $(".frame").removeClass("frame-zoom");
+    $(".fake-frame").removeClass("fake-frame-zoom");
+    $(".menu").removeClass("menu-gone");
+    overview = 0;
+    clearInterval(shadowTimer);
+    
+    var window_width = window.innerWidth;
+    var offset = -1 * active * window_width;
+    $(".all-frames").css('left', offset + 'px');
+}
+
+$(".fake-frame").click(function() {
+    hoverIndex = $(".fake-frame").index($(this)); 
+
+    if (smallDrag == true) {
+        if (hoverActive == hoverIndex) {
+            clearInterval(momentumTimer);
+            active = hoverIndex;
+            zoomIn();
+            smallDrag = false;
+        } else {
+            target = hoverIndex;
         }
     }
-});
-
-
-$(".side-right").hover(function() {
-    if (active < $(".bot").length - 1) {
-        $(this).css("opacity", "0.9");
-    }
-}, function() {
-    $(this).css("opacity", "0");
-});
-
-
-$(".side-left").click(function() {
-    if (active > 0) {
-        switchPanel(active - 1); 
-        if (active == 0) {
-            $(this).css("opacity", "0");
+    
+    /**if (overview == 1) {
+        if (index != active) {
+            switchPanel(index);
+        } else {
+            zoomIn();
         }
-    }
-});
-
-$(".side-left").hover(function() {
-    if (active > 0) {
-        $(this).css("opacity", "0.9");
-    }
-}, function() {
-    $(this).css("opacity", "0");
-});
-
-$(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: 
-            if (active != 0) {
-                switchPanel(active - 1);
-            }
-            break;
-        case 39: 
-            if (active != $(".bot").length - 1) {
-                switchPanel(active + 1);
-            }
-            break;
-        default: 
-            return;
-    }
-    e.preventDefault();
-});
-
-/**$(".bot").hover(function() {
-	if(active != 0) {
-		$(".info").css("top",  (parseInt($(".info_text").css("height")) * -1.2) + "px");
-		$(active).css("top", "-100px");
-	}
-}, function() {
-	$(".info").css("top", "-50px");
-	$(active).css("top", "-15px");
-	$(".filling").css("top", "0px");
-});**/
-
-$(".info").hover(function() {
-	if($(".circle").index(active) != 0 && active != 0) {
-		$(".info").css("top",  "-90px");
-        $("h1").css("margin-top", "0px");
-        //$(".arrows").removeClass("arrows-move");
-	}
-}, function() {
-	$(".info").css("top", "-45px");
-    $("h1").css("margin-top", "-5px");
-    /**if (active == max_active && active < 4) {
-        $(".arrows").addClass("arrows-move");
     }**/
 });
-
-$(".info").click(function() {
-    if($(".arrows").hasClass("arrows-move")) {
-        switchPanel(active + 1); 
-        $(".side-right").css("opacity", "0");
-    }
-})
 
 var isMobile = {
     Android: function() {
@@ -179,15 +220,8 @@ $( document ).ready(function() {
 		window.location.replace("m/index.html");	
 	}
 
-    $(".info_text").text(panels[$(".circle").index(active)]);
-    active = 0;
+    active = 0;    
     
-    setTimeout(function() {
-        if (active == 0) {
-            $(".arrows").addClass("arrows-move");
-            $(".side-right").css("opacity", "0.9");
-        }
-    }, 25000);
   // Handler for .ready() called.
 });
 

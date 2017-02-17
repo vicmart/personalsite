@@ -68,24 +68,21 @@ span{
 
 .propic{
 	position: relative;
-	left: calc(50% - 100px);
+	left: calc(50% - 125px);
 	top: 5px;
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
 	overflow: hidden;
-	-moz-border-radius: 100px;
-	-webkit-border-radius: 100px;
-	border-radius: 100px;
+	-moz-border-radius: 100%;
+	-webkit-border-radius: 100%;
+	border-radius: 100%;
 }
 
 .pro-border{
-	width: 210px;
-	height: 210px;
-	top: -105px;
-	left: calc(50% - 105px);
-	-moz-border-radius: 105px;
-	-webkit-border-radius: 105px;
-	border-radius: 105px;
+	width: 260px;
+	height: 260px;
+	top: -130px;
+	left: calc(50% - 130px);
 	z-index: 1;
 }
 
@@ -101,7 +98,7 @@ span{
 .content{
 	position: absolute;
 	top: -1px;
-	padding-top: 90px;
+	padding-top: 120px;
 	
 	width: 100%;
 	height: 125%;
@@ -112,8 +109,8 @@ span{
 	-o-transform:translateX(-50%); 
 	transform:translateX(-50%); 
 	
-	display:inline-block;
-	overflow: scroll;
+	display: inline-block;
+	overflow: auto;
 }
 
 .console{

@@ -26,12 +26,192 @@ h1 {
     transition: all 0.25s;
 }
 
+.menu {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 75px;
+    height: 75px;
+    z-index: 10;
+
+    cursor: pointer; 
+    cursor: hand;
+    
+    -webkit-transition: all 0.25s ease 0.25s;
+    -moz-transition: all 0.25s ease 0.25s;
+    -ms-transition: all 0.25s ease 0.25s;
+    -o-transition: all 0.25s ease 0.25s;
+    transition: all 0.25s ease 0.25s;
+}
+
+.menu-gone {
+    opacity: 0;
+    
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.menu-box {
+    width: 80%;
+    height: 80%;
+    margin-top: 7.5%;
+    margin-left: 10%;
+    
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.hr {
+    margin: 22.5% 10px;
+    width: calc(90% - 14px);
+    
+    height: 2px;
+    border-width: 0;
+    background-color: #BBB;
+    
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -m-transition: all 0.5s;
+    transition: all 0.5s;
+    
+    -webkit-user-select: none;    
+    -moz-user-select: none; 
+    -ms-user-select: none;
+}
+
+.hrhover {
+    background-color: #FFF;
+}
+
+.hrhover:nth-child(1n) {
+    width: 40%;
+    
+    -webkit-animation: shrink-1 0.5s 1;
+    -moz-animation: shrink-1 0.5s 1;
+    -o-animation: shrink-1 0.5s 1;
+    animation: shrink-1 0.5s 1;
+}
+
+.hrhover:nth-child(2) {
+    width: 25%;
+    
+    -webkit-animation: shrink-2 0.5s 1;
+    -moz-animation: shrink-2 0.5s 1;
+    -o-animation: shrink-2 0.5s 1;
+    animation: shrink-2 0.5s 1;
+}
+
+@keyframes shrink-1 {
+  0%   { width: calc(90% - 14px); }
+  50% { width: 10%; background-color: #FFF;}
+  100% { width: 40%;}
+}
+
+@keyframes shrink-2 {
+  0%   { width: calc(90% - 14px); }
+  50% { width: 5%; background-color: #FFF;}
+  100% { width: 25%;}
+}
+
+@keyframes shrink {
+  0%   { width: 80%; height: 80%; margin-left: 10%; margin-top: 15%;}
+  50% { width: 50%; height: 50%; margin-left: 25%; margin-top: 17.5%; border-color: #0b598c; background-color: #0b598c; }
+  100% { width: 60%; height: 60%; margin-left: 20%; margin-top: 15%; border-color: #2980b9; background-color: #2980b9; }
+}
+
+.menu-box-small {
+    width: 60%; 
+    height: 60%;
+    margin-left: 20%;
+    margin-top: 15%;
+    border-radius: 10px;
+    border-color: #2980b9;
+    background-color: #2980b9;
+    
+    -webkit-animation: shrink 0.5s 1;
+    -moz-animation: shrink 0.5s 1;
+    -o-animation: shrink 0.5s 1;
+    animation: shrink 0.5s 1;
+}
+
 .frame{
 	position: relative;
 	float: left;
 	width: 16.66666666666667%;
 	height: 100%;
 	z-index: 0;
+    
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.frame-zoom {
+    margin-right: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #DDD;
+}
+
+.fake-frame {
+    position: relative;
+	float: left;
+	width: 16.66666666666667%;
+	height: 100%;
+	z-index: 10;
+    
+    cursor: pointer; 
+    cursor: hand;
+}
+
+.fake-frame-zoom {
+    margin-right: 50px;
+}
+
+.frame-title {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0px;
+    width: 16.6%;
+    text-align: left;
+    font-size: 2em;
+    color: black;
+    z-index: 10;
+}
+
+#title2 {
+    left: calc(16.67% + 50px);
+}
+
+#title3 {
+    left: calc(33.33% + 100px);
+}
+
+#title4 {
+    left: calc(50% + 150px);
+}
+
+#title5 {
+    left: calc(66.67% + 200px);
+}
+
+
+.frame-subtitle {
+    font-size: 0.75em;
+    color: #AAA;
+    z-index: 10;
 }
 
 .side-right {
@@ -253,6 +433,18 @@ h1 {
 	text-align: left;
 }
 
+.fake-all-frames {
+    position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 600%;
+	height: 100%;
+}
+
+.fake-all-frames-zoom {
+    z-index: 10;
+}
+
 .all-frames{
 	position: fixed;
 	top: 0px;
@@ -260,11 +452,26 @@ h1 {
 	width: 600%;
 	height: 100%;
 	
-	-webkit-transition: left 0.5s ease, top 0.75s;
-    -moz-transition: left 0.5s ease, top 0.75s;
-    -ms-transition: left 0.5s ease, top 0.75s;
-    -o-transition: left 0.5s ease, top 0.75s;
-    transition: left 0.5s ease, top 0.75s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.all-frames-zoom {
+    width: 450%;
+    height: 75%;
+    left: 12.5%;
+    top: 7.25%;
+}
+
+.all-frames-no-animation {
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    -ms-transition: opacity 0.25s;
+    -o-transition: opacity 0.25s;
+    transition: opacity 0.25s;
 }
 
 .window{

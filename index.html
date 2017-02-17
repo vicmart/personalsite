@@ -8,9 +8,9 @@
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 	</head>
 	<body>
-        <div class="side-left"><div class="arrow arrow-left"></div></div>
+        <!--div class="side-left"><div class="arrow arrow-left"></div></div>
         <div class="side-right"><div class="arrow"></div></div>
-        <div class="bot-cont">
+        <!--div class="bot-cont">
 			<div class="bot">I Am...</div>
 			<div class="bot">Ambitious</div>
 			<div class="bot">Accomplished</div>
@@ -19,14 +19,34 @@
 			<div class="info">
                 <!--div class="arrows"></div>
                 <div class="arrows delay"></div>
-                <div class="arrows delay2"></div-->
+                <div class="arrows delay2"></div>
                 <div class="info_text" id="caption"></div></div>	
 			<div class="progress"></div>
-		</div>
+		</div-->
+        <div class="menu">
+            <div class="menu-box">
+                <hr class="hr">
+                <hr class="hr">
+                <hr class="hr">
+            </div>
+        </div>
+        <div class="fake-all-frames all-frames">
+            <div class="fake-frame"></div>
+            <div class="fake-frame"></div>
+            <div class="fake-frame"></div>
+            <div class="fake-frame"></div>
+            <div class="fake-frame"></div>
+            <div class="fake-frame"></div>
+        </div>
 		<div class='all-frames' id='allframes'>
-			<div class="frame" style="background-color:white;"><iframe src="opening.html"></iframe></div>
-			<div class="frame metro-page" style="background-color:white;"><iframe class="metro-iframe" id="metro" src="metro.html"></iframe></div>
-			<div class="frame" id="bubbles" style="overflow: hidden;">
+            <div class="frame-title">Introduction<div class="frame-subtitle"></div></div>
+            <div class="frame-title" id="title2">Background<div class="frame-subtitle">My Beginings</div></div>
+            <div class="frame-title" id="title3">Hobbies<div class="frame-subtitle">My Creativity</div></div>
+            <div class="frame-title" id="title4">Research &amp; Work<div class="frame-subtitle">My Career</div></div>
+            <div class="frame-title" id="title5">Interests<div class="frame-subtitle">My Passions</div></div>
+			<div class="frame" style="background-color:white;"><iframe id="opening-frame" src="opening.html"></iframe></div>
+			<div class="frame metro-page" style="background-color:white;"><iframe class="iframe metro-iframe" id="metro" src="metro.html"></iframe></div>
+			<div class="frame" id="bubbles" style="overflow: hidden; background-color: white;">
 				<!-- Libraries -->
 			    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 				<script src="Javascript/bubbles-new.js"></script>
@@ -173,8 +193,8 @@
         
 			    </script>
 			</div>
-			<div class="frame"><iframe src="accordion.html"></iframe></div>
-			<div class="frame"><iframe src="square.html" id="interests"></iframe></div>
+			<div class="frame"><iframe class="iframe" src="accordion.html"></iframe></div>
+			<div class="frame"><iframe class="iframe" src="square.html" id="interests"></iframe></div>
 		</div>
 		<script src="Javascript/panels.js"></script>
 	</body>
