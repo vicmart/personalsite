@@ -22,6 +22,28 @@ div{
 	padding: 0px;
 }
 
+.app-div {
+    position: absolute;
+    width: 200px;
+    right: 30px;
+    bottom: 40px;
+    text-align: center;
+}
+
+.app-image {
+    width: 100%;
+    cursor: hand;
+}
+
+.app-title, .app-subtitle {
+    text-align: center;
+}
+
+.app-subtitle {
+    color: gray;
+    font-size: 0.8em;
+}
+
 .background{
 	width: 100%;
 	height: 100%;
