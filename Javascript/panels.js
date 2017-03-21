@@ -23,6 +23,10 @@ var target = -1;
 var index;
 var wait;
 
+$(document).scroll(function() {
+    console.log(document.body.scrollTop);
+});
+
 $(document).mousedown(function(event) {
     if (overview == 1) {
         isDragging = true;
@@ -219,6 +223,8 @@ $( document ).ready(function() {
 	if(isMobile.any() || isMobile2()){
 		window.location.replace("m/index.html");	
 	}
+    
+    $(".universe").height($(".universe").width() * 6);
 
     active = 0;    
     
