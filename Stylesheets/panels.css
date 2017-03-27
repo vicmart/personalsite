@@ -182,13 +182,37 @@ h1 {
 
 .frame-title {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 14px);
     left: 0px;
     width: 16.6%;
-    text-align: left;
     font-size: 2em;
     color: black;
     z-index: 10;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+}
+
+
+.frame-icon-cont {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    left: 0px;
+    top: -2px;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid #DDD;
+    margin-right: 10px;
+}
+
+.frame-icon {
+    position: relative;
+    width: 100%;
+    height: auto;
+    left: -1px;
+    vertical-align: middle;
 }
 
 #title2 {
