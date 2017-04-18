@@ -52,14 +52,28 @@ p {
 .c_title {
     text-align: center;
     font-weight: bold;
+    letter-spacing: 3px;
     -webkit-transition: color 0.5s ease;
     transition: color 0.5s ease;
 } 
 
 .c_date {
     text-align: right;
+    float: right;
     font-style: italic;
     font-size: 12px;
+    color: #777;
+    display: inline-block;
+    -webkit-transition: color 0.5s ease;
+    transition: color 0.5s ease;
+}
+
+.c_loc {
+    text-align: left;
+    display: inline-block;
+    font-style: italic;
+    font-size: 12px;
+    color: #999;
     -webkit-transition: color 0.5s ease;
     transition: color 0.5s ease;
 }
@@ -78,6 +92,9 @@ hr {
     width: 80%;
     margin-top: 0px;
     margin-bottom: 0px;
+    background-color: #CCC;
+    border: none;
+    height: 1px;
     -webkit-transition: border-color 0.5s ease;
     transition: border-color 0.5s ease;
 }

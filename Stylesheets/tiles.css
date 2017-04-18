@@ -1,0 +1,305 @@
+@font-face {
+    font-family: Raleway-Light;
+    src: url(Raleway-Light.ttf);
+}
+
+body, html {
+    padding: 0px;
+    margin: 0px;
+}
+
+.animated {
+    -webkit-transition: all 0.25s;
+    -m-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    transition: all 0.25s;    
+}
+
+.animated-slow {
+    -webkit-transition: all 0.5s;
+    -m-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;    
+}
+
+.question {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 11px;
+    right: 75px;
+    z-index: 9;
+    position: fixed;
+    border-radius: 100%;
+}
+
+.question-mark {
+    position: relative;
+    color: white;
+    font-family: Raleway-Light;
+    font-size: 2.85em;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: black;
+    border-radius: 25px;
+    z-index: 10;
+}
+
+.question-description {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: white;
+    z-index: 8;
+    font-size: 1.25em;
+    font-family: Raleway-Light;
+    color: rgba(0, 0, 0, 0);
+    border-radius: 25px;
+    width: 0px;
+    padding: 0px;
+    height: 0px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.actual-description {
+    width: 500px;
+    height: 75px;
+}
+
+.question:hover {
+    cursor: hand;
+}
+
+.question:hover > .question-mark {
+    background-color: white;
+    color: black;
+}
+
+.question:hover > .question-description {
+    width: 500px;
+    height: 75px;
+    padding: 25px;
+    padding-right: 15px;
+    color: #555;
+    box-shadow: 0px 0px 2px black;
+    opacity: 1;
+}
+
+.master-tile {
+    padding: 25px 50px;
+    padding-left: 65px;
+    float: left;
+}
+
+.master-tile:hover {
+    background-color: #DDD;
+}
+
+.title {
+    font-family: Raleway-Light;
+    font-size: 3em;
+    width: 100%;
+    letter-spacing: 1px;
+    color: #999;
+}
+
+.tile-cont {
+    width: 100%;
+}
+
+.tile {
+    position: relative;
+    width: calc(33% - 8px);
+    margin: 5px;
+    float: left;
+    box-shadow: 0px 0px 1px black;
+}
+
+.tile-app {
+    margin: 10px 7.5%;
+    margin-bottom: 20px;
+    width: calc(18% + 3px);
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.tile-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: black; 
+    background: -webkit-linear-gradient(transparent, black);
+    background: -o-linear-gradient(transparent, black);
+    background: -moz-linear-gradient(transparent, black);
+    background: linear-gradient(transparent, black);
+    
+    opacity: 0;
+    
+    display: table-cell;
+    vertical-align: bottom;
+    
+    color: white;
+    font-size: 2em;
+    font-family: Raleway-Light;
+}
+
+.tile-overlay-light-green {
+    background: #8BC465;
+    background: -webkit-linear-gradient(transparent, #8BC465);
+    background: -o-linear-gradient(transparent, #8BC465); 
+    background: -moz-linear-gradient(transparent, #8BC465); 
+    background: linear-gradient(transparent, #8BC465); 
+}
+
+.tile-overlay-green {
+    background: green;
+    background: -webkit-linear-gradient(transparent, green);
+    background: -o-linear-gradient(transparent, green); 
+    background: -moz-linear-gradient(transparent, green); 
+    background: linear-gradient(transparent, green); 
+}
+
+.tile-overlay-blue {
+    background: #2DC9FE;
+    background: -webkit-linear-gradient(transparent, #2DC9FE);
+    background: -o-linear-gradient(transparent, #2DC9FE); 
+    background: -moz-linear-gradient(transparent, #2DC9FE); 
+    background: linear-gradient(transparent, #2DC9FE); 
+}
+
+.tile-overlay-lightish-blue {
+    background: #419FBF;
+    background: -webkit-linear-gradient(transparent, #419FBF);
+    background: -o-linear-gradient(transparent, #419FBF); 
+    background: -moz-linear-gradient(transparent, #419FBF); 
+    background: linear-gradient(transparent, #419FBF); 
+}
+
+.tile-overlay-light-blue {
+    background: #85AEDC;
+    background: -webkit-linear-gradient(transparent, #85AEDC);
+    background: -o-linear-gradient(transparent, #85AEDC); 
+    background: -moz-linear-gradient(transparent, #85AEDC); 
+    background: linear-gradient(transparent, #85AEDC); 
+}
+
+.tile-overlay-white {
+    background: #FFFFFF;
+    background: -webkit-linear-gradient(transparent, #FFFFFF);
+    background: -o-linear-gradient(transparent, #FFFFFF); 
+    background: -moz-linear-gradient(transparent, #FFFFFF); 
+    background: linear-gradient(transparent, #FFFFFF); 
+    color: black;
+}
+
+.tile-overlay-dark-blue {
+    background: #204157;
+    background: -webkit-linear-gradient(transparent, #204157);
+    background: -o-linear-gradient(transparent, #204157); 
+    background: -moz-linear-gradient(transparent, #204157); 
+    background: linear-gradient(transparent, #204157); 
+}
+
+.tile-overlay-purple {
+    background: #0C21A1;
+    background: -webkit-linear-gradient(transparent, #0C21A1);
+    background: -o-linear-gradient(transparent, #0C21A1); 
+    background: -moz-linear-gradient(transparent, #0C21A1); 
+    background: linear-gradient(transparent, #0C21A1); 
+}
+
+.tile-overlay-dark-red {
+    background: #A90042;
+    background: -webkit-linear-gradient(transparent, #A90042);
+    background: -o-linear-gradient(transparent, #A90042); 
+    background: -moz-linear-gradient(transparent, #A90042); 
+    background: linear-gradient(transparent, #A90042); 
+}
+
+/* Website Colors */
+
+.tile-overlay-blue {
+    background: #2980b9;
+    background: -webkit-linear-gradient(transparent, #2980b9);
+    background: -o-linear-gradient(transparent, #2980b9); 
+    background: -moz-linear-gradient(transparent, #2980b9); 
+    background: linear-gradient(transparent, #2980b9); 
+}
+
+.tile-overlay-dark-blue {
+    background: #2c3e50;
+    background: -webkit-linear-gradient(transparent, #2c3e50);
+    background: -o-linear-gradient(transparent, #2c3e50); 
+    background: -moz-linear-gradient(transparent, #2c3e50); 
+    background: linear-gradient(transparent, #2c3e50); 
+}
+
+.tile-overlay-purple {
+    background: #8e44ad;
+    background: -webkit-linear-gradient(transparent, #8e44ad);
+    background: -o-linear-gradient(transparent, #8e44ad); 
+    background: -moz-linear-gradient(transparent, #8e44ad); 
+    background: linear-gradient(transparent, #8e44ad); 
+}
+
+.tile-overlay-green {
+    background: #27ae60;
+    background: -webkit-linear-gradient(transparent, #27ae60);
+    background: -o-linear-gradient(transparent, #27ae60); 
+    background: -moz-linear-gradient(transparent, #27ae60); 
+    background: linear-gradient(transparent, #27ae60); 
+}
+
+.tile-overlay-light-green {
+    background: #16a085;
+    background: -webkit-linear-gradient(transparent, #16a085);
+    background: -o-linear-gradient(transparent, #16a085); 
+    background: -moz-linear-gradient(transparent, #16a085); 
+    background: linear-gradient(transparent, #16a085); 
+}
+
+.tile-text {
+    position: absolute;
+    left: 18px;
+    bottom: 30px;
+}
+
+.tile-subtitle {
+    font-size: 0.5em;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+}
+
+.tile-image {
+    width: 100%;
+    height: auto;
+}
+
+.tile:hover {
+    box-shadow: 0px 0px 3px black;
+    transform: scale(1.025);
+    cursor: hand;
+}
+
+.tile:hover > .tile-overlay {
+    opacity: 1;
+}
+
+@media screen and (max-width: 1050px) { 
+    .tile {
+        width: calc(50% - 16px);
+    }
+    
+    .tile-app {
+        width: calc(27% + 0px);
+        margin: 11.1% 11.1%;
+    }
+}

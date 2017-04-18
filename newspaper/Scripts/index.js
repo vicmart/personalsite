@@ -12,7 +12,7 @@ function switchLights() {
         $('body').css('background-color', 'white');
         $('.side_bar').css('color', 'black');
         $('.c_title').css('color', 'black');
-        $('.c_date').css('color', 'black');
+        $('.c_date').css('color', '#777');
         $('hr').css('border-color', 'white');
     }
 }
@@ -72,17 +72,18 @@ $(document).ready(function() {
     windowResize();
 	var text = "Lorem ipsum dolor sit amet, consec tetur adipis cing elit, sed do eiusmod tempor incid idunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci tation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in volup tate velit esse cillum dolore eu fugiat nulla pariatur. Except eur sint occaecat cupid atat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-	var div, title, date, ctext, line;
+	var div, title, loc, date, ctext, line;
 	for (var i = 0; i < 10; i++) {
  		$(".col").each(function(index) {
             div = $("<div class='content'></div>"); 
 	   		title = "<p class='c_title'>TITLE</p>";
+   			loc = "<p class='c_loc'>Baltimore, MD</p>";
    			date = "<p class='c_date'></p>";
 	   		date.innerHTML = parseInt(Math.random() * 31) + "March 2016";
 	   		ctext = "<p class='c_text'></p>";
 	   		ctext.innerHTML = text.substring(0, 175 + (Math.random() * 250));
-	   		line = "<hr>";
-	   		$(div).append(title, line, date, ctext);
+	   		line = "<hr noshade>";
+	   		$(div).append(title, line, loc, date, ctext);
 		   	$(this).append(div);
 	   	});
 	}
