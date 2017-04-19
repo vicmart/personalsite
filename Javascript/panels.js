@@ -24,7 +24,7 @@ var index;
 var wait;
 
 $(document).scroll(function() {
-    console.log(document.body.scrollTop);
+
 });
 
 $(document).mousedown(function(event) {
@@ -92,8 +92,6 @@ function slide() {
         var diff = curr - (target * -0.185 * (parseInt($(".all-frames").css("width")) - 600));
 
         momentum = (momentum/1.45) - (diff/32);
-        
-        console.log(diff);
         
         if (Math.abs(diff) < 5) {
             target = -1;
