@@ -11,8 +11,4 @@ group.translation.set(two.width / 2, two.height / 2);
 
 // Bind a function to scale and rotate the group
 // to the animation loop.
-two.bind('update', function(frameCount) {
-  // This code is called everytime two.update() is called.
-  // Effectively 60 times per second.
-    group.translation.x = group.translation.x + 1
-}).play();  // Finally, start the animation loop
+two.bind('update', move).play();  // Finally, start the animation loop
