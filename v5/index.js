@@ -50,6 +50,9 @@ $(document).ready(function() {
     addEvent(350, 1200, 2, false);
     addSubEvent(0, 10, 1, false);
     addSubEvent(0, 160, 2, false);
+    addSubEvent(1, 10, 1, false);
+    addSubEvent(1, 140, 2, false);
+    addSubEvent(1, 180, 2, false);
     addEvent(1350, 600, 3, false);
     addEvent(2350, 900, 2, true);
     addEvent(4200, 50, 3, false);
@@ -59,6 +62,7 @@ $(document).ready(function() {
     addEvents();
 
     setTimeout(moveCamera, cameraTimer, 0);
+    setTimeout(moveCamera, cameraTimer+=2500, 1);
     
     /**for (var i = 1; i < 8; i++) {
         if (i % 3 == 0) {
@@ -93,6 +97,8 @@ function addEvent(x, y, index, top_text) {
     shape.scale = 0;
     shape.translation.set(x, y);
     events.push(shape);
+    subevents.push([]);
+    sublines.push([]);
     
     var text_offset = 0;
     
@@ -130,8 +136,8 @@ function addSubEvent(parent_index, angle, index, top_text) {
     var parent_x = parent.translation.x;
     var parent_y = parent.translation.y;
     
-    var x = parent_x + (Math.cos(toRadians(angle)) * 300);
-    var y = parent_y + (Math.sin(toRadians(angle)) * 300);
+    var x = parent_x + (Math.cos(toRadians(angle)) * 400);
+    var y = parent_y + (Math.sin(toRadians(angle)) * 400);
     
     max_x = Math.max(x + (subsize/2), max_x);
     max_y = Math.max(y + (subsize/2), max_y);
@@ -139,15 +145,15 @@ function addSubEvent(parent_index, angle, index, top_text) {
     var line = two.makeLine(parent_x, parent_y, x, y);
     line.stroke = "rgba(0, 0, 0, 1)";
     line.linewidth = 5;
-    line.scale = 1;
-    sublines.push(line);
+    line.scale = 0;
+    sublines[parent_index].push(line);
     camera.add(line);
     
     var shape = two.interpret($(".images svg")[index]).center();
     shape.visible = true;
-    shape.scale = subsize_factor;
+    shape.scale = 0;
     shape.translation.set(x, y);
-    subevents.push(shape);
+    subevents[parent_index].push(shape);
     
     var text_offset = 0;
     
@@ -318,7 +324,9 @@ function moveCamera(index) {
 
 function movingCamera() {
     var selected_element = events[cameraIndex];
-    var selected_line = lines[cameraIndex];    
+    var selected_line = lines[cameraIndex];  
+    var selected_subevents = subevents[cameraIndex];
+    var selected_sublines = sublines[cameraIndex];
     
     if (!drawn_lines[cameraIndex]) {
         var curr_diff = Math.sqrt(Math.pow(camera.translation.x - cam_x_target, 2) + Math.pow(camera.translation.y - cam_y_target, 2));
@@ -333,8 +341,25 @@ function movingCamera() {
             selected_line.translation.set(x_translation, y_translation);
             selected_line.scale = Math.max(0, (1 - percentage));
         }
-        
-        selected_element.scale = (1 - percentage) * size_factor;
+
+        selected_element.scale = (1 - percentage) * size_factor;        
+
+        if (percentage < 0.1) {
+            percentage = percentage * 10;
+            for (var i = 0; i < selected_sublines.length; i++) {
+                var subline = selected_sublines[i];
+                var subevent = selected_subevents[i];
+                var x_translation = ((selected_element.translation.x * (percentage + 1)) + (subevent.translation.x * (1 - percentage)))/2;
+                var y_translation = ((selected_element.translation.y * (percentage + 1)) + (subevent.translation.y * (1 - percentage)))/2;
+
+                subline.translation.set(x_translation, y_translation);
+                subline.scale = Math.max(0, (1 - percentage));
+            };
+            
+            selected_subevents.forEach(function(sub){
+                sub.scale = (1 - percentage) * subsize_factor;
+            });
+        }        
     }
         
     if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig)) {
