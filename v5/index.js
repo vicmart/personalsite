@@ -7,7 +7,6 @@ var cam_y_target = 0;
 var cam_zoom_target = 0;
 var cam_zoom_orig = 0;
 var cam_zoom_in = false;
-var speed = 12.0;
 
 var hoverIndex;
 var obj_x_orig = 0;
@@ -25,6 +24,10 @@ var prev_x = 0;
 var prev_y = 0;
 
 var size = 200;
+var subsize = 100;
+var speed = 12.0;
+var size_factor = size/400;
+var subsize_factor = subsize/400;
 
 var elem = document.getElementById('draw-shapes');
 var two = new Two({type: Two.Types["svg"], width: window.innerWidth, height: window.innerHeight }).appendTo(elem);
@@ -32,28 +35,32 @@ var camera = two.makeGroup();
 camera.translation.set(0, 0);
 
 var events = [];
-var shapes = [];
+var subevents = [];
 var lines = [];
+var sublines = [];
 var drawn_lines = [];
 var titles = [];
 var subtitles = [];
+var dates = [];
 
 var title_target = 0;
 
 $(document).ready(function() {
-    addEvent(150, 100, 1);
-    addEvent(350, 1200, 2);
-    addEvent(1350, 600, 3);
-    addEvent(2350, 900, 2);
-    addEvent(4200, 50, 3);
-    addEvent(3700, 1600, 1);
-    addEvent(1200, 1600, 2);
-    addEvent(500, 2500, 1);
+    addEvent(150, 100, 1, true);
+    addEvent(350, 1200, 2, false);
+    addSubEvent(0, 10, 1, false);
+    addSubEvent(0, 160, 2, false);
+    addEvent(1350, 600, 3, false);
+    addEvent(2350, 900, 2, true);
+    addEvent(4200, 50, 3, false);
+    addEvent(3700, 1600, 1, true);
+    addEvent(1200, 1600, 2, false);
+    addEvent(500, 2500, 1, true);
     addEvents();
 
     setTimeout(moveCamera, cameraTimer, 0);
     
-    for (var i = 1; i < 8; i++) {
+    /**for (var i = 1; i < 8; i++) {
         if (i % 3 == 0) {
             setTimeout(zoomOut, cameraTimer+=5000);
             setTimeout(zoomIn, cameraTimer+=5000, i);
@@ -62,12 +69,12 @@ $(document).ready(function() {
         }
     }
 
-    setTimeout(moveCamera, cameraTimer+=5000, 2);
+    setTimeout(moveCamera, cameraTimer+=5000, 2);**/
 
     two.play();
 });
 
-function addEvent(x, y, index) {  
+function addEvent(x, y, index, top_text) {  
     max_x = Math.max(x + (size/2), max_x);
     max_y = Math.max(y + (size/2), max_y);
     
@@ -83,21 +90,33 @@ function addEvent(x, y, index) {
     //shape.fill = 'green';
     shape.visible = true;
     //shape.noStroke();
-    shape.scale = 0.5;
+    shape.scale = 0;
     shape.translation.set(x, y);
     events.push(shape);
     
-    var title = new Two.Text("TITLE GOES HERE", x - size/2, y + size/2 + 30);
+    var text_offset = 0;
+    
+    if (top_text == true) {
+        text_offset = -1.575 * size;
+    }
+    
+    var title = new Two.Text("TITLE GOES HERE", x - size/2, y + size/2 + 55 + text_offset);
     title.size = 45;
     title.alignment = 'left';
     titles.push(title);
-    var subtitle = new Two.Text("Subtitle goes here", x - size/2, y + size/2 + 60);
+    var subtitle = new Two.Text("Subtitle goes here", x - size/2, y + size/2 + 90 + text_offset);
     subtitle.size = 25;
     subtitle.alignment = 'left';
     subtitle.fill = 'rgba(0, 0, 0, 0.5)';
     subtitles.push(subtitle);
+    var date = new Two.Text("Junior Year // College", x - size/2, y + size/2 + 20 + text_offset);
+    date.size = 15;
+    date.alignment = 'left';
+    date.fill = 'rgba(0, 0, 0, 0.5)';
+    dates.push(date);
     camera.add(title);
     camera.add(subtitle);
+    camera.add(date);
     
     two.update();
     
@@ -105,13 +124,66 @@ function addEvent(x, y, index) {
     prev_y = y;
 }
 
+function addSubEvent(parent_index, angle, index, top_text) {  
+    var parent = events[parent_index];
+    
+    var parent_x = parent.translation.x;
+    var parent_y = parent.translation.y;
+    
+    var x = parent_x + (Math.cos(toRadians(angle)) * 300);
+    var y = parent_y + (Math.sin(toRadians(angle)) * 300);
+    
+    max_x = Math.max(x + (subsize/2), max_x);
+    max_y = Math.max(y + (subsize/2), max_y);
+    
+    var line = two.makeLine(parent_x, parent_y, x, y);
+    line.stroke = "rgba(0, 0, 0, 1)";
+    line.linewidth = 5;
+    line.scale = 1;
+    sublines.push(line);
+    camera.add(line);
+    
+    var shape = two.interpret($(".images svg")[index]).center();
+    shape.visible = true;
+    shape.scale = subsize_factor;
+    shape.translation.set(x, y);
+    subevents.push(shape);
+    
+    var text_offset = 0;
+    
+    if (top_text == true) {
+        text_offset = -1.75 * subsize;
+    }
+    
+    var title = new Two.Text("TITLE GOES HERE", x - subsize/2, y + subsize/2 + 40 + text_offset);
+    title.size = 30;
+    title.alignment = 'left';
+    titles.push(title);
+    var subtitle = new Two.Text("Subtitle goes here", x - subsize/2, y + subsize/2 + 65 + text_offset);
+    subtitle.size = 20;
+    subtitle.alignment = 'left';
+    subtitle.fill = 'rgba(0, 0, 0, 0.5)';
+    subtitles.push(subtitle);
+    var date = new Two.Text("Junior Year // College", x - subsize/2, y + subsize/2 + 15 + text_offset);
+    date.size = 12;
+    date.alignment = 'left';
+    date.fill = 'rgba(0, 0, 0, 0.5)';
+    dates.push(date);
+
+    camera.add(title);
+    camera.add(subtitle);
+    camera.add(date);
+    
+    two.update();
+}
+
 function addEvents() {
     events.forEach(function(event){
         camera.add(event);
     });
 
-    shapes.forEach(function(shape){
-        camera.add(shape);
+    subevents.forEach(function(subevent){
+        camera.add(subevent);
     });
 
     $(".images").empty();
@@ -261,6 +333,8 @@ function movingCamera() {
             selected_line.translation.set(x_translation, y_translation);
             selected_line.scale = Math.max(0, (1 - percentage));
         }
+        
+        selected_element.scale = (1 - percentage) * size_factor;
     }
         
     if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig)) {
@@ -271,7 +345,7 @@ function movingCamera() {
         cam_y_target = camera.translation.y;
         
         drawn_lines[cameraIndex] = true;
-        hoverEvent();
+        //hoverEvent();
         
         makeTextVisible();
     }
@@ -309,6 +383,7 @@ function makingText() {
     for (var i = 0; i < titles.length; i++) {
         titles[i].opacity = Math.max(0, Math.min(1, titles[i].opacity + diff));
         subtitles[i].opacity = Math.max(0, Math.min(1, subtitles[i].opacity + diff));
+        dates[i].opacity = Math.max(0, Math.min(1, dates[i].opacity + diff));
     }
     
     if (titles[0].opacity == title_target) {
@@ -415,4 +490,8 @@ function closeIn(element, x_target, y_target, x_original, y_original) {
         return true;
     }
     return false;
+}
+
+function toRadians (angle) {
+    return angle * (Math.PI / 180);
 }
