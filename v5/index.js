@@ -1,4 +1,4 @@
-var cameraIndex;
+var cameraIndex = 0;
 var cameraTimer = 0;
 var cam_x_orig = 0;
 var cam_y_orig = 0;
@@ -8,13 +8,13 @@ var cam_zoom_target = 0;
 var cam_zoom_orig = 0;
 var cam_zoom_in = false;
 
-var hoverIndex;
-var obj_x_orig = 0;
-var obj_y_orig = 0;
-var obj_x_curr = 0;
-var obj_y_curr = 0;
-var obj_x_target = 0;
-var obj_y_target = 0;
+var hoverIndex = 0;
+var obj_x_orig = [];
+var obj_y_orig = [];
+var obj_x_curr = [];
+var obj_y_curr = [];
+var obj_x_target = [];
+var obj_y_target = [];
 var stop_hovering = false;
 
 var max_x = 0;
@@ -42,8 +42,13 @@ var drawn_lines = [];
 var titles = [];
 var subtitles = [];
 var dates = [];
+var sub_titles = [];
+var sub_subtitles = [];
+var sub_dates = [];
 
+var target_text = -1;
 var title_target = 0;
+var text_speed = 1;
 
 $(document).ready(function() {
     addEvent(150, 100, 1, true);
@@ -51,20 +56,22 @@ $(document).ready(function() {
     addSubEvent(0, 10, 1, false);
     addSubEvent(0, 160, 2, false);
     addSubEvent(1, 10, 1, false);
-    addSubEvent(1, 140, 2, false);
-    addSubEvent(1, 180, 2, false);
+    addSubEvent(1, 160, 2, false);
+    addSubEvent(1, 210, 2, false);
     addEvent(1350, 600, 3, false);
-    addEvent(2350, 900, 2, true);
-    addEvent(4200, 50, 3, false);
-    addEvent(3700, 1600, 1, true);
-    addEvent(1200, 1600, 2, false);
-    addEvent(500, 2500, 1, true);
+    addEvent(2350, 900, 2, false);
+    addEvent(4200, 50, 3, true);
+    addEvent(3700, 1600, 1, false);
+    addEvent(1200, 1600, 2, true);
+    addEvent(500, 2500, 1, false);
     addEvents();
 
     setTimeout(moveCamera, cameraTimer, 0);
-    setTimeout(moveCamera, cameraTimer+=2500, 1);
+    //setTimeout(moveCamera, cameraTimer+=5000, 1);
+    //setTimeout(moveCamera, cameraTimer+=5000, 2);
+    //setTimeout(zoomOut, cameraTimer+=2500);
     
-    /**for (var i = 1; i < 8; i++) {
+    for (var i = 1; i < 8; i++) {
         if (i % 3 == 0) {
             setTimeout(zoomOut, cameraTimer+=5000);
             setTimeout(zoomIn, cameraTimer+=5000, i);
@@ -73,9 +80,11 @@ $(document).ready(function() {
         }
     }
 
-    setTimeout(moveCamera, cameraTimer+=5000, 2);**/
+    setTimeout(moveCamera, cameraTimer+=5000, 2);
 
     two.play();
+    
+    makeTextInvisible(-1, 10000000);
 });
 
 function addEvent(x, y, index, top_text) {  
@@ -99,7 +108,10 @@ function addEvent(x, y, index, top_text) {
     events.push(shape);
     subevents.push([]);
     sublines.push([]);
-    
+    sub_titles.push([]);
+    sub_subtitles.push([]);
+    sub_dates.push([]);
+
     var text_offset = 0;
     
     if (top_text == true) {
@@ -136,8 +148,8 @@ function addSubEvent(parent_index, angle, index, top_text) {
     var parent_x = parent.translation.x;
     var parent_y = parent.translation.y;
     
-    var x = parent_x + (Math.cos(toRadians(angle)) * 400);
-    var y = parent_y + (Math.sin(toRadians(angle)) * 400);
+    var x = parent_x + (Math.cos(toRadians(angle)) * 500);
+    var y = parent_y + (Math.sin(toRadians(angle)) * 500);
     
     max_x = Math.max(x + (subsize/2), max_x);
     max_y = Math.max(y + (subsize/2), max_y);
@@ -161,23 +173,23 @@ function addSubEvent(parent_index, angle, index, top_text) {
         text_offset = -1.75 * subsize;
     }
     
-    var title = new Two.Text("TITLE GOES HERE", x - subsize/2, y + subsize/2 + 40 + text_offset);
-    title.size = 30;
-    title.alignment = 'left';
-    titles.push(title);
-    var subtitle = new Two.Text("Subtitle goes here", x - subsize/2, y + subsize/2 + 65 + text_offset);
+    var title = new Two.Text("TITLE GOES HERE", x, y + subsize/2 + 35 + text_offset);
+    title.size = 22.5;
+    title.alignment = 'center';
+    sub_titles[parent_index].push(title);
+    /**var subtitle = new Two.Text("Subtitle goes here", x - subsize/2, y + subsize/2 + 65 + text_offset);
     subtitle.size = 20;
     subtitle.alignment = 'left';
     subtitle.fill = 'rgba(0, 0, 0, 0.5)';
-    subtitles.push(subtitle);
-    var date = new Two.Text("Junior Year // College", x - subsize/2, y + subsize/2 + 15 + text_offset);
+    sub_subtitles[parent_index].push(subtitle);**/
+    var date = new Two.Text("Junior Year // College", x, y + subsize/2 + 15 + text_offset);
     date.size = 12;
-    date.alignment = 'left';
+    date.alignment = 'center';
     date.fill = 'rgba(0, 0, 0, 0.5)';
-    dates.push(date);
+    sub_dates[parent_index].push(date);
 
     camera.add(title);
-    camera.add(subtitle);
+    //camera.add(subtitle);
     camera.add(date);
     
     two.update();
@@ -201,87 +213,85 @@ function addEvents() {
 
 function hoverEvent() {
     hoverIndex = cameraIndex;
-    obj_x_orig = events[cameraIndex].translation.x;
-    obj_y_orig = events[cameraIndex].translation.y;    
-    obj_x_target = 0;
-    obj_y_target = 0;
-    obj_x_curr = 0;
-    obj_y_curr = 0;
+
+    two.unbind('update', hoveringEvent);
+    
+    obj_x_orig = [];
+    obj_y_orig = [];
+    obj_x_curr = [];
+    obj_y_curr = [];
+    obj_x_target = [];
+    obj_y_target = [];
+    
+    for (var i = 0; i < subevents[hoverIndex].length; i++) {
+        obj_x_orig.push(subevents[hoverIndex][i].translation.x);
+        obj_y_orig.push(subevents[hoverIndex][i].translation.y);    
+        obj_x_target.push(0);
+        obj_y_target.push(0);
+        obj_x_curr.push(0);
+        obj_y_curr.push(0);
+    }
     
     stop_hovering = false;
     
-    two.unbind('update', hoveringEvent);
     two.bind('update', hoveringEvent);
-    
-    var selected_element = events[hoverIndex];
-    var selected_title = titles[hoverIndex];
-    var selected_line_before = lines[hoverIndex];
-    var selected_subtitle = subtitles[hoverIndex];
 }
 
 function hoveringEvent() {
-    var selected_element = events[hoverIndex];
-    var selected_title = titles[hoverIndex];
-    var selected_subtitle = subtitles[hoverIndex];
-    var selected_line_before = lines[hoverIndex];
-    var selected_line_after;
-    if (hoverIndex < lines.length - 1) {
-        selected_line_after = lines[hoverIndex + 1];
-    }
+    var stop_hovering_counter = 0;
     
-    var d = new Date();
-    var time = d.getTime();
-    
-    if (Math.abs(obj_x_curr - obj_x_target) < 0.5 && stop_hovering == false) {
-        obj_x_target = (Math.random() * 40) - 20;
-    }
+    for (var i = 0; i < subevents[hoverIndex].length; i++) {
+        var selected_element = subevents[hoverIndex][i];
+        var selected_title = sub_titles[hoverIndex][i];
+        var selected_subtitle = sub_subtitles[hoverIndex][i];
+        var selected_line_before = sublines[hoverIndex][i];
 
-    if (Math.abs(obj_y_curr - obj_y_target) < 0.5 && stop_hovering == false) {
-        obj_y_target = (Math.random() * 40) - 20;
-    }
-    
-    if (stop_hovering == true && Math.abs(obj_x_curr - obj_x_target) < 0.05 && Math.abs(obj_y_curr - obj_y_target) < 0.05) {
-        stop_hovering = false;
-        
-        selected_line_before.vertices[1].x = obj_x_orig - selected_line_before.translation.x;
-        selected_line_before.vertices[1].y = obj_y_orig - selected_line_before.translation.y;
+        var d = new Date();
+        var time = d.getTime();
 
-        if (hoverIndex < lines.length - 1) {
-            selected_line_after.vertices[0].x = obj_x_orig - selected_line_after.translation.x;
-            selected_line_after.vertices[0].y = obj_y_orig - selected_line_after.translation.y;
+        if (Math.abs(obj_x_curr[i] - obj_x_target[i]) < 0.5 && stop_hovering == false) {
+            obj_x_target[i] = (Math.random() * 80) - 40;
         }
+
+        if (Math.abs(obj_y_curr[i] - obj_y_target[i]) < 0.5 && stop_hovering == false) {
+            obj_y_target[i] = (Math.random() * 80) - 40;
+        }
+
+        if (stop_hovering == true && Math.abs(obj_x_curr[i] - obj_x_target[i]) < 0.05 && Math.abs(obj_y_curr[i] - obj_y_target[i]) < 0.05) {
+            stop_hovering_counter++;
+        }
+
+        if (obj_x_curr[i] < obj_x_target[i]) {
+            obj_x_curr[i] += 0.1;
+        } else {
+            obj_x_curr[i] -= 0.1;
+        }
+
+        if (obj_y_curr[i] < obj_y_target[i]) {
+            obj_y_curr[i] += 0.1;
+        } else {
+            obj_y_curr[i] -= 0.1;
+        }
+
+        selected_element.translation.x = obj_x_orig[i] + (obj_x_curr[i] * Math.cos(time/2500));
+        selected_element.translation.y = obj_y_orig[i] + (obj_y_curr[i] * Math.sin(time/2500));
+
+        selected_line_before.vertices[1].x = selected_element.translation.x - selected_line_before.translation.x;
+        selected_line_before.vertices[1].y = selected_element.translation.y - selected_line_before.translation.y;
+    }
+    
+    if (stop_hovering_counter == subevents[hoverIndex].length) {
+        stop_hovering = false;
         
         two.unbind('update', hoveringEvent);
     }
-
-    if (obj_x_curr < obj_x_target) {
-        obj_x_curr += 0.1;
-    } else {
-        obj_x_curr -= 0.1;
-    }
-
-    if (obj_y_curr < obj_y_target) {
-        obj_y_curr += 0.1;
-    } else {
-        obj_y_curr -= 0.1;
-    }
-
-    selected_element.translation.x = obj_x_orig + (obj_x_curr * Math.cos(time/2500));
-    selected_element.translation.y = obj_y_orig + (obj_y_curr * Math.sin(time/2500));
-
-    selected_line_before.vertices[1].x = selected_element.translation.x - selected_line_before.translation.x;
-    selected_line_before.vertices[1].y = selected_element.translation.y - selected_line_before.translation.y;
-
-    if (hoverIndex < lines.length - 1) {
-        selected_line_after.vertices[0].x = selected_element.translation.x - selected_line_after.translation.x;
-        selected_line_after.vertices[0].y = selected_element.translation.y - selected_line_after.translation.y;
-    }
 }
 
-function moveBack() {
-    obj_x_target = 0;
-    obj_y_target = 0;
-    
+function stopHovering() {
+    for (var i = 0; i < subevents[hoverIndex].length; i++) {
+        obj_x_target[i] = 0;
+        obj_y_target[i] = 0;
+    }
     stop_hovering = true;
 }
 
@@ -289,7 +299,7 @@ function moveBack() {
 
 function moveCamera(index) {
     two.unbind('update', movingCamera);
-    moveBack();
+    //stopHovering();
     
     for (var i = 1; i <= cameraIndex; i++) {
         var selected_line = lines[i];
@@ -323,6 +333,10 @@ function moveCamera(index) {
 }
 
 function movingCamera() {
+    if (cameraIndex > 0) {
+        makeTextInvisible(cameraIndex - 1, 1);
+    }
+
     var selected_element = events[cameraIndex];
     var selected_line = lines[cameraIndex];  
     var selected_subevents = subevents[cameraIndex];
@@ -372,7 +386,7 @@ function movingCamera() {
         drawn_lines[cameraIndex] = true;
         //hoverEvent();
         
-        makeTextVisible();
+        makeTextVisible(cameraIndex, 1);
     }
 }
 
@@ -384,38 +398,66 @@ function movingCameraHome() {
 
 // Text functions
 
-function makeTextVisible() {
+function makeTextVisible(index, speed) {
     two.unbind('update', makingText);
-    
+    target_text = index;
     title_target = 1;
+    text_speed = speed;
     two.bind('update', makingText);
 }
 
-function makeTextInvisible() {
+function makeTextInvisible(index, speed) {
     two.unbind('update', makingText);
 
+    target_text = index;
     title_target = 0;
+    text_speed = speed;
     two.bind('update', makingText);
 }
 
 function makingText() {
-    var diff = 0.05;
+    var diff = 0.025;
     
     if (title_target == 0) {
-        diff = -0.05;
+        diff = -0.025;
+    }
+
+    diff = diff * text_speed;
+    var small_diff = diff * 0.75;
+            
+    var text_target_count = 0;
+    console.log(target_text);
+
+    if (target_text == -1) {
+        for (var i = 0; i < titles.length; i++) {
+            titles[i].opacity = Math.max(0, Math.min(1, titles[i].opacity + diff));
+            subtitles[i].opacity = Math.max(0, Math.min(1, subtitles[i].opacity + small_diff));
+            dates[i].opacity = Math.max(0, Math.min(1, dates[i].opacity + small_diff));
+            for (var j = 0; j < sub_titles[i].length; j++) {
+                sub_titles[i][j].opacity = Math.max(0, Math.min(1, sub_titles[i][j].opacity + diff));
+                //sub_subtitles[i][j].opacity = Math.max(0, Math.min(1, sub_subtitles[i][j].opacity + diff));
+                sub_dates[i][j].opacity = Math.max(0, Math.min(1, sub_dates[i][j].opacity + small_diff));
+            }
+            
+            if (titles[i].opacity == title_target) {
+                text_target_count++;
+            }
+        }
+    } else {
+        titles[target_text].opacity = Math.max(0, Math.min(1, titles[target_text].opacity + diff));
+        subtitles[target_text].opacity = Math.max(0, Math.min(1, subtitles[target_text].opacity + small_diff));
+        dates[target_text].opacity = Math.max(0, Math.min(1, dates[target_text].opacity + small_diff));
+        for (var j = 0; j < sub_titles[target_text].length; j++) {
+            sub_titles[target_text][j].opacity = Math.max(0, Math.min(1, sub_titles[target_text][j].opacity + diff));
+            //sub_subtitles[target_text][j].opacity = Math.max(0, Math.min(1, sub_subtitles[target_text][j].opacity + small_diff));
+            sub_dates[target_text][j].opacity = Math.max(0, Math.min(1, sub_dates[target_text][j].opacity + small_diff));
+        }
     }
     
-    for (var i = 0; i < titles.length; i++) {
-        titles[i].opacity = Math.max(0, Math.min(1, titles[i].opacity + diff));
-        subtitles[i].opacity = Math.max(0, Math.min(1, subtitles[i].opacity + diff));
-        dates[i].opacity = Math.max(0, Math.min(1, dates[i].opacity + diff));
-    }
-    
-    if (titles[0].opacity == title_target) {
+    if ((target_text > -1 && titles[target_text].opacity == title_target) || (target_text == -1 && text_target_count == titles.length)) {
         two.unbind('update', makingText);
     }
 }
-
 
 // Zoom functions
 
@@ -423,7 +465,7 @@ function zoomIn(index) {
     two.unbind('update', movingCameraHome);
     two.unbind('update', movingCamera);
     two.unbind('update', zoomingOut);
-    moveBack();
+    //stopHovering();
 
     cam_zoom_target = 1;
     cameraIndex = index;
@@ -443,9 +485,9 @@ function zoomOut() {
     two.unbind('update', movingCameraHome);
     two.unbind('update', movingCamera);
     two.unbind('update', zoomingOut);
-    moveBack();
+    //stopHovering();
     
-    makeTextInvisible();
+    makeTextInvisible(-1, 1);
     
     for (var i = 1; i <= cameraIndex; i++) {
         var selected_line = lines[i];
