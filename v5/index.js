@@ -52,35 +52,54 @@ var text_speed = 1;
 
 $(document).ready(function() {
     addEvent(150, 100, 1, true);
-    addEvent(350, 1200, 2, false);
     addSubEvent(0, 10, 1, false);
     addSubEvent(0, 160, 2, false);
+    addEvent(300, 1200, 2, false);
     addSubEvent(1, 10, 1, false);
-    addSubEvent(1, 160, 2, false);
-    addSubEvent(1, 210, 2, false);
-    addEvent(1350, 600, 3, false);
-    addEvent(2350, 900, 2, false);
-    addEvent(4200, 50, 3, true);
-    addEvent(3700, 1600, 1, false);
-    addEvent(1200, 1600, 2, true);
-    addEvent(500, 2500, 1, false);
+    addSubEvent(1, 150, 2, false);
+    addSubEvent(1, 210, 2, true);
+    addSubEvent(1, 185, 1, false);
+    addEvent(1300, 600, 3, false);
+    addEvent(2800, 2500, 2, false);
+    addSubEvent(3, 150, 1, false);
+    addEvent(4200, 100, 3, true);
+    addSubEvent(4, -20, 1, false);
+    addSubEvent(4, 30, 1, false);
+    addEvent(2200, 100, 1, false);
+    addSubEvent(5, 190, 1, false);
+    addEvent(3100, 700, 1, false);
+    addSubEvent(6, -30, 1, false);
+    addEvent(2700, 1300, 2, true);
+    addSubEvent(7, -20, 1, false);
+    addSubEvent(7, 30, 1, false);
+    addSubEvent(7, 160, 1, false);
+    addSubEvent(7, 210, 1, false);
+    addEvent(1100, 1300, 1, false);
+    addSubEvent(8, 30, 1, false);
+    addSubEvent(8, -30, 1, false);
+    addEvent(200, 2500, 1, false);
+    addSubEvent(9, 160, 1, false);
+    addEvent(1400, 2500, 1, false);
+    addSubEvent(10, 210, 1, false);
     addEvents();
 
     setTimeout(moveCamera, cameraTimer, 0);
     //setTimeout(moveCamera, cameraTimer+=5000, 1);
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
-    //setTimeout(zoomOut, cameraTimer+=2500);
+    //setTimeout(zoomOut, cameraTimer+=0);
     
-    for (var i = 1; i < 8; i++) {
+    for (var i = 1; i < 11; i++) {
         if (i % 3 == 0) {
-            setTimeout(zoomOut, cameraTimer+=5000);
-            setTimeout(zoomIn, cameraTimer+=5000, i);
+            setTimeout(zoomOut, cameraTimer+=2500);
+            setTimeout(zoomIn, cameraTimer+=2500, i);
         } else {
-            setTimeout(moveCamera, cameraTimer+=5000, i);
+            setTimeout(moveCamera, cameraTimer+=2500, i);
         }
     }
+        
+    setTimeout(zoomOut, cameraTimer+=2500);
 
-    setTimeout(moveCamera, cameraTimer+=5000, 2);
+    //setTimeout(moveCamera, cameraTimer+=5000, 2);
 
     two.play();
     
@@ -118,18 +137,18 @@ function addEvent(x, y, index, top_text) {
         text_offset = -1.575 * size;
     }
     
-    var title = new Two.Text("TITLE GOES HERE", x - size/2, y + size/2 + 55 + text_offset);
+    var title = new Two.Text("TITLE GOES HERE", x, y + size/2 + 55 + text_offset);
     title.size = 45;
-    title.alignment = 'left';
+    title.alignment = 'center';
     titles.push(title);
-    var subtitle = new Two.Text("Subtitle goes here", x - size/2, y + size/2 + 90 + text_offset);
+    var subtitle = new Two.Text("Subtitle goes here", x, y + size/2 + 90 + text_offset);
     subtitle.size = 25;
-    subtitle.alignment = 'left';
+    subtitle.alignment = 'center';
     subtitle.fill = 'rgba(0, 0, 0, 0.5)';
     subtitles.push(subtitle);
-    var date = new Two.Text("Junior Year // College", x - size/2, y + size/2 + 20 + text_offset);
+    var date = new Two.Text("Junior Year // College", x, y + size/2 + 20 + text_offset);
     date.size = 15;
-    date.alignment = 'left';
+    date.alignment = 'center';
     date.fill = 'rgba(0, 0, 0, 0.5)';
     dates.push(date);
     camera.add(title);
@@ -170,7 +189,7 @@ function addSubEvent(parent_index, angle, index, top_text) {
     var text_offset = 0;
     
     if (top_text == true) {
-        text_offset = -1.75 * subsize;
+        text_offset = -1.5 * subsize;
     }
     
     var title = new Two.Text("TITLE GOES HERE", x, y + subsize/2 + 35 + text_offset);
