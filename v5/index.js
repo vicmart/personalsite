@@ -1,4 +1,4 @@
-var cameraIndex = 0;
+var cameraIndex = -1;
 var cameraTimer = 0;
 var cam_x_orig = 0;
 var cam_y_orig = 0;
@@ -51,36 +51,57 @@ var title_target = 0;
 var text_speed = 1;
 
 $(document).ready(function() {
-    addEvent(150, 100, 1, true);
-    addSubEvent(0, 10, 1, false);
-    addSubEvent(0, 160, 2, false);
-    addEvent(300, 1200, 2, false);
-    addSubEvent(1, 10, 1, false);
-    addSubEvent(1, 150, 2, false);
-    addSubEvent(1, 210, 2, true);
-    addSubEvent(1, 185, 1, false);
-    addEvent(1300, 600, 3, false);
-    addEvent(2800, 2500, 2, false);
-    addSubEvent(3, 150, 1, false);
-    addEvent(4200, 100, 3, true);
-    addSubEvent(4, -20, 1, false);
-    addSubEvent(4, 30, 1, false);
-    addEvent(2200, 100, 1, false);
-    addSubEvent(5, 190, 1, false);
-    addEvent(3100, 700, 1, false);
-    addSubEvent(6, -30, 1, false);
-    addEvent(2700, 1300, 2, true);
-    addSubEvent(7, -20, 1, false);
-    addSubEvent(7, 30, 1, false);
-    addSubEvent(7, 160, 1, false);
-    addSubEvent(7, 210, 1, false);
-    addEvent(1100, 1300, 1, false);
-    addSubEvent(8, 30, 1, false);
-    addSubEvent(8, -30, 1, false);
-    addEvent(200, 2500, 1, false);
-    addSubEvent(9, 160, 1, false);
-    addEvent(1400, 2500, 1, false);
-    addSubEvent(10, 210, 1, false);
+    addEvent(500, 100, 1, 2);
+    addSubEvent(0, -22.5, 1, false);
+    addSubEvent(0, 157.5, 2, false);
+    addSubEvent(0, 202.5, 2, false);
+
+    addEvent(2300, 1900, 2, 0);
+    addSubEvent(1, -22.5, 2, false);
+    addSubEvent(1, 22.5, 2, false);
+    addSubEvent(1, 202.5, 2, true);
+    addSubEvent(1, 180, 2, false);
+    addSubEvent(1, 0, 2, false);
+    
+    addEvent(2300, 900, 3, 1);
+    
+    addEvent(3100, 100, 2, 2);
+    addSubEvent(3, 202.5, 2, false);
+    addSubEvent(3, -22.5, 2, false);
+    
+    addEvent(4700, 1700, 3, 1);
+    addSubEvent(4, -22.5, 2, false);
+    addSubEvent(4, 0, 1, false);
+    addSubEvent(4, 22.5, 2, false);
+    addSubEvent(4,-45, 2, false);
+    
+    addEvent(3700, 2700, 2, 0);
+    addSubEvent(5, 22.5, 2, false);
+    
+    addEvent(1300, 2700, 2, 0);
+    addSubEvent(6, -22.5, 2, false);
+    addSubEvent(6, 22.5, 2, false);
+    addSubEvent(6, 157.5, 2, false);
+    
+    addEvent(500, 1900, 2, 2);
+    addSubEvent(7, -22.5, 2, false);
+    addSubEvent(7, 0, 2, false);
+    addSubEvent(7, 157.5, 2, false);
+    addSubEvent(7, 180, 2, false);
+    addSubEvent(7, 202.5, 2, false);
+    
+    addEvent(500, 3600, 2, 0);
+    addSubEvent(8, 202.5, 2, false);
+    addSubEvent(8, -22.5, 2, false);
+    addSubEvent(8, 157.5, 2, false);
+    
+    addEvent(4500, 3600, 2, 0);
+    addSubEvent(9, 0, 2, false);
+    addSubEvent(9, 202.5, 2, false);
+    
+    addEvent(5400, 2700, 2, 3);
+    addSubEvent(10, 202.5, 2, false);
+    
     addEvents();
 
     setTimeout(moveCamera, cameraTimer, 0);
@@ -90,14 +111,18 @@ $(document).ready(function() {
     
     for (var i = 1; i < 11; i++) {
         if (i % 3 == 0) {
-            setTimeout(zoomOut, cameraTimer+=2500);
-            setTimeout(zoomIn, cameraTimer+=2500, i);
+            setTimeout(zoomOut, cameraTimer+=3000);
+            setTimeout(zoomIn, cameraTimer+=3000, i);
         } else {
-            setTimeout(moveCamera, cameraTimer+=2500, i);
+            setTimeout(moveCamera, cameraTimer+=3000, i);
         }
     }
+    
+    for (var i = 1; i < 11; i++) {
+        setTimeout(moveCamera, cameraTimer+=3000, i);
+    }
         
-    setTimeout(zoomOut, cameraTimer+=2500);
+    setTimeout(zoomOut, cameraTimer+=3000);
 
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
 
@@ -106,7 +131,7 @@ $(document).ready(function() {
     makeTextInvisible(-1, 10000000);
 });
 
-function addEvent(x, y, index, top_text) {  
+function addEvent(x, y, index, location) {  
     max_x = Math.max(x + (size/2), max_x);
     max_y = Math.max(y + (size/2), max_y);
     
@@ -131,24 +156,34 @@ function addEvent(x, y, index, top_text) {
     sub_subtitles.push([]);
     sub_dates.push([]);
 
-    var text_offset = 0;
-    
-    if (top_text == true) {
-        text_offset = -1.575 * size;
+    var text_offset_y = 0;
+    var text_offset_x = 0;
+    var alignment = 'center';
+
+    if (location == 1) {
+        text_offset_x = -0.575 * size;
+        text_offset_y = -0.78 * size;
+        alignment = "right";
+    } else if (location == 2) {
+        text_offset_y = -1.575 * size;
+    } else if (location == 3) {
+        text_offset_x = 0.575 * size;
+        text_offset_y = -0.78 * size;
+        alignment = "left";
     }
     
-    var title = new Two.Text("TITLE GOES HERE", x, y + size/2 + 55 + text_offset);
+    var title = new Two.Text("TITLE GOES HERE", x + text_offset_x, y + size/2 + 55 + text_offset_y);
     title.size = 45;
-    title.alignment = 'center';
+    title.alignment = alignment;
     titles.push(title);
-    var subtitle = new Two.Text("Subtitle goes here", x, y + size/2 + 90 + text_offset);
+    var subtitle = new Two.Text("Subtitle goes here", x + text_offset_x, y + size/2 + 90 + text_offset_y);
     subtitle.size = 25;
-    subtitle.alignment = 'center';
+    subtitle.alignment = alignment;
     subtitle.fill = 'rgba(0, 0, 0, 0.5)';
     subtitles.push(subtitle);
-    var date = new Two.Text("Junior Year // College", x, y + size/2 + 20 + text_offset);
+    var date = new Two.Text("Junior Year // College", x + text_offset_x, y + size/2 + 20 + text_offset_y);
     date.size = 15;
-    date.alignment = 'center';
+    date.alignment = alignment;
     date.fill = 'rgba(0, 0, 0, 0.5)';
     dates.push(date);
     camera.add(title);
@@ -320,22 +355,7 @@ function moveCamera(index) {
     two.unbind('update', movingCamera);
     //stopHovering();
     
-    for (var i = 1; i <= cameraIndex; i++) {
-        var selected_line = lines[i];
-        
-        var x_translation = (events[i - 1].translation.x + events[i].translation.x)/2;
-        var y_translation = (events[i - 1].translation.y + events[i].translation.y)/2;
-
-        selected_line.translation.set(x_translation, y_translation);
-        selected_line.scale = 1;
-        
-        selected_line.vertices[0].x = events[i - 1].translation.x - selected_line.translation.x;
-        selected_line.vertices[0].y = events[i - 1].translation.y - selected_line.translation.y;
-
-        selected_line.vertices[1].x = events[i].translation.x - selected_line.translation.x;
-        selected_line.vertices[1].y = events[i].translation.y - selected_line.translation.y;
-    }
-    
+    checkAllVisited();
     cameraIndex = index;
     
     cam_x_orig = camera.translation.x;
@@ -343,11 +363,9 @@ function moveCamera(index) {
     
     cam_x_target = (window.innerWidth/2) - events[cameraIndex].translation.x;
     cam_y_target = (window.innerHeight/2) - events[cameraIndex].translation.y;
-    
-    /**if (cameraIndex > 0 && !drawn_lines[cameraIndex]) {
-        //lines[cameraIndex].translation.set(events[cameraIndex - 1].translation.x, events[cameraIndex - 1].translation.y);
-    }**/
-    
+        
+    drawn_lines[cameraIndex] = true;
+
     two.bind('update', movingCamera);
 }
 
@@ -393,25 +411,84 @@ function movingCamera() {
                 sub.scale = (1 - percentage) * subsize_factor;
             });
         }        
+    } else {
+        selected_element.scale = size_factor;
+        for (var j = 0; j < selected_subevents.length; j++) {
+            selected_subevents[j].scale = subsize_factor;
+            selected_sublines[j].scale = 1;
+        }
     }
         
-    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig)) {
+    var results = closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig);
+    if(results == 2) {
         two.unbind('update', movingCamera);
         two.unbind('update', zoomingOut);
         
         cam_x_target = camera.translation.x;
         cam_y_target = camera.translation.y;
         
-        drawn_lines[cameraIndex] = true;
         //hoverEvent();
-        
         makeTextVisible(cameraIndex, 1);
+    } else if (results == 1) {
+        makeAllElseInvisible();
     }
 }
 
 function movingCameraHome() {            
-    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig)) {
+    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig) == 2) {
         two.unbind('update', movingCameraHome);
+    }
+}
+
+function checkAllVisited() {
+    for (var i = 0; i <= cameraIndex; i++) {
+        if (i > 0) {
+            var selected_line = lines[i];
+        
+            var x_translation = (events[i - 1].translation.x + events[i].translation.x)/2;
+            var y_translation = (events[i - 1].translation.y + events[i].translation.y)/2;
+
+            selected_line.translation.set(x_translation, y_translation);
+            selected_line.scale = 1;
+        
+            selected_line.vertices[0].x = events[i - 1].translation.x - selected_line.translation.x;
+            selected_line.vertices[0].y = events[i - 1].translation.y - selected_line.translation.y;
+
+            selected_line.vertices[1].x = events[i].translation.x - selected_line.translation.x;
+            selected_line.vertices[1].y = events[i].translation.y - selected_line.translation.y;
+        } 
+        
+        for (var j = 0; j < subevents[i].length; j++) {
+            var selected_line = sublines[i][j];
+            
+            var x_translation = (events[i].translation.x + subevents[i][j].translation.x)/2;
+            var y_translation = (events[i].translation.y + subevents[i][j].translation.y)/2;
+
+            selected_line.translation.set(x_translation, y_translation);
+            selected_line.scale = 1;
+        }
+    }
+}
+
+function makeAllElseInvisible() {
+    for (var i = 0; i < events.length; i++) {
+        if (i != cameraIndex) {
+            events[i].scale = 0;
+            for (var j = 0; j < subevents[i].length; j++) {
+                subevents[i][j].scale = 0;
+                sublines[i][j].scale = 0;
+            }
+        }
+    }
+}
+
+function makeAllElseVisible() {
+    for (var i = 0; i < cameraIndex; i++) {
+        events[i].scale = size_factor;
+        for (var j = 0; j < subevents[i].length; j++) {
+            subevents[i][j].scale = subsize_factor;
+            sublines[i][j].scale = 1;
+        }
     }
 }
 
@@ -445,7 +522,6 @@ function makingText() {
     var small_diff = diff * 0.75;
             
     var text_target_count = 0;
-    console.log(target_text);
 
     if (target_text == -1) {
         for (var i = 0; i < titles.length; i++) {
@@ -505,6 +581,9 @@ function zoomOut() {
     two.unbind('update', movingCamera);
     two.unbind('update', zoomingOut);
     //stopHovering();
+
+    checkAllVisited();
+    makeAllElseVisible();
     
     makeTextInvisible(-1, 1);
     
@@ -573,9 +652,11 @@ function closeIn(element, x_target, y_target, x_original, y_original) {
     }
 
     if (progress > 0.995) {
-        return true;
+        return 2;
+    } else if (progress > 0.5) {
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 function toRadians (angle) {
