@@ -17,6 +17,12 @@ var obj_x_target = [];
 var obj_y_target = [];
 var stop_hovering = false;
 
+var exps = [];
+var exp_x_orig = [];
+var exp_y_orig = [];
+var exp_x_target = [];
+var exp_y_target = [];
+
 var max_x = 0;
 var max_y = 0;
 
@@ -29,13 +35,21 @@ var speed = 12.0;
 var size_factor = size/400;
 var subsize_factor = subsize/400;
 
+var scoreboard_width = 500;
+var scoreboard_height = 285;
+
 var elem = document.getElementById('draw-shapes');
 var two = new Two({type: Two.Types["svg"], width: window.innerWidth, height: window.innerHeight }).appendTo(elem);
 var camera = two.makeGroup();
+var scoreboard = two.makeGroup();
+var controls = two.makeGroup();
 camera.translation.set(0, 0);
+scoreboard.translation.set(0, 0);
+controls.translation.set(window.innerWidth - 400, 0);
 
 var events = [];
 var subevents = [];
+var subevent_types = [];
 var lines = [];
 var sublines = [];
 var drawn_lines = [];
@@ -52,9 +66,9 @@ var text_speed = 1;
 
 $(document).ready(function() {
     addEvent(500, 100, 1, 2);
-    addSubEvent(0, -22.5, 1, false);
-    addSubEvent(0, 157.5, 2, false);
-    addSubEvent(0, 202.5, 2, false);
+    addSubEvent(0, -22.5, 1, false, 0);
+    addSubEvent(0, 157.5, 2, false, 0);
+    addSubEvent(0, 202.5, 2, false, 1);
 
     addEvent(2300, 1900, 2, 0);
     addSubEvent(1, -22.5, 2, false);
@@ -103,13 +117,16 @@ $(document).ready(function() {
     addSubEvent(10, 202.5, 2, false);
     
     addEvents();
+    
+    addTally();
+    addControls();
 
     setTimeout(moveCamera, cameraTimer, 0);
     //setTimeout(moveCamera, cameraTimer+=5000, 1);
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
     //setTimeout(zoomOut, cameraTimer+=0);
     
-    for (var i = 1; i < 11; i++) {
+    /**for (var i = 1; i < 11; i++) {
         if (i % 3 == 0) {
             setTimeout(zoomOut, cameraTimer+=3000);
             setTimeout(zoomIn, cameraTimer+=3000, i);
@@ -122,7 +139,7 @@ $(document).ready(function() {
         setTimeout(moveCamera, cameraTimer+=3000, i);
     }
         
-    setTimeout(zoomOut, cameraTimer+=3000);
+    setTimeout(zoomOut, cameraTimer+=3000);**/
 
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
 
@@ -151,6 +168,7 @@ function addEvent(x, y, index, location) {
     shape.translation.set(x, y);
     events.push(shape);
     subevents.push([]);
+    subevent_types.push([]);
     sublines.push([]);
     sub_titles.push([]);
     sub_subtitles.push([]);
@@ -174,15 +192,18 @@ function addEvent(x, y, index, location) {
     
     var title = new Two.Text("TITLE GOES HERE", x + text_offset_x, y + size/2 + 55 + text_offset_y);
     title.size = 45;
+    title.family = 'Avenir';
     title.alignment = alignment;
     titles.push(title);
     var subtitle = new Two.Text("Subtitle goes here", x + text_offset_x, y + size/2 + 90 + text_offset_y);
     subtitle.size = 25;
+    subtitle.family = 'Avenir';
     subtitle.alignment = alignment;
     subtitle.fill = 'rgba(0, 0, 0, 0.5)';
     subtitles.push(subtitle);
     var date = new Two.Text("Junior Year // College", x + text_offset_x, y + size/2 + 20 + text_offset_y);
     date.size = 15;
+    date.family = 'Avenir';
     date.alignment = alignment;
     date.fill = 'rgba(0, 0, 0, 0.5)';
     dates.push(date);
@@ -196,7 +217,7 @@ function addEvent(x, y, index, location) {
     prev_y = y;
 }
 
-function addSubEvent(parent_index, angle, index, top_text) {  
+function addSubEvent(parent_index, angle, index, top_text, type) {  
     var parent = events[parent_index];
     
     var parent_x = parent.translation.x;
@@ -220,6 +241,7 @@ function addSubEvent(parent_index, angle, index, top_text) {
     shape.scale = 0;
     shape.translation.set(x, y);
     subevents[parent_index].push(shape);
+    subevent_types[parent_index].push(type);
     
     var text_offset = 0;
     
@@ -229,6 +251,7 @@ function addSubEvent(parent_index, angle, index, top_text) {
     
     var title = new Two.Text("TITLE GOES HERE", x, y + subsize/2 + 35 + text_offset);
     title.size = 22.5;
+    title.family = 'Avenir';
     title.alignment = 'center';
     sub_titles[parent_index].push(title);
     /**var subtitle = new Two.Text("Subtitle goes here", x - subsize/2, y + subsize/2 + 65 + text_offset);
@@ -238,6 +261,7 @@ function addSubEvent(parent_index, angle, index, top_text) {
     sub_subtitles[parent_index].push(subtitle);**/
     var date = new Two.Text("Junior Year // College", x, y + subsize/2 + 15 + text_offset);
     date.size = 12;
+    date.family = 'Avenir';
     date.alignment = 'center';
     date.fill = 'rgba(0, 0, 0, 0.5)';
     sub_dates[parent_index].push(date);
@@ -261,6 +285,70 @@ function addEvents() {
     $(".images").empty();
     
     two.update();
+}
+
+function addControls() {
+    var roundedRect = new Two.RoundedRectangle(200, 0, 450, 120, 20);
+    roundedRect.stroke = "black";
+    roundedRect.linewidth = 5;
+    roundedRect.fill = "rgba(255, 255, 255, 0.75)";
+    controls.add(roundedRect);
+}
+
+function addTally() {
+    var roundedRect = new Two.RoundedRectangle(scoreboard_width/2 - 50, scoreboard_height/2 - 50, scoreboard_width + 50, scoreboard_height + 50, 20);
+    roundedRect.stroke = "black";
+    roundedRect.linewidth = 5;
+    roundedRect.fill = "rgba(255, 255, 255, 0.75)";
+    scoreboard.add(roundedRect);
+
+    var title = new Two.Text("VICTOR DADFAR", 20, 40);
+    title.family = 'Avenir';
+    title.size = 40;
+    title.alignment = 'left';
+    scoreboard.add(title);
+
+    title = new Two.Text("SKILLS EARNED", 20, 70);
+    title.size = 18;
+    title.fill = 'rgba(0, 0, 0, 0.35)';
+    title.alignment = 'left';
+    title.family = 'Avenir';
+    scoreboard.add(title);
+
+    title = new Two.Text("APPLICATION DEVELOPMENT", 20, 110);
+    title.alignment = 'left';
+    title.family = 'Avenir';
+    scoreboard.add(title);
+
+    title = new Two.Text("WEB DESIGN & DEVELOPMENT", 20, 140);
+    title.alignment = 'left';
+    title.family = 'Avenir';
+    scoreboard.add(title);
+        
+    title = new Two.Text("RESEARCH", 20, 170);
+    title.alignment = 'left';
+    title.family = 'Avenir';
+    scoreboard.add(title);
+
+    title = new Two.Text("TEAMWORK", 20, 200);
+    title.alignment = 'left';
+    title.family = 'Avenir';
+    scoreboard.add(title);
+
+    title = new Two.Text("LEADERSHIP", 20, 230);
+    title.alignment = 'left';
+    title.family = 'Avenir';
+    scoreboard.add(title);
+    
+    var line = two.makeLine(20, 85, 450, 85);
+    line.stroke = "rgba(0, 0, 0, 0.25)";
+    line.linewidth = 2;
+    scoreboard.add(line);
+    
+    line = two.makeLine(230, 100, 230, 240);
+    line.stroke = "rgba(0, 0, 0, 0.25)";
+    line.linewidth = 2;
+    scoreboard.add(line);
 }
 
 // Event functions
@@ -364,8 +452,10 @@ function moveCamera(index) {
     cam_x_target = (window.innerWidth/2) - events[cameraIndex].translation.x;
     cam_y_target = (window.innerHeight/2) - events[cameraIndex].translation.y;
         
-    drawn_lines[cameraIndex] = true;
-
+    if (cameraIndex > 0) {
+        drawn_lines[cameraIndex - 1] = true;
+    }
+    
     two.bind('update', movingCamera);
 }
 
@@ -419,23 +509,26 @@ function movingCamera() {
         }
     }
         
-    var results = closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig);
+    var results = closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig, false);
     if(results == 2) {
         two.unbind('update', movingCamera);
         two.unbind('update', zoomingOut);
         
         cam_x_target = camera.translation.x;
         cam_y_target = camera.translation.y;
+
+        drawn_lines[cameraIndex] = true;
         
         //hoverEvent();
         makeTextVisible(cameraIndex, 1);
+        addExp();
     } else if (results == 1) {
         makeAllElseInvisible();
     }
 }
 
 function movingCameraHome() {            
-    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig) == 2) {
+    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig, false) == 2) {
         two.unbind('update', movingCameraHome);
     }
 }
@@ -483,12 +576,53 @@ function makeAllElseInvisible() {
 }
 
 function makeAllElseVisible() {
-    for (var i = 0; i < cameraIndex; i++) {
+    for (var i = 0; i <= cameraIndex; i++) {
         events[i].scale = size_factor;
         for (var j = 0; j < subevents[i].length; j++) {
             subevents[i][j].scale = subsize_factor;
             sublines[i][j].scale = 1;
         }
+    }
+}
+
+function addExp() {
+    while (exps.length > 0) {
+        exps.pop();
+        exp_x_orig.pop();
+        exp_y_orig.pop();
+        exp_x_target.pop();
+        exp_y_target.pop();
+    }
+    
+    for (var j = 0; j < subevent_types[cameraIndex].length; j++) {
+        var type = subevent_types[cameraIndex][j];        
+        var subevent = subevents[cameraIndex][j];
+        
+        var exp = new Two.Ellipse(subevent.translation.x + camera.translation.x, subevent.translation.y + camera.translation.y, 10, 10);
+        exp.fill = 'rgba(0, 0, 0, 1)';
+        scoreboard.add(exp);
+        exps.push(exp);
+        
+        exp_x_orig.push(exp.translation.x);
+        exp_y_orig.push(exp.translation.y);
+        exp_x_target.push(250);
+        exp_y_target.push(120);
+    }
+    
+    two.unbind('update', updateExp);
+    two.bind('update', updateExp);
+}
+
+function updateExp() {
+    var count = 0;
+    for (var j = 0; j < exps.length; j++) {
+        if (closeIn(exps[j], exp_x_target[j], exp_y_target[j], exp_x_orig[j], exp_y_orig[j], true) == 2) {
+            count++;
+        }
+    }
+    
+    if (count == exps.length) {
+        two.unbind('update', updateExp);
     }
 }
 
@@ -630,7 +764,7 @@ function zoomingOut() {
 
 // General math functions
 
-function closeIn(element, x_target, y_target, x_original, y_original) {
+function closeIn(element, x_target, y_target, x_original, y_original, exact) {
     var x_curr = element.translation.x;
     var y_curr = element.translation.y;
 
@@ -651,10 +785,16 @@ function closeIn(element, x_target, y_target, x_original, y_original) {
         element.translation.y += ((y_target - y_curr)/speed);   
     }
 
-    if (progress > 0.995) {
-        return 2;
-    } else if (progress > 0.5) {
-        return 1;
+    if (exact == true) {
+        if (progress > 0.999) {
+            return 2;
+        }
+    } else {
+        if (progress > 0.995) {
+            return 2;
+        } else if (progress > 0.5) {
+            return 1;
+        }
     }
     return 0;
 }
