@@ -65,6 +65,7 @@ var title_target = 0;
 var text_speed = 1;
 
 $(document).ready(function() {
+    console.log("v5");
     addEvent(500, 100, 1, 2);
     addSubEvent(0, -22.5, 1, false, 0);
     addSubEvent(0, 157.5, 2, false, 0);
@@ -616,7 +617,7 @@ function addExp() {
 function updateExp() {
     var count = 0;
     for (var j = 0; j < exps.length; j++) {
-        if (closeIn(exps[j], exp_x_target[j], exp_y_target[j], exp_x_orig[j], exp_y_orig[j], true) == 2) {
+        if (closeIn2(exps[j], exp_x_target[j], exp_y_target[j], exp_x_orig[j], exp_y_orig[j], true) == 2) {
             count++;
         }
     }
@@ -765,6 +766,43 @@ function zoomingOut() {
 // General math functions
 
 function closeIn(element, x_target, y_target, x_original, y_original, exact) {
+    var x_curr = element.translation.x;
+    var y_curr = element.translation.y;
+
+    var progress = Math.sqrt(Math.pow(x_curr - x_original, 2) + Math.pow(y_curr - y_original, 2)) / Math.sqrt(Math.pow(x_target - x_original, 2) + Math.pow(y_target - y_original, 2));
+    
+    if (isNaN(progress)) {
+        progress = 1;
+    }
+    
+    if (progress < 0.5) {
+        var unit_x = (x_target - x_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
+        var unit_y = (y_target - y_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
+
+        element.translation.x += ((x_curr - x_original + (unit_x * speed))/speed);
+        element.translation.y += ((y_curr - y_original + (unit_y * speed))/speed);
+    } else {
+        element.translation.x += ((x_target - x_curr)/speed);
+        element.translation.y += ((y_target - y_curr)/speed);   
+    }
+
+    if (exact == true) {
+        if (progress > 0.999) {
+            return 2;
+        }
+    } else {
+        if (progress > 0.995) {
+            return 2;
+        } else if (progress > 0.5) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+//Necessary for a stupid safari bug
+
+function closeIn2(element, x_target, y_target, x_original, y_original, exact) {
     var x_curr = element.translation.x;
     var y_curr = element.translation.y;
 
