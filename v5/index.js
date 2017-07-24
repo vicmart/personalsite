@@ -31,11 +31,11 @@ var prev_y = 0;
 
 var size = 200;
 var subsize = 100;
-var speed = 12.0;
+var speed = 8.0;
 var size_factor = size/400;
 var subsize_factor = subsize/400;
 
-var scoreboard_width = 500;
+var scoreboard_width = 490;
 var scoreboard_height = 285;
 
 var elem = document.getElementById('draw-shapes');
@@ -50,6 +50,7 @@ controls.translation.set(window.innerWidth - 400, 0);
 var events = [];
 var subevents = [];
 var subevent_types = [];
+var score_counts = [];
 var lines = [];
 var sublines = [];
 var drawn_lines = [];
@@ -69,53 +70,53 @@ $(document).ready(function() {
     addEvent(500, 100, 1, 2);
     addSubEvent(0, -22.5, 1, false, 0);
     addSubEvent(0, 157.5, 2, false, 0);
-    addSubEvent(0, 202.5, 2, false, 1);
+    addSubEvent(0, 180, 2, false, 1);
 
     addEvent(2300, 1900, 2, 0);
-    addSubEvent(1, -22.5, 2, false);
-    addSubEvent(1, 22.5, 2, false);
-    addSubEvent(1, 202.5, 2, true);
-    addSubEvent(1, 180, 2, false);
-    addSubEvent(1, 0, 2, false);
+    addSubEvent(1, -22.5, 2, false, 2);
+    addSubEvent(1, 22.5, 2, false, 2);
+    addSubEvent(1, 157.5, 2, false, 2);
+    addSubEvent(1, 180, 2, false, 2);
+    addSubEvent(1, 0, 2, false, 2);
     
     addEvent(2300, 900, 3, 1);
     
     addEvent(3100, 100, 2, 2);
-    addSubEvent(3, 202.5, 2, false);
-    addSubEvent(3, -22.5, 2, false);
+    addSubEvent(3, 180, 2, false, 4);
+    addSubEvent(3, -22.5, 2, false, 4);
     
     addEvent(4700, 1700, 3, 1);
-    addSubEvent(4, -22.5, 2, false);
-    addSubEvent(4, 0, 1, false);
-    addSubEvent(4, 22.5, 2, false);
-    addSubEvent(4,-45, 2, false);
+    addSubEvent(4, -22.5, 2, false, 3);
+    addSubEvent(4, 0, 1, false, 3);
+    addSubEvent(4, 22.5, 2, false, 3);
+    addSubEvent(4,-45, 2, false, 3);
     
     addEvent(3700, 2700, 2, 0);
-    addSubEvent(5, 22.5, 2, false);
+    addSubEvent(5, 22.5, 2, false, 0);
     
     addEvent(1300, 2700, 2, 0);
-    addSubEvent(6, -22.5, 2, false);
-    addSubEvent(6, 22.5, 2, false);
-    addSubEvent(6, 157.5, 2, false);
+    addSubEvent(6, -22.5, 2, false, 4);
+    addSubEvent(6, 22.5, 2, false, 4);
+    addSubEvent(6, 157.5, 2, false, 4);
     
     addEvent(500, 1900, 2, 2);
-    addSubEvent(7, -22.5, 2, false);
-    addSubEvent(7, 0, 2, false);
-    addSubEvent(7, 157.5, 2, false);
-    addSubEvent(7, 180, 2, false);
-    addSubEvent(7, 202.5, 2, false);
+    addSubEvent(7, -22.5, 2, false, 1);
+    addSubEvent(7, 0, 2, false, 1);
+    addSubEvent(7, 157.5, 2, false, 1);
+    addSubEvent(7, 180, 2, false, 1);
+    addSubEvent(7, 22.5, 2, false, 1);
     
     addEvent(500, 3600, 2, 0);
-    addSubEvent(8, 202.5, 2, false);
-    addSubEvent(8, -22.5, 2, false);
-    addSubEvent(8, 157.5, 2, false);
+    addSubEvent(8, 180, 2, false, 0);
+    addSubEvent(8, -22.5, 2, false, 0);
+    addSubEvent(8, 157.5, 2, false, 0);
     
     addEvent(4500, 3600, 2, 0);
-    addSubEvent(9, 0, 2, false);
-    addSubEvent(9, 202.5, 2, false);
+    addSubEvent(9, 0, 2, false, 4);
+    addSubEvent(9, 22.5, 2, false, 4);
     
     addEvent(5400, 2700, 2, 3);
-    addSubEvent(10, 202.5, 2, false);
+    addSubEvent(10, 180, 2, false, 3);
     
     addEvents();
     
@@ -127,7 +128,7 @@ $(document).ready(function() {
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
     //setTimeout(zoomOut, cameraTimer+=0);
     
-    /**for (var i = 1; i < 11; i++) {
+    for (var i = 1; i < 11; i++) {
         if (i % 3 == 0) {
             setTimeout(zoomOut, cameraTimer+=3000);
             setTimeout(zoomIn, cameraTimer+=3000, i);
@@ -140,7 +141,7 @@ $(document).ready(function() {
         setTimeout(moveCamera, cameraTimer+=3000, i);
     }
         
-    setTimeout(zoomOut, cameraTimer+=3000);**/
+    setTimeout(zoomOut, cameraTimer+=3000);
 
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
 
@@ -148,6 +149,8 @@ $(document).ready(function() {
     
     makeTextInvisible(-1, 10000000);
 });
+
+// Add event functions
 
 function addEvent(x, y, index, location) {  
     max_x = Math.max(x + (size/2), max_x);
@@ -162,9 +165,7 @@ function addEvent(x, y, index, location) {
     camera.add(line);
     
     var shape = two.interpret($(".images svg")[index]).center();
-    //shape.fill = 'green';
     shape.visible = true;
-    //shape.noStroke();
     shape.scale = 0;
     shape.translation.set(x, y);
     events.push(shape);
@@ -320,28 +321,33 @@ function addTally() {
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
+    score_counts.push(0);
 
     title = new Two.Text("WEB DESIGN & DEVELOPMENT", 20, 140);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
+    score_counts.push(0);
         
     title = new Two.Text("RESEARCH", 20, 170);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
+    score_counts.push(0);
 
     title = new Two.Text("TEAMWORK", 20, 200);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
+    score_counts.push(0);
 
     title = new Two.Text("LEADERSHIP", 20, 230);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
+    score_counts.push(0);
     
-    var line = two.makeLine(20, 85, 450, 85);
+    var line = two.makeLine(20, 85, 440, 85);
     line.stroke = "rgba(0, 0, 0, 0.25)";
     line.linewidth = 2;
     scoreboard.add(line);
@@ -358,7 +364,7 @@ function hoverEvent() {
     hoverIndex = cameraIndex;
 
     two.unbind('update', hoveringEvent);
-    
+
     obj_x_orig = [];
     obj_y_orig = [];
     obj_x_curr = [];
@@ -510,7 +516,7 @@ function movingCamera() {
         }
     }
         
-    var results = closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig, false);
+    var results = closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig);
     if(results == 2) {
         two.unbind('update', movingCamera);
         two.unbind('update', zoomingOut);
@@ -518,18 +524,22 @@ function movingCamera() {
         cam_x_target = camera.translation.x;
         cam_y_target = camera.translation.y;
 
+        if (drawn_lines[cameraIndex] == false) {
+            addExp();
+        }
+
         drawn_lines[cameraIndex] = true;
         
         //hoverEvent();
         makeTextVisible(cameraIndex, 1);
-        addExp();
+        updateAllExp();
     } else if (results == 1) {
         makeAllElseInvisible();
     }
 }
 
 function movingCameraHome() {            
-    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig, false) == 2) {
+    if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig) == 2) {
         two.unbind('update', movingCameraHome);
     }
 }
@@ -564,6 +574,8 @@ function checkAllVisited() {
     }
 }
 
+// Optimizing functions
+
 function makeAllElseInvisible() {
     for (var i = 0; i < events.length; i++) {
         if (i != cameraIndex) {
@@ -586,6 +598,31 @@ function makeAllElseVisible() {
     }
 }
 
+// EXP functions
+
+function updateAllExp() {
+    var temp_score_counts = [];
+
+    for (var i = 0; i < score_counts.length; i++) {
+        temp_score_counts.push(0);
+    }
+    
+    for (var i = 0; i <= cameraIndex; i++) {
+        for (var j = 0; j < subevents[i].length; j++) {
+            temp_score_counts[subevent_types[i][j]]++;
+        }
+    }
+    
+    for (var i = 0; i < score_counts.length; i++) {
+        while (score_counts[i] < temp_score_counts[i]) {
+            var exp = new Two.Ellipse(250 + (30 * score_counts[i]++), 110 + (30 * i), 10, 10);
+            exp.fill = 'rgba(0, 0, 0, 1)';
+            exp.scale = 1;
+            scoreboard.add(exp);            
+        }
+    }
+}
+
 function addExp() {
     while (exps.length > 0) {
         exps.pop();
@@ -601,13 +638,14 @@ function addExp() {
         
         var exp = new Two.Ellipse(subevent.translation.x + camera.translation.x, subevent.translation.y + camera.translation.y, 10, 10);
         exp.fill = 'rgba(0, 0, 0, 1)';
+        exp.scale = 0;
         scoreboard.add(exp);
         exps.push(exp);
         
         exp_x_orig.push(exp.translation.x);
         exp_y_orig.push(exp.translation.y);
-        exp_x_target.push(250);
-        exp_y_target.push(120);
+        exp_x_target.push(250 + (30 * score_counts[type]++));
+        exp_y_target.push(110 + (30 * type));
     }
     
     two.unbind('update', updateExp);
@@ -617,7 +655,7 @@ function addExp() {
 function updateExp() {
     var count = 0;
     for (var j = 0; j < exps.length; j++) {
-        if (closeIn2(exps[j], exp_x_target[j], exp_y_target[j], exp_x_orig[j], exp_y_orig[j], true) == 2) {
+        if (closeIn2(exps[j], exp_x_target[j], exp_y_target[j], exp_x_orig[j], exp_y_orig[j]) == 2) {
             count++;
         }
     }
@@ -719,6 +757,7 @@ function zoomOut() {
 
     checkAllVisited();
     makeAllElseVisible();
+    updateAllExp();
     
     makeTextInvisible(-1, 1);
     
@@ -765,7 +804,7 @@ function zoomingOut() {
 
 // General math functions
 
-function closeIn(element, x_target, y_target, x_original, y_original, exact) {
+function closeIn(element, x_target, y_target, x_original, y_original) {
     var x_curr = element.translation.x;
     var y_curr = element.translation.y;
 
@@ -786,57 +825,45 @@ function closeIn(element, x_target, y_target, x_original, y_original, exact) {
         element.translation.y += ((y_target - y_curr)/speed);   
     }
 
-    if (exact == true) {
-        if (progress > 0.999) {
-            return 2;
-        }
-    } else {
-        if (progress > 0.995) {
-            return 2;
-        } else if (progress > 0.5) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-//Necessary for a stupid safari bug
-
-function closeIn2(element, x_target, y_target, x_original, y_original, exact) {
-    var x_curr = element.translation.x;
-    var y_curr = element.translation.y;
-
-    var progress = Math.sqrt(Math.pow(x_curr - x_original, 2) + Math.pow(y_curr - y_original, 2)) / Math.sqrt(Math.pow(x_target - x_original, 2) + Math.pow(y_target - y_original, 2));
-    
-    if (isNaN(progress)) {
-        progress = 1;
-    }
-    
-    if (progress < 0.5) {
-        var unit_x = (x_target - x_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
-        var unit_y = (y_target - y_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
-
-        element.translation.x += ((x_curr - x_original + (unit_x * speed))/speed);
-        element.translation.y += ((y_curr - y_original + (unit_y * speed))/speed);
-    } else {
-        element.translation.x += ((x_target - x_curr)/speed);
-        element.translation.y += ((y_target - y_curr)/speed);   
-    }
-
-    if (exact == true) {
-        if (progress > 0.999) {
-            return 2;
-        }
-    } else {
-        if (progress > 0.995) {
-            return 2;
-        } else if (progress > 0.5) {
-            return 1;
-        }
+    if (progress > 0.995) {
+        return 2;
+    } else if (progress > 0.5) {
+        return 1;
     }
     return 0;
 }
 
 function toRadians (angle) {
     return angle * (Math.PI / 180);
+}
+
+//Necessary for a stupid safari bug
+
+function closeIn2(element, x_target, y_target, x_original, y_original) {
+    var x_curr = element.translation.x;
+    var y_curr = element.translation.y;
+
+    var progress = Math.sqrt(Math.pow(x_curr - x_original, 2) + Math.pow(y_curr - y_original, 2)) / Math.sqrt(Math.pow(x_target - x_original, 2) + Math.pow(y_target - y_original, 2));
+    
+    element.scale = Math.min(1, progress * 5);
+    
+    if (isNaN(progress)) {
+        progress = 1;
+    }
+    
+    if (progress < 0.5) {
+        var unit_x = (x_target - x_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
+        var unit_y = (y_target - y_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
+
+        element.translation.x += ((x_curr - x_original + (unit_x * speed))/speed);
+        element.translation.y += ((y_curr - y_original + (unit_y * speed))/speed);
+    } else {
+        element.translation.x += ((x_target - x_curr)/speed);
+        element.translation.y += ((y_target - y_curr)/speed);   
+    }
+
+    if (progress > 0.9999999) {
+        return 2;
+    }
+    return 0;
 }
