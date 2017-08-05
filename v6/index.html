@@ -62,10 +62,11 @@
                 font-size: 1.5em;
                 left: 0px;
                 opacity: 1;
+                color: white;
             }
                         
             .pretitle {
-                color: rgba(0, 0, 0, 0.25);
+                color: rgba(255, 255, 255, 0.35);
             }
             
             .title {
@@ -74,7 +75,7 @@
             }
             
             .subtitle {
-                color: rgba(0, 0, 0, 0.5);
+                color: rgba(255, 255, 255, 0.6);
                 font-size: 1.5em;
             }
             
@@ -119,6 +120,7 @@
                 margin-left: 0px;
                 margin-top: 0px;
                 margin-right: 0px;
+                fill: white;
             }
             
             .subevent > .text {
@@ -131,44 +133,34 @@
             
             .blue .text {
                 background-color: #053978;
-                color: white;
             }
             
-            .blue .pretitle {
-                color: rgba(255, 255, 255, 0.35);
-            }
-            
-            .blue .subtitle {
-                color: rgba(255, 255, 255, 0.6);
-            }
-            
-            .blue .icon {
+            .blue > .icon-wrapper > .icon {
                 fill: #053978;
-            }
-            
-            .blue .subevent .icon {
-                fill: white;
             }
             
             .red .text {
                 background-color: #8B0000;
-                color: white;
+            }
+
+            .red > .icon-wrapper > .icon {
+                fill: #8B0000;
             }
             
-            .red .pretitle {
-                color: rgba(255, 255, 255, 0.35);
+            .medium-red .text {
+                background-color: #CE887F;
             }
             
-            .red .subtitle {
-                color: rgba(255, 255, 255, 0.6);
+            .medium-red > .icon-wrapper > .icon {
+                fill: #CE887F;
             }
             
-            .red .icon {
-                fill: #053978;
+            .light-red .text {
+                background-color: #CE887F;
             }
             
-            .red .subevent .icon {
-                fill: white;
+            .light-red > .icon-wrapper > .icon {
+                fill: #CE887F;
             }
             
             @media screen and (max-width: 850px) {
@@ -202,7 +194,7 @@
                 }
             }
         </style>
-        <div class="event animated">
+        <div class="event animated red">
             <div class="icon-wrapper animated hidden">
                 <img class="icon animated" src="Leader.svg">
             </div>
@@ -235,7 +227,7 @@
                 </div>
             </div>
         </div>
-        <div class="event animated blue">
+        <div class="event animated medium-red">
             <div class="icon-wrapper animated hidden">
                 <img class="icon animated" src="Leader.svg">
             </div>
@@ -282,7 +274,33 @@
                 </div>
             </div>
         </div>
-        <div class="event animated red">
+        <div class="event animated light-red">
+            <div class="icon-wrapper animated hidden">
+                <img class="icon animated" src="Leader.svg">
+            </div>
+            <div class="text animated big-text">
+                <div class="pretitle animated hidden big-pretitle">(First)</div>
+                <div class="title animated hidden big-title">PROGRAMMING CLUB</div>
+                <div class="subtitle animated hidden big-subtitle">11th Grade</div>
+                <div class="subevent animated hidden big-subevent">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">High School Hobby Club</div>
+                        <div class="subtitle">11th Grade</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">College Hobby Club</div>
+                        <div class="subtitle">Freshman Year</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                </div>
+            </div>
+        </div>
+        <div class="event animated blue">
             <div class="icon-wrapper animated hidden">
                 <img class="icon animated" src="Leader.svg">
             </div>
