@@ -7,6 +7,8 @@ var cam_y_target = 0;
 var cam_zoom_target = 0;
 var cam_zoom_orig = 0;
 var cam_zoom_in = false;
+var fake_cam_x_curr = 0;
+var fake_cam_y_curr = 0;
 
 var hoverIndex = 0;
 var obj_x_orig = [];
@@ -25,6 +27,10 @@ var exp_y_target = [];
 
 var max_x = 0;
 var max_y = 0;
+var submin_x = [];
+var submin_y = [];
+var submax_x = [];
+var submax_y = [];
 
 var prev_x = 0;
 var prev_y = 0;
@@ -32,22 +38,26 @@ var prev_y = 0;
 var size = 200;
 var subsize = 100;
 var speed = 8.0;
+var zooming = false;
+var zoom_max = 1;
 var size_factor = size/400;
 var subsize_factor = subsize/400;
 
-var scoreboard_width = 490;
-var scoreboard_height = 285;
+var scoreboard_width = 435;
+var scoreboard_height = 225;
 
 var elem = document.getElementById('draw-shapes');
 var two = new Two({type: Two.Types["svg"], width: window.innerWidth, height: window.innerHeight }).appendTo(elem);
 var camera = two.makeGroup();
 var scoreboard = two.makeGroup();
 var controls = two.makeGroup();
+var zui = new ZUI(two);
 camera.translation.set(0, 0);
 scoreboard.translation.set(0, 0);
-controls.translation.set(window.innerWidth - 400, 0);
+controls.translation.set(scoreboard_width, 0);
 
 var events = [];
+var event_orientations = [];
 var subevents = [];
 var subevent_types = [];
 var score_counts = [];
@@ -65,57 +75,65 @@ var target_text = -1;
 var title_target = 0;
 var text_speed = 1;
 
+var event_titles = ["COMPUTER PROGRAM", "RESEARCH PAPER", "PROGRAMMING CLUB", "JOHNS HOPKINS UNIVERSITY",  "DESIGN TEAM", "ANDROID APPLICATION", "COURSE ASSISTANT", "DESIGN TEAM LEADER", "WEBMASTER", "iOS APPLICATION", "SUMMER SCHOLAR"];
+
+var subevent_titles = ["7th Grade", "11th Grade", "11th Grade", "Biomedical Engineering & Computer Science",  "Freshman Year", "Freshman Year", "Sophomore Year", "Sophomore Year", "Sophomore Year", "Junior Year", "Junior Year"];
+
+var preevent_titles = ["(First)", "(First)", "(First)", "(First Enrolled at)", "(First Experience on a)", "(First)", "(First Job as a)", "(First Experience as a)", "(First Position as a)", "(First)", "(First Experience as a)"]
+
 $(document).ready(function() {
     console.log("v5");
-    addEvent(500, 100, 1, 2);
-    addSubEvent(0, -22.5, 1, false, 0);
+    
+    var cursor = 0;
+    addEvent(500, 100, 1, 2, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
+    addSubEvent(0, 0, 1, false, 0);
     addSubEvent(0, 157.5, 2, false, 0);
     addSubEvent(0, 180, 2, false, 1);
 
-    addEvent(2300, 1900, 2, 0);
+    addEvent(2500, 5100, 2, 0, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
     addSubEvent(1, -22.5, 2, false, 2);
     addSubEvent(1, 22.5, 2, false, 2);
     addSubEvent(1, 157.5, 2, false, 2);
     addSubEvent(1, 180, 2, false, 2);
     addSubEvent(1, 0, 2, false, 2);
-    
-    addEvent(2300, 900, 3, 1);
-    
-    addEvent(3100, 100, 2, 2);
-    addSubEvent(3, 180, 2, false, 4);
-    addSubEvent(3, -22.5, 2, false, 4);
-    
-    addEvent(4700, 1700, 3, 1);
+
+    addEvent(4500, 100, 2, 2, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
+    addSubEvent(2, 180, 2, false, 4);
+    addSubEvent(2, 157.5, 2, false, 4);
+
+    addEvent(6000, 200, 3, 2, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
+
+    addEvent(7500, 1100, 3, 1, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
     addSubEvent(4, -22.5, 2, false, 3);
     addSubEvent(4, 0, 1, false, 3);
     addSubEvent(4, 22.5, 2, false, 3);
     addSubEvent(4,-45, 2, false, 3);
     
-    addEvent(3700, 2700, 2, 0);
+    addEvent(8000, 2600, 2, 1, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
     addSubEvent(5, 22.5, 2, false, 0);
     
-    addEvent(1300, 2700, 2, 0);
+    addEvent(7500, 4100, 2, 0, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
     addSubEvent(6, -22.5, 2, false, 4);
     addSubEvent(6, 22.5, 2, false, 4);
-    addSubEvent(6, 157.5, 2, false, 4);
+    addSubEvent(6, 0, 2, false, 4);
     
-    addEvent(500, 1900, 2, 2);
-    addSubEvent(7, -22.5, 2, false, 1);
-    addSubEvent(7, 0, 2, false, 1);
-    addSubEvent(7, 157.5, 2, false, 1);
-    addSubEvent(7, 180, 2, false, 1);
-    addSubEvent(7, 22.5, 2, false, 1);
+    addEvent(6000, 4800, 2, 2, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
+    addSubEvent(7, 22.5, 2, false, 4);
+    addSubEvent(7, 0, 2, false, 4);
+
+    addEvent(4500, 5100, 2, 0, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
+    addSubEvent(8, 180, 2, false, 1);
+    addSubEvent(8, 0, 2, false, 1);
+    addSubEvent(8, 157.5, 2, false, 1);
+    addSubEvent(8, -22.5, 2, true, 1);
+    addSubEvent(8, 22.5, 2, false, 1);
     
-    addEvent(500, 3600, 2, 0);
-    addSubEvent(8, 180, 2, false, 0);
-    addSubEvent(8, -22.5, 2, false, 0);
-    addSubEvent(8, 157.5, 2, false, 0);
+    addEvent(4500, 3434, 0, 1, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
+    addSubEvent(9, 0, 2, false, 0);
+    addSubEvent(9, -22.5, 2, false, 0);
+    addSubEvent(9, 22.5, 2, false, 0);
     
-    addEvent(4500, 3600, 2, 0);
-    addSubEvent(9, 0, 2, false, 4);
-    addSubEvent(9, 22.5, 2, false, 4);
-    
-    addEvent(5400, 2700, 2, 3);
+    addEvent(4500, 1768, 3, 3, event_titles[cursor], subevent_titles[cursor], preevent_titles[cursor++]);
     addSubEvent(10, 180, 2, false, 3);
     
     addEvents();
@@ -142,6 +160,7 @@ $(document).ready(function() {
     }
         
     setTimeout(zoomOut, cameraTimer+=3000);
+    //setTimeout(zoomIn, cameraTimer+=3000, 1);
 
     //setTimeout(moveCamera, cameraTimer+=5000, 2);
 
@@ -152,7 +171,11 @@ $(document).ready(function() {
 
 // Add event functions
 
-function addEvent(x, y, index, location) {  
+function addEvent(x, y, index, location, title, subtitle, pretitle) {  
+    submin_x.push(Math.min(x, 100000000));
+    submin_y.push(Math.min(y, 100000000));
+    submax_x.push(Math.max(x + size, 0));
+    submax_y.push(Math.max(y + size, 0));
     max_x = Math.max(x + (size/2), max_x);
     max_y = Math.max(y + (size/2), max_y);
     
@@ -169,6 +192,7 @@ function addEvent(x, y, index, location) {
     shape.scale = 0;
     shape.translation.set(x, y);
     events.push(shape);
+    event_orientations.push(location);
     subevents.push([]);
     subevent_types.push([]);
     sublines.push([]);
@@ -179,7 +203,7 @@ function addEvent(x, y, index, location) {
     var text_offset_y = 0;
     var text_offset_x = 0;
     var alignment = 'center';
-
+    
     if (location == 1) {
         text_offset_x = -0.575 * size;
         text_offset_y = -0.78 * size;
@@ -192,19 +216,19 @@ function addEvent(x, y, index, location) {
         alignment = "left";
     }
     
-    var title = new Two.Text("TITLE GOES HERE", x + text_offset_x, y + size/2 + 55 + text_offset_y);
+    var title = new Two.Text(title, x + text_offset_x, y + size/2 + 55 + text_offset_y);
     title.size = 45;
     title.family = 'Avenir';
     title.alignment = alignment;
     titles.push(title);
-    var subtitle = new Two.Text("Subtitle goes here", x + text_offset_x, y + size/2 + 90 + text_offset_y);
+    var subtitle = new Two.Text(subtitle, x + text_offset_x, y + size/2 + 90 + text_offset_y);
     subtitle.size = 25;
     subtitle.family = 'Avenir';
     subtitle.alignment = alignment;
     subtitle.fill = 'rgba(0, 0, 0, 0.5)';
     subtitles.push(subtitle);
-    var date = new Two.Text("Junior Year // College", x + text_offset_x, y + size/2 + 20 + text_offset_y);
-    date.size = 15;
+    var date = new Two.Text(pretitle, x + text_offset_x, y + size/2 + 20 + text_offset_y);
+    date.size = 20;
     date.family = 'Avenir';
     date.alignment = alignment;
     date.fill = 'rgba(0, 0, 0, 0.5)';
@@ -228,6 +252,10 @@ function addSubEvent(parent_index, angle, index, top_text, type) {
     var x = parent_x + (Math.cos(toRadians(angle)) * 500);
     var y = parent_y + (Math.sin(toRadians(angle)) * 500);
     
+    submin_x[parent_index] = Math.min(x, submin_x[parent_index]);
+    submin_y[parent_index] = Math.min(y, submin_y[parent_index]);
+    submax_x[parent_index] = Math.max(x + size, submax_x[parent_index]);
+    submax_y[parent_index] = Math.max(y + size, submax_y[parent_index]);
     max_x = Math.max(x + (subsize/2), max_x);
     max_y = Math.max(y + (subsize/2), max_y);
     
@@ -300,59 +328,59 @@ function addControls() {
 function addTally() {
     var roundedRect = new Two.RoundedRectangle(scoreboard_width/2 - 50, scoreboard_height/2 - 50, scoreboard_width + 50, scoreboard_height + 50, 20);
     roundedRect.stroke = "black";
-    roundedRect.linewidth = 5;
+    roundedRect.linewidth = 0;
     roundedRect.fill = "rgba(255, 255, 255, 0.75)";
     scoreboard.add(roundedRect);
 
-    var title = new Two.Text("VICTOR DADFAR", 20, 40);
+    var title = new Two.Text("VICTOR DADFAR", 10, 30);
     title.family = 'Avenir';
     title.size = 40;
     title.alignment = 'left';
     scoreboard.add(title);
 
-    title = new Two.Text("SKILLS EARNED", 20, 70);
+    title = new Two.Text("An Interactive List of (Firsts)", 20, 55);
     title.size = 18;
     title.fill = 'rgba(0, 0, 0, 0.35)';
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
 
-    title = new Two.Text("APPLICATION DEVELOPMENT", 20, 110);
+    title = new Two.Text("APPLICATION DEVELOPMENT", 10, 90);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
     score_counts.push(0);
 
-    title = new Two.Text("WEB DESIGN & DEVELOPMENT", 20, 140);
+    title = new Two.Text("WEB DESIGN & DEVELOPMENT", 10, 115);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
     score_counts.push(0);
         
-    title = new Two.Text("RESEARCH", 20, 170);
+    title = new Two.Text("RESEARCH", 10, 140);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
     score_counts.push(0);
 
-    title = new Two.Text("TEAMWORK", 20, 200);
+    title = new Two.Text("TEAM SKILLS", 10, 165);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
     score_counts.push(0);
 
-    title = new Two.Text("LEADERSHIP", 20, 230);
+    title = new Two.Text("LEADERSHIP", 10, 190);
     title.alignment = 'left';
     title.family = 'Avenir';
     scoreboard.add(title);
     score_counts.push(0);
     
-    var line = two.makeLine(20, 85, 440, 85);
+    var line = two.makeLine(10, 70, 410, 70);
     line.stroke = "rgba(0, 0, 0, 0.25)";
     line.linewidth = 2;
     scoreboard.add(line);
     
-    line = two.makeLine(230, 100, 230, 240);
+    line = two.makeLine(230, 80, 230, 200);
     line.stroke = "rgba(0, 0, 0, 0.25)";
     line.linewidth = 2;
     scoreboard.add(line);
@@ -450,15 +478,46 @@ function moveCamera(index) {
     two.unbind('update', movingCamera);
     //stopHovering();
     
+    for (var i = 0; i < events.length; i++) {
+        for (var j = 0; j < subevents[i].length; j++) {
+            subevents[i][j].opacity = 1;
+            sublines[i][j].opacity = 1;
+        }
+    }
+
+    scoreboard.opacity = 1;
+    
     checkAllVisited();
     cameraIndex = index;
     
     cam_x_orig = camera.translation.x;
     cam_y_orig = camera.translation.y;
     
-    cam_x_target = (window.innerWidth/2) - events[cameraIndex].translation.x;
-    cam_y_target = (window.innerHeight/2) - events[cameraIndex].translation.y;
-        
+    var orientation = event_orientations[cameraIndex];
+    
+    var x_diff = 0;
+    var y_diff = 0;
+    
+    switch(orientation) {
+        case 0:
+            y_diff = 50;
+            break;
+        case 1:
+            x_diff = -50;
+            break;
+        case 2:
+            y_diff = -50;
+            break;
+        case 3:
+            x_diff = 50;
+            break;
+    }
+    
+    cam_zoom_orig = camera.scale;
+    cam_zoom_target = camera.scale;
+    
+    cam_x_target = (window.innerWidth/2) - (events[cameraIndex].translation.x);
+    cam_y_target = (window.innerHeight/2) - (events[cameraIndex].translation.y);
     if (cameraIndex > 0) {
         drawn_lines[cameraIndex - 1] = true;
     }
@@ -489,7 +548,7 @@ function movingCamera() {
             selected_line.translation.set(x_translation, y_translation);
             selected_line.scale = Math.max(0, (1 - percentage));
         }
-
+        
         selected_element.scale = (1 - percentage) * size_factor;        
 
         if (percentage < 0.1) {
@@ -520,6 +579,7 @@ function movingCamera() {
     if(results == 2) {
         two.unbind('update', movingCamera);
         two.unbind('update', zoomingOut);
+        zooming = false;
         
         cam_x_target = camera.translation.x;
         cam_y_target = camera.translation.y;
@@ -541,6 +601,8 @@ function movingCamera() {
 function movingCameraHome() {            
     if(closeIn(camera, cam_x_target, cam_y_target, cam_x_orig, cam_y_orig) == 2) {
         two.unbind('update', movingCameraHome);
+        two.unbind('update', zoomingOut);
+        zooming = false;
     }
 }
 
@@ -560,7 +622,7 @@ function checkAllVisited() {
 
             selected_line.vertices[1].x = events[i].translation.x - selected_line.translation.x;
             selected_line.vertices[1].y = events[i].translation.y - selected_line.translation.y;
-        } 
+        }
         
         for (var j = 0; j < subevents[i].length; j++) {
             var selected_line = sublines[i][j];
@@ -615,7 +677,7 @@ function updateAllExp() {
     
     for (var i = 0; i < score_counts.length; i++) {
         while (score_counts[i] < temp_score_counts[i]) {
-            var exp = new Two.Ellipse(250 + (30 * score_counts[i]++), 110 + (30 * i), 10, 10);
+            var exp = new Two.Ellipse(250 + (25 * score_counts[i]++), 88 + (25 * i), 7.5, 7.5);
             exp.fill = 'rgba(0, 0, 0, 1)';
             exp.scale = 1;
             scoreboard.add(exp);            
@@ -635,17 +697,19 @@ function addExp() {
     for (var j = 0; j < subevent_types[cameraIndex].length; j++) {
         var type = subevent_types[cameraIndex][j];        
         var subevent = subevents[cameraIndex][j];
-        
-        var exp = new Two.Ellipse(subevent.translation.x + camera.translation.x, subevent.translation.y + camera.translation.y, 10, 10);
-        exp.fill = 'rgba(0, 0, 0, 1)';
-        exp.scale = 0;
-        scoreboard.add(exp);
-        exps.push(exp);
-        
-        exp_x_orig.push(exp.translation.x);
-        exp_y_orig.push(exp.translation.y);
-        exp_x_target.push(250 + (30 * score_counts[type]++));
-        exp_y_target.push(110 + (30 * type));
+
+        if (type <= 4) {
+            var exp = new Two.Ellipse(subevent.translation.x + camera.translation.x, subevent.translation.y + camera.translation.y, 7.5, 7.5);
+            exp.fill = 'rgba(0, 0, 0, 1)';
+            exp.scale = 0;
+            scoreboard.add(exp);
+            exps.push(exp);
+
+            exp_x_orig.push(exp.translation.x);
+            exp_y_orig.push(exp.translation.y);
+            exp_x_target.push(250 + (25 * score_counts[type]++));
+            exp_y_target.push(88 + (25 * type));   
+        }
     }
     
     two.unbind('update', updateExp);
@@ -745,6 +809,8 @@ function zoomIn(index) {
     cam_zoom_orig = camera.scale;
     cam_zoom_in = true;
         
+    zooming = true;
+    
     two.bind('update', zoomingOut);
     two.bind('update', movingCamera);
 }
@@ -780,7 +846,7 @@ function zoomOut() {
     var x_per = window.innerWidth/max_x;
     var y_per = window.innerHeight/max_y;
     
-    cam_zoom_target = Math.min(x_per, y_per) - 0.05;
+    cam_zoom_target = Math.min(x_per, y_per) - 0.02;
     
     cam_x_orig = camera.translation.x;
     cam_y_orig = camera.translation.y;
@@ -789,17 +855,46 @@ function zoomOut() {
     cam_zoom_orig = camera.scale;
     cam_zoom_in = false;
     
+    zooming = true;
+    
     two.bind('update', zoomingOut);
-    two.bind('update', movingCameraHome);    
+    //two.bind('update', movingCameraHome);    
 }
 
 function zoomingOut() {    
     var x_curr = camera.translation.x;
     var y_curr = camera.translation.y;
 
-    var progress = Math.sqrt(Math.pow(x_curr - cam_x_orig, 2) + Math.pow(y_curr - cam_y_orig, 2)) / Math.sqrt(Math.pow(cam_x_target - cam_x_orig, 2) + Math.pow(cam_y_target - cam_y_orig, 2));
+    var progress = Math.sqrt(Math.pow(fake_cam_x_curr - cam_x_orig, 2) + Math.pow(fake_cam_y_curr - cam_y_orig, 2)) / Math.sqrt(Math.pow(cam_x_target - cam_x_orig, 2) + Math.pow(cam_y_target - cam_y_orig, 2));
 
-    camera.scale = (cam_zoom_orig * (1 - progress)) + (cam_zoom_target * progress);
+    if (progress < 0.5) {
+        var unit_x = (x_target - fake_cam_x_curr) / Math.sqrt(Math.pow(x_target - fake_cam_x_curr, 2) + Math.pow(y_target - fake_cam_y_curr, 2));
+        var unit_y = (y_target - fake_cam_y_curr) / Math.sqrt(Math.pow(x_target - fake_cam_x_curr, 2) + Math.pow(y_target - fake_cam_y_curr, 2));
+
+        fake_cam_x_curr += ((fake_cam_x_curr - x_original + (fake_cam_x_curr * temp_speed))/temp_speed);
+        fake_cam_y_curr += ((fake_cam_y_curr - y_original + (fake_cam_y_curr * temp_speed))/temp_speed);
+    } else {
+        fake_cam_x_curr += ((x_target - fake_cam_x_curr)/temp_speed);
+        fake_cam_y_curr += ((y_target - fake_cam_y_curr)/temp_speed);   
+    }
+    
+    var new_scale = (cam_zoom_orig * (1 - progress)) + (cam_zoom_target * progress);
+    zui.zoomSet(new_scale, window.innerWidth/2, window.innerHeight/2);
+
+    var change = 1 - progress;
+
+    if (cam_x_target < cam_x_orig) {
+        change = progress;
+    }
+
+    for (var i = 0; i < events.length; i++) {
+        for (var j = 0; j < subevents[i].length; j++) {
+            subevents[i][j].opacity = change;
+            sublines[i][j].opacity = change;
+        }
+    }
+
+    scoreboard.opacity = change;
 }
 
 // General math functions
@@ -814,17 +909,23 @@ function closeIn(element, x_target, y_target, x_original, y_original) {
         progress = 1;
     }
     
+    var temp_speed = speed;
+    
+    /**if (zooming == true) {
+        temp_speed = speed * 1.5
+    }**/
+    
     if (progress < 0.5) {
         var unit_x = (x_target - x_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
         var unit_y = (y_target - y_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
 
-        element.translation.x += ((x_curr - x_original + (unit_x * speed))/speed);
-        element.translation.y += ((y_curr - y_original + (unit_y * speed))/speed);
+        element.translation.x += ((x_curr - x_original + (unit_x * temp_speed))/temp_speed);
+        element.translation.y += ((y_curr - y_original + (unit_y * temp_speed))/temp_speed);
     } else {
-        element.translation.x += ((x_target - x_curr)/speed);
-        element.translation.y += ((y_target - y_curr)/speed);   
+        element.translation.x += ((x_target - x_curr)/temp_speed);
+        element.translation.y += ((y_target - y_curr)/temp_speed);   
     }
-
+        
     if (progress > 0.995) {
         return 2;
     } else if (progress > 0.5) {
@@ -855,11 +956,11 @@ function closeIn2(element, x_target, y_target, x_original, y_original) {
         var unit_x = (x_target - x_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
         var unit_y = (y_target - y_curr) / Math.sqrt(Math.pow(x_target - x_curr, 2) + Math.pow(y_target - y_curr, 2));
 
-        element.translation.x += ((x_curr - x_original + (unit_x * speed))/speed);
-        element.translation.y += ((y_curr - y_original + (unit_y * speed))/speed);
+        element.translation.x += (x_curr - x_original + (unit_x * speed))/speed;
+        element.translation.y += (y_curr - y_original + (unit_y * speed))/speed;
     } else {
-        element.translation.x += ((x_target - x_curr)/speed);
-        element.translation.y += ((y_target - y_curr)/speed);   
+        element.translation.x += (x_target - x_curr)/speed;
+        element.translation.y += (y_target - y_curr)/speed;   
     }
 
     if (progress > 0.9999999) {

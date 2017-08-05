@@ -147,7 +147,7 @@ h1 {
 .frame{
 	position: relative;
 	float: left;
-	width: 16.66666666666667%;
+	width: 20%;
 	height: 100%;
 	z-index: 0;
     
@@ -168,7 +168,7 @@ h1 {
 .fake-frame {
     position: relative;
 	float: left;
-	width: 16.66666666666667%;
+	width: 20%;
 	height: 100%;
 	z-index: 10;
     
@@ -184,7 +184,7 @@ h1 {
     position: absolute;
     top: calc(100% + 14px);
     left: 0px;
-    width: 16.6%;
+    width: 20%;
     font-size: 2em;
     color: black;
     z-index: 10;
@@ -216,19 +216,19 @@ h1 {
 }
 
 #title2 {
-    left: calc(16.67% + 50px);
+    left: calc(20% + 50px);
 }
 
 #title3 {
-    left: calc(33.33% + 100px);
+    left: calc(40% + 100px);
 }
 
 #title4 {
-    left: calc(50% + 150px);
+    left: calc(60% + 150px);
 }
 
 #title5 {
-    left: calc(66.67% + 200px);
+    left: calc(80% + 200px);
 }
 
 
@@ -473,7 +473,7 @@ h1 {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	width: 600%;
+	width: 500%;
 	height: 100%;
 	
     -webkit-transition: all 0.5s;
@@ -484,7 +484,7 @@ h1 {
 }
 
 .all-frames-zoom {
-    width: 450%;
+    width: 360%;
     height: 75%;
     left: 12.5%;
     top: 7.25%;

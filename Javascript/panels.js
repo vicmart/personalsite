@@ -14,7 +14,7 @@ var newDrag = 0;
 var currentDrag = 0;
 var smallDrag = 0;
 var shadow_timer = 0;
-var shadow_interval = 30;
+var shadow_interval = 60;
 var momentum = 0;
 var momentumTimer = null;
 var shadowTimer = null;
@@ -40,7 +40,7 @@ $(document).mousedown(function(event) {
 });
 
 $(document).mousemove(function(event) {
-    if (isDragging == true && overview == 1) {
+    /**if (isDragging == true && overview == 1) {
         var oldDrag = newDrag;
         
         newDrag = event.pageX - dragOrigin + currentDrag;        
@@ -50,7 +50,7 @@ $(document).mousemove(function(event) {
         var window_width = window.innerWidth;
         var offset = -1 * active * (window_width * 0.75);
         $(".all-frames").css('left', ((offset - (50 * active)) + (window_width/8) + newDrag) + "px");
-    }
+    }**/
 });
 
 $(document).mouseup(function() {
@@ -60,7 +60,7 @@ $(document).mouseup(function() {
         }
         isDragging = false;    
         currentDrag = newDrag;
-        momentumTimer = setInterval(slide, 20);
+        momentumTimer = setInterval(slide, 16);
     }
 });
 
@@ -74,13 +74,14 @@ function slide() {
     var diff_min = ((offset - (50 * active)) + (window_width/8) + currentDrag) - 100;
     if ((offset - (50 * active)) + (window_width/8) + currentDrag < -0.67 * parseInt($(".all-frames").css("width"))) {
         momentum = (momentum/1.15) - (diff_max/64);
+        console.log("hello");
     } else if ((offset - (50 * active)) + (window_width/8) + currentDrag > 100) {
         momentum = (momentum/1.15) - (diff_min/64);
     } else if (target == -1) {
         momentum = momentum/1.02;
     }
         
-    hoverActive = parseInt((offset - (50 * active)+ (window_width/8) + currentDrag - (window_width/2))/ (-0.17 * parseInt($(".all-frames").css("width"))));
+    hoverActive = parseInt((offset - (50 * active)+ (window_width/8) + currentDrag - (window_width/2))/ (-0.2 * parseInt($(".all-frames").css("width"))));
     
     $(".frame-zoom").removeClass("frame-zoom-active");
     $(".frame-zoom").eq(hoverActive).addClass("frame-zoom-active");
@@ -89,12 +90,13 @@ function slide() {
     
     if (target != -1) {
         var curr = offset - (50 * active) + (window_width/8) + currentDrag;
-        var diff = curr - (target * -0.185 * (parseInt($(".all-frames").css("width")) - 600));
+        var diff = curr + ((window_width * -0.14) + target * ($(".fake-frame").eq(0).width() + 52.5));
 
         momentum = (momentum/1.45) - (diff/32);
         
-        if (Math.abs(diff) < 5) {
+        if (Math.abs(diff) < 10) {
             target = -1;
+            momentum = 0;
         }
     }
     
@@ -142,7 +144,7 @@ function zoomOut() {
     $(".menu").addClass("menu-gone");
     overview = 1;
     currentDrag = 0;
-    shadowTimer = setInterval(shadow, 60);
+    //shadowTimer = setInterval(shadow, 60);
     $(".frame-zoom").eq(hoverActive).addClass("frame-zoom-active");
     $(".frame-title").eq(hoverActive).addClass("frame-title-active");
 
@@ -171,7 +173,8 @@ function zoomIn() {
 
 $(".fake-frame").click(function() {
     hoverIndex = $(".fake-frame").index($(this)); 
-
+    //target = hoverIndex;
+    
     if (smallDrag == true) {
         if (hoverActive == hoverIndex) {
             clearInterval(momentumTimer);

@@ -1,0 +1,370 @@
+<html>
+    <head>
+    </head>
+    <body>
+		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+        <style>
+            body, html {
+                font-family: Avenir;
+                margin: 0px;
+                padding: 0px;
+            }
+            
+            .animated {
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                -m-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+            
+            .event {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            .icon-wrapper {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                margin-top: calc(30vh - 150px);
+                margin-left: calc(40% - 320px);
+                margin-right: 20px;
+                float: left;
+                left: 0px;
+                opacity: 1;
+            }
+            
+            .icon {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                left: 0px;
+                top: 0px;
+            }
+            
+            .icon-wrapper.hidden {
+                left: -200px;
+                opacity: 0;
+            }
+            
+            .text {
+                position: relative;
+                width: calc(60% - 20px);
+                overflow: hidden;
+                height: auto;
+                float: left;
+                display: table;
+                background-color: #DDD;
+                padding-top: calc(30vh - 75px);
+                padding-left: 20px;
+                font-size: 1.5em;
+                left: 0px;
+                opacity: 1;
+            }
+                        
+            .pretitle {
+                color: rgba(0, 0, 0, 0.25);
+            }
+            
+            .title {
+                font-size: 2.5em;
+                line-height: 90%;
+            }
+            
+            .subtitle {
+                color: rgba(0, 0, 0, 0.5);
+                font-size: 1.5em;
+            }
+            
+            .pretitle, .title, .subtitle {
+                position: relative;
+                left: 0;
+                opacity: 1;
+            }
+            
+            .text > .hidden {
+                left: 200px;
+                opacity: 0;
+            }
+            
+            .subevent {
+                font-size: 0.3em;
+                margin-top: 10px;
+                width: calc(100% - 20px);
+                display: table-row;
+                position: relative;
+                float: left;
+                width: 100%;
+                height: 80px;
+                left: 0px;
+                opacity: 1;
+            }
+            
+            .subevent.hidden {
+                left: 200px;
+                opacity: 0;
+            }
+            
+            .subevent:last-of-type {
+                height: 90px;
+            }
+            
+            .subevent > .icon {
+                position: relative;
+                float: left;                
+                width: 75px;
+                height: 75px;
+                margin-left: 0px;
+                margin-top: 0px;
+                margin-right: 0px;
+            }
+            
+            .subevent > .text {
+                background-color: rgba(0, 0, 0, 0);
+                top: 0px;
+                padding-top: 20px;
+                padding-left: 10px;
+                height: auto;
+            }
+            
+            .blue .text {
+                background-color: #053978;
+                color: white;
+            }
+            
+            .blue .pretitle {
+                color: rgba(255, 255, 255, 0.35);
+            }
+            
+            .blue .subtitle {
+                color: rgba(255, 255, 255, 0.6);
+            }
+            
+            .blue .icon {
+                fill: #053978;
+            }
+            
+            .blue .subevent .icon {
+                fill: white;
+            }
+            
+            .red .text {
+                background-color: #8B0000;
+                color: white;
+            }
+            
+            .red .pretitle {
+                color: rgba(255, 255, 255, 0.35);
+            }
+            
+            .red .subtitle {
+                color: rgba(255, 255, 255, 0.6);
+            }
+            
+            .red .icon {
+                fill: #053978;
+            }
+            
+            .red .subevent .icon {
+                fill: white;
+            }
+            
+            @media screen and (max-width: 850px) {
+                .icon-wrapper {
+                    width: 200px;
+                    height: 200px;
+                    margin-top: calc(30vh - 100px);
+                    margin-left: calc(40% - 220px);
+                }
+                
+                .text {
+                    font-size: 1.35em;
+                }
+            }
+            
+            @media screen and (max-width: 600px) {
+                .icon-wrapper {
+                    margin-bottom: 20px;
+                    margin-left: 20px;
+                }
+                
+                .text {
+                    font-size: 1.0em;
+                    width: 100%;
+                    padding-top: 20px;
+                    width: auto;
+                }
+                
+                .text .subevent {
+                    font-size: 0.5em;
+                }
+            }
+        </style>
+        <div class="event animated">
+            <div class="icon-wrapper animated hidden">
+                <img class="icon animated" src="Leader.svg">
+            </div>
+            <div class="text animated big-text">
+                <div class="pretitle animated hidden big-pretitle">(First)</div>
+                <div class="title animated hidden big-title">COMPUTER PROGRAM</div>
+                <div class="subtitle animated hidden big-subtitle">7th Grade</div>
+                <div class="subevent animated hidden big-subevent">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Graphing Calculator App (Ti-84)</div>
+                        <div class="subtitle">7th Grade</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Desktop Application (Visual Basic)</div>
+                        <div class="subtitle">9th Grade</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Website/Game Prototype</div>
+                        <div class="subtitle">10th Grade</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                </div>
+            </div>
+        </div>
+        <div class="event animated blue">
+            <div class="icon-wrapper animated hidden">
+                <img class="icon animated" src="Leader.svg">
+            </div>
+            <div class="text animated big-text">
+                <div class="pretitle animated hidden big-pretitle">(First)</div>
+                <div class="title animated hidden big-title">RESEARCH PAPER</div>
+                <div class="subtitle animated hidden big-subtitle">11th Grade</div>
+                <div class="subevent animated hidden big-subevent">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Future of Computer Graphics</div>
+                        <div class="subtitle">11th Grade</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Handwriting Assessment Platform for Autism Diagnosis</div>
+                        <div class="subtitle">Freshman Year</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Low-Cost Method for Probe Motion Tracking</div>
+                        <div class="subtitle">Freshman Year</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Computational Genomics Lab</div>
+                        <div class="subtitle">Sophomore Year</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">Medical Imaging Lab</div>
+                        <div class="subtitle">Junior Year</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                </div>
+            </div>
+        </div>
+        <div class="event animated red">
+            <div class="icon-wrapper animated hidden">
+                <img class="icon animated" src="Leader.svg">
+            </div>
+            <div class="text animated big-text">
+                <div class="pretitle animated hidden big-pretitle">(First)</div>
+                <div class="title animated hidden big-title">PROGRAMMING CLUB</div>
+                <div class="subtitle animated hidden big-subtitle">11th Grade</div>
+                <div class="subevent animated hidden big-subevent">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">High School Hobby Club</div>
+                        <div class="subtitle">11th Grade</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                    <img class="icon" src="Leader.svg">
+                    <div class="text">
+                        <div class="title">College Hobby Club</div>
+                        <div class="subtitle">Freshman Year</div>
+                    </div>
+                </div>
+                <div class="subevent animated hidden">
+                </div>
+            </div>
+        </div>
+        <script>
+            var visited = [];
+            
+            $('img[src$=".svg"]').each(function() {
+                var $img = jQuery(this);
+                var imgURL = $img.attr('src');
+                var attributes = $img.prop("attributes");
+
+                $.get(imgURL, function(data) {
+                    // Get the SVG tag, ignore the rest
+                    var $svg = jQuery(data).find('svg');
+
+                    // Remove any invalid XML tags
+                    $svg = $svg.removeAttr('xmlns:a');
+
+                    // Loop through IMG attributes and apply on SVG
+                    $.each(attributes, function() {
+                        $svg.attr(this.name, this.value);
+                    });
+
+                    // Replace IMG with SVG
+                    $img.replaceWith($svg);
+                }, 'xml');
+            });
+            
+            $(document).ready(function() {
+                $(".event").each(function() {
+                    visited.push(0); 
+                });
+            });
+            
+            $(window).scroll(function() {
+                var scroll = $(window).scrollTop();
+                var index = 0;
+                
+                while (scroll > $(".big-text").eq(index).offset().top + window.innerHeight/2 && index < visited.length - 1) {
+                    index++;
+                }
+                
+                if (visited[index] == 0) {
+                    visited[index] = 1;
+                    
+                    console.log("hello there");
+                    
+                    var counter = 1;
+                    var diff = 250;
+                    $(".icon-wrapper").eq(index).removeClass("hidden");
+                    $(".big-pretitle").eq(index).removeClass("hidden");
+                    $(".big-title").eq(index).removeClass("hidden");
+                    $(".big-subtitle").eq(index).removeClass("hidden");
+                    setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(0).removeClass("hidden"); }, (counter++) * diff);
+                    setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(1).removeClass("hidden"); }, (counter++) * diff);
+                    setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(2).removeClass("hidden"); }, (counter++) * diff);
+                    setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(3).removeClass("hidden"); }, (counter++) * diff);
+                    setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(4).removeClass("hidden"); }, (counter++) * diff);
+                }
+            });
+        </script>
+    </body>
+</html>
