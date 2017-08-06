@@ -65,42 +65,19 @@ $(document).mouseup(function() {
 });
 
 function slide() {
-    currentDrag += momentum;  
-
     var window_width = window.innerWidth;
-    var offset = -1 * active * (window_width * 0.75);
-    
-    var diff_max = ((offset - (50 * active)) + (window_width/8) + currentDrag) - (-0.67 * parseInt($(".all-frames").css("width")));
-    var diff_min = ((offset - (50 * active)) + (window_width/8) + currentDrag) - 100;
-    if ((offset - (50 * active)) + (window_width/8) + currentDrag < -0.67 * parseInt($(".all-frames").css("width"))) {
-        momentum = (momentum/1.15) - (diff_max/64);
-        console.log("hello");
-    } else if ((offset - (50 * active)) + (window_width/8) + currentDrag > 100) {
-        momentum = (momentum/1.15) - (diff_min/64);
-    } else if (target == -1) {
-        momentum = momentum/1.02;
-    }
+    var offset = (window_width * -0.14) + (-1 * active * ($(".fake-frame").eq(0).width() + 52.5));
         
-    hoverActive = parseInt((offset - (50 * active)+ (window_width/8) + currentDrag - (window_width/2))/ (-0.2 * parseInt($(".all-frames").css("width"))));
-    
-    $(".frame-zoom").removeClass("frame-zoom-active");
-    $(".frame-zoom").eq(hoverActive).addClass("frame-zoom-active");
-    $(".frame-title").removeClass("frame-title-active");
-    $(".frame-title").eq(hoverActive).addClass("frame-title-active");
-    
-    if (target != -1) {
-        var curr = offset - (50 * active) + (window_width/8) + currentDrag;
-        var diff = curr + ((window_width * -0.14) + target * ($(".fake-frame").eq(0).width() + 52.5));
+    var curr = parseInt($(".all-frames").css("left"));
+    var target_pos = (window_width * -0.12) + (1.05 * (target * $(".fake-frame").eq(0).outerWidth()));
 
-        momentum = (momentum/1.45) - (diff/32);
-        
-        if (Math.abs(diff) < 10) {
-            target = -1;
-            momentum = 0;
-        }
+    if(Math.abs(curr + target_pos) < 50) {
+        hoverActive = target;
+    } else if(Math.abs(curr + target_pos) < 10) {
+        clearInterval(momentumTimer);
     }
     
-    $(".all-frames").css('left', (offset - (50 * active) + (window_width/8) + currentDrag) + "px");
+    $(".all-frames").css('left', (curr - (curr + target_pos)/8) + "px");
 }
 
 function shadow() {
@@ -153,7 +130,7 @@ function zoomOut() {
     
     var window_width = window.innerWidth;
     var offset = -1 * active * (window_width * 0.75);
-    $(".all-frames").css('left', ((offset - (50 * active)) + ((window_width/8))) + "px");
+    $(".all-frames").css('left', -0.76 * (active * $(".fake-frame").eq(0).width()) + (window_width * 0.14) + "px");
 }
 
 function zoomIn() {
@@ -175,15 +152,13 @@ $(".fake-frame").click(function() {
     hoverIndex = $(".fake-frame").index($(this)); 
     //target = hoverIndex;
     
-    if (smallDrag == true) {
-        if (hoverActive == hoverIndex) {
-            clearInterval(momentumTimer);
-            active = hoverIndex;
-            zoomIn();
-            smallDrag = false;
-        } else {
-            target = hoverIndex;
-        }
+    if (hoverActive == hoverIndex) {
+        clearInterval(momentumTimer);
+        active = hoverIndex;
+        zoomIn();
+        smallDrag = false;
+    } else {
+        target = hoverIndex;
     }
     
     /**if (overview == 1) {
