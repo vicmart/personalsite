@@ -34,7 +34,6 @@ $(document).mousedown(function(event) {
         newDrag = currentDrag;
         smallDrag = false;
         momentum = 0;
-        target = -1;
         clearInterval(momentumTimer);
     }
 });

@@ -89,6 +89,10 @@
                 padding-top: 0px;
             }
             
+            .header .big-title {
+                padding-top: 20px;
+            }
+            
             .header > .icon-wrapper {
                 margin-left: 50%;
                 margin-top: calc(70vh - 320px);
@@ -100,19 +104,23 @@
                 margin-bottom: 80vh;
             }
             
-            .footer-btn {
+            .footer-btn, .header-btn {
                 float: left;
                 margin-right: 20px;
                 color: rgba(255, 255, 255, 0.5);
                 text-decoration: underline;
             }
             
-            .footer-btn:hover {
+            .header-btn {
+                float: none;
+            }
+            
+            .footer-btn:hover, .header-btn:hover {
                 color: rgba(255, 255, 255, 0.75);
                 cursor: hand;
             }
             
-            .footer-btn:active {
+            .footer-btn:active, .header-btn:active {
                 color: rgba(255, 255, 255, 1);
                 cursor: hand;
             }
@@ -289,9 +297,9 @@
                     <img class="icon animated" src="Leader.svg">
                 </div>
                 <div class="text animated big-text">
-                    <div class="pretitle animated hidden big-pretitle" style="opacity: 0;">Victor Dadfar's</div>
                     <div class="title animated hidden big-title">VICTOR DADFAR</div>
                     <div class="subtitle animated hidden big-subtitle">A timeline of (firsts)</div>
+                    <div class="pretitle animated hidden big-pretitle"><a class="header-btn"href="mailto:vdadfar1@gmail.com" target="_blank">email</a><a class="header-btn" href="http://www.linkedin.com/pub/victor-dadfar/94/287/3a1" target="_blank">linkedin</a><a class="header-btn" href="http://github.com/Vicmart1" target="_blank">github</a></div>
                     <div class="subevent animated hidden">
                     </div>
                 </div>

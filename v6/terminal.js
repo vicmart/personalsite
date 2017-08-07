@@ -81,6 +81,24 @@ function enterCommand() {
             command_history = command_history + "</br>";
             
             break;
+        case "info":
+            break;
+        case "scrollto":
+            break;
+        case "color":
+            break;
+        case "email":
+            break;
+        case "resume":
+            break;
+        case "linkedin":
+            break;
+        case "github":
+            break;
+        case "browser":
+            break;
+        case "help":
+            break;
         default:
             command_history = command_history + "</br> '" + current_command + "' is not a valid command. </br> ";
             break;
