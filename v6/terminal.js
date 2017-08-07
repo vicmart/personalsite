@@ -6,20 +6,25 @@ var events = [];
 var subevents = [];
 
 var current_folder = "";
+var current_event;
 var home_folder = "Personal Site";
 
+var code_active = false;
+
 $(document).keypress(function(e) {
-    addToCommand(String.fromCharCode(e.which));
-    if (e.which == 32) {
-        return false;
-    }
+    if (code_active == true) {
+        addToCommand(String.fromCharCode(e.which));
+        if (e.which == 32) {
+            return false;
+        }
 
-    if (e.which == 8) {
-        backspace();
-    }
+        if (e.which == 8) {
+            backspace();
+        }
 
-    if (e.which == 13) {
-        enterCommand();
+        if (e.which == 13) {
+            enterCommand();
+        }
     }
 });
 
@@ -48,8 +53,6 @@ function updateText() {
         command_history = command_history.substring(cut_index, command_history.length);
         $(".code").html(command_history + current_command + "&nbsp;"); 
     }
-    
-    //$(".code").scrollTop(document.getElementsByClassName("code")[0].scrollHeight);
 }
 
 function enterCommand() {
@@ -72,12 +75,21 @@ function enterCommand() {
             $(".event").each(function() {
                 if (found == false && $(this).children(".text").eq(0).children(".big-title").eq(0).text().substring(0, folder.length).localeCompare(folder.toUpperCase()) == 0) {
                     current_folder = $(this).children(".text").eq(0).children(".big-title").eq(0).text().toLowerCase();
+                    current_event = $(this);
                     found = true;
+                    if (current_event) {
+                        $('html, body').animate({
+                            scrollTop: $(current_event).children(".big-text").offset().top
+                        }, 2000);
+                    } else {
+                        command_history = command_history + "</br> Must first enter an event to scroll to. </br>";     
+                    }
                 }
             });
             
             if (found == false && folder.localeCompare("..") == 0) {
                 current_folder = home_folder;
+                current_event = null;
                 found = true;
             }
             
@@ -90,24 +102,53 @@ function enterCommand() {
             break;
         case "info":
             break;
-        case "scrollto":
-            break;
         case "color":
+            var color = current_command.substring(current_command.split(" ")[0].length + 1, current_command.length);
+            if (current_event) {
+                $(current_event).children(".big-text").eq(0).css("background-color", color);
+                $(current_event).children(".big-text").eq(0).children(".subevent").each(function() {
+                    $(this).children(".text").eq(0).css("background-color", color);
+                });
+                $(current_event).children(".icon-wrapper").eq(0).children(".icon").eq(0).css("fill", color);
+            } else {
+                command_history = command_history + "</br> Must first enter an event before coloring.";                
+            }
+            
+            command_history = command_history + "</br>";
             break;
         case "email":
+            window.location.href = "mailto:vdadfar1@gmail.com";
+            command_history = command_history + "</br>";
             break;
         case "resume":
+            window.open("resume.pdf", "_blank");
+            command_history = command_history + "</br>";
             break;
         case "linkedin":
+            window.open("http://www.linkedin.com/pub/victor-dadfar/94/287/3a1", "_blank");
+            command_history = command_history + "</br>";
             break;
         case "github":
+            window.open("http://github.com/Vicmart1", "_blank");
+            command_history = command_history + "</br>";
             break;
         case "browser":
+            var url = current_command.substring(current_command.split(" ")[0].length + 1, current_command.length);
+            window.open("http://" + url, "_blank");
+            command_history = command_history + "</br>";
+            break;
+        case "clear":
+            command_history = "History cleared.</br>";
+            break;
+        case "refresh":
+            location.reload();
+            break;
+        case "tourguide":
             break;
         case "help":
             break;
         default:
-            command_history = command_history + "</br> '" + current_command + "' is not a valid command. </br> ";
+            command_history = command_history + "</br> '" + current_command + "' is not a valid command. ";
             break;
     }
     
