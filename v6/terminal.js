@@ -39,10 +39,17 @@ function updateText() {
     if (cursor_state == true) {
         $(".code").html(command_history + current_command + "_"); 
     } else {
-        $(".code").html(command_history + current_command); 
+        $(".code").html(command_history + current_command + "&nbsp;"); 
     }
     
-    $(".code").scrollTop(document.getElementsByClassName("code")[0].scrollHeight);
+    while (document.getElementsByClassName("code")[0].scrollHeight > $(".code").eq(0).outerHeight()) {
+        var cut_index = command_history.split("</br>")[0].length + 5;
+        
+        command_history = command_history.substring(cut_index, command_history.length);
+        $(".code").html(command_history + current_command + "&nbsp;"); 
+    }
+    
+    //$(".code").scrollTop(document.getElementsByClassName("code")[0].scrollHeight);
 }
 
 function enterCommand() {

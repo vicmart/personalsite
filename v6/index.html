@@ -48,6 +48,18 @@
                 top: 0px;
             }
             
+            .icon-wrapper-ignore {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                margin-top: calc(0vh - 150px);
+                margin-left: calc(40% - 320px);
+                margin-right: 20px;
+                float: left;
+                left: 0px;
+                opacity: 0;
+            }
+            
             .icon-wrapper.hidden {
                 left: -200px;
                 opacity: 0;
@@ -85,7 +97,6 @@
             
             .header > .text {
                 margin-top: 0vh;
-                margin-left: 40%;
                 padding-top: 0px;
             }
             
@@ -93,7 +104,7 @@
                 padding-top: 20px;
             }
             
-            .header > .icon-wrapper {
+            .header > .icon-wrapper-head {
                 margin-left: 50%;
                 margin-top: calc(70vh - 320px);
             }
@@ -220,6 +231,72 @@
                 fill: #00A309;
             }
             
+            .window {
+                width: 100%;
+                position: relative;
+                float: left;
+            }
+            
+            .window-small {
+                width: 70%;
+            }
+            
+            .switcher {
+                position: fixed;
+                background-color: black;
+                width: 75px;
+                height: 75px;
+                bottom: 20px;
+                right: 20px;
+                z-index: 10;
+            }
+            
+            .switcher:hover {
+                cursor: hand;
+            }
+            
+            .switcher-active {
+                right: calc(30% + 20px);
+            }
+            
+            .code {
+                position: fixed;
+                float: left;
+                width: calc(30% - 9px);
+                left: 100%;
+                height: calc(100% - 70px);
+                background-color: rgba(0, 0, 0, 0.75);
+                box-shadow: inset 4px -3px 5px #000;
+                color: white;
+                font-family: courier;
+                overflow: scroll;
+                padding: 5px;
+                padding-bottom: 70px;
+            }
+            
+            .code-big {
+                left: calc(70% - 1px);
+            }
+            
+            @media screen and (max-width: 1000px) {
+                .switcher {
+                    opacity: 0;
+                    z-index: -1;
+                }
+                
+                .code {
+                    opacity: 0;
+                }
+                
+                .code-big {
+                    left: 100%;
+                }
+                
+                .window-small {
+                    width: 100%;
+                }
+            }
+            
             @media screen and (max-width: 850px) {
                 .icon-wrapper {
                     width: 200px;
@@ -269,31 +346,14 @@
                     margin-bottom: 0px;
                 }
             }
-            
-            .window {
-                width: 70vw;
-                position: relative;
-                float: left;
-            }
-            
-            .code {
-                position: fixed;
-                float: left;
-                width: 30vw;
-                left: 70vw;
-                height: calc(100vh - 70px);
-                background-color: rgba(0, 0, 0, 0.75);
-                box-shadow: inset 4px -3px 5px #000;
-                color: white;
-                font-family: courier;
-                overflow: scroll;
-                padding: 5px;
-                padding-bottom: 70px;
-            }
         </style>
-        <div class="window">
+        <div class="switcher animated"></div>
+        <div class="window animated">
             <div class="event animated header red">
-                <div class="icon-wrapper animated hidden">
+                <div class="icon-wrapper icon-wrapper-head animated hidden">
+                    <img class="icon animated" src="Leader.svg">
+                </div>
+                <div class="icon-wrapper-ignore animated hidden" style="opacity: 0;">
                     <img class="icon animated" src="Leader.svg">
                 </div>
                 <div class="text animated big-text">
@@ -702,7 +762,7 @@
                 </div>
             </div>
         </div>
-        <div class="code">
+        <div class="code animated">
         </div>
         <script src="terminal.js"></script>
         <script>
@@ -799,6 +859,18 @@
                 $('html, body').animate({
                     scrollTop: 0
                 }, 2000);
+            });
+            
+            $(".switcher").click(function() {
+                 if ($(".window").hasClass("window-small")) {
+                     $(".window").removeClass("window-small");
+                     $(".code").removeClass("code-big");
+                     $(".switcher").removeClass("switcher-active");
+                 } else {
+                     $(".window").addClass("window-small");
+                     $(".code").addClass("code-big");
+                     $(".switcher").addClass("switcher-active");
+                 }
             });
         </script>
     </body>
