@@ -11,6 +11,8 @@ var home_folder = "Personal Site";
 
 var code_active = false;
 
+var guide_active = 0;
+
 $(document).keypress(function(e) {
     if (code_active == true) {
         addToCommand(String.fromCharCode(e.which));
@@ -79,10 +81,10 @@ function enterCommand() {
                     found = true;
                     if (current_event) {
                         $('html, body').animate({
-                            scrollTop: $(current_event).children(".big-text").offset().top
+                            scrollTop: $(current_event).children(".icon-wrapper").eq(0).offset().top - parseInt($(current_event).children(".icon-wrapper").eq(0).css("margin-top"))
                         }, 2000);
                     } else {
-                        command_history = command_history + "</br> Must first enter an event to scroll to. </br>";     
+                        command_history = command_history + "</br> Must first select an event. </br>";     
                     }
                 }
             });
@@ -101,6 +103,17 @@ function enterCommand() {
             
             break;
         case "info":
+            var folder = current_command.substring(current_command.split(" ")[0].length + 1, current_command.length);
+            
+            if (current_event) {
+                if (folder.length == 0) {
+                    command_history = command_history + "</br>" + $(current_event).data("info") + "</br>";
+                } else {
+                    
+                }
+            } else {
+                command_history = command_history + "</br> Must first select an event.";                
+            }
             break;
         case "color":
             var color = current_command.substring(current_command.split(" ")[0].length + 1, current_command.length);
@@ -111,7 +124,7 @@ function enterCommand() {
                 });
                 $(current_event).children(".icon-wrapper").eq(0).children(".icon").eq(0).css("fill", color);
             } else {
-                command_history = command_history + "</br> Must first enter an event before coloring.";                
+                command_history = command_history + "</br> Must first select an event.";                
             }
             
             command_history = command_history + "</br>";
@@ -144,16 +157,36 @@ function enterCommand() {
             location.reload();
             break;
         case "tourguide":
+            $(".switcher").eq(0).click();
+            guide_active = 0;
+            guide();
+            break;
+        case "exit":
+            $(".switcher").eq(0).click();
+            command_history = "";
             break;
         case "help":
+            command_history = command_history + "</br> ls: list all events </br> cd [event]: enter an event (type the first couple of letters and hit enter to autocomplete)</br> info: display further information about the selected event or subevent </br> color: change the color of the selected event </br> email: open a window to send an email to Victor </br> resume: open Victor's resume </br> linkedin: open Victor's LinkedIn profile </br> github: open Victor's Github profile </br> browser [site url]: open the selected site </br> clear: clear the current screen </br> refresh: refresh the page </br> tourguide: activate this site's auto touring function </br> exit: exit this terminal </br>"
             break;
         default:
-            command_history = command_history + "</br> '" + current_command + "' is not a valid command. ";
+            command_history = command_history + "</br> '" + current_command + "' is not a valid command. </br>";
             break;
     }
     
     current_command = "";
     printDialogue();
+}
+
+function guide() {
+    if (guide_active != -1) {
+        $('html, body').animate({
+            scrollTop: $(events[guide_active]).children(".icon-wrapper").eq(0).offset().top - parseInt($(events[guide_active]).children(".icon-wrapper").eq(0).css("margin-top"))
+        }, 2000);
+
+        if (++guide_active < events.length) {
+            setTimeout(guide, 3000);
+        }
+    }
 }
 
 function printDialogue() {
