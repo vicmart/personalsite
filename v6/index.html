@@ -5,372 +5,19 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />  
         <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />        
         <meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
-        <style>
-            body, html {
-                font-family: Avenir;
-                margin: 0px;
-                padding: 0px;
-            }
-            
-            .animated {
-                -webkit-transition: all 0.5s;
-                -moz-transition: all 0.5s;
-                -o-transition: all 0.5s;
-                -m-transition: all 0.5s;
-                transition: all 0.5s;
-            }
-            
-            .event {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-            
-            .icon-wrapper {
-                position: relative;
-                width: 300px;
-                height: 300px;
-                margin-top: calc(30vh - 150px);
-                margin-left: calc(40% - 320px);
-                margin-right: 20px;
-                float: left;
-                left: 0px;
-                opacity: 1;
-            }
-            
-            .icon {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                left: 0px;
-                top: 0px;
-            }
-            
-            .icon-wrapper-ignore {
-                position: relative;
-                width: 300px;
-                height: 300px;
-                margin-top: calc(0vh - 150px);
-                margin-left: calc(40% - 320px);
-                margin-right: 20px;
-                float: left;
-                left: 0px;
-                opacity: 0;
-            }
-            
-            .icon-wrapper.hidden {
-                left: -200px;
-                opacity: 0;
-            }
-            
-            .text {
-                position: relative;
-                width: calc(60% - 20px);
-                overflow: hidden;
-                height: auto;
-                float: left;
-                display: table;
-                background-color: #DDD;
-                box-shadow: -2.5px 2.5px 2.5px gray;
-                padding-top: calc(30vh - 75px);
-                padding-left: 20px;
-                font-size: 1.5em;
-                left: 0px;
-                opacity: 1;
-                color: white;
-            }
-            
-            .big-text {
-                margin-top: -1px;
-            }
-            
-            .school > .text {
-                margin-top: 0px;
-                padding-top: 20px;
-                width: calc(100% - 20px);
-            }
-            
-            .school .subevent {
-                width: 40%;
-            }
-            
-            .header > .text {
-                margin-top: 0vh;
-                padding-top: 0px;
-            }
-            
-            .header .big-title {
-                padding-top: 20px;
-            }
-            
-            .header > .icon-wrapper-head {
-                margin-left: 50%;
-                margin-top: calc(40vh - 320px);
-                height: 600px;
-                width: 600px;
-            }
-                        
-            .footer > .text {
-                padding-bottom: 10px;
-                margin-bottom: 80vh;
-            }
-            
-            .footer-btn, .header-btn {
-                float: left;
-                margin-right: 20px;
-                color: rgba(255, 255, 255, 0.5);
-                text-decoration: underline;
-            }
-            
-            .header-btn {
-                float: none;
-            }
-            
-            .footer-btn:hover, .header-btn:hover {
-                color: rgba(255, 255, 255, 0.75);
-                cursor: hand;
-            }
-            
-            .footer-btn:active, .header-btn:active {
-                color: rgba(255, 255, 255, 1);
-                cursor: hand;
-            }
-                        
-            .footer .pretitle {
-                width: 100%;
-            }
-                        
-            .pretitle {
-                color: rgba(255, 255, 255, 0.35);
-            }
-            
-            .title {
-                font-size: 2.5em;
-                line-height: 90%;
-                padding-right: 0px;
-            }
-            
-            .subtitle {
-                color: rgba(255, 255, 255, 0.6);
-                font-size: 1.5em;
-            }
-            
-            .pretitle, .title, .subtitle {
-                position: relative;
-                left: 0;
-                opacity: 1;
-            }
-            
-            .text > .hidden {
-                left: 200px;
-                opacity: 0;
-            }
-            
-            .subevent {
-                font-size: 0.3em;
-                margin-top: 20px;
-                width: calc(100% - 20px);
-                display: table-row;
-                position: relative;
-                float: left;
-                width: 100%;
-                height: 80px;
-                left: 0px;
-                opacity: 1;
-            }
-            
-            .subevent.hidden {
-                left: 200px;
-                opacity: 0;
-            }
-            
-            .subevent:last-of-type {
-                height: 90px;
-            }
-            
-            .subevent > .icon {
-                position: relative;
-                float: left;                
-                width: 75px;
-                height: 75px;
-                margin-left: 0px;
-                margin-top: 0px;
-                margin-right: 0px;
-                fill: white;
-            }
-            
-            .subevent > .text {
-                box-shadow: none;
-                background-color: rgba(0, 0, 0, 0);
-                top: 0px;
-                padding-top: 20px;
-                padding-left: 10px;
-                height: auto;
-            }
-            
-            .blue .text {
-                background-color: #053978;
-            }
-            
-            .blue > .icon-wrapper > .icon {
-                fill: #053978;
-            }
-            
-            .red .text {
-                background-color: #8B0000;
-            }
-
-            .red > .icon-wrapper > .icon {
-                fill: #8B0000;
-            }
-            
-            .green .text {
-                background-color: #00A309;
-            }
-            
-            .green > .icon-wrapper > .icon {
-                fill: #00A309;
-            }
-            
-            .window {
-                width: 100%;
-                position: relative;
-                float: left;
-            }
-            
-            .window-small {
-                width: 70%;
-            }
-            
-            .switcher {
-                position: fixed;
-                background-color: rgba(0, 0, 0, 0.75);
-                width: 55px;
-                height: 58px;
-                bottom: 20px;
-                right: 20px;
-                z-index: 10;
-                border-radius: 100%;
-                font-size: 2.5em;
-                color: white;
-                padding: 10px;
-                padding-top: 7px;
-                box-shadow: 0px 0px 5px black;
-            }
-            
-            .switcher:hover {
-                cursor: hand;
-            }
-            
-            .switcher-active {
-                right: calc(30% + 20px);
-            }
-            
-            .switcher > .icon {
-                fill: red;
-            }
-            
-            .code {
-                position: fixed;
-                float: left;
-                width: calc(31%);
-                left: 100%;
-                height: calc(100% - 60px);
-                background-color: rgba(0, 0, 0, 0.75);
-                box-shadow: inset 4px -3px 5px #000;
-                color: white;
-                font-family: courier;
-                overflow: scroll;
-                padding: 5px;
-                padding-bottom: 70px;
-            }
-            
-            .code-big {
-                left: calc(70% - 1px);
-            }
-            
-            @media screen and (max-width: 1000px) {
-                .switcher {
-                    opacity: 0;
-                    z-index: -1;
-                }
-                
-                .code {
-                    opacity: 0;
-                }
-                
-                .code-big {
-                    left: 100%;
-                }
-                
-                .window-small {
-                    width: 100%;
-                }
-            }
-            
-            @media screen and (max-width: 850px) {
-                .icon-wrapper {
-                    width: 200px;
-                    height: 200px;
-                    margin-top: calc(30vh - 100px);
-                    margin-left: calc(40% - 220px);
-                }
-                
-                .text {
-                    font-size: 1.35em;
-                }
-                
-                .school .subevent {
-                    width: 50%;
-                }
-            }
-            
-            @media screen and (max-width: 600px) {
-                .icon-wrapper {
-                    margin-bottom: 20px;
-                    margin-left: 20px;
-                    margin-top: 50px;
-                }
-                
-                .icon-wrapper-ignore, .footer > .icon-wrapper {
-                    width: 0px;
-                    height: 0px;
-                    margin: 0px;
-                }
-                
-                .text {
-                    font-size: 1.0em;
-                    padding-top: 20px;
-                    width: calc(100% - 20px);
-                }
-                
-                .subevent > .text {
-                    font-size: 1.75em;
-                    width: calc(100% - 90px);
-                }
-                
-                .school .subevent {
-                    width: 100%;
-                }
-                
-                .header .text, .footer .text {
-                    width: calc(100% - 20px);
-                    margin-left: 0px;
-                }
-                
-                .header .icon-wrapper, .school .icon-wrapper {
-                    margin-left: 20px;
-                    margin-bottom: 0px;
-                }
-            }
-        </style>
         <div class="switcher animated">
             >_
         </div>
         <div class="window animated">
+            <div class="guide animated">
+                <div class="animated-fast guide-text">
+                    In 7th grade, Victor wrote a program for his Ti-84 calculator. Unbeknownst to him, that program would change his path forever.
+                </div>
+            </div>
             <div class="event animated header red" data-info="Some test metadata.">
                 <div class="icon-wrapper icon-wrapper-head  animated hidden">
                     <img class="icon animated" src="../Icons/Victor%20Icon.svg">
@@ -395,21 +42,21 @@
                     <div class="title animated hidden big-title">COMPUTER PROGRAM</div>
                     <div class="subtitle animated hidden big-subtitle">7th Grade</div>
                     <div class="subevent animated hidden big-subevent" data-info="It was a simple function written in Basic that took one input and calculated the square of it. But to Victor, it was the coolest thing ever.">
-                        <img class="icon" src="../Icons/Calculator.svg">
+                        <img class="icon animated" src="../Icons/Calculator.svg">
                         <div class="text animated">
                             <div class="title">Graphing Calculator App (Ti-84)</div>
                             <div class="subtitle">7th Grade</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden" data-info="In high school he took his first programming course - Introduction to Visual Basic. In a few short months, Victor was creating games and other interactive applications with this platform.">
-                        <img class="icon" src="../Icons/Monitor.svg">
+                        <img class="icon animated" src="../Icons/Monitor.svg">
                         <div class="text animated">
                             <div class="title">Desktop Application (Visual Basic)</div>
                             <div class="subtitle">9th Grade</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden" data-info="But Victor yearned for greater graphical fidelity and multi-OS support. Soon he was playing with Javascript, and his passion for web development was born. A medium which places great emphasis on User Experience and Attention-Grabbing design, websites became Victor's favorite thing to program.">
-                        <img class="icon" src="../Icons/www.svg">
+                        <img class="icon animated" src="../Icons/www.svg">
                         <div class="text animated">
                             <div class="title">Website/Game Prototype</div>
                             <div class="subtitle">10th Grade</div>
@@ -428,35 +75,35 @@
                     <div class="title animated hidden big-title">RESEARCH PAPER</div>
                     <div class="subtitle animated hidden big-subtitle">11th Grade</div>
                     <div class="subevent animated hidden big-subevent" data-info="Computer Graphics was, by and long, Victor's favorite field of study within CS. Before switching to programming, Victor aspired to be an architect, and even when learning how to code he was fascinated with game development.">
-                        <img class="icon" src="../Icons/Utah%20Teapot.svg">
+                        <img class="icon animated" src="../Icons/Utah%20Teapot.svg">
                         <div class="text animated">
                             <div class="title">Prediction on the Future of Computer Graphics</div>
                             <div class="subtitle">11th Grade</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Pencil%20&%20Paper.svg">
+                        <img class="icon animated" src="../Icons/Pencil%20&%20Paper.svg">
                         <div class="text animated">
                             <div class="title">Tablet-Based Method for Handwriting Analysis</div>
                             <div class="subtitle">Freshman Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Accelerometer.svg">
+                        <img class="icon animated" src="../Icons/Accelerometer.svg">
                         <div class="text animated">
                             <div class="title">Low-Cost Method for Probe Motion Tracking</div>
                             <div class="subtitle">Freshman Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/DNA.svg">
+                        <img class="icon animated" src="../Icons/DNA.svg">
                         <div class="text animated">
                             <div class="title">Computational Genomics Lab</div>
                             <div class="subtitle">Sophomore Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/MRI.svg">
+                        <img class="icon animated" src="../Icons/MRI.svg">
                         <div class="text animated">
                             <div class="title">Novel Work Flow for Surgical Tracking</div>
                             <div class="subtitle">Junior Year</div>
@@ -475,14 +122,14 @@
                     <div class="title animated hidden big-title">CS HOBBY CLUB</div>
                     <div class="subtitle animated hidden big-subtitle">11th Grade</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/One%20Talking.svg">
+                        <img class="icon animated " src="../Icons/One%20Talking.svg">
                         <div class="text animated">
                             <div class="title">Programming Club</div>
                             <div class="subtitle">11th Grade</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Two%20Talking.svg">
+                        <img class="icon animated" src="../Icons/Two%20Talking.svg">
                         <div class="text animated">
                             <div class="title">HackerLab</div>
                             <div class="subtitle">Freshman Year</div>
@@ -501,14 +148,14 @@
                     <div class="title animated hidden big-title">JOHNS HOPKINS UNIVERSITY</div>
                     <div class="subtitle animated hidden big-subtitle">Whiting School of Engineering</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Biomedical%20Engineering.svg">
+                        <img class="icon animated" src="../Icons/Biomedical%20Engineering.svg">
                         <div class="text animated">
                             <div class="title">Biomedical Engineering</div>
                             <div class="subtitle">Major</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Code.svg">
+                        <img class="icon animated" src="../Icons/Code.svg">
                         <div class="text animated">
                             <div class="title">Computer Science</div>
                             <div class="subtitle">Minor</div>
@@ -527,28 +174,28 @@
                     <div class="title animated hidden big-title">CBID DESIGN TEAM</div>
                     <div class="subtitle animated hidden big-subtitle">Freshman Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Stethescope.svg">
+                        <img class="icon animated" src="../Icons/Stethescope.svg">
                         <div class="text animated">
                             <div class="title">Contraceptive Implant Training Tool</div>
                             <div class="subtitle">Freshman Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Heartbeat.svg">
+                        <img class="icon animated" src="../Icons/Heartbeat.svg">
                         <div class="text animated">
                             <div class="title">Fetal Heart Rate Monitor</div>
                             <div class="subtitle">Sophomore Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Pill.svg">
+                        <img class="icon animated" src="../Icons/Pill.svg">
                         <div class="text animated">
                             <div class="title">Medication Adherance Platform</div>
                             <div class="subtitle">Junior Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden">
-                        <img class="icon" src="../Icons/Brain.svg">
+                        <img class="icon animated" src="../Icons/Brain.svg">
                         <div class="text animated">
                             <div class="title">Cranial Implant for Enhanced Drug Delivery</div>
                             <div class="subtitle">Senior Year</div>
@@ -567,7 +214,7 @@
                     <div class="title animated hidden big-title">ANDROID APP</div>
                     <div class="subtitle animated hidden big-subtitle">Freshman Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Pencil%20&%20Paper.svg">
+                        <img class="icon animated" src="../Icons/Pencil%20&%20Paper.svg">
                         <div class="text animated">
                             <div class="title">Tablet-Based Method for Handwriting Analysis</div>
                             <div class="subtitle">Freshman Year</div>
@@ -586,21 +233,21 @@
                     <div class="title animated hidden big-title">COURSE ASSISTANT</div>
                     <div class="subtitle animated hidden big-subtitle">Sophomore Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Apple.svg">
+                        <img class="icon animated" src="../Icons/Apple.svg">
                         <div class="text animated">
                             <div class="title">Introduction to Java, Fall Semester</div>
                             <div class="subtitle">Sophomore Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Chalk.svg">
+                        <img class="icon animated" src="../Icons/Chalk.svg">
                         <div class="text animated">
                             <div class="title">Java, Spring Semester</div>
                             <div class="subtitle">Sophomore Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Graduation%20Cap.svg">
+                        <img class="icon animated" src="../Icons/Graduation%20Cap.svg">
                         <div class="text animated">
                             <div class="title">Java, Fall Semester</div>
                             <div class="subtitle">Junior Year</div>
@@ -619,14 +266,14 @@
                     <div class="title animated hidden big-title">DESIGN TEAM LEADER</div>
                     <div class="subtitle animated hidden big-subtitle">Sophomore Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Heartbeat.svg">
+                        <img class="icon animated" src="../Icons/Heartbeat.svg">
                         <div class="text animated">
                             <div class="title">Fetal Heart Rate Monitor</div>
                             <div class="subtitle">Sophomore Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Brain.svg">
+                        <img class="icon animated" src="../Icons/Brain.svg">
                         <div class="text animated">
                             <div class="title">Cranial Implant for Enhanced Drug Delivery</div>
                             <div class="subtitle">Senior Year</div>
@@ -645,35 +292,35 @@
                     <div class="title animated hidden big-title">WEBMASTER GIG</div>
                     <div class="subtitle animated hidden big-subtitle">Sophomore Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Engineering%20World%20Health.svg">
+                        <img class="icon animated" src="../Icons/Engineering%20World%20Health.svg">
                         <div class="text animated">
                             <div class="title">Engineering World Health</div>
                             <div class="subtitle">Sophomore Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Plus.svg">
+                        <img class="icon animated" src="../Icons/Plus.svg">
                         <div class="text animated">
                             <div class="title">Medhacks</div>
                             <div class="subtitle">Junior Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Number%208.svg">
+                        <img class="icon animated" src="../Icons/Number%208.svg">
                         <div class="text animated">
                             <div class="title">OCHO Tech</div>
                             <div class="subtitle">Junior Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Fuerza.svg">
+                        <img class="icon animated" src="../Icons/Fuerza.svg">
                         <div class="text animated">
                             <div class="title">Fuerza Strategy Group</div>
                             <div class="subtitle">Junior Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Accuo.svg">
+                        <img class="icon animated" src="../Icons/Accuo.svg">
                         <div class="text animated">
                             <div class="title">Accuo</div>
                             <div class="subtitle">Junior Year</div>
@@ -692,21 +339,21 @@
                     <div class="title animated hidden big-title">iOS APP</div>
                     <div class="subtitle animated hidden big-subtitle">Junior Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Stockport.svg">
+                        <img class="icon animated" src="../Icons/Stockport.svg">
                         <div class="text animated">
                             <div class="title">StockPort</div>
                             <div class="subtitle">Junior Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/PillPal.svg">
+                        <img class="icon animated" src="../Icons/PillPal.svg">
                         <div class="text animated">
                             <div class="title">PillPal</div>
                             <div class="subtitle">Junior Year</div>
                         </div>
                     </div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/PhoneFit.svg">
+                        <img class="icon animated" src="../Icons/PhoneFit.svg">
                         <div class="text animated">
                             <div class="title">PhoneFit</div>
                             <div class="subtitle">Junior Year</div>
@@ -725,7 +372,7 @@
                     <div class="title animated hidden big-title">DELOITTE</div>
                     <div class="subtitle animated hidden big-subtitle">Junior Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Train.svg">
+                        <img class="icon animated" src="../Icons/Train.svg">
                         <div class="text animated">
                             <div class="title">Amtrak Team</div>
                             <div class="subtitle">Federal Technology Practice</div>
@@ -746,7 +393,7 @@
                     <div class="title animated hidden big-title">SMARTWATCH APP</div>
                     <div class="subtitle animated hidden big-subtitle">Junior Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Handshake.svg">
+                        <img class="icon animated" src="../Icons/Handshake.svg">
                         <div class="text animated">
                             <div class="title">Deloitte</div>
                             <div class="subtitle">Junior Year</div>
@@ -765,7 +412,7 @@
                     <div class="title animated hidden big-title">LARGE-SCALE AGILE DEVELOPMENT TEAM</div>
                     <div class="subtitle animated hidden big-subtitle">Junior Year</div>
                     <div class="subevent animated hidden big-subevent">
-                        <img class="icon" src="../Icons/Handshake.svg">
+                        <img class="icon animated" src="../Icons/Handshake.svg">
                         <div class="text animated">
                             <div class="title">Deloitte</div>
                             <div class="subtitle">Junior Year</div>
@@ -789,6 +436,8 @@
         <script src="terminal.js"></script>
         <script>
             var visited = [];
+            var previous_index = -1;
+            var guide_text = "";
             
             $('img[src$=".svg"]').each(function() {
                 var $img = jQuery(this);
@@ -845,20 +494,46 @@
             }
             
             $(window).resize(function() {
-               resize(); 
+                var height = $(".guide-text").height();
+                $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                resize(); 
             });
             
             $(window).scroll(function() {
                 var scroll = $(window).scrollTop();
                 var index = 0;
                                 
-                while (scroll > $(".big-text").eq(index).offset().top + window.innerHeight/3 && index < visited.length - 1) {
+                while (scroll > $(".big-text").eq(index).offset().top + window.innerHeight/2 && index < visited.length - 1) {
                     index++;
                 }
                 
                 if (index == 0 && scroll > $(".big-text").eq(1).offset().top - $(".big-text").eq(0).offset().top) {
                     index++;
                 }
+                
+                if (index != previous_index) {
+                    if (index == 0) {
+                        $(".guide").css("bottom", -100);
+                        $(".switcher").addClass("switcher-bottom");
+                    } else {
+                        if (parseInt($(".guide").css("bottom")) == 0) {
+                            $(".guide-text").css("opacity", 0);
+                        } else {
+                            $(".guide").css("bottom", 0);
+                            $(".switcher").removeClass("switcher-bottom");
+                        }
+                        guide_text = $(".big-text").eq(index).parent().data("info");
+
+                        setTimeout(function() {
+                            $(".guide-text").html(guide_text);
+                            $(".guide-text").css("opacity", 1);
+                            var height = $(".guide-text").height();
+
+                            $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                        }, 250);
+                    }
+                }
+                //$(".guide-scroll").eq(0).css("margin-top", parseInt($(".guide-scroll").eq(0).height()/2) - parseInt($(".guide-event").eq(index).position().top) - parseInt($(".guide-event").eq(index).height()));
                 
                 if (visited[index] == 0) {
                     visited[index] = 1;
@@ -875,6 +550,8 @@
                     setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(3).removeClass("hidden"); }, (counter++) * diff);
                     setTimeout(function() { $(".big-text").eq(index).children(".subevent").eq(4).removeClass("hidden"); }, (counter++) * diff);
                 }
+                
+                previous_index = index;
             });
             
             $("#toTop").click(function() {
@@ -889,11 +566,22 @@
                      $(".window").removeClass("window-small");
                      $(".code").removeClass("code-big");
                      $(".switcher").removeClass("switcher-active");
+                     setTimeout(function() {
+                        var height = $(".guide-text").height();
+                        $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                     }, 500);
+
                      code_active = false;
                  } else {
                      $(".window").addClass("window-small");
                      $(".code").addClass("code-big");
                      $(".switcher").addClass("switcher-active");
+                     
+                     setTimeout(function() {
+                        var height = $(".guide-text").height();
+                        $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                     }, 500);
+                     
                      code_active = true;
                  }
             });
