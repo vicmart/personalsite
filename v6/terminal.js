@@ -102,19 +102,6 @@ function enterCommand() {
             command_history = command_history + "</br>";
             
             break;
-        case "info":
-            var folder = current_command.substring(current_command.split(" ")[0].length + 1, current_command.length);
-            
-            if (current_event) {
-                if (folder.length == 0) {
-                    command_history = command_history + "</br>" + $(current_event).data("info") + "</br>";
-                } else {
-                    
-                }
-            } else {
-                command_history = command_history + "</br> Must first select an event.";                
-            }
-            break;
         case "color":
             var color = current_command.substring(current_command.split(" ")[0].length + 1, current_command.length);
             if (current_event) {
@@ -166,7 +153,7 @@ function enterCommand() {
             command_history = "";
             break;
         case "help":
-            command_history = command_history + "</br> ls: list all events </br> cd [event]: enter an event (type the first couple of letters and hit enter to autocomplete)</br> info: display further information about the selected event or subevent </br> color: change the color of the selected event </br> email: open a window to send an email to Victor </br> resume: open Victor's resume </br> linkedin: open Victor's LinkedIn profile </br> github: open Victor's Github profile </br> browser [site url]: open the selected site </br> clear: clear the current screen </br> refresh: refresh the page </br> tourguide: activate this site's auto touring function </br> exit: exit this terminal </br>"
+            command_history = command_history + "</br> ls: list all events </br> cd [event]: enter an event (type the first couple of letters and hit enter to autocomplete)</br>  color: change the color of the selected event </br> email: open a window to send an email to Victor </br> resume: open Victor's resume </br> linkedin: open Victor's LinkedIn profile </br> github: open Victor's Github profile </br> browser [site url]: open the selected site </br> clear: clear the current screen </br> refresh: refresh the page </br> tourguide: activate this site's auto touring function </br> exit: exit this terminal </br>"
             break;
         default:
             command_history = command_history + "</br> '" + current_command + "' is not a valid command. </br>";

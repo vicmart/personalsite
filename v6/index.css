@@ -1,5 +1,15 @@
+@font-face {
+    font-family: Raleway-Med;
+    src: url(Raleway-Medium.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Light;
+    src: url(Raleway-Light.ttf);
+}
+
 body, html {
-    font-family: Avenir;
+    font-family: Raleway-Light;
     margin: 0px;
     padding: 0px;
 }
@@ -179,7 +189,7 @@ body, html {
     opacity: 1;
 }
 
-.subevent.hidden {
+.hidden {
     left: 200px;
     opacity: 0;
 }
@@ -246,7 +256,7 @@ body, html {
 .switcher {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.75);
-    width: 55px;
+    width: 50px;
     height: 58px;
     bottom: 87.5px;
     right: 10px;
@@ -255,6 +265,7 @@ body, html {
     font-size: 2.5em;
     color: white;
     padding: 10px;
+    padding-left: 15px;
     padding-top: 7px;
     box-shadow: 0px 0px 5px black;
 }
@@ -322,16 +333,15 @@ body, html {
         width: calc(70% - 1px);
     }
 
-    .subevent:hover {
+    .subevent:not(:last-of-type):hover {
         height: 150px;
         cursor: hand;
     }
 
-    .subevent:hover > .icon {
+    .subevent:not(:last-of-type):hover > .icon {
         width: 150px;
         height: 150px;
     }
-
 }
 
 @media screen and (max-width: 1000px) {

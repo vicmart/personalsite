@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
-		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+		<script src='../Javascript/jquery-1.11.3.min.js'></script>
         <div class="switcher animated">
             >_
         </div>
@@ -438,6 +438,7 @@
             var visited = [];
             var previous_index = -1;
             var guide_text = "";
+            var guide_subtext = "";
             
             $('img[src$=".svg"]').each(function() {
                 var $img = jQuery(this);
@@ -471,11 +472,9 @@
                     $(".big-pretitle").eq(0).removeClass("hidden");
                     $(".big-title").eq(0).removeClass("hidden");
                     $(".big-subtitle").eq(0).removeClass("hidden");
-                });
-                
-                resize();
-                
-                
+                    resize();
+                }, 250);
+                                
                 current_folder = home_folder;
                 printDialogue();
                 setInterval(function() {
@@ -558,6 +557,39 @@
                 $('html, body').animate({
                     scrollTop: 0
                 }, 2000);
+            });
+            
+            $(".subevent").mouseenter(function() {
+                var text = $(this).children(".text")[0];
+                var text_height = $(text).outerHeight();
+                $(text).css("margin-top", (135 - text_height)/2);
+
+                guide_subtext = $(this).data("info");
+
+                $(".guide-text").css("opacity", 0);
+                
+                setTimeout(function() {
+                    $(".guide-text").html(guide_subtext);
+                    $(".guide-text").css("opacity", 1);
+                    var height = $(".guide-text").height();
+
+                    $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                }, 250);
+            });
+            
+            $(".subevent").mouseleave(function() {
+                var text = $(this).children(".text")[0];
+                $(text).css("margin-top", 0);
+                
+                $(".guide-text").css("opacity", 0);
+                
+                setTimeout(function() {
+                    $(".guide-text").html(guide_text);
+                    $(".guide-text").css("opacity", 1);
+                    var height = $(".guide-text").height();
+
+                    $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                }, 250);
             });
             
             $(".switcher").click(function() {
