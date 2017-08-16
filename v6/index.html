@@ -501,11 +501,7 @@
                 var scroll = $(window).scrollTop();
                 var index = 0;
                                 
-                while (scroll > $(".big-text").eq(index).offset().top + window.innerHeight/2 && index < visited.length - 1) {
-                    index++;
-                }
-                
-                if (index == 0 && scroll > $(".big-text").eq(1).offset().top - $(".big-text").eq(0).offset().top) {
+                while (scroll > $(".big-text").eq(index).offset().top + $(".big-text").eq(index).outerHeight() - 300 && index < visited.length - 1) {
                     index++;
                 }
                 
@@ -531,7 +527,6 @@
                         }, 250);
                     }
                 }
-                //$(".guide-scroll").eq(0).css("margin-top", parseInt($(".guide-scroll").eq(0).height()/2) - parseInt($(".guide-event").eq(index).position().top) - parseInt($(".guide-event").eq(index).height()));
                 
                 if (visited[index] == 0) {
                     visited[index] = 1;
@@ -559,36 +554,40 @@
             });
             
             $(".subevent").mouseenter(function() {
-                var text = $(this).children(".text")[0];
-                var text_height = $(text).outerHeight();
-                $(text).css("margin-top", (135 - text_height)/2);
+                if ($(window).width() > 850) {
+                    var text = $(this).children(".text")[0];
+                    var text_height = $(text).outerHeight();
+                    $(text).css("margin-top", (135 - text_height)/2);
 
-                guide_subtext = $(this).data("info");
+                    guide_subtext = $(this).data("info");
 
-                $(".guide-text").css("opacity", 0);
-                
-                setTimeout(function() {
-                    $(".guide-text").html(guide_subtext);
-                    $(".guide-text").css("opacity", 1);
-                    var height = $(".guide-text").height();
+                    $(".guide-text").css("opacity", 0);
 
-                    $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
-                }, 250);
+                    setTimeout(function() {
+                        $(".guide-text").html(guide_subtext);
+                        $(".guide-text").css("opacity", 1);
+                        var height = $(".guide-text").height();
+
+                        $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                    }, 250);
+                }
             });
             
             $(".subevent").mouseleave(function() {
-                var text = $(this).children(".text")[0];
-                $(text).css("margin-top", 0);
-                
-                $(".guide-text").css("opacity", 0);
-                
-                setTimeout(function() {
-                    $(".guide-text").html(guide_text);
-                    $(".guide-text").css("opacity", 1);
-                    var height = $(".guide-text").height();
+                if ($(window).width() > 850) {
+                    var text = $(this).children(".text")[0];
+                    $(text).css("margin-top", 0);
 
-                    $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
-                }, 250);
+                    $(".guide-text").css("opacity", 0);
+
+                    setTimeout(function() {
+                        $(".guide-text").html(guide_text);
+                        $(".guide-text").css("opacity", 1);
+                        var height = $(".guide-text").height();
+
+                        $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                    }, 250);
+                }
             });
             
             $(".switcher").click(function() {
