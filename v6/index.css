@@ -345,7 +345,7 @@ body, html {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1150px) {
     .guide {
         font-size: 1.2em;
     }
