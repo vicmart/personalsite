@@ -258,8 +258,8 @@ body, html {
     background-color: rgba(0, 0, 0, 0.75);
     width: 50px;
     height: 58px;
-    bottom: 112.5px;
-    right: 10px;
+    bottom: 120px;
+    right: 20px;
     z-index: 10;
     border-radius: 100%;
     font-size: 2.5em;
@@ -279,7 +279,7 @@ body, html {
 }
 
 .switcher-bottom {
-    bottom: 12.5px;   
+    bottom: 20px;   
 }
 
 .switcher > .icon {
@@ -289,7 +289,7 @@ body, html {
 .code {
     position: fixed;
     float: left;
-    width: calc(31%);
+    width: calc(30%);
     left: 100%;
     height: calc(100% - 60px);
     background-color: rgba(0, 0, 0, 0.75);

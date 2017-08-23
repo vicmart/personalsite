@@ -156,7 +156,7 @@ function enterCommand() {
             command_history = command_history + "</br> ls: list all events </br> cd [event]: enter an event (type the first couple of letters and hit enter to autocomplete)</br>  color: change the color of the selected event </br> email: open a window to send an email to Victor </br> resume: open Victor's resume </br> linkedin: open Victor's LinkedIn profile </br> github: open Victor's Github profile </br> browser [site url]: open the selected site </br> clear: clear the current screen </br> refresh: refresh the page </br> tourguide: autoscroll </br> exit: exit this terminal </br>"
             break;
         default:
-            command_history = command_history + "</br> '" + current_command + "' is not a valid command. </br>";
+            command_history = command_history + "</br> '" + current_command + "' is not a valid command. Type 'help' for a list of all available commands.</br>";
             break;
     }
     
