@@ -268,6 +268,10 @@ body, html {
     padding-left: 15px;
     padding-top: 7px;
     box-shadow: 0px 0px 5px black;
+    -webkit-user-select: none;  
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;  
 }
 
 .switcher:hover {
@@ -284,6 +288,41 @@ body, html {
 
 .switcher > .icon {
     fill: red;
+}
+
+.reverser {
+    left: 20px;
+    height: 55px;
+    width: 55px;
+    font-size: 3.25em;
+    padding-top: 3.5px;
+    padding-left: 3.5px;
+    padding-bottom: 16.5px;
+    padding-right: 16.5px;
+}
+
+.reverser-active {
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.reverser > .icon {
+    fill: #FFFFFF;
+    width: 125%;
+    height: 125%;
+}
+
+.reverse-text {
+    width: 300px;
+    left: 120px;
+    font-size: 2em;
+    border-radius: 58px;
+    padding-top: 17px;
+    padding-bottom: 0px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .code {
@@ -307,6 +346,10 @@ body, html {
 
 .guide {
     display: none;
+    -webkit-user-select: none;  
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
 }
 
 @media screen and (min-width: 850px) {
@@ -353,6 +396,16 @@ body, html {
     .switcher {
         opacity: 0;
         z-index: -1;
+        bottom: 20px;
+    }
+    
+    .reverser {
+        opacity: 1;
+        z-index: 10;
+    }
+    
+    .reverse-text.hidden {
+        opacity: 0;
     }
 
     .code {
@@ -441,5 +494,14 @@ body, html {
         margin-top: calc(40vh - 320px);
         height: 400px;
         width: 400px;
+    }
+    
+    .reverse-text {
+        font-size: 1em;
+        width: 150px;
+        height: 25px;
+        padding-top: 5px;
+        bottom: 42.5px;
+        left: 115px;
     }
 }
