@@ -243,14 +243,14 @@ body, html {
 }
 
 .window {
-    width: 100%;
+    width: 100vw;
     position: relative;
     float: left;
     overflow: hidden;
 }
 
 .window-small {
-    width: 70%;
+    width: 70vw;
 }
 
 .switcher {
@@ -328,9 +328,9 @@ body, html {
 .code {
     position: fixed;
     float: left;
-    width: calc(30%);
-    left: 100%;
-    height: calc(100% - 60px);
+    width: calc(30vw);
+    left: 100vw;
+    height: calc(100vh - 60px);
     background-color: rgba(0, 0, 0, 0.75);
     box-shadow: inset 4px -3px 5px #000;
     color: white;
@@ -341,7 +341,7 @@ body, html {
 }
 
 .code-big {
-    left: calc(70% - 1px);
+    left: calc(70vw - 1px);
 }
 
 .guide {
@@ -374,7 +374,7 @@ body, html {
     }
 
     .window-small > .guide {
-        width: calc(70% - 21px);
+        width: calc(70vw - 21px);
     }
 
     .subevent:not(:last-of-type):hover {
@@ -412,11 +412,11 @@ body, html {
     }
 
     .window-small {
-        width: 100%;
+        width: 100vw;
     }
 
     .window-small > .guide {
-        width: 100%;
+        width: 100vw;
     }
 
     .header > .icon-wrapper-head {

@@ -622,7 +622,7 @@
             $(".subevent").mouseenter(function() {
                 if ($(window).width() > 850) {
                     guide_subtext = $(this).data("info");
-                    
+                    console.log(guide_subtext);
                     var text = $(this).children(".text")[0];
                     var text_height = $(text).outerHeight();
                     $(text).css("margin-top", (135 - text_height)/2);
