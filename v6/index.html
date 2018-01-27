@@ -1,0 +1,224 @@
+<html>
+    <head>
+        <script src='../jquery-1.11.3.min.js'></script>
+        <style>
+            body, html {
+                padding: 0px;
+                margin: 5px;
+                margin-left: 0px;
+                background-color: black;
+            }
+            
+            .animated {
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                -m-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+            
+            .container {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+            }
+            
+            .block {
+                position: absolute;
+                width: 250px;
+                height: 250px;
+                margin: 20px;
+                background-color: red;
+                color: white;
+                font-size: 75px;
+                font-family: Helvetica;
+                text-align: center;
+                line-height: 250px;
+            }
+            
+            .invisible, .invisible-permanent {
+                opacity: 0;
+            }
+            
+            .block-large {
+                width: 540px;               
+            }
+            
+            .block-big {
+                width: 540px;
+                height: 540px;
+                z-index: 10;
+            }
+            
+            @media screen and (max-width: 600px) {
+                .block {
+                    width: 150px;
+                    height: 150px;
+                    margin: 5px;
+                    line-height: 150px;
+                }   
+                
+                .block-big {
+                    width: 310px;
+                    height: 310px;
+                    z-index: 10;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="block animated"></div>
+            <div class="block block-large animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block block-large animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block block-large animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+        </div>
+        <script>
+            var block_width = parseInt($(".block").outerWidth(true));
+            var window_width = window.innerWidth;
+            var blocks_per_row = parseInt(window_width / block_width);
+            
+            function resizeWindow() {
+                $(".invisible-permanent").remove();
+                
+                block_width = parseInt($($(".block").not(".block-big").not(".block-large")).outerWidth(true));
+                
+                window_width = window.innerWidth;
+                blocks_per_row = parseInt(window_width / block_width);
+
+                var left_over = window_width % block_width;
+                blocks_per_row = parseInt(window_width / block_width);
+                $(".container").css("margin-left", left_over/2);
+                
+                $(".block").each(function(index) {
+                    if ($(this).hasClass("block-large")) {
+                        $("<div class='block animated invisible-permanent'></div>").insertAfter($(this));
+                        
+                        var this_index = $(".block").index($(this));
+                        var row_below = $(".block").eq(this_index + blocks_per_row - 1);
+
+                        if ((this_index + 1) % blocks_per_row == 0) {
+                            $("<div class='block animated invisible-permanent'></div>").insertBefore($(this));
+                        }
+                    }
+                });
+                
+                $(".block").each(function(index) {
+                    $(this).css("left", (index % blocks_per_row) * block_width);
+                    $(this).css("top", parseInt(index / blocks_per_row) * block_width);
+                });
+            }
+            
+            $("document").ready(function() {
+                $(".block").each(function(index) {
+                    $(this).html(index);
+                    $(this).data("size", 0);
+                });
+                resizeWindow();
+            });
+            
+            $(window).resize(function() {
+                resizeWindow();
+            });
+            
+            $(".block").click(function() {
+                if (!$(this).hasClass("block-large")) {
+                    if (!$(this).hasClass("block-big")) {
+                        expandBlock(this);
+                    } else {
+                        compressBlock(this);     
+                    }
+                }
+            });
+            
+            function expandBlock(block) {
+                $(".invisible").remove();
+                
+                $("<div class='block animated invisible'></div>").insertAfter($(block));
+
+                var this_index = $(".block").index($(block));
+                var fall_to_next_row = false;
+                
+                if ((this_index + 1) % blocks_per_row == 0) {
+                    $("<div class='block animated invisible'></div>").insertBefore($(block));
+                    fall_to_next_row = true;
+                }
+
+                resizeWindow();
+
+                this_index = $(".block").index($(block));
+                var row_below = $(".block").eq(this_index + blocks_per_row - 1);
+
+                $("<div class='block animated invisible'></div>").insertAfter(row_below);
+                $("<div class='block animated invisible'></div>").insertAfter(row_below);
+                
+                resizeWindow();
+
+                check_below(this_index);
+                
+                resizeWindow();
+
+                $(".block").removeClass("block-big");
+                $(block).addClass("block-big");
+            }
+            
+            function compressBlock(block) {
+                var this_index = $(".block").index($(block));
+                $(".invisible").remove();
+
+                resizeWindow();  
+
+                $(block).removeClass("block-big");
+            }
+            
+            function check_below(index) {
+                var row_below_left = $(".block").eq(index + blocks_per_row);
+                var row_below_right = $(".block").eq(index + blocks_per_row + 1);
+                
+                if (row_below_left.hasClass("invisible-permanent")) {
+                    var row_below_left_before = $(".block").eq(index + blocks_per_row - 1);
+                    
+                    var row_below_right_after = $(".block").eq(index + blocks_per_row + 2);
+                    
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    
+                    $(row_below_right).remove();
+                    $(row_below_right_after).remove();
+                }
+                
+                if (!row_below_right.hasClass("invisible")) {
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_right);
+                }
+            }
+        </script>
+    </body>
+</html>
