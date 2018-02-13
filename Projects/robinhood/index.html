@@ -1,0 +1,183 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+        <style>
+            @font-face {
+                font-family: DINRegular;
+                src: url(DINRegular.ttf);
+            }
+            
+            @font-face {
+                font-family: DINLight;
+                src: url(DINLight.ttf);
+            }
+            
+            @font-face {
+                font-family: DINMedium;
+                src: url(DINPro-Medium_13936.ttf);
+            }
+            
+            html, body {
+                margin: 0px;
+            }
+
+            .summary {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                top: 100px;
+            }
+            
+            .price {
+                font-family: DINLight;
+                font-size: 4em;
+            }
+            
+            .price > .small {
+                font-size: 0.6em;
+            }
+            
+            .subprice {
+                font-family: DINRegular;
+                color: #BBB;
+                margin-bottom: 5px;
+            }
+            
+            .subprice > .green {
+                color: #21ce99;                
+            }
+            
+            .subprice > .red {
+                color: #F1563A;                
+            }
+            
+            .chart {
+                
+            }
+            
+            .svg-chart {
+                width: 100%;
+                height: calc(100% - 300px);
+            }
+            
+            .scales {
+                margin-top: 5px;
+                font-family: DINMedium;
+                position: relative;
+            }
+            
+            .scales > div {
+                width: 16.6%;
+                float: left;
+                color: #21ce99;
+            }
+            
+            .scales > div:hover {
+                
+            }
+            
+            .scales > .active {
+                color: black;
+            }
+            
+            .scales > .underline {
+                position: absolute;
+                background-color: black;
+                height: 2px;
+                top: 30px;
+                width: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="summary">
+            <div class="price">
+                <span class="small">$</span>5,640<span class="small">.21</span>
+            </div>
+            <div class="subprice">
+                <span class="green">+$231.41 (1.5%)</span> TODAY
+            </div>
+            <div class="chart">
+                <svg class="svg-chart">
+                </svg>
+            </div>
+            <div class="scales">
+                <div id="day" class="active">1D</div>
+                <div id="week">1W</div>
+                <div id="month3">3M</div>
+                <div id="month6">6M</div>
+                <div id="year">1Y</div>
+                <div id="all">ALL</div>
+                <!--div class="underline"></div>
+                <div class="underline"></div>
+                <div class="underline"></div>
+                <div class="underline"></div>
+                <div class="underline"></div>
+                <div class="underline"></div-->
+            </div>
+        </div>
+        
+        <script>
+            var vals = [];
+            var interval = 30;
+            var baseline = parseInt($(".svg-chart").height())/2;
+            var max_speed = 100000;
+            
+            var cursor_x = 0;
+            var target_x = 0;
+            
+            $(document).ready(function() {                
+                var string = "<line id='baseline' stroke-dasharray='2, 5' x1='0' y1='" + baseline + "' x2='10000' y2='" + baseline + "' stroke='gray'/><line id='cursor-line' x1='0' y1='0' x2='0' y2='10000' stroke='lightgray'/><path id='chartpath' d='M -100 " + baseline + " ";
+                for (var i = 0; i < 1000; i++) {
+                    var current = (Math.random() * 200) + baseline - 100;
+                    string = string + "L " + (i * interval) + " " + current + " ";
+                    
+                    vals.push(current);
+                }
+                
+                baseline = vals[0];
+                
+                string = string + "' stroke='#21ce99' stroke-width='3' fill='none'/><circle id='cursor' cx='50' cy='400' r='10' fill='#21ce99'/>";
+                $(".svg-chart").html(string); 
+                $("#baseline").attr("y1", baseline);
+                $("#baseline").attr("y2", baseline);
+                
+                setInterval(loop, 16);
+            });
+            
+            $(".chart").mousemove(function(e) {
+                target_x = e.pageX;
+                
+                $("#cursor-line").attr("x1", e.pageX);
+                $("#cursor-line").attr("x2", e.pageX); 
+            });
+            
+            $(".chart").mouseleave(function(e) {
+                
+            });
+            
+            function loop() {
+                cursor_x += Math.min((target_x - cursor_x)/16, max_speed);
+                $("#cursor").attr("cx", cursor_x);
+
+                var remainder = cursor_x % interval;
+                var before = vals[parseInt(cursor_x / interval)];
+                var after = vals[parseInt(cursor_x / interval) + 1];
+                var slope = (after - before)/interval;
+                var y_val = before + (slope * remainder);
+                $("#cursor").attr("cy", y_val);
+                
+                $(".price").html("<span class='small'>$</span>" + parseInt(y_val) + "<span class='small'>" + (y_val % 1).toFixed(2).toString().substr(1) + "</span>");
+                
+                var percent = (100 * (y_val - baseline) / baseline);
+                
+                if (percent >= 0) {
+                    $(".subprice").html("<span class='green'>+$" + Math.abs((y_val - baseline)).toFixed(2) + " (" + Math.abs(percent).toFixed(1) + "%)</span> TODAY");
+                } else {
+                    $(".subprice").html("<span class='red'>-$" + Math.abs((y_val - baseline)).toFixed(2) + " (" + Math.abs(percent).toFixed(1) + "%)</span> TODAY"); 
+                }
+            }
+            
+        </script>
+    </body>
+</html>
