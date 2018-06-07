@@ -595,6 +595,16 @@ body, html {
         background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d) !important;
         background: linear-gradient(to bottom, #11998e, #38ef7d) !important;
     }
+    
+    .footer.green > .text {
+        background: #38ef7d !important;        
+        background: -webkit-linear-gradient(to bottom, #38ef7d, #38ef7d) !important;
+        background: linear-gradient(to bottom, #38ef7d, #38ef7d) !important;
+    }
+    
+    .footer.red > .text {
+        background: #ED213A !important;        
+    }
 
     .subevent > .text {
         background: none !important;
