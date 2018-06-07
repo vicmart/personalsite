@@ -557,6 +557,48 @@ body, html {
         padding-top: 20px;
         width: calc(100% - 20px);
     }
+    
+    .text > .date {
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+    
+    .text > .subtitle {
+        font-family: Raleway-Light;
+        font-size: 1.1em;
+    }
+    
+    .text > .subevent > .text > .date {
+        font-size: 2em;
+    }
+    
+    .text > .subevent > .text > .title {
+        font-family: Raleway-Light;
+    }
+    
+    .blue .text, .blue > .school-text {
+        background: #00d2ff;
+        background: -webkit-linear-gradient(to bottom, #3a7bd5, #00d2ff);
+        background: linear-gradient(to bottom, #3a7bd5, #00d2ff); 
+    }
+
+    .red .text, .red > .school-text {
+        /* background-color: #8B0000; */
+        background: #ED213A; 
+        background: -webkit-linear-gradient(to bottom, #93291E, #ED213A); 
+        background: linear-gradient(to bottom, #93291E, #ED213A); 
+    }
+    
+    .green .text, .green > .school-text {
+        /* background-color: #00A309; */
+        background: #11998e;
+        background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d);
+        background: linear-gradient(to bottom, #11998e, #38ef7d);
+    }
+
+    .subevent > .text {
+        background: none !important;
+    }
 
     .subevent > .text {
         font-size: 1.75em;
