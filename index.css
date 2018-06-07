@@ -8,6 +8,11 @@
     src: url(Raleway-Light.ttf);
 }
 
+@font-face {
+    font-family: Raleway-Thin;
+    src: url(Raleway-Thin.otf);
+}
+
 body, html {
     font-family: Raleway-Light;
     margin: 0px;
@@ -81,13 +86,35 @@ body, html {
     float: left;
     display: table;
     background-color: #DDD;
-    box-shadow: -2.5px 2.5px 2.5px gray;
+    box-shadow: -5px 5px 5px #BBB, -1px 1px 1px #BBB;
     padding-top: calc(30vh - 75px);
     padding-left: 20px;
     font-size: 1.5em;
     left: 0px;
     opacity: 1;
     color: white;
+}
+
+.subevent > .text > .subtitle, .subevent > .text > .date {
+    margin: 0px;
+}
+
+.subevent > .text > .subtitle {
+    opacity: 0;
+    padding-top: 15px;
+    font-size: 1.5em;
+    font-family: Raleway-Light;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.subevent > .text > .subtitle > a {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.subevent > .text > .subtitle.expand {
+    height: auto;
+    opacity: 1;
+    padding-top: 5px;
 }
 
 .big-text {
@@ -130,6 +157,16 @@ body, html {
     margin-right: 20px;
     color: rgba(255, 255, 255, 0.5);
     text-decoration: underline;
+    
+    text-decoration: none;
+    border-radius: 2px;
+    padding: 5px;
+    font-family: Raleway-Light;
+    font-size: 0.75em;
+}
+
+.green > .footer-btn, .green > .header-btn {
+    
 }
 
 .header-btn {
@@ -137,7 +174,8 @@ body, html {
 }
 
 .footer-btn:hover, .header-btn:hover {
-    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 1);
+    color: #777;
     cursor: hand;
 }
 
@@ -150,6 +188,17 @@ body, html {
     width: 100%;
 }
 
+.date {
+    margin-top: -60px;
+    margin-bottom: 40px;
+    font-size: 1.25em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.date.empty {
+    margin: 0px;
+}
+
 .pretitle {
     color: rgba(255, 255, 255, 0.35);
 }
@@ -158,17 +207,25 @@ body, html {
     font-size: 2.5em;
     line-height: 90%;
     padding-right: 0px;
+    font-family: Raleway-Thin;
 }
 
 .subtitle {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+    font-family: Raleway-Thin;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-.pretitle, .title, .subtitle {
+.pretitle, .title, .subtitle, .date {
     position: relative;
     left: 0;
     opacity: 1;
+}
+
+.subtitle {
+    padding-right: 10px;
 }
 
 .text > .hidden {
@@ -213,33 +270,64 @@ body, html {
     box-shadow: none;
     background-color: rgba(0, 0, 0, 0);
     top: 0px;
-    padding-top: 20px;
+    padding-top: 15px;
     padding-left: 10px;
     height: auto;
 }
 
 .blue .text {
-    background-color: #053978;
+    /* background-color: #053978; */
+    background: #00d2ff;
+    background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);
+    background: linear-gradient(to right, #3a7bd5, #00d2ff); 
 }
 
 .blue > .icon-wrapper > .icon {
-    fill: #053978;
+    fill: #3a7bd5;
 }
 
 .red .text {
-    background-color: #8B0000;
+    /* background-color: #8B0000; */
+    background: #ED213A; 
+    background: -webkit-linear-gradient(to right, #93291E, #ED213A); 
+    background: linear-gradient(to right, #93291E, #ED213A); 
 }
 
 .red > .icon-wrapper > .icon {
-    fill: #8B0000;
+    fill: #93291E;
 }
 
 .green .text {
-    background-color: #00A309;
+    /* background-color: #00A309; */
+    background: #11998e;
+    background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
+    background: linear-gradient(to right, #11998e, #38ef7d);
 }
 
 .green > .icon-wrapper > .icon {
-    fill: #00A309;
+    fill: #11998e;
+}
+
+.subevent > .text {
+    background: none !important;
+}
+
+.blue > .school-text {
+    background: #00d2ff !important;
+    background: -webkit-linear-gradient(to right, #3a7bd5 40%, #00d2ff) !important;
+    background: linear-gradient(to right, #3a7bd5 40%, #00d2ff) !important;
+}
+
+.red > .school-text {
+    background: #ED213A !important; 
+    background: -webkit-linear-gradient(to right, #93291E 40%, #ED213A) !important; 
+    background: linear-gradient(to right, #93291E 40%, #ED213A) !important; 
+}
+
+.green > .school-text {
+    background: #11998e !important;
+    background: -webkit-linear-gradient(to right, #11998e 40%, #38ef7d) !important;
+    background: linear-gradient(to right, #11998e 40%, #38ef7d) !important;
 }
 
 .window {
@@ -377,12 +465,12 @@ body, html {
         width: calc(70vw - 21px);
     }
 
-    .subevent:not(:last-of-type):hover {
+    .subevent:not(:last-of-type):not(.school-subevent):hover {
         height: 150px;
         cursor: hand;
     }
 
-    .subevent:not(:last-of-type):hover > .icon {
+    .subevent:not(:last-of-type):not(.school-subevent):hover > .icon {
         width: 150px;
         height: 150px;
     }
