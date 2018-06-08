@@ -553,6 +553,8 @@
                     updateText();
                 }, 500);
                 
+                $(window).scroll();
+                
                 parsePage();
             });
             
@@ -563,6 +565,7 @@
                 $('.work-subgroup').reverseChildren();
                 if (!reversed) {
                     reversed = true;
+                    $(".reverser").addClass("green");
                     $(".reverser").addClass("reverser-active");
                     $(".header").removeClass("red");
                     $(".header").addClass("green");
@@ -572,6 +575,7 @@
                     $(".reverse-text").addClass("reverse-text-active");
                 } else {
                     reversed = false;
+                    $(".reverser").addClass("red");
                     $(".reverser").removeClass("reverser-active");
                     $(".header").removeClass("green");
                     $(".header").addClass("red");
@@ -611,6 +615,22 @@
                 }
                 
                 guide_text = $(".big-text").eq(index).parent().data("info");
+                
+                $(".reverser").removeClass("red");
+                $(".reverser").removeClass("blue");
+                $(".reverser").removeClass("green");
+
+                $(".reverser").addClass("red");
+                if ($(".big-text").eq(index).parent().hasClass("blue")) {
+                    color = 1;
+                    $(".reverser").addClass("blue");
+                } else if ($(".big-text").eq(index).parent().hasClass("green")) {
+                    color = 2;
+                    $(".reverser").addClass("green");
+                }
+                
+                
+                
                 if (index != previous_index) {
                     $(".guide").css("bottom", -100);
                     $(".switcher").addClass("switcher-bottom");
@@ -715,28 +735,33 @@
             
             $(".switcher").click(function() {
                 guide_active = -1;
-                if ($(this).hasClass("reverser") == false) {
+                
+                $(".reverser").removeClass("red");
+                $(".reverser").removeClass("blue");
+                $(".reverser").removeClass("green");
+                
+                if ($(this).hasClass("reverser") == false) {                    
                     if ($(".window").hasClass("window-small")) {
-                     $(".window").removeClass("window-small");
-                     $(".code").removeClass("code-big");
-                     $(".switcher").removeClass("switcher-active");
-                     setTimeout(function() {
-                        var height = $(".guide-text").height();
-                        $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
-                     }, 500);
+                        $(".window").removeClass("window-small");
+                        $(".code").removeClass("code-big");
+                        $(".switcher").removeClass("switcher-active");
+                        setTimeout(function() {
+                            var height = $(".guide-text").height();
+                            $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                        }, 500);
 
-                     code_active = false;
+                        code_active = false;
                     } else {
-                     $(".window").addClass("window-small");
-                     $(".code").addClass("code-big");
-                     $(".switcher").addClass("switcher-active");
+                        $(".window").addClass("window-small");
+                        $(".code").addClass("code-big");
+                        $(".switcher").addClass("switcher-active");
 
-                     setTimeout(function() {
-                        var height = $(".guide-text").height();
-                        $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
-                     }, 500);
+                        setTimeout(function() {
+                            var height = $(".guide-text").height();
+                            $(".guide-text").css("padding-top", ($(".guide").height() - height)/2);
+                        }, 500);
 
-                     code_active = true;
+                        code_active = true;
                     }
                 } else if ($(this).hasClass("reverse-text") == false) {
                     reverse();

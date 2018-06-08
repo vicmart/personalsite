@@ -154,13 +154,14 @@ body, html {
 
 .footer-btn, .header-btn {
     float: left;
-    margin-right: 20px;
+    margin-right: 10px;
     color: rgba(255, 255, 255, 0.5);
     text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
     
     text-decoration: none;
     border-radius: 2px;
-    padding: 5px;
+    padding: 10px;
     font-family: Raleway-Light;
     font-size: 0.75em;
 }
@@ -174,8 +175,8 @@ body, html {
 }
 
 .footer-btn:hover, .header-btn:hover {
-    background-color: rgba(255, 255, 255, 1);
-    color: #777;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #FFF;
     cursor: hand;
 }
 
@@ -277,7 +278,7 @@ body, html {
 
 .blue .text {
     /* background-color: #053978; */
-    background: #00d2ff;
+    background: #3a7bd5;
     background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);
     background: linear-gradient(to right, #3a7bd5, #00d2ff); 
 }
@@ -288,7 +289,7 @@ body, html {
 
 .red .text {
     /* background-color: #8B0000; */
-    background: #ED213A; 
+    background: #93291E; 
     background: -webkit-linear-gradient(to right, #93291E, #ED213A); 
     background: linear-gradient(to right, #93291E, #ED213A); 
 }
@@ -313,13 +314,13 @@ body, html {
 }
 
 .blue > .school-text {
-    background: #00d2ff !important;
+    background: #3a7bd5 !important;
     background: -webkit-linear-gradient(to right, #3a7bd5 40%, #00d2ff) !important;
     background: linear-gradient(to right, #3a7bd5 40%, #00d2ff) !important;
 }
 
 .red > .school-text {
-    background: #ED213A !important; 
+    background: #93291E !important; 
     background: -webkit-linear-gradient(to right, #93291E 40%, #ED213A) !important; 
     background: linear-gradient(to right, #93291E 40%, #ED213A) !important; 
 }
@@ -343,8 +344,8 @@ body, html {
 
 .switcher {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.75);
-    width: 50px;
+    background-color: black;
+    width: 47px;
     height: 58px;
     bottom: 120px;
     right: 20px;
@@ -353,9 +354,9 @@ body, html {
     font-size: 2.5em;
     color: white;
     padding: 10px;
-    padding-left: 15px;
+    padding-left: 18px;
     padding-top: 7px;
-    box-shadow: 0px 0px 5px black;
+    box-shadow: 0px 0px 5px #444, 0px 0px 1px #444;
     -webkit-user-select: none;  
     -moz-user-select: none;
     -ms-user-select: none;
@@ -396,21 +397,37 @@ body, html {
 }
 
 .reverser > .icon {
-    fill: #FFFFFF;
+    fill: white;
+    opacity: 0.5;
     width: 125%;
     height: 125%;
 }
 
+.reverser.red {
+    background-color: #93291E;
+}
+
+.reverser.blue {
+    background-color: #3a7bd5;
+}
+
+.reverser.green {
+    background-color: #11998e;
+}
+
 .reverse-text {
-    width: 300px;
+    width: 225px;
+    height: 35px;
     left: 120px;
-    font-size: 2em;
+    bottom: 37px;
+    font-size: 1.5em;
     border-radius: 58px;
-    padding-top: 17px;
+    padding-top: 5px;
     padding-bottom: 0px;
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
+    font-family: Raleway-Thin;
 }
 
 .code {
@@ -420,7 +437,7 @@ body, html {
     left: 100vw;
     height: calc(100vh - 60px);
     background-color: rgba(0, 0, 0, 0.75);
-    box-shadow: inset 4px -3px 5px #000;
+    box-shadow: inset 5px -5px 5px #222, inset 1px -1px 1px #222;
     color: white;
     font-family: courier;
     overflow: scroll;
@@ -635,6 +652,20 @@ body, html {
         width: 400px;
     }
     
+    .header-btn {
+        font-size: 1em;
+    }
+    
+    .footer-btn {
+        font-size: 1em;
+        color: black;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .reverser {
+        display: none;
+    }
+    
     .reverse-text {
         font-size: 1em;
         width: 150px;
@@ -642,5 +673,6 @@ body, html {
         padding-top: 5px;
         bottom: 42.5px;
         left: 115px;
+        font-family: Raleway-Light;
     }
 }
