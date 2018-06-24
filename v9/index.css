@@ -1,0 +1,168 @@
+@font-face {
+    font-family: Raleway-Med;
+    src: url(../Raleway-Medium.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Light;
+    src: url(../Raleway-Light.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Thin;
+    src: url(../Raleway-Thin.otf);
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.page-color {
+    position: fixed;
+    width: 100vw;
+    height: 200vh;
+    background: #000000;
+    background: -webkit-linear-gradient(to left, #434343 -100%, #000000);
+    background: linear-gradient(to left, #434343 -100%, #000000);
+}
+
+.city {
+    float: left;
+    position: relative;
+    width: 87.5vw;
+    height: 90vh;
+    margin-left: 12.5vw;
+    margin-top: 10vh;
+    margin-bottom: calc(10vh + 200px);
+}
+
+.city:last-of-type {
+    margin-bottom: 5vh;
+}
+
+.city > .bg-group {
+}
+
+.city > .bg-group > .background {
+    position: absolute;
+    width: 75vw;
+    height: 40vw;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: 0 30%;
+}
+
+.city > .bg-group > .title-group {
+    position: relative;
+    top: 30px;
+    left: 30px;
+    width: calc(75vw - 30px);
+}
+
+.city-text {
+    color: white;
+    font-family: Raleway-Light;
+    font-size: 1.5em;
+}
+
+.city-text > .title {
+    font-size: 2.5em;
+    font-family: Raleway-Thin;
+}
+
+.grid {
+    position: absolute;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-gap: 10px 10px;
+    width: 87.5vw;
+    height: 29.16vw;
+    bottom: 5vh;
+    left: -6.25vw;
+}
+
+.grid > .tile {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.4), 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.grid > .tile:hover {
+    
+}
+
+.tile.large, .tile.large-down {
+    grid-column: 2/4;
+}
+
+.tile.large-right {
+    grid-column: 4/6;
+}
+
+.tile.invisible {
+    opacity: 0;
+}
+
+
+.tile.blue {
+    background: #00B4DB;
+}
+
+.tile.purple {
+    background: #8f94fb;
+}
+
+.tile.green {
+    background: #93F9B9;
+}
+
+
+.grid > .tile > .background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 70%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+}
+
+.grid > .tile > .background {
+    object-position: 0 100%;
+}
+
+
+@media screen and (max-width: 800px) {
+    .city {
+        width: 100vw;
+        height: 100vh;
+        margin-left: 0vw;
+        margin-top: 0vh;
+        margin-bottom: calc(10vh + 200px);
+    }
+    
+    .city > .bg-group > .background {
+        width: 100vw;
+        height: 60vw;
+        border-radius: 0px;
+    }
+    
+    .grid {
+        grid-template-columns: auto auto auto;
+        grid-gap: 10px 10px;
+        width: 100vw;
+        height: 100vw;
+        left: 0vw;
+    }
+    
+    .tile.large-down {
+        grid-column: 1/3;
+    }
+    
+    .tile.large-right { 
+         grid-column: 2/4;   
+    }
+}

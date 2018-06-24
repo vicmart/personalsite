@@ -1,0 +1,322 @@
+<html>
+    <head>
+        <script src='../jquery-1.11.3.min.js'></script>
+        <style>
+            body, html {
+                padding: 0px;
+                margin: 5px;
+                margin-left: 0px;
+                background-color: rgb(52, 52, 54);
+            }
+            
+            .animated {
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                -m-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+            
+            .container {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+            }
+            
+            .block {
+                position: absolute;
+                width: 250px;
+                height: 250px;
+                margin: 20px;
+                background-color: red;
+                color: white;
+                font-size: 75px;
+                font-family: Helvetica;
+                overflow: hidden;
+                cursor: pointer; 
+                cursor: hand;
+            }
+            
+            .invisible, .invisible-permanent {
+                opacity: 0;
+                cursor: default;
+            }
+            
+            .block-large {
+                width: 540px;
+                cursor: default;
+            }
+            
+            .block-big {
+                width: 540px;
+                height: 540px;
+                z-index: 10;
+            }
+                        
+            .block > .content {
+                background-color: rgb(52, 52, 54);
+                width: 0px;
+                height: 250px;
+                position: absolute;
+                overflow: hidden;
+                z-index: 10;
+            }
+            
+            .block > .content > .icon, .block > .icon {
+                fill: rgb(52, 52, 54);
+                padding: 20px;
+                width: 200px;
+            }
+            
+            .block > .content > .icon {
+                fill: red;
+            }
+            
+            .title {
+                font-size: 40;
+                color: rgb(52, 52, 54);
+                position: absolute;
+                left: 250px;
+                top: 100px;
+                width: 250px;
+            }
+            
+            .content > .title {
+                color: red;
+            }
+            
+            .subtitle {
+                font-size: 20;
+                top: 150px;
+            }
+            
+            .block-hovered > .content {
+                width: 50%;
+            }
+            
+            .block-big > .content {
+                width: 101%;
+                height: 250px;
+            }
+            
+            @media screen and (max-width: 585px) {
+                .block {
+                    width: 150px;
+                    height: 150px;
+                    margin: 5px;
+                }   
+                
+                .block-big {
+                    width: 310px;
+                    height: 310px;
+                    z-index: 10;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class='block animated invisible-permanent'></div>
+            <div class="block animated">
+                <div class="content animated">
+                    <img class="icon animated" src="../Icons/Amtrak.svg"></img>
+                    <div class="title">Amtrak</div>
+                    <div class="title subtitle">Deloitte Summer Scholar Internship</div>
+                </div>
+                <img class="icon animated" src="../Icons/Amtrak.svg"></img>
+                <div class="title">Amtrak</div>
+                <div class="title subtitle">Deloitte Summer Scholar Internship</div>
+            </div>
+            <div class="block block-large animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"><img class="icon animated" src="../Icons/Amtrak.svg"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block block-large animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block block-large animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+            <div class="block animated"></div>
+        </div>
+        <script>
+            $('img[src$=".svg"]').each(function() {
+                var $img = jQuery(this);
+                var imgURL = $img.attr('src');
+                var attributes = $img.prop("attributes");
+
+                $.get(imgURL, function(data) {
+                    // Get the SVG tag, ignore the rest
+                    var $svg = jQuery(data).find('svg');
+
+                    // Remove any invalid XML tags
+                    $svg = $svg.removeAttr('xmlns:a');
+
+                    // Loop through IMG attributes and apply on SVG
+                    $.each(attributes, function() {
+                        $svg.attr(this.name, this.value);
+                    });
+
+                    // Replace IMG with SVG
+                    $img.replaceWith($svg);
+                }, 'xml');
+            });
+            
+            var block_width = parseInt($(".block").outerWidth(true));
+            var window_width = window.innerWidth;
+            var blocks_per_row = parseInt(window_width / block_width);
+            
+            var mouseX = 0;
+            var mouseY = 0;
+            
+            function resizeWindow() {
+                block_width = parseInt($(".invisible-permanent").outerWidth(true));
+                $(".invisible-permanent").remove();
+                
+                window_width = window.innerWidth;
+                blocks_per_row = parseInt(window_width / block_width);
+
+                var left_over = window_width % block_width;
+                blocks_per_row = parseInt(window_width / block_width);
+                $(".container").css("margin-left", left_over/2);
+                
+                $(".block").each(function(index) {
+                    if ($(this).hasClass("block-large")) {
+                        $("<div class='block animated invisible-permanent'></div>").insertAfter($(this));
+                        
+                        var this_index = $(".block").index($(this));
+                        var row_below = $(".block").eq(this_index + blocks_per_row - 1);
+
+                        if ((this_index + 1) % blocks_per_row == 0) {
+                            $("<div class='block animated invisible-permanent'></div>").insertBefore($(this));
+                        }
+                    }
+                });
+                
+                $(".block").each(function(index) {
+                    $(this).css("left", (index % blocks_per_row) * block_width);
+                    $(this).css("top", parseInt(index / blocks_per_row) * block_width);
+                });
+            }
+            
+            $("document").ready(function() {
+                $(".icon").each(function(index) {
+                    $(this).width(block_width - 80);
+                });
+
+                resizeWindow();
+            });
+            
+            $(window).resize(function() {
+                resizeWindow();
+            });
+            
+            $(".block").click(function() {
+                if (!$(this).hasClass("block-large")) {
+                    if (!$(this).hasClass("block-big")) {
+                        expandBlock(this);
+                    } else {
+                        compressBlock(this);     
+                    }
+                }
+            });
+            
+            function expandBlock(block) {
+                $(".invisible").remove();
+                
+                $("<div class='block animated invisible'></div>").insertAfter($(block));
+
+                var this_index = $(".block").index($(block));
+                var fall_to_next_row = false;
+                
+                if ((this_index + 1) % blocks_per_row == 0) {
+                    $("<div class='block animated invisible'></div>").insertBefore($(block));
+                    fall_to_next_row = true;
+                }
+
+                resizeWindow();
+
+                this_index = $(".block").index($(block));
+                var row_below = $(".block").eq(this_index + blocks_per_row - 1);
+
+                $("<div class='block animated invisible'></div>").insertAfter(row_below);
+                $("<div class='block animated invisible'></div>").insertAfter(row_below);
+                
+                resizeWindow();
+
+                check_below(this_index);
+                
+                resizeWindow();
+
+                $(".block").removeClass("block-big");
+                $(block).addClass("block-big");
+                
+                $(".block").removeClass("block-hovered"); 
+                $(block).addClass("block-hovered"); 
+            }
+            
+            function compressBlock(block) {
+                var this_index = $(".block").index($(block));
+                $(".invisible").remove();
+
+                resizeWindow();  
+
+                $(block).removeClass("block-big");
+            }
+            
+            function check_below(index) {
+                var row_below_left = $(".block").eq(index + blocks_per_row);
+                var row_below_right = $(".block").eq(index + blocks_per_row + 1);
+                
+                if (row_below_left.hasClass("invisible-permanent")) {
+                    var row_below_left_before = $(".block").eq(index + blocks_per_row - 1);
+                    
+                    var row_below_right_after = $(".block").eq(index + blocks_per_row + 2);
+                    
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_left_before);
+                    
+                    $(row_below_right).remove();
+                    $(row_below_right_after).remove();
+                }
+                
+                if (!row_below_right.hasClass("invisible")) {
+                    $("<div class='block animated invisible'></div>").insertBefore(row_below_right);
+                }
+            }
+            
+            $( document ).on( "mousemove", function( event ) {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
+            });
+            
+            $(".block").hover(function() {
+                $(this).addClass("block-hovered"); 
+            }, function() {
+                if (!$(this).hasClass("block-big")) {
+                    $(this).removeClass("block-hovered"); 
+                }
+            });
+        </script>
+    </body>
+</html>
