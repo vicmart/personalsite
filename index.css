@@ -170,6 +170,7 @@ body, html {
 .footer-btn, .header-btn {
     float: left;
     margin-right: 10px;
+    margin-bottom: 10px;
     color: rgba(255, 255, 255, 0.5);
     text-decoration: underline;
     background-color: rgba(255, 255, 255, 0.1);
@@ -577,7 +578,7 @@ body, html {
     .window-small > .guide {
         width: calc(70vw - 21px);
     }
-
+    
     .subevent:not(:last-of-type):not(.school-subevent):hover {
         height: 150px;
         cursor: hand;
@@ -635,6 +636,10 @@ body, html {
 
     .text {
         font-size: 1.35em;
+    }
+    
+    .pretitle {
+        color: rgba(255, 255, 255, 0.5);
     }
 
     .school .subevent {
