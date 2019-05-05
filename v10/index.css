@@ -1,0 +1,11 @@
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.Block
+{
+  background-color: #eee;
+  position: absolute;
+  float: left;
+}
