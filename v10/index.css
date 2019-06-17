@@ -5,7 +5,15 @@ html, body {
 
 .Block
 {
+  transition: 0.2s all;
+
   background-color: #eee;
   position: absolute;
   float: left;
+}
+
+.Block:hover
+{
+  background-color: red;
+  cursor: pointer;
 }
