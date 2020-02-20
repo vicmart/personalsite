@@ -1,0 +1,97 @@
+$divider-color: #987766;
+
+body
+{
+  background-color: #FEF0DF;
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.card
+{
+  border-radius: 10px;
+  border: 1px solid $divider-color;
+  box-shadow: 0 0 2px $divider-color, 0 0 10px $divider-color;
+  width: calc(100vw - 34px);
+  height: calc(100vh - 34px);
+  margin: 15px;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: space-between;
+
+  &-section
+  {
+    padding: 20px 0;
+    overflow: hidden;
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+
+    &:first-child
+    {
+      text-align: left;
+    }
+    
+    &:first-child & 
+    {
+      &-icon
+      {
+        fill: rgba(63, 168, 191, 0.25);
+        left: -150px;
+      }
+    }
+
+    &:last-child
+    {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    &:last-child &
+    {
+      &-icon
+      {
+        fill: rgba(242, 12, 94, 0.25);
+        right: -150px;
+      }
+
+      &-title
+      {
+        align-items: flex-end;
+      }
+    }
+
+    &-container
+    {
+      padding: 0 40px;
+      position: relative;
+      height: 100%;
+      width: calc(100vw - 114px);
+      position: absolute;
+    }
+
+    &-title
+    {
+      font-size: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-icon
+    {
+      position: absolute;
+      bottom: -200px;
+      width: 600px;
+      height: auto;
+    }
+  }
+
+  &-divider
+  {
+    width: 2px;
+    height: 100%;
+    background-color: $divider-color;
+  }
+}

@@ -1,0 +1,54 @@
+body {
+  background-color: #FEF0DF;
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace; }
+
+.card {
+  border-radius: 10px;
+  border: 1px solid #987766;
+  box-shadow: 0 0 2px #987766, 0 0 10px #987766;
+  width: calc(100vw - 34px);
+  height: calc(100vh - 34px);
+  margin: 15px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between; }
+  .card-section {
+    padding: 20px 0;
+    overflow: hidden;
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start; }
+    .card-section:first-child {
+      text-align: left; }
+    .card-section:first-child .card-section-icon {
+      fill: rgba(63, 168, 191, 0.25);
+      left: -150px; }
+    .card-section:last-child {
+      justify-content: flex-end;
+      text-align: right; }
+    .card-section:last-child .card-section-icon {
+      fill: rgba(242, 12, 94, 0.25);
+      right: -150px; }
+    .card-section:last-child .card-section-title {
+      align-items: flex-end; }
+    .card-section-container {
+      padding: 0 40px;
+      position: relative;
+      height: 100%;
+      width: calc(100vw - 114px);
+      position: absolute; }
+    .card-section-title {
+      font-size: 48px;
+      display: flex;
+      flex-direction: column; }
+    .card-section-icon {
+      position: absolute;
+      bottom: -200px;
+      width: 600px;
+      height: auto; }
+  .card-divider {
+    width: 2px;
+    height: 100%;
+    background-color: #987766; }
