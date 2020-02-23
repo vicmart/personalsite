@@ -1,12 +1,20 @@
 body {
-  background-color: #FEF0DF;
+  position: relative;
+  background: black;
   margin: 0;
   font-family: 'Courier New', Courier, monospace; }
+  body .background {
+    position: absolute;
+    background: linear-gradient(180deg, #FEF0DF 0%, #fccd95 100%);
+    top: -15px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; }
 
 .card {
   border-radius: 10px;
-  border: 1px solid #987766;
-  box-shadow: 0 0 2px #987766, 0 0 10px #987766;
+  box-shadow: 0 0 4px #987766, 0 0 10px #987766;
   width: calc(100vw - 34px);
   height: calc(100vh - 34px);
   margin: 15px;
@@ -26,8 +34,9 @@ body {
       fill: rgba(63, 168, 191, 0.25);
       left: -150px; }
     .card-section:last-child {
-      justify-content: flex-end;
-      text-align: right; }
+      justify-content: flex-end; }
+      .card-section:last-child .card-section-title {
+        text-align: right; }
     .card-section:last-child .card-section-icon {
       fill: rgba(242, 12, 94, 0.25);
       right: -150px; }
@@ -38,7 +47,13 @@ body {
       position: relative;
       height: 100%;
       width: calc(100vw - 114px);
-      position: absolute; }
+      position: absolute;
+      display: flex; }
+    .card-section-col {
+      flex-basis: 0;
+      flex-grow: 1; }
+      .card-section-col:not(:first-child) {
+        margin-left: 30px; }
     .card-section-title {
       font-size: 48px;
       display: flex;
@@ -49,6 +64,6 @@ body {
       width: 600px;
       height: auto; }
   .card-divider {
-    width: 2px;
+    width: 1px;
     height: 100%;
     background-color: #987766; }
