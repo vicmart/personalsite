@@ -1,23 +1,10 @@
 body {
-  position: relative;
-  background: black;
   margin: 0;
   font-family: 'Courier New', Courier, monospace; }
-  body .background {
-    position: absolute;
-    background: linear-gradient(180deg, #FEF0DF 0%, #fccd95 100%);
-    top: -15px;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1; }
 
 .card {
-  border-radius: 10px;
-  box-shadow: 0 0 4px #987766, 0 0 10px #987766;
-  width: calc(100vw - 34px);
-  height: calc(100vh - 34px);
-  margin: 15px;
+  width: calc(100vw);
+  height: calc(100vh);
   overflow: hidden;
   display: flex;
   justify-content: space-between; }
@@ -29,12 +16,15 @@ body {
     display: flex;
     justify-content: flex-start; }
     .card-section:first-child {
-      text-align: left; }
+      text-align: left;
+      background: linear-gradient(180deg, #55504a 0%, #2a2825 100%);
+      color: white; }
     .card-section:first-child .card-section-icon {
       fill: rgba(63, 168, 191, 0.25);
       left: -150px; }
     .card-section:last-child {
-      justify-content: flex-end; }
+      justify-content: flex-end;
+      background: linear-gradient(180deg, #FEF0DF 0%, #d4c8ba 100%); }
       .card-section:last-child .card-section-title {
         text-align: right; }
     .card-section:last-child .card-section-icon {
@@ -46,7 +36,7 @@ body {
       padding: 0 40px;
       position: relative;
       height: 100%;
-      width: calc(100vw - 114px);
+      width: calc(100vw - 80px);
       position: absolute;
       display: flex; }
     .card-section-col {
@@ -63,7 +53,19 @@ body {
       bottom: -200px;
       width: 600px;
       height: auto; }
-  .card-divider {
-    width: 1px;
-    height: 100%;
-    background-color: #987766; }
+    .card-section-bubble {
+      margin-top: 20px;
+      border-radius: 25px;
+      padding: 20px 30px; }
+    .card-section-dark .card-section-bubble {
+      box-shadow: -10px -10px 20px 0px #5f5a53, 10px 10px 20px #36322f; }
+      .card-section-dark .card-section-bubble:nth-child(2) {
+        box-shadow: -10px -10px 20px 0px #54504a, 10px 10px 20px #2b2825; }
+      .card-section-dark .card-section-bubble:nth-child(3) {
+        box-shadow: -10px -10px 20px 0px #494641, 10px 10px 20px #201e1c; }
+    .card-section-light .card-section-bubble {
+      box-shadow: -10px -10px 20px 0px #fff9f2, 10px 10px 20px #d4c8ba; }
+      .card-section-light .card-section-bubble:nth-child(2) {
+        box-shadow: -10px -10px 20px 0px #f8f4ee, 10px 10px 20px #cdbeae; }
+      .card-section-light .card-section-bubble:nth-child(3) {
+        box-shadow: -10px -10px 20px 0px #f2efea, 10px 10px 20px #c5b5a2; }
