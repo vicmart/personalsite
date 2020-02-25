@@ -1,3 +1,49 @@
+@keyframes floatX {
+  0% {
+    transform: translateX(3px);
+    animation-timing-function: ease-out; }
+  12% {
+    transform: translateX(6px);
+    animation-timing-function: ease-in; }
+  25% {
+    transform: translateX(3px);
+    animation-timing-function: linear; }
+  50% {
+    transform: translateX(-3px);
+    animation-timing-function: ease-out; }
+  62% {
+    transform: translateX(-6px);
+    animation-timing-function: ease-in; }
+  75% {
+    transform: translateX(-3px);
+    animation-timing-function: linear; }
+  100% {
+    transform: translateX(3px);
+    animation-timing-function: ease-out; } }
+
+@keyframes floatY {
+  0% {
+    transform: translateY(3px);
+    animation-timing-function: ease-in; }
+  12% {
+    transform: translateY(0px);
+    animation-timing-function: ease-out; }
+  25% {
+    transform: translateY(-3px);
+    animation-timing-function: ease-in-out; }
+  50% {
+    transform: translateY(3px);
+    animation-timing-function: ease-in; }
+  62% {
+    transform: translateY(0px);
+    animation-timing-function: ease-out; }
+  75% {
+    transform: translateY(-3px);
+    animation-timing-function: ease-in-out; }
+  100% {
+    transform: translateY(3px);
+    animation-timing-function: ease-in; } }
+
 body {
   margin: 0;
   font-family: 'Courier New', Courier, monospace; }
@@ -35,15 +81,11 @@ body {
     .card-section-container {
       padding: 0 40px;
       position: relative;
-      height: 100%;
+      height: calc(100vh - 40px);
       width: calc(100vw - 80px);
       position: absolute;
-      display: flex; }
-    .card-section-col {
-      flex-basis: 0;
-      flex-grow: 1; }
-      .card-section-col:not(:first-child) {
-        margin-left: 30px; }
+      display: flex;
+      align-items: center; }
     .card-section-title {
       font-size: 48px;
       display: flex;
@@ -54,9 +96,13 @@ body {
       width: 600px;
       height: auto; }
     .card-section-bubble {
-      margin-top: 20px;
       border-radius: 25px;
-      padding: 20px 30px; }
+      padding: 20px 30px;
+      max-width: 400px;
+      height: auto;
+      animation: floatX 10s infinite ease-out; }
+      .card-section-bubble-container {
+        animation: floatY 10s infinite ease-in; }
     .card-section-dark .card-section-bubble {
       box-shadow: -10px -10px 20px 0px #5f5a53, 10px 10px 20px #36322f; }
       .card-section-dark .card-section-bubble:nth-child(2) {
